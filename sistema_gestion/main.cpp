@@ -5,7 +5,7 @@ using namespace std;
 int main() {
     setlocale(LC_ALL, "Spanish");
 
-    cout << "Hello world!" << endl;
+    cout << "hola mundo!" << endl;
 
     return 0;
 }
