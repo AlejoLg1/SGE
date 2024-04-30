@@ -77,7 +77,7 @@ void Alumno::cargar() {
 
     cout << "CREANDO PERFIL ALUMNO" << endl;
 
-    Persona::cargar();
+    //Persona::cargar();
 
     cout << endl << "\t - Legajo: ";
     cin >> legajo;
@@ -112,7 +112,7 @@ void Alumno::cargar() {
 }
 
 void Alumno::mostrar() {
-    Persona::mostrar();
+    //Persona::mostrar();
 
     cout << endl << "\t - Legajo: " << getLegajo();
     cout << endl << "\t - Clave: " << getClave();
