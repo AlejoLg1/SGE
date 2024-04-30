@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Administrador.h"
+#include "Alumno.h"
 
 using namespace std;
 

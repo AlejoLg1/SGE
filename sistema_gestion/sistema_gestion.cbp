@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="Administrador.cpp" />
 		<Unit filename="Administrador.h" />
+		<Unit filename="Alumno.cpp" />
+		<Unit filename="Alumno.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
