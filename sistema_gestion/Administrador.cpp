@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <limits>
 #include "Administrador.h"
 
 using namespace std;
@@ -26,6 +27,14 @@ void Administrador::setId() {
 }
 
 void Administrador::setClave(int clave) {
+
+    while(cin.fail()){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << endl << "\t---- ERROR : CLAVE INVÁLIDA ----" << endl;
+        cout <<  endl << "\t - Clave (numérica): ";
+        cin >> clave;
+    }
     _clave = clave;
 }
 
