@@ -27,7 +27,6 @@ void Alumno::setClave(int clave) {
         cout << endl << "\t---- ERROR : CLAVE INVÁLIDA ----" << endl;
         cout <<  endl << "\t - Clave (numérica): ";
         cin >> clave;
-        setClave(clave);
     }
     _clave = clave;
 }
@@ -39,7 +38,6 @@ void Alumno::setEstado(bool estado) {
         cout << endl << "\t---- ERROR : ESTADO INVÁLIDO ----" << endl;
         cout <<  endl << "\t - Estado (1 para activo, 0 para inactivo): ";
         cin >> estado;
-        setEstado(estado);
     }
     _estado = estado;
 }
