@@ -55,7 +55,7 @@ bool Director::getEstado ()
 
 void Director::cargarDirector()
 {
-    Persona::cargar();
+    //Persona::cargar();
     cout<< "Legajo: ";
     // _legajo=ContarLegajos(); CONSULTAR A LOS CHICOS YA QUE HAY LEGAJOS EN VARIOS ARCHIVOS
     cout<< "Clave: ";

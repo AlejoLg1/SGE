@@ -11,7 +11,7 @@ int main() {
 Listados aux;
 
 //aux.CargarDirectores();
-aux.ListarDirectores();
+//aux.ListarDirectores();
 
     return 0;
 }
