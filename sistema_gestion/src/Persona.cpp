@@ -3,6 +3,8 @@
 #include <limits>
 #include "Persona.h"
 
+using namespace std;
+
 
 ///---- CONSTRUCTOR ----\\\
 
@@ -57,10 +59,21 @@ bool Persona::getNacimiento()
 
 void Persona::cargar()
 {
+    cout<< "Nombre: ";
+    cin >> _nombre;
+    cout<< "Apellido: ";
+    cin >> _apellido;
+
+   // _nacimiento.Cargar(); Falta clase Fecha
 
 }
 void Persona::mostrar()
 {
+
+    cout << "Nombre: " << _nombre<<endl;
+    cout << "Apellido: " << _apellido<<endl;
+    // _nacimiento.Cargar(); Falta clase Fecha
+
 
 }
 void Persona::grabarEnDisco()

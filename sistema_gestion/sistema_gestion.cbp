@@ -38,8 +38,12 @@
 		<Unit filename="Administrador.h" />
 		<Unit filename="Alumno.cpp" />
 		<Unit filename="Alumno.h" />
+		<Unit filename="include/Director.h" />
+		<Unit filename="include/Listados.h" />
 		<Unit filename="include/Persona.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Director.cpp" />
+		<Unit filename="src/Listados.cpp" />
 		<Unit filename="src/Persona.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

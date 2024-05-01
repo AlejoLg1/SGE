@@ -19,14 +19,35 @@
 
 1714587257 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\include\persona.h
 
-1714584395 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\main.cpp
+1714593095 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\main.cpp
 	<iostream>
 	"Administrador.h"
 	"Alumno.h"
+	"Persona.h"
+	"Director.h"
+	"Listados.h"
 
-1714587746 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\persona.cpp
+1714593201 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\persona.cpp
 	<iostream>
 	<cstring>
 	<limits>
 	"Persona.h"
+
+1714593095 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\director.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Director.h"
+
+1714592245 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\include\director.h
+	"Persona.h"
+
+1714593150 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\listados.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Listados.h"
+	"Director.h"
+
+1714592157 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\include\listados.h
 
