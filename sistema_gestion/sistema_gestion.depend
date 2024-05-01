@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1714584395 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\administrador.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Administrador.h"
+
+1714584395 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\administrador.h
+
+1714584395 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\alumno.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Alumno.h"
+	"Persona.h"
+
+1714584395 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\alumno.h
+	"Persona.h"
+
+1714587257 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\include\persona.h
+
+1714584395 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\main.cpp
+	<iostream>
+	"Administrador.h"
+	"Alumno.h"
+
+1714587746 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\persona.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Persona.h"
+
