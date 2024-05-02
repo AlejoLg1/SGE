@@ -51,3 +51,73 @@
 
 1714592157 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\include\listados.h
 
+1714443034 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\administrador.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Administrador.h"
+
+1714432332 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\administrador.h
+
+1714443006 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\alumno.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Alumno.h"
+	"Persona.h"
+
+1714441516 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\alumno.h
+	"Persona.h"
+
+1714588416 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\persona.h
+
+1714597432 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\main.cpp
+	<iostream>
+	"Administrador.h"
+	"Alumno.h"
+	"Persona.h"
+	"Director.h"
+	"Listados.h"
+
+1714432332 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\administrador.h
+
+1714441516 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\alumno.h
+	"Persona.h"
+
+1714594279 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\director.h
+	"Persona.h"
+
+1714594279 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\listados.h
+
+1714597543 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\director.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Director.h"
+
+1714597846 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\listados.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Listados.h"
+	"Director.h"
+
+1714594279 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\persona.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Persona.h"
+
+1714443034 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\administrador.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Administrador.h"
+
+1714443006 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\alumno.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Alumno.h"
+	"Persona.h"
+
