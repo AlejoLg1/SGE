@@ -96,7 +96,7 @@ void Administrador::cambiarClave(int legajo, int clave) {
                 long offset = ftell(pAdministrador) - sizeof(Administrador);
                 fseek(pAdministrador, offset, SEEK_SET);
                 fwrite(this, sizeof(Administrador), 1, pAdministrador);
-                cout << endl << "CONTRASEÑA CON ÉXITO " << endl << endl;
+                cout << endl << "CONTRASEÑA CAMBIADA CON ÉXITO " << endl << endl;
                 system("pause");
                 break;
             }
