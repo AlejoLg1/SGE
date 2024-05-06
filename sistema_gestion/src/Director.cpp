@@ -68,6 +68,9 @@ void Director::cargarDirector()
 
     cout<< endl << "\t - Clave: ";
     cin >> _clave;
+
+    cout << endl << "\t - Estado (1 para activo, 0 para inactivo): ";
+    cin >> _estado;
 }
 
 void Director::activarDirector(int legajo)
@@ -149,8 +152,10 @@ void Director::desactivarDirector(int legajo)
 void Director::mostrarDirector()
 {
     Persona::mostrar();
+    cout << endl;
     cout <<"Legajo: " << _legajo<<endl;
     cout <<"Clave: " << _clave<<endl;
+    cout << endl << "estado: " << _estado<<endl;
     cout << endl << endl;
 
 
