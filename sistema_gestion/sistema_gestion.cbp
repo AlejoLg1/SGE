@@ -41,6 +41,7 @@
 		<Unit filename="include/FacturaArchivo.h" />
 		<Unit filename="include/FacturaManager.h" />
 		<Unit filename="include/Fecha.h" />
+		<Unit filename="include/Funciones.h" />
 		<Unit filename="include/Listados.h" />
 		<Unit filename="include/Persona.h" />
 		<Unit filename="include/rlutil.h" />
@@ -52,6 +53,7 @@
 		<Unit filename="src/FacturaArchivo.cpp" />
 		<Unit filename="src/FacturaManager.cpp" />
 		<Unit filename="src/Fecha.cpp" />
+		<Unit filename="src/Funciones.cpp" />
 		<Unit filename="src/Listados.cpp" />
 		<Unit filename="src/Persona.cpp" />
 		<Extensions>
