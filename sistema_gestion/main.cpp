@@ -4,14 +4,15 @@
 #include "Persona.h"
 #include "Director.h"
 #include "Listados.h"
+#include "Funciones.h"
 
 using namespace std;
 
-int main() {
-Listados aux;
 
-//aux.CargarDirectores();
-//aux.ListarDirectores();
+int main() {
+    setlocale(LC_ALL, "Spanish");
+
+    menuPrincipal();
 
     return 0;
 }
