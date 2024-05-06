@@ -40,6 +40,10 @@ class Director : public Persona
 
         void cargarDirector();
 
+        void activarDirector(int);
+
+        void desactivarDirector(int);
+
         void mostrarDirector();
 
         void grabarEnDiscoDirector();
