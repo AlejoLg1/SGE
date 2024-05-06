@@ -59,9 +59,9 @@ bool Persona::getNacimiento()
 
 void Persona::cargar()
 {
-    cout<< "Nombre: ";
+    cout << endl << "\t - Nombre: ";
     cin >> _nombre;
-    cout<< "Apellido: ";
+    cout << endl << "\t - Apellido: ";
     cin >> _apellido;
 
    // _nacimiento.Cargar(); Falta clase Fecha
@@ -70,8 +70,8 @@ void Persona::cargar()
 void Persona::mostrar()
 {
 
-    cout << "Nombre: " << _nombre<<endl;
-    cout << "Apellido: " << _apellido<<endl;
+    cout << endl << "\t - Nombre: " << _nombre << endl;
+    cout << "\t - Apellido: " << _apellido;
     // _nacimiento.Cargar(); Falta clase Fecha
 
 
