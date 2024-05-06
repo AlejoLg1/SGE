@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <limits>
+#include "Funciones.h"
 #include "Alumno.h"
 #include "Persona.h"
 
@@ -8,15 +9,8 @@ using namespace std;
 
 ///---- SETTERS ----\\\
 
-void Alumno::setlegajo(int legajo) {
-    while(legajo < 0 || cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << endl << "\t---- ERROR : LEGAJO INVÁLIDO ----" << endl;
-        cout << endl << "\t - Legajo: ";
-        cin >> legajo;
-    }
-    _legajo = legajo;
+void Alumno::setlegajo() {
+    _legajo = settearNuevoLegajo();
 }
 
 void Alumno::setClave(int clave) {
@@ -75,17 +69,17 @@ void Alumno::cargar() {
 
     cout << "CREANDO PERFIL ALUMNO" << endl;
 
-    //Persona::cargar();
-
     cout << endl << "\t - Legajo: ";
-    cin >> legajo;
-    setlegajo(legajo);
+    setlegajo();
+    cout << getLegajo();
 
-    cout <<  endl << "\t - Clave (numérica): ";
+    Persona::cargar();
+
+    cout << "\t - Clave (numérica): ";
     cin >> clave;
     setClave(clave);
 
-    cout <<  endl << "\t - Estado (1 para activo, 0 para inactivo): ";
+    cout << "\t - Estado (1 para activo, 0 para inactivo): ";
     cin >> estado;
     setEstado(estado);
 
@@ -110,9 +104,9 @@ void Alumno::cargar() {
 }
 
 void Alumno::mostrar() {
-    //Persona::mostrar();
 
     cout << endl << "\t - Legajo: " << getLegajo();
+    Persona::mostrar();
     cout << endl << "\t - Clave: " << getClave();
     cout << endl << "\t - Estado: " << (getEstado() ? "Activo" : "Inactivo");
     cout << endl << "\t - Materias: ";
@@ -125,7 +119,7 @@ void Alumno::mostrar() {
     cout << endl << endl;
 }
 
-void Alumno::grabarEnDisco() {
+void Alumno::grabarEnDiscoAlumno() {
     FILE *pAlumno;
 
     if(!(pAlumno = fopen("alumnos.dat", "ab"))) {
@@ -140,7 +134,7 @@ void Alumno::grabarEnDisco() {
     fclose(pAlumno);
 }
 
-void Alumno::leerEnDisco() {
+void Alumno::leerEnDiscoAlumno() {
     FILE *pAlumno;
 
     if(!(pAlumno = fopen("alumnos.dat", "rb"))) {

@@ -14,7 +14,7 @@ class Alumno : public Persona{
 
         ///---- SETTERS ----\\\
 
-        void setlegajo(int);
+        void setlegajo();
 
         void setClave(int);
 
@@ -39,9 +39,9 @@ class Alumno : public Persona{
 
         void mostrar();
 
-        void grabarEnDisco();
+        void grabarEnDiscoAlumno();
 
-        void leerEnDisco();
+        void leerEnDiscoAlumno();
 
 };
 
