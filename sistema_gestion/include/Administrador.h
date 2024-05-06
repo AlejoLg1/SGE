@@ -32,9 +32,11 @@ class Administrador {
 
         void mostrar();
 
-        void grabarEnDisco();
+        void cambiarClave(int, int);
 
-        void leerEnDisco();
+        void grabarEnDiscoAdministrador();
+
+        void leerEnDiscoAdministrador();
 
 };
 
