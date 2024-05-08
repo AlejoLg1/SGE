@@ -92,7 +92,7 @@ void Director::activarDirector(int legajo)
                 long offset = ftell(pDirectivo) - sizeof(Director);
                 fseek(pDirectivo, offset, SEEK_SET);
                 fwrite(this, sizeof(Director), 1, pDirectivo);
-                cout << endl << "DIRECTOR MARCADO COMO ACTIVO CON ÉXITO " << endl << endl;
+                cout << endl << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl << endl;
                 system("pause");
                 break;
             }
@@ -129,7 +129,7 @@ void Director::desactivarDirector(int legajo)
                 long offset = ftell(pDirectivo) - sizeof(Director);
                 fseek(pDirectivo, offset, SEEK_SET);
                 fwrite(this, sizeof(Director), 1, pDirectivo);
-                cout << endl << "DIRECTOR MARCADO COMO INACTIVO CON ÉXITO " << endl;
+                cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl;
                 system("pause");
                 break;
             }
@@ -148,6 +148,43 @@ void Director::desactivarDirector(int legajo)
     fclose(pDirectivo);
 }
 
+void Director::cambiarClave(int legajo, int clave) {
+
+    bool usuarioEncontrado = false;
+    FILE *pDirectivo;
+
+    if(!(pDirectivo = fopen("Director.dat", "rb+"))) {
+        system("cls");
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
+
+    while (fread(this, sizeof(Director), 1, pDirectivo)) {
+        if(this->getLegajo() == legajo){
+            usuarioEncontrado = true;
+            if(this->getClave() != clave){
+                this->setClave(clave);
+                long offset = ftell(pDirectivo) - sizeof(Director);
+                fseek(pDirectivo, offset, SEEK_SET);
+                fwrite(this, sizeof(Director), 1, pDirectivo);
+                cout << endl << "CONTRASEÑA CAMBIADA CON ÉXITO " << endl << endl;
+                system("pause");
+                break;
+            }
+            else{
+                cout << endl << "---- ERROR: CONTRASEÑAS IGUALES ----" << endl << endl;
+                system("pause");
+            }
+        }
+    }
+
+    if(!usuarioEncontrado) {
+        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+        system("pause");
+    }
+
+    fclose(pDirectivo);
+}
 
 void Director::mostrarDirector()
 {
@@ -160,6 +197,7 @@ void Director::mostrarDirector()
 
 
 }
+
 void Director::grabarEnDiscoDirector()
 {
     FILE *p;

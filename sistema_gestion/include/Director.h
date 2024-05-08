@@ -44,6 +44,8 @@ class Director : public Persona
 
         void desactivarDirector(int);
 
+        void cambiarClave(int , int);
+
         void mostrarDirector();
 
         void grabarEnDiscoDirector();
