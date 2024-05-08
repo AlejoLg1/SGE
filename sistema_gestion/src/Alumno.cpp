@@ -72,38 +72,135 @@ void Alumno::cargar() {
     cout << endl << "\t - Legajo: ";
     setlegajo();
     cout << getLegajo();
+    cout << endl;
 
     Persona::cargar();
 
-    cout << "\t - Clave (numérica): ";
+    cout << endl << "\t - Clave (numérica): ";
     cin >> clave;
     setClave(clave);
 
-    cout << "\t - Estado (1 para activo, 0 para inactivo): ";
+    cout << endl << "\t - Estado (1 para activo, 0 para inactivo): ";
     cin >> estado;
     setEstado(estado);
 
-    cout << endl << "\t - Materias (-1 para finalizar carga): " << endl;
-
-    while(materia != -1 && cont != 7) {
-        cout << "\t\t - Materia (ingrese N° de materia): ";
-        cin >> materia;
-
-        while(materia < -1 || cin.fail()){
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "\t\t---- ERROR : N° DE MATERIA INVÁLIDO ----" << endl;
-            cout << "\t\t - Materia (ingrese N° de materia): ";
-            cin >> materia;
-        }
-        materias[cont] = materia;
-        cont ++;
-    }
     setMaterias(materias);
 
 }
 
+void Alumno::activarAlumno(int legajo) {
+    bool usuarioEncontrado = false;
+    FILE *pAlumno;
+
+    if(!(pAlumno = fopen("alumnos.dat", "rb+"))) {
+        system("cls");
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
+
+    while (fread(this, sizeof(Alumno), 1, pAlumno)) {
+        if(this->getLegajo() == legajo){
+            usuarioEncontrado = true;
+            if(this->getEstado() == false){
+                this->setEstado(true);
+                long offset = ftell(pAlumno) - sizeof(Alumno);
+                fseek(pAlumno, offset, SEEK_SET);
+                fwrite(this, sizeof(Alumno), 1, pAlumno);
+                cout << endl << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl << endl;
+                system("pause");
+                break;
+            }
+            else{
+                cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO PREVIAMENTE ----" << endl << endl;
+                system("pause");
+            }
+        }
+    }
+
+    if(!usuarioEncontrado) {
+        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+        system("pause");
+    }
+
+    fclose(pAlumno);
+}
+
+void Alumno::desactivarAlumno(int legajo) {
+    bool usuarioEncontrado = false;
+    FILE *pAlumno;
+
+    if(!(pAlumno = fopen("alumnos.dat", "rb+"))) {
+        system("cls");
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    };
+    while (fread(this, sizeof(Alumno), 1, pAlumno)) {
+        if(this->getLegajo() == legajo){
+            usuarioEncontrado = true;
+            if(this->getEstado() == true){
+                this->setEstado(false);
+                long offset = ftell(pAlumno) - sizeof(Alumno);
+                fseek(pAlumno, offset, SEEK_SET);
+                fwrite(this, sizeof(Alumno), 1, pAlumno);
+                cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl << endl;
+                system("pause");
+                break;
+            }
+            else{
+                cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO PREVIAMENTE ----" << endl;
+                system("pause");
+            }
+        }
+    }
+
+    if(!usuarioEncontrado) {
+        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+        system("pause");
+    }
+
+    fclose(pAlumno);
+}
+
+void Alumno::cambiarClave(int legajo, int clave) {
+
+    bool usuarioEncontrado = false;
+    FILE *pAlumno;
+
+    if(!(pAlumno = fopen("alumnos.dat", "rb+"))) {
+        system("cls");
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
+
+    while (fread(this, sizeof(Alumno), 1, pAlumno)) {
+        if(this->getLegajo() == legajo){
+            usuarioEncontrado = true;
+            if(this->getClave() != clave){
+                this->setClave(clave);
+                long offset = ftell(pAlumno) - sizeof(Alumno);
+                fseek(pAlumno, offset, SEEK_SET);
+                fwrite(this, sizeof(Alumno), 1, pAlumno);
+                cout << endl << "CONTRASEÑA CAMBIADA CON ÉXITO " << endl << endl;
+                system("pause");
+                break;
+            }
+            else{
+                cout << endl << "---- ERROR: CONTRASEÑAS IGUALES ----" << endl << endl;
+                system("pause");
+            }
+        }
+    }
+
+    if(!usuarioEncontrado) {
+        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+        system("pause");
+    }
+
+    fclose(pAlumno);
+}
+
 void Alumno::mostrar() {
+    bool inscripto = false;
 
     cout << endl << "\t - Legajo: " << getLegajo();
     Persona::mostrar();
@@ -112,9 +209,14 @@ void Alumno::mostrar() {
     cout << endl << "\t - Materias: ";
     for (int i = 0; i < 7; ++i) {
         if(getMaterias()[i] != -1) {
+            inscripto = true;
             cout << endl << "\t\t - Materia: ";
             cout << getMaterias()[i];
         }
+    }
+
+    if(!inscripto){
+        cout << "NO INSCRIPTO";
     }
     cout << endl << endl;
 }

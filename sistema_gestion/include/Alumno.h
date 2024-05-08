@@ -37,6 +37,12 @@ class Alumno : public Persona{
 
         void cargar();
 
+        void activarAlumno(int);
+
+        void desactivarAlumno(int);
+
+        void cambiarClave(int , int);
+
         void mostrar();
 
         void grabarEnDiscoAlumno();
