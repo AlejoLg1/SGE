@@ -284,13 +284,15 @@ void login(int rol, string Rol) {
             menuAdministrador();
             break;
         case 50: //DIRECTOR
-            cout << "Ha seleccionado la opcion 2." << endl;
+            system("cls");
+            menuDirectivo();
             break;
         case 51: //PROFESOR
             cout << "Ha seleccionado la opcion 3." << endl;
             break;
         case 52: //ALUMNO
             cout << "Ha seleccionado la opcion 4." << endl;
+            system("pause");
             break;
         default:
             cout << "Opcion invalida." << endl;
@@ -477,6 +479,8 @@ bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNomb
 
 ///--- MENÚS ROLES ---\\
 
+///--- MENÚ ADMINISTRADOR ---\\
+
 void menuAdministrador() {
     int opcion;
     int legajoDirector;
@@ -572,13 +576,241 @@ void menuAdministrador() {
 
 }
 
+///--- MENÚ DIRECTIVO ---\\
+
 void menuDirectivo() {
+    int opcion;
+    int legajoDirector;
+    int nuevaClave;
+
+    cout << "¡Bienvenido!" << endl;
+    cout << "Seleccione la opción que desee: " << endl;
+
+    cout << endl << "1) Gestion perfil Profesor";
+    cout << endl << "2) Gestion perfil Alumno";
+    cout << endl << "3) Cambiar contraseña";
+    cout << endl << "4) Volver al Menú principal";
+    cout << endl << endl;
+
+    opcion = _getch();
+
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        Sleep(500);
+        system("cls");
+
+        cout << "¡Bienvenido!" << endl;
+        cout << "Seleccione la opción que desee: " << endl;
+
+        cout << endl << "1) Gestion perfil Profesor";
+        cout << endl << "2) Gestion perfil Alumno";
+        cout << endl << "3) Cambiar contraseña";
+        cout << endl << "4) Volver al Menú principal";
+        cout << endl << endl;
+
+        opcion = _getch();
+
+    }
+
+    switch(opcion) {
+        case 49:
+            system("cls");
+            subMenuDirectivoProfesor();
+            break;
+        case 50:
+            system("cls");
+            subMenuDirectivoAlumno();
+            break;
+        case 51:
+
+            system("cls");
+            cout << "CAMBIANDO CONTRASEÑA" << endl;
+
+            cout << endl << "\t - Contraseña anterior: " << clave << endl;
+            cout << endl << "\t - Contraseña nueva (numérica): ";
+            cin >> nuevaClave;
+
+            directorObj.cambiarClave(legajo, nuevaClave);
+
+            system("cls");
+            menuDirectivo();
+            break;
+        case 52:
+            system("cls");
+            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
+            Sleep(2000);
+            system("cls");
+            menuPrincipal();
+            break;
+        default:
+            cout << "Opción no válida." << endl;
+    }
+}
+
+void subMenuDirectivoProfesor() {
+    int opcion;
+    int legajoProfesor;
+    int nuevaClave;
+
+    cout << "¡Bienvenido!" << endl;
+    cout << "Seleccione la opción que desee: " << endl;
+
+    cout << endl << "1) Crear perfil Profesor";
+    cout << endl << "2) Activar perfil Profesor";
+    cout << endl << "3) Desactivar perfil Profesor";
+    cout << endl << "4) Volver al Menú Directivo";
+    cout << endl << endl;
+
+    opcion = _getch();
+
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        Sleep(500);
+        system("cls");
+
+        cout << "¡Bienvenido!" << endl;
+        cout << "Seleccione la opción que desee: " << endl;
+
+        cout << endl << "1) Crear perfil Profesor";
+        cout << endl << "2) Activar perfil Profesor";
+        cout << endl << "3) Desactivar perfil Profesor";
+        cout << endl << "4) Volver al Menú Directivo";
+        cout << endl << endl;
+
+        opcion = _getch();
+    }
+
+    switch(opcion) {
+        case 49:
+            system("cls");
+            //profesorObj.grabarEnDiscoDirector();
+            system("cls");
+            subMenuDirectivoProfesor();
+            break;
+        case 50:
+            system("cls");
+            cout << "ACTIVANDO PERFIL PROFESOR" << endl;
+
+            cout << endl << "\t- Legajo: ";
+            cin >> legajoProfesor;
+            validarLegajo(legajoProfesor);
+
+            //profesorObj.activarProfesor(legajoProfesor);
+
+            system("cls");
+            subMenuDirectivoProfesor();
+            break;
+        case 51:
+            system("cls");
+            cout << "DESACTIVANDO PERFIL PROFESOR" << endl;
+
+            cout << endl << "\t- Legajo: ";
+            cin >> legajoProfesor;
+            validarLegajo(legajoProfesor);
+
+            //profesorObj.desactivarProfesor(legajoProfesor);
+
+            system("cls");
+            subMenuDirectivoProfesor();
+            break;
+        case 52:
+            system("cls");
+            cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
+            Sleep(2000);
+            system("cls");
+            menuDirectivo();
+            break;
+        default:
+            cout << "Opción no válida." << endl;
+    }
 
 }
+
+void subMenuDirectivoAlumno() {
+    int opcion;
+    int legajoAlumno;
+    int nuevaClave;
+
+    cout << "¡Bienvenido!" << endl;
+    cout << "Seleccione la opción que desee: " << endl;
+
+    cout << endl << "1) Crear perfil Alumno";
+    cout << endl << "2) Activar perfil Alumno";
+    cout << endl << "3) Desactivar perfil Alumno";
+    cout << endl << "4) Volver al Menú Directivo";
+    cout << endl << endl;
+
+    opcion = _getch();
+
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        Sleep(500);
+        system("cls");
+
+        cout << "¡Bienvenido!" << endl;
+        cout << "Seleccione la opción que desee: " << endl;
+
+        cout << endl << "1) Crear perfil Alumno";
+        cout << endl << "2) Activar perfil Alumno";
+        cout << endl << "3) Desactivar perfil Alumno";
+        cout << endl << "4) Volver al Menú Directivo";
+        cout << endl << endl;
+
+        opcion = _getch();
+    }
+
+    switch(opcion) {
+        case 49:
+            system("cls");
+            alumnoObj.grabarEnDiscoAlumno();
+            system("cls");
+            subMenuDirectivoAlumno();
+            break;
+        case 50:
+            system("cls");
+            cout << "ACTIVANDO PERFIL ALUMNO" << endl;
+
+            cout << endl << "\t- Legajo: ";
+            cin >> legajoAlumno;
+            validarLegajo(legajoAlumno);
+
+            alumnoObj.activarAlumno(legajoAlumno);
+
+            system("cls");
+            subMenuDirectivoAlumno();
+            break;
+        case 51:
+            system("cls");
+            cout << "DESACTIVANDO PERFIL ALUMNO" << endl;
+
+            cout << endl << "\t- Legajo: ";
+            cin >> legajoAlumno;
+            validarLegajo(legajoAlumno);
+
+            alumnoObj.desactivarAlumno(legajoAlumno);
+
+            system("cls");
+            subMenuDirectivoAlumno();
+            break;
+        case 52:
+            system("cls");
+            cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
+            Sleep(2000);
+            system("cls");
+            menuDirectivo();
+            break;
+        default:
+            cout << "Opción no válida." << endl;
+    }
+}
+
+///--- MENÚ PROFESOR ---\\
 
 void menuProfesor() {
 
 }
+
+///--- MENÚ ALUMNO ---\\
 
 void menuAlumno() {
 

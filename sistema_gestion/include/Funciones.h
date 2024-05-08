@@ -37,7 +37,11 @@ void validarLegajo(int legajo);
 ///--- MENÚS ROLES ---\\
 
 void menuAdministrador();
+
 void menuDirectivo();
+void subMenuDirectivoProfesor();
+void subMenuDirectivoAlumno();
+
 void menuProfesor();
 void menuAlumno();
 
