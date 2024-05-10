@@ -9,8 +9,10 @@
 #include "Director.h"
 //#include "Profesor.h"
 #include "Alumno.h"
+#include "rlutil.h"
 
 using namespace std;
+using namespace rlutil;
 
 const int CANTIDADOBJETOS = 3;
 //const int CANTIDADOBJETOS = 4;
@@ -46,11 +48,42 @@ int x;
 int legajo;
 int clave;
 
+void marco(int y, int x, int ancho, int alto, int color)
+{
+
+    setBackgroundColor(BLACK);
+    //cls();
+    setColor(color);
+    int i;
+    for(i=x; i<=x+ancho; i++)
+    {
+        setlocale(LC_ALL, "C");
+        gotoxy(i,y);
+        printf("\xdB");
+        gotoxy(i,y+alto);
+        printf("\xdB");
+    }
+
+
+    for(i=y; i<=y+alto; i++)
+    {
+        setlocale(LC_ALL, "C");
+        gotoxy(x,i);
+        printf("\xdB");
+        gotoxy(x+ancho,i);
+        printf("\xdB");
+
+
+    }
+}
+
 void menuPrincipal() {
 
     rol = seleccionarRol(rol);
 
     while(true) {
+        marco(12, 10, 80, 48, 9);
+        setColor(15);
         switch (rol) {
             case 49: //ADMINISTRADOR
                 system("cls");
@@ -131,13 +164,15 @@ void menuPrincipal() {
 
 int seleccionarRol(int rol) {
 
-    cout << "Seleccione su rol correspondiente: " << endl;
-    cout << endl << "1) Administrador";
-    cout << endl << "2) Director";
-    cout << endl << "3) Profesor";
-    cout << endl << "4) Alumno";
-    cout << endl << "5) Salir";
-    cout << endl << endl;
+    marco(12, 10, 80, 48, 9);
+    setColor(15);
+    gotoxy(25,16);cout << "Seleccione su rol correspondiente: " << endl;
+    gotoxy(25,17);cout << "1) Administrador";
+    gotoxy(25,18);cout << "2) Director";
+    gotoxy(25,19);cout << "3) Profesor";
+    gotoxy(25,20);cout << "4) Alumno";
+    gotoxy(25,21);cout << "5) Salir";
+    gotoxy(25,22);cout << endl;
 
     rol = _getch();
 
@@ -807,6 +842,49 @@ void subMenuDirectivoAlumno() {
 ///--- MENÚ PROFESOR ---\\
 
 void menuProfesor() {
+     system("cls");
+    system("title PROYECTO 2024");
+    int opcion;
+    do{
+        marco(12, 10, 80, 48, 9);
+        setColor(15);
+        gotoxy(25,16);cout << "----------------------------------------------------"<< endl;
+        gotoxy(25,17);cout << "                   MENU PROFESOR                    "<< endl;
+        gotoxy(25,18);cout << "----------------------------------------------------"<< endl;
+        gotoxy(25,20);cout << "1. CARGAR NOTAS                                     "<< endl;
+        gotoxy(25,21);cout << "2. MODIFICAR NOTAS                                  "<< endl;
+        gotoxy(25,22);cout << "3. CARGAR FECHA DE EXAMEN                           "<< endl;
+        gotoxy(25,23);cout << "4. VER MATERIAS ASIGNADAS                           "<< endl;
+        gotoxy(25,24);cout << "0. SALIR                                            "<< endl;
+        gotoxy(25,25);cout << "----------------------------------------------------"<< endl;
+        gotoxy(25,26);cout << "- SELECCIONE UNA OPCION: -    "<< endl;
+        gotoxy(25,27);cout << "----------------------------------------------------"<< endl;
+        gotoxy(25,28);cout << " --> ";cin>>opcion;
+
+        switch(opcion){
+            case 1:
+                ///-- >> FUNCION CARGA DE NOTAS
+            break;
+            case 2:
+                ///-- >> FUNCION MODIFICACION DE NOTAS
+            break;
+            case 3:
+                ///-- >> FUNCION CARGA FECHA DE EXAMEN
+            break;
+            case 4:
+                ///-- >> FUNCION DE LISTADO DE MATERIAS ASIGNADAS
+            break;
+
+            case 0:
+                return;
+            break;
+            default:
+                cout << "OPCION INCORRECTA. REINGRESE LA OPCION NUEVAMENTE.";
+            break;
+        }
+
+    }while(opcion != 0);
+
 
 }
 

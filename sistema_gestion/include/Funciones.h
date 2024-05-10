@@ -2,6 +2,8 @@
 #define FUNCIONES_H_INCLUDED
 #include <string>
 
+void marco(int, int, int, int, int);
+
 void menuPrincipal();
 
 int seleccionarRol(int);
