@@ -24,22 +24,17 @@ FILE *pProfesor;
 FILE *pAlumno;
 
 //VECTORES ARCHIVOS
-FILE* vecPFiles[CANTIDADOBJETOS] = {pAdm, pDirectivo, pAlumno};
-const char* vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "alumnos.dat"};
-int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Director), sizeof(Alumno)};
-string vecNombresRoles[CANTIDADOBJETOS] = {"ADMINISTRADOR", "DIRECTOR", "ALUMNO"};
 
-//DESCOMENTAR CUANDO ESTÉ CREADA LA CLASE PROFESOR Y BORRAR LO DE ARRIBA
-//FILE* vecPFiles[CANTIDADOBJETOS] = {pAdm, pDirectivo, pProfesor, pAlumno};
-//string vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "profesor.dat", "alumnos.dat"};
-//int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Directivo), sizeof(Profesor), sizeof(Alumno)};
-//string vecNombresRoles[CANTIDADOBJETOS] = {"ADMINISTRADOR", "DIRECTOR", "PROFESOR", "ALUMNO"};
+FILE* vecPFiles[CANTIDADOBJETOS] = {pAdm, pDirectivo, pProfesor, pAlumno};
+string vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "profesor.dat", "alumnos.dat"};
+int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Directivo), sizeof(Profesor), sizeof(Alumno)};
+string vecNombresRoles[CANTIDADOBJETOS] = {"ADMINISTRADOR", "DIRECTOR", "PROFESOR", "ALUMNO"};
 
 
 //OBJETOS
 Administrador administradorObj;
 Director directorObj;
-//Profesor profesorObj;
+Profesor profesorObj;
 Alumno alumnoObj;
 
 //VARIABLES GLOBALES
@@ -119,7 +114,7 @@ void menuPrincipal() {
             case 51: //PROFESOR
                 system("cls");
                 rol = seleccionarRol(rol);
-                /*system("cls");
+                system("cls");
                 if(usuariosCargados()){
                     if(!usuariosEspecificosCargados("PROFESOR", vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)){
                         mensajeUsuariosNoEncontrados("PROFESOR");
@@ -131,7 +126,7 @@ void menuPrincipal() {
                 }
                 else{
                     mensajeUsuariosNoEncontrados("PROFESOR");
-                }*/
+                }
                 ;
                 break;
             case 52: // ALUMNO
@@ -367,13 +362,13 @@ bool usuarioValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNom
                 }
             }
             else if(Rol == "PROFESOR"){
-                /*Profesor obj;
+                Profesor obj;
                 while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
                     if(obj.getLegajo() == legajo){
                         valido = true;
                         return valido;
                     }
-                }*/
+                }
             }
             else{
                 Alumno obj;
@@ -425,7 +420,7 @@ bool claveValida(string Rol, int legajo, int clave, FILE* vecPFiles[], const cha
                 }
             }
             else if(Rol == "PROFESOR"){
-                /*Profesor obj;
+                Profesor obj;
                 while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
                     if(obj.getLegajo() == legajo){
                         if(obj.getClave() == clave){
@@ -433,7 +428,7 @@ bool claveValida(string Rol, int legajo, int clave, FILE* vecPFiles[], const cha
                             return valida;
                         }
                     }
-                }*/
+                }
             }
             else{
                 Alumno obj;
@@ -484,7 +479,7 @@ bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNomb
                 }
             }
             else if(Rol == "PROFESOR"){
-                /*Profesor obj;
+                Profesor obj;
                 while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
                     if(obj.getLegajo() == legajo){
                         if(obj.getEstado() == true){
@@ -492,7 +487,7 @@ bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNomb
                             return valido;
                         }
                     }
-                }*/
+                }
             }
             else{
                 Alumno obj;
@@ -718,7 +713,7 @@ void subMenuDirectivoProfesor() {
     switch(opcion) {
         case 49:
             system("cls");
-            //profesorObj.grabarEnDiscoDirector();
+            profesorObj.grabarEnDiscoDirector();
             system("cls");
             subMenuDirectivoProfesor();
             break;
@@ -730,7 +725,7 @@ void subMenuDirectivoProfesor() {
             cin >> legajoProfesor;
             validarLegajo(legajoProfesor);
 
-            //profesorObj.activarProfesor(legajoProfesor);
+            profesorObj.activarProfesor(legajoProfesor);
 
             system("cls");
             subMenuDirectivoProfesor();
@@ -743,7 +738,7 @@ void subMenuDirectivoProfesor() {
             cin >> legajoProfesor;
             validarLegajo(legajoProfesor);
 
-            //profesorObj.desactivarProfesor(legajoProfesor);
+            profesorObj.desactivarProfesor(legajoProfesor);
 
             system("cls");
             subMenuDirectivoProfesor();
