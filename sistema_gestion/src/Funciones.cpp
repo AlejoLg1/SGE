@@ -9,10 +9,10 @@
 #include "Director.h"
 #include "Profesor.h"
 #include "Alumno.h"
-#include "rlutil.h"
+//#include "rlutil.h"
 
 using namespace std;
-using namespace rlutil;
+//using namespace rlutil;
 
 const int CANTIDADOBJETOS = 4;
 
@@ -23,7 +23,6 @@ FILE *pProfesor;
 FILE *pAlumno;
 
 //VECTORES ARCHIVOS
-
 FILE* vecPFiles[CANTIDADOBJETOS] = {pAdm, pDirectivo, pProfesor, pAlumno};
 const char* vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "profesor.dat", "alumnos.dat"};
 int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Director), sizeof(Profesor), sizeof(Alumno)};
@@ -41,7 +40,7 @@ int x;
 int legajo;
 int clave;
 
-void marco(int y, int x, int ancho, int alto, int color)
+/*void marco(int y, int x, int ancho, int alto, int color)
 {
 
     setBackgroundColor(BLACK);
@@ -66,15 +65,16 @@ void marco(int y, int x, int ancho, int alto, int color)
         gotoxy(x+ancho,i);
         printf("\xdB");
     }
-}
+}*/
+
 
 void menuPrincipal() {
     setlocale(LC_ALL, "Spanish");
     rol = seleccionarRol(rol);
 
     while(true) {
-        marco(12, 10, 80, 48, 9);
-        setColor(15);
+        //marco(12, 10, 80, 48, 9);
+        //setColor(15);
         switch (rol) {
             case 49: //ADMINISTRADOR
                 system("cls");
@@ -154,7 +154,7 @@ void menuPrincipal() {
 
 int seleccionarRol(int rol) {
     setlocale(LC_ALL, "Spanish");
-    marco(12, 10, 80, 48, 9);
+    /*marco(12, 10, 80, 48, 9);
     setColor(15);
     gotoxy(25,16);cout << "Seleccione su rol correspondiente: " << endl;
     gotoxy(25,17);cout << "1) Administrador";
@@ -162,12 +162,20 @@ int seleccionarRol(int rol) {
     gotoxy(25,19);cout << "3) Profesor";
     gotoxy(25,20);cout << "4) Alumno";
     gotoxy(25,21);cout << "5) Salir";
-    gotoxy(25,22);cout << endl;
+    gotoxy(25,22);cout << endl;*/
+
+    cout << "Seleccione su rol correspondiente: " << endl;
+    cout << endl << "1) Administrador";
+    cout << endl << "2) Director";
+    cout << endl << "3) Profesor";
+    cout << endl << "4) Alumno";
+    cout << endl << "5) Salir";
+    cout << endl << endl;
 
     rol = _getch();
 
     while(rol != 49 && rol != 50 && rol != 51 && rol != 52 && rol != 53){
-        cout << "---- ERROR: OPCIï¿½N INVï¿½LIDA ----" << endl;
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -185,7 +193,7 @@ int seleccionarRol(int rol) {
     return rol;
 }
 
-///--- SETTEAR LEGAJO AUTOMï¿½TICO ---\\
+///--- SETTEAR LEGAJO AUTOMÁTICO ---\\
 
 int settearNuevoLegajo() {
 
@@ -233,7 +241,7 @@ bool usuariosEspecificosCargados(string Rol, FILE* vecPFiles[], const char* vecN
     for(x = 0; x < CANTIDADOBJETOS; x++){
         if(Rol == vecNombresRoles[x]) {
             if(!(vecPFiles[x] = fopen(vecNombresFiles[x], "rb+"))) {
-                cout << endl << "No encontrï¿½ el archivo" << endl;
+                cout << endl << "No encontró el archivo" << endl;
                 if (!(vecPFiles[x] = fopen(vecNombresFiles[x], "wb+"))) {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
@@ -269,7 +277,7 @@ void mensajeUsuariosNoEncontrados(string Rol) {
 void login(int rol, string Rol) {
     setlocale(LC_ALL, "Spanish");
 
-    cout << Rol << ": INICIO DE SESIï¿½N (Nro. de Legajo 0 para salir)" << endl;
+    cout << Rol << ": INICIO DE SESIÓN (Nro. de Legajo 0 para salir)" << endl;
     cout << endl << endl << "\t - Legajo: ";
     cin >> legajo;
 
@@ -278,17 +286,17 @@ void login(int rol, string Rol) {
         menuPrincipal();
     }
     if(!usuarioValido(Rol, legajo, vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
-        cout << endl << "---- ERROR: NO SE ENCONTRï¿½ UN USUARIO " << Rol << " CON LEGAJO '" << legajo << "' CARGADO EN EL SISTEMA ----" << endl << endl;
+        cout << endl << "---- ERROR: NO SE ENCONTRÓ UN USUARIO " << Rol << " CON LEGAJO '" << legajo << "' CARGADO EN EL SISTEMA ----" << endl << endl;
         cout << endl << endl;
         system("pause");
         system("cls");
         login(rol, Rol);
     }
 
-    cout << endl << "\t - Contraseï¿½a (numï¿½rica): ";
+    cout << endl << "\t - Contraseña (numérica): ";
     cin >> clave;
     if(!claveValida(Rol, legajo, clave, vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
-        cout << endl << "---- ERROR: CONTRASEï¿½A INCORRECTA ----" << endl << endl;
+        cout << endl << "---- ERROR: CONTRASEÑA INCORRECTA ----" << endl << endl;
         cout << endl << endl;
         system("pause");
         system("cls");
@@ -317,8 +325,8 @@ void login(int rol, string Rol) {
             cout << "Ha seleccionado la opcion 3." << endl;
             break;
         case 52: //ALUMNO
+            system("cls");
             menuAlumno();
-            system("pause");
             break;
         default:
             cout << "Opcion invalida." << endl;
@@ -503,40 +511,41 @@ bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNomb
 }
 
 
-///--- MENï¿½S ROLES ---\\
+///--- MENÚS ROLES ---\\
 
-///--- MENï¿½ ADMINISTRADOR ---\\
+///--- MENÚ ADMINISTRADOR ---\\
 
 void menuAdministrador() {
+
     int opcion;
     int legajoDirector;
     int nuevaClave;
 
-    cout << "ï¿½Bienvenido!" << endl;
-    cout << "Seleccione la opciï¿½n que desee: " << endl;
+    cout << "¡Bienvenido!" << endl;
+    cout << "Seleccione la opción que desee: " << endl;
 
     cout << endl << "1) Crear perfil Director";
     cout << endl << "2) Activar perfil Director";
     cout << endl << "3) Desactivar perfil Director";
-    cout << endl << "4) Cambiar contraseï¿½a";
-    cout << endl << "5) Volver al Menï¿½ principal";
+    cout << endl << "4) Cambiar contraseña";
+    cout << endl << "5) Volver al Menú principal";
     cout << endl << endl;
 
     opcion = _getch();
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53){
-        cout << "---- ERROR: OPCIï¿½N INVï¿½LIDA ----" << endl;
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "ï¿½Bienvenido!" << endl;
-        cout << "Seleccione la opciï¿½n que desee: " << endl;
+        cout << "¡Bienvenido!" << endl;
+        cout << "Seleccione la opción que desee: " << endl;
 
         cout << endl << "1) Crear perfil Director";
         cout << endl << "2) Activar perfil Director";
         cout << endl << "3) Desactivar perfil Director";
-        cout << endl << "4) Cambiar contraseï¿½a";
-        cout << endl << "5) Volver al Menï¿½ principal";
+        cout << endl << "4) Cambiar contraseña";
+        cout << endl << "5) Volver al Menú principal";
         cout << endl << endl;
 
         opcion = _getch();
@@ -578,10 +587,10 @@ void menuAdministrador() {
             break;
         case 52:
             system("cls");
-            cout << "CAMBIANDO CONTRASEï¿½A" << endl;
+            cout << "CAMBIANDO CONTRASEÑA" << endl;
 
-            cout << endl << "\t - Contraseï¿½a anterior: " << clave << endl;
-            cout << endl << "\t - Contraseï¿½a nueva (numï¿½rica): ";
+            cout << endl << "\t - Contraseña anterior: " << clave << endl;
+            cout << endl << "\t - Contraseña nueva (numérica): ";
             cin >> nuevaClave;
 
             administradorObj.cambiarClave(legajo, nuevaClave);
@@ -591,47 +600,47 @@ void menuAdministrador() {
             break;
         case 53:
             system("cls");
-            cout << "VOLVIENDO AL MENï¿½ PRINCIPAL..." << endl;
+            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
             Sleep(2000);
             system("cls");
             menuPrincipal();
             break;
         default:
-            cout << "Opciï¿½n no vï¿½lida." << endl;
+            cout << "Opción no válida." << endl;
     }
 
 }
 
-///--- MENï¿½ DIRECTIVO ---\\
+///--- MENÚ DIRECTIVO ---\\
 
 void menuDirectivo() {
     int opcion;
     int legajoDirector;
     int nuevaClave;
 
-    cout << "ï¿½Bienvenido!" << endl;
-    cout << "Seleccione la opciï¿½n que desee: " << endl;
+    cout << "¡Bienvenido!" << endl;
+    cout << "Seleccione la opción que desee: " << endl;
 
     cout << endl << "1) Gestion perfil Profesor";
     cout << endl << "2) Gestion perfil Alumno";
-    cout << endl << "3) Cambiar contraseï¿½a";
-    cout << endl << "4) Volver al Menï¿½ principal";
+    cout << endl << "3) Cambiar contraseña";
+    cout << endl << "4) Volver al Menú principal";
     cout << endl << endl;
 
     opcion = _getch();
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
-        cout << "---- ERROR: OPCIï¿½N INVï¿½LIDA ----" << endl;
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "ï¿½Bienvenido!" << endl;
-        cout << "Seleccione la opciï¿½n que desee: " << endl;
+        cout << "¡Bienvenido!" << endl;
+        cout << "Seleccione la opción que desee: " << endl;
 
         cout << endl << "1) Gestion perfil Profesor";
         cout << endl << "2) Gestion perfil Alumno";
-        cout << endl << "3) Cambiar contraseï¿½a";
-        cout << endl << "4) Volver al Menï¿½ principal";
+        cout << endl << "3) Cambiar contraseña";
+        cout << endl << "4) Volver al Menú principal";
         cout << endl << endl;
 
         opcion = _getch();
@@ -650,10 +659,10 @@ void menuDirectivo() {
         case 51:
 
             system("cls");
-            cout << "CAMBIANDO CONTRASEï¿½A" << endl;
+            cout << "CAMBIANDO CONTRASEÑA" << endl;
 
-            cout << endl << "\t - Contraseï¿½a anterior: " << clave << endl;
-            cout << endl << "\t - Contraseï¿½a nueva (numï¿½rica): ";
+            cout << endl << "\t - Contraseña anterior: " << clave << endl;
+            cout << endl << "\t - Contraseña nueva (numérica): ";
             cin >> nuevaClave;
 
             directorObj.cambiarClave(legajo, nuevaClave);
@@ -663,13 +672,13 @@ void menuDirectivo() {
             break;
         case 52:
             system("cls");
-            cout << "VOLVIENDO AL MENï¿½ PRINCIPAL..." << endl;
+            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
             Sleep(2000);
             system("cls");
             menuPrincipal();
             break;
         default:
-            cout << "Opciï¿½n no vï¿½lida." << endl;
+            cout << "Opción no válida." << endl;
     }
 }
 
@@ -678,29 +687,29 @@ void subMenuDirectivoProfesor() {
     int legajoProfesor;
     int nuevaClave;
 
-    cout << "ï¿½Bienvenido!" << endl;
-    cout << "Seleccione la opciï¿½n que desee: " << endl;
+    cout << "¡Bienvenido!" << endl;
+    cout << "Seleccione la opción que desee: " << endl;
 
     cout << endl << "1) Crear perfil Profesor";
     cout << endl << "2) Activar perfil Profesor";
     cout << endl << "3) Desactivar perfil Profesor";
-    cout << endl << "4) Volver al Menï¿½ Directivo";
+    cout << endl << "4) Volver al Menú Directivo";
     cout << endl << endl;
 
     opcion = _getch();
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
-        cout << "---- ERROR: OPCIï¿½N INVï¿½LIDA ----" << endl;
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "Â¡Bienvenido!" << endl;
-        cout << "Seleccione la opciÃ³n que desee: " << endl;
+        cout << "¡Bienvenido!" << endl;
+        cout << "Seleccione la opción que desee: " << endl;
 
         cout << endl << "1) Crear perfil Profesor";
         cout << endl << "2) Activar perfil Profesor";
         cout << endl << "3) Desactivar perfil Profesor";
-        cout << endl << "4) Volver al MenÃº Directivo";
+        cout << endl << "4) Volver al Menú Directivo";
         cout << endl << endl;
 
         opcion = _getch();
@@ -741,13 +750,13 @@ void subMenuDirectivoProfesor() {
             break;
         case 52:
             system("cls");
-            cout << "VOLVIENDO AL MENï¿½ DIRECTIVO..." << endl;
+            cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
             Sleep(2000);
             system("cls");
             menuDirectivo();
             break;
         default:
-            cout << "Opciï¿½n no vï¿½lida." << endl;
+            cout << "Opción no válida." << endl;
     }
 
 }
@@ -757,29 +766,29 @@ void subMenuDirectivoAlumno() {
     int legajoAlumno;
     int nuevaClave;
 
-    cout << "ï¿½Bienvenido!" << endl;
-    cout << "Seleccione la opciï¿½n que desee: " << endl;
+    cout << "¡Bienvenido!" << endl;
+    cout << "Seleccione la opción que desee: " << endl;
 
     cout << endl << "1) Crear perfil Alumno";
     cout << endl << "2) Activar perfil Alumno";
     cout << endl << "3) Desactivar perfil Alumno";
-    cout << endl << "4) Volver al Menï¿½ Directivo";
+    cout << endl << "4) Volver al Menú Directivo";
     cout << endl << endl;
 
     opcion = _getch();
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
-        cout << "---- ERROR: OPCIï¿½N INVï¿½LIDA ----" << endl;
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "ï¿½Bienvenido!" << endl;
-        cout << "Seleccione la opciï¿½n que desee: " << endl;
+        cout << "¡Bienvenido!" << endl;
+        cout << "Seleccione la opción que desee: " << endl;
 
         cout << endl << "1) Crear perfil Alumno";
         cout << endl << "2) Activar perfil Alumno";
         cout << endl << "3) Desactivar perfil Alumno";
-        cout << endl << "4) Volver al Menï¿½ Directivo";
+        cout << endl << "4) Volver al Menú Directivo";
         cout << endl << endl;
 
         opcion = _getch();
@@ -820,26 +829,26 @@ void subMenuDirectivoAlumno() {
             break;
         case 52:
             system("cls");
-            cout << "VOLVIENDO AL MENï¿½ DIRECTIVO..." << endl;
+            cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
             Sleep(2000);
             system("cls");
             menuDirectivo();
             break;
         default:
-            cout << "Opciï¿½n no vï¿½lida." << endl;
+            cout << "Opción no válida." << endl;
     }
 }
 
-///--- MENï¿½ PROFESOR ---\\
+///--- MENÚ PROFESOR ---\\
 
 void menuProfesor() {
      system("cls");
     system("title PROYECTO 2024");
     int opcion;
     do{
-        marco(12, 10, 80, 48, 9);
-        setColor(15);
-        gotoxy(25,16);cout << "----------------------------------------------------"<< endl;
+//        marco(12, 10, 80, 48, 9);
+  //      setColor(15);
+        /*gotoxy(25,16);cout << "----------------------------------------------------"<< endl;
         gotoxy(25,17);cout << "                   MENU PROFESOR                    "<< endl;
         gotoxy(25,18);cout << "----------------------------------------------------"<< endl;
         gotoxy(25,20);cout << "1. CARGAR NOTAS                                     "<< endl;
@@ -850,7 +859,21 @@ void menuProfesor() {
         gotoxy(25,25);cout << "----------------------------------------------------"<< endl;
         gotoxy(25,26);cout << "- SELECCIONE UNA OPCION: -    "<< endl;
         gotoxy(25,27);cout << "----------------------------------------------------"<< endl;
-        gotoxy(25,28);cout << " --> ";cin>>opcion;
+        gotoxy(25,28);cout << " --> ";cin>>opcion;*/
+
+        cout << "----------------------------------------------------"<< endl;
+        cout << "                   MENU PROFESOR                    "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "1. CARGAR NOTAS                                     "<< endl;
+        cout << "2. MODIFICAR NOTAS                                  "<< endl;
+        cout << "3. CARGAR FECHA DE EXAMEN                           "<< endl;
+        cout << "4. VER MATERIAS ASIGNADAS                           "<< endl;
+        cout << "0. SALIR                                            "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "- SELECCIONE UNA OPCION: -    "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << " --> ";cin>>opcion;
+
 
         switch(opcion){
             case 1:
@@ -879,7 +902,7 @@ void menuProfesor() {
 
 }
 
-///--- MENï¿½ ALUMNO ---\\
+///--- MENÚ ALUMNO ---\\
 
 void menuAlumno() {
     int OPC;
@@ -960,7 +983,7 @@ void validarLegajo(int legajo) {
     while(legajo < 0 || cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << endl << "\t---- ERROR : LEGAJO INVï¿½LIDO ----" << endl;
+        cout << endl << "\t---- ERROR : LEGAJO INVÁLIDO ----" << endl;
         cout << endl << "\t - Legajo: ";
         cin >> legajo;
     }
