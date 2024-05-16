@@ -7,7 +7,7 @@
 #include "Funciones.h"
 #include "Administrador.h"
 #include "Director.h"
-//#include "Profesor.h"
+#include "Profesor.h"
 #include "Alumno.h"
 #include "rlutil.h"
 
@@ -72,13 +72,11 @@ void marco(int y, int x, int ancho, int alto, int color)
         printf("\xdB");
         gotoxy(x+ancho,i);
         printf("\xdB");
-
-
     }
 }
 
 void menuPrincipal() {
-
+    setlocale(LC_ALL, "Spanish");
     rol = seleccionarRol(rol);
 
     while(true) {
@@ -119,7 +117,7 @@ void menuPrincipal() {
             case 51: //PROFESOR
                 system("cls");
                 rol = seleccionarRol(rol);
-                /*system("cls");
+                system("cls");
                 if(usuariosCargados()){
                     if(!usuariosEspecificosCargados("PROFESOR", vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)){
                         mensajeUsuariosNoEncontrados("PROFESOR");
@@ -131,8 +129,7 @@ void menuPrincipal() {
                 }
                 else{
                     mensajeUsuariosNoEncontrados("PROFESOR");
-                }*/
-                ;
+                }
                 break;
             case 52: // ALUMNO
                 system("cls");
@@ -163,7 +160,7 @@ void menuPrincipal() {
 }
 
 int seleccionarRol(int rol) {
-
+    setlocale(LC_ALL, "Spanish");
     marco(12, 10, 80, 48, 9);
     setColor(15);
     gotoxy(25,16);cout << "Seleccione su rol correspondiente: " << endl;
@@ -277,6 +274,7 @@ void mensajeUsuariosNoEncontrados(string Rol) {
 ///--- LOGIN ROLES ---\\
 
 void login(int rol, string Rol) {
+    setlocale(LC_ALL, "Spanish");
 
     cout << Rol << ": INICIO DE SESIÓN (Nro. de Legajo 0 para salir)" << endl;
     cout << endl << endl << "\t - Legajo: ";
