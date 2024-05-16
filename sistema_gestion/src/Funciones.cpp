@@ -319,7 +319,7 @@ void login(int rol, string Rol) {
             cout << "Ha seleccionado la opcion 3." << endl;
             break;
         case 52: //ALUMNO
-            cout << "Ha seleccionado la opcion 4." << endl;
+            menuAlumno();
             system("pause");
             break;
         default:
@@ -884,7 +884,77 @@ void menuProfesor() {
 ///--- MEN� ALUMNO ---\\
 
 void menuAlumno() {
+    int OPC;
+    while(true) {
+        system ("cls");
+        cout<<"############################"<<endl;
+        cout<<"######Sub Menu Alumno#######"<<endl;
+        cout<<"# 1-Materias               #"<<endl;
+        cout<<"# 2-Examenes               #"<<endl;
+        cout<<"# 3-Cambiar Contrasena     #"<<endl;
+        cout<<"# 0-SALIR                  #"<<endl;
+        cout<<"----------------------------"<<endl;
+        cout<<"Opcion: ";
+        cin>>OPC;
 
+        switch (OPC!=0)
+        {
+        case 1:
+        system ("cls");
+        cout<<"############################"<<endl;
+        cout<<"######    Materias   #######"<<endl;
+        cout<<"# 1-Inscribirse            #"<<endl;
+        cout<<"# 2-Notas                  #"<<endl;
+        cout<<"# 3-Darse De Baja          #"<<endl;
+        cout<<"# 0-Menu Anterior          #"<<endl;
+        cout<<"----------------------------"<<endl;
+        cout<<"Opcion: ";
+        cin>>OPC;
+        switch (OPC)
+        {
+        case 1:
+
+            break;
+
+        case 2:
+            break;
+
+        case 3:
+            break;
+        case 0:
+            break;
+
+        default:
+            cout << endl;
+            cout<<"OPCION INCORRECTA"<<endl;
+            system("pause");
+            break;
+}
+            break;
+///------------------------------------------------------------------
+        case 2:
+            break;
+///------------------------------------------------------------------
+        case 3:
+            break;
+///------------------------------------------------------------------
+        case 0:
+            system("cls");
+            cout << "GRACIAS POR USAR ESTE PROGRAMA !!" << endl << endl;
+            system("pause");
+            return;
+
+            break;
+
+        default:
+            cout << endl;
+            cout<<"OPCION INCORRECTA"<<endl;
+            system("pause");
+            break;
+
+
+        }
+    }
 }
 
 void validarLegajo(int legajo) {
