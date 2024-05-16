@@ -14,8 +14,7 @@
 using namespace std;
 using namespace rlutil;
 
-const int CANTIDADOBJETOS = 3;
-//const int CANTIDADOBJETOS = 4;
+const int CANTIDADOBJETOS = 4;
 
 //ARCHIVOS
 FILE *pAdm;
@@ -26,10 +25,9 @@ FILE *pAlumno;
 //VECTORES ARCHIVOS
 
 FILE* vecPFiles[CANTIDADOBJETOS] = {pAdm, pDirectivo, pProfesor, pAlumno};
-string vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "profesor.dat", "alumnos.dat"};
-int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Directivo), sizeof(Profesor), sizeof(Alumno)};
+const char* vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "profesor.dat", "alumnos.dat"};
+int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Director), sizeof(Profesor), sizeof(Alumno)};
 string vecNombresRoles[CANTIDADOBJETOS] = {"ADMINISTRADOR", "DIRECTOR", "PROFESOR", "ALUMNO"};
-
 
 //OBJETOS
 Administrador administradorObj;
@@ -696,13 +694,13 @@ void subMenuDirectivoProfesor() {
         Sleep(500);
         system("cls");
 
-        cout << "�Bienvenido!" << endl;
-        cout << "Seleccione la opci�n que desee: " << endl;
+        cout << "¡Bienvenido!" << endl;
+        cout << "Seleccione la opción que desee: " << endl;
 
         cout << endl << "1) Crear perfil Profesor";
         cout << endl << "2) Activar perfil Profesor";
         cout << endl << "3) Desactivar perfil Profesor";
-        cout << endl << "4) Volver al Men� Directivo";
+        cout << endl << "4) Volver al Menú Directivo";
         cout << endl << endl;
 
         opcion = _getch();
@@ -711,7 +709,7 @@ void subMenuDirectivoProfesor() {
     switch(opcion) {
         case 49:
             system("cls");
-            profesorObj.grabarEnDiscoDirector();
+            profesorObj.grabarEnDiscoProfesor();
             system("cls");
             subMenuDirectivoProfesor();
             break;
@@ -723,7 +721,7 @@ void subMenuDirectivoProfesor() {
             cin >> legajoProfesor;
             validarLegajo(legajoProfesor);
 
-            profesorObj.activarProfesor(legajoProfesor);
+            //profesorObj.activarProfesor(legajoProfesor);
 
             system("cls");
             subMenuDirectivoProfesor();
@@ -736,7 +734,7 @@ void subMenuDirectivoProfesor() {
             cin >> legajoProfesor;
             validarLegajo(legajoProfesor);
 
-            profesorObj.desactivarProfesor(legajoProfesor);
+            //profesorObj.desactivarProfesor(legajoProfesor);
 
             system("cls");
             subMenuDirectivoProfesor();
