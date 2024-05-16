@@ -30,7 +30,7 @@ class Persona
 
         char* getApellido();
 
-        //bool getFechao(Fecha);
+        //bool getFecha(Fecha);
 
 
 

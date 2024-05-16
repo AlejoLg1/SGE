@@ -20,7 +20,7 @@ class Director : public Persona
 
         ///---- SETTERS ----\\\
 
-        void setLegajo(int);
+        void setLegajo();
 
         void setClave(int);
 

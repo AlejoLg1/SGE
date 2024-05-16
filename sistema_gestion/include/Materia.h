@@ -6,11 +6,9 @@ class Materia
 {
 
     private:
-        int _id ;
+        int _id;
         int _legajoProfesor;
-        char _nombreMateria [20];
-
-
+        char _nombreMateria[20];
 
     public:
 
@@ -44,13 +42,9 @@ class Materia
 
         void mostrarMateria();
 
-        void grabarEnDisco();
+        void grabarEnDiscoMateria();
 
-        int leerEnDisco(int pos);
-
-
-
-
+        int leerEnDiscoMateria();
 
 };
 

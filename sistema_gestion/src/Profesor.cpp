@@ -1,7 +1,9 @@
 #include <iostream>
-using namespace std;
 #include <cstdlib>
+#include "Funciones.h"
 #include "Profesor.h"
+
+using namespace std;
 
 Profesor::Profesor()
 {
@@ -11,8 +13,8 @@ Profesor::Profesor()
     _estado = false;
 }
 
-void Profesor::setLegajo(int legajo){
-    _legajo = legajo;
+void Profesor::setLegajo(){
+    _legajo = settearNuevoLegajo();
 }
 void Profesor::setClave(int clave){
     _clave = clave;
@@ -63,7 +65,7 @@ void Profesor::grabarEnDiscoProfesor(){
 
 }
 
-bool Profesor::leerEnDiscoProfesor(int pos){
+/*bool Profesor::leerEnDiscoProfesor(int pos){ ARREGLAR PARA QUE NO NECESITE PARÁMETRO
     FILE *p;
 
     p = fopen("profesores.dat", "rb");
@@ -79,7 +81,5 @@ bool Profesor::leerEnDiscoProfesor(int pos){
 
     fclose(p);
     return leyo;
-
-
-}
+} */
 

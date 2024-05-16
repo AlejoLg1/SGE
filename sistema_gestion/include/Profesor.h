@@ -1,6 +1,6 @@
-#pragma once
+#ifndef PROFESOR_H_INCLUDED
+#define PROFESOR_H_INCLUDED
 #include "Persona.h"
-
 
 class Profesor : public Persona
 {
@@ -15,7 +15,7 @@ class Profesor : public Persona
 
         ///SETTERS
 
-        void setLegajo(int);
+        void setLegajo();
         void setClave(int);
         void setEstado(bool);
 
@@ -30,7 +30,8 @@ class Profesor : public Persona
         void cargarProfesor();
         void mostrarProfesor();
         void grabarEnDiscoProfesor();
-        bool leerEnDiscoProfesor(int);
+        bool leerEnDiscoProfesor();
 
 };
 
+#endif

@@ -74,7 +74,7 @@ void Materia::mostrarMateria()
 
 
 }
-void Materia::grabarEnDisco()
+void Materia::grabarEnDiscoMateria()
 {
 FILE *p;
     p=fopen ("Materia.dat","ab");
@@ -85,7 +85,8 @@ FILE *p;
 
     fclose (p);
 }
-int Materia::leerEnDisco(int pos)
+
+/*int Materia::leerEnDiscoMateria(int pos) ARREGLAR PARA QUE NO NECESITO UN PARÁMETRO
 {
      FILE *p;
     bool Leyo;
@@ -99,6 +100,6 @@ int Materia::leerEnDisco(int pos)
 
     fclose(p);
     return Leyo;
-}
+}  */
 
 

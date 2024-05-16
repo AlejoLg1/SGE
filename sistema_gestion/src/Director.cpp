@@ -17,10 +17,8 @@ Director::Director()
 ///---- SETTERS ----\\\
 
 
-void Director::setLegajo(int legajo)
-{
-    _legajo = legajo;
-
+void Director::setLegajo() {
+    _legajo = settearNuevoLegajo();
 }
 
 void Director::setClave(int clave)
@@ -61,8 +59,9 @@ void Director::cargarDirector()
     cout << "CREANDO PERFIL DIRECTOR" << endl;
 
     cout<< endl <<"\t - Legajo: ";
-    _legajo = settearNuevoLegajo();
-    cout << getLegajo() << endl;
+    setLegajo();
+    cout << getLegajo();
+    cout << endl;
 
     Persona::cargar();
 
