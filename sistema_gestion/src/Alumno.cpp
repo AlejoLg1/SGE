@@ -36,9 +36,6 @@ void Alumno::setEstado(bool estado) {
     _estado = estado;
 }
 
-void Alumno::setMaterias(int *materias) {
-    memcpy(_materias, materias, sizeof(_materias));
-}
 
 ///---- GETTERS ----\\\
 
@@ -54,9 +51,6 @@ bool Alumno::getEstado() {
     return _estado;
 }
 
-int* Alumno::getMaterias() {
-    return _materias;
-}
 
 ///---- MÉTODOS ----\\\
 
@@ -83,8 +77,6 @@ void Alumno::cargar() {
     cout << endl << "\t - Estado (1 para activo, 0 para inactivo): ";
     cin >> estado;
     setEstado(estado);
-
-    setMaterias(materias);
 
 }
 
@@ -206,18 +198,6 @@ void Alumno::mostrar() {
     Persona::mostrar();
     cout << endl << "\t - Clave: " << getClave();
     cout << endl << "\t - Estado: " << (getEstado() ? "Activo" : "Inactivo");
-    cout << endl << "\t - Materias: ";
-    for (int i = 0; i < 7; ++i) {
-        if(getMaterias()[i] != -1) {
-            inscripto = true;
-            cout << endl << "\t\t - Materia: ";
-            cout << getMaterias()[i];
-        }
-    }
-
-    if(!inscripto){
-        cout << "NO INSCRIPTO";
-    }
     cout << endl << endl;
 }
 

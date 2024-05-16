@@ -7,8 +7,6 @@ class Alumno : public Persona{
         int _legajo;
         int _clave;
         bool _estado;
-        int _materias[7];
-
 
     public:
 
@@ -29,9 +27,6 @@ class Alumno : public Persona{
         int getClave();
 
         bool getEstado();
-
-        int* getMaterias();
-
 
         ///---- MÉTODOS ----\\\
 
