@@ -24,7 +24,7 @@ FILE *pAlumno;
 
 //VECTORES ARCHIVOS
 FILE* vecPFiles[CANTIDADOBJETOS] = {pAdm, pDirectivo, pProfesor, pAlumno};
-const char* vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "profesor.dat", "alumnos.dat"};
+const char* vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "profesores.dat", "alumnos.dat"};
 int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Director), sizeof(Profesor), sizeof(Alumno)};
 string vecNombresRoles[CANTIDADOBJETOS] = {"ADMINISTRADOR", "DIRECTOR", "PROFESOR", "ALUMNO"};
 
@@ -109,8 +109,6 @@ void menuPrincipal() {
                 break;
             case 51: //PROFESOR
                 system("cls");
-                rol = seleccionarRol(rol);
-                system("cls");
                 if(usuariosCargados()){
                     if(!usuariosEspecificosCargados("PROFESOR", vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)){
                         mensajeUsuariosNoEncontrados("PROFESOR");
@@ -139,7 +137,7 @@ void menuPrincipal() {
                     mensajeUsuariosNoEncontrados("ALUMNO");
                 }
                 break;
-            case 53: // SALIR
+            case 48: // SALIR
                 system("cls");
                 cout << endl << "SALIENDO...." << endl;
                 Sleep(2000);
@@ -164,28 +162,36 @@ int seleccionarRol(int rol) {
     gotoxy(25,21);cout << "5) Salir";
     gotoxy(25,22);cout << endl;*/
 
-    cout << "Seleccione su rol correspondiente: " << endl;
-    cout << endl << "1) Administrador";
-    cout << endl << "2) Director";
-    cout << endl << "3) Profesor";
-    cout << endl << "4) Alumno";
-    cout << endl << "5) Salir";
-    cout << endl << endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "                     MENÚ ROLES                     "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "1. ADMINISTRADOR                                    "<< endl;
+    cout << "2. DIRECTOR                                         "<< endl;
+    cout << "3. PROFESOR                                         "<< endl;
+    cout << "4. ALUMNO                                           "<< endl;
+    cout << "0. SALIR                                            "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "       - SELECCIONE SU ROL CORRESPONDIENTE: -       "<< endl;
+    cout << "----------------------------------------------------"<< endl;
 
     rol = _getch();
 
-    while(rol != 49 && rol != 50 && rol != 51 && rol != 52 && rol != 53){
+    while(rol != 49 && rol != 50 && rol != 51 && rol != 52 && rol != 48){
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "Seleccione su rol correspondiente: " << endl;
-        cout << endl << "1) Administrador";
-        cout << endl << "2) Directivo";
-        cout << endl << "3) Profesor";
-        cout << endl << "4) Alumno";
-        cout << endl << "5) Salir";
-        cout << endl << endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "                     MENÚ ROLES                     "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "1. ADMINISTRADOR                                    "<< endl;
+        cout << "2. DIRECTOR                                         "<< endl;
+        cout << "3. PROFESOR                                         "<< endl;
+        cout << "4. ALUMNO                                           "<< endl;
+        cout << "0. SALIR                                            "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "       - SELECCIONE SU ROL CORRESPONDIENTE: -       "<< endl;
+        cout << "----------------------------------------------------"<< endl;
 
         rol = _getch();
     }
@@ -322,7 +328,8 @@ void login(int rol, string Rol) {
             menuDirectivo();
             break;
         case 51: //PROFESOR
-            cout << "Ha seleccionado la opcion 3." << endl;
+            system("cls");
+            menuProfesor();
             break;
         case 52: //ALUMNO
             system("cls");
@@ -521,32 +528,36 @@ void menuAdministrador() {
     int legajoDirector;
     int nuevaClave;
 
-    cout << "¡Bienvenido!" << endl;
-    cout << "Seleccione la opción que desee: " << endl;
-
-    cout << endl << "1) Crear perfil Director";
-    cout << endl << "2) Activar perfil Director";
-    cout << endl << "3) Desactivar perfil Director";
-    cout << endl << "4) Cambiar contraseña";
-    cout << endl << "5) Volver al Menú principal";
-    cout << endl << endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "                 MENÚ ADMINISTRADOR                 "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "1. CREAR PERFIL DIRECTOR                            "<< endl;
+    cout << "2. ACTIVAR PERFIL DIRECTOR                          "<< endl;
+    cout << "3. DESACTIVAR PERFIL DIRECTOR                       "<< endl;
+    cout << "4. CAMBIAR CONTRASEÑA                               "<< endl;
+    cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+    cout << "----------------------------------------------------"<< endl;
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48){
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "¡Bienvenido!" << endl;
-        cout << "Seleccione la opción que desee: " << endl;
-
-        cout << endl << "1) Crear perfil Director";
-        cout << endl << "2) Activar perfil Director";
-        cout << endl << "3) Desactivar perfil Director";
-        cout << endl << "4) Cambiar contraseña";
-        cout << endl << "5) Volver al Menú principal";
-        cout << endl << endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "                 MENÚ ADMINISTRADOR                 "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "1. CREAR PERFIL DIRECTOR                            "<< endl;
+        cout << "2. ACTIVAR PERFIL DIRECTOR                          "<< endl;
+        cout << "3. DESACTIVAR PERFIL DIRECTOR                       "<< endl;
+        cout << "4. CAMBIAR CONTRASEÑA                               "<< endl;
+        cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+        cout << "----------------------------------------------------"<< endl;
 
         opcion = _getch();
 
@@ -598,7 +609,7 @@ void menuAdministrador() {
             system("cls");
             menuAdministrador();
             break;
-        case 53:
+        case 48:
             system("cls");
             cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
             Sleep(2000);
@@ -618,30 +629,34 @@ void menuDirectivo() {
     int legajoDirector;
     int nuevaClave;
 
-    cout << "¡Bienvenido!" << endl;
-    cout << "Seleccione la opción que desee: " << endl;
-
-    cout << endl << "1) Gestion perfil Profesor";
-    cout << endl << "2) Gestion perfil Alumno";
-    cout << endl << "3) Cambiar contraseña";
-    cout << endl << "4) Volver al Menú principal";
-    cout << endl << endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "                   MENÚ DIRECTIVO                   "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "1. GESTIÓN PERFIL PROFESOR                          "<< endl;
+    cout << "2. GESTIÓN PERFIL ALUMNO                            "<< endl;
+    cout << "3. CAMBIAR CONTRASEÑA                               "<< endl;
+    cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+    cout << "----------------------------------------------------"<< endl;
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "¡Bienvenido!" << endl;
-        cout << "Seleccione la opción que desee: " << endl;
-
-        cout << endl << "1) Gestion perfil Profesor";
-        cout << endl << "2) Gestion perfil Alumno";
-        cout << endl << "3) Cambiar contraseña";
-        cout << endl << "4) Volver al Menú principal";
-        cout << endl << endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "                   MENÚ DIRECTIVO                   "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "1. GESTIÓN PERFIL PROFESOR                          "<< endl;
+        cout << "2. GESTIÓN PERFIL ALUMNO                            "<< endl;
+        cout << "3. CAMBIAR CONTRASEÑA                               "<< endl;
+        cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+        cout << "----------------------------------------------------"<< endl;
 
         opcion = _getch();
 
@@ -670,7 +685,7 @@ void menuDirectivo() {
             system("cls");
             menuDirectivo();
             break;
-        case 52:
+        case 48:
             system("cls");
             cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
             Sleep(2000);
@@ -687,30 +702,34 @@ void subMenuDirectivoProfesor() {
     int legajoProfesor;
     int nuevaClave;
 
-    cout << "¡Bienvenido!" << endl;
-    cout << "Seleccione la opción que desee: " << endl;
-
-    cout << endl << "1) Crear perfil Profesor";
-    cout << endl << "2) Activar perfil Profesor";
-    cout << endl << "3) Desactivar perfil Profesor";
-    cout << endl << "4) Volver al Menú Directivo";
-    cout << endl << endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "                  GESTIÓN PROFESOR                  "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "1. CREAR PERFIL PROFESOR                            "<< endl;
+    cout << "2. ACTIVAR PERFIL PROFESOR                          "<< endl;
+    cout << "3. DESACTIVAR PERFIL PROFESOR                       "<< endl;
+    cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+    cout << "----------------------------------------------------"<< endl;
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "¡Bienvenido!" << endl;
-        cout << "Seleccione la opción que desee: " << endl;
-
-        cout << endl << "1) Crear perfil Profesor";
-        cout << endl << "2) Activar perfil Profesor";
-        cout << endl << "3) Desactivar perfil Profesor";
-        cout << endl << "4) Volver al Menú Directivo";
-        cout << endl << endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "                  GESTIÓN PROFESOR                  "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "1. CREAR PERFIL PROFESOR                            "<< endl;
+        cout << "2. ACTIVAR PERFIL PROFESOR                          "<< endl;
+        cout << "3. DESACTIVAR PERFIL PROFESOR                       "<< endl;
+        cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+        cout << "----------------------------------------------------"<< endl;
 
         opcion = _getch();
     }
@@ -748,7 +767,7 @@ void subMenuDirectivoProfesor() {
             system("cls");
             subMenuDirectivoProfesor();
             break;
-        case 52:
+        case 48:
             system("cls");
             cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
             Sleep(2000);
@@ -766,30 +785,35 @@ void subMenuDirectivoAlumno() {
     int legajoAlumno;
     int nuevaClave;
 
-    cout << "¡Bienvenido!" << endl;
-    cout << "Seleccione la opción que desee: " << endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "                   GESTIÓN ALUMNO                   "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "1. CREAR PERFIL ALUMNO                              "<< endl;
+    cout << "2. ACTIVAR PERFIL ALUMNO                            "<< endl;
+    cout << "3. DESACTIVAR PERFIL ALUMNO                         "<< endl;
+    cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+    cout << "----------------------------------------------------"<< endl;
 
-    cout << endl << "1) Crear perfil Alumno";
-    cout << endl << "2) Activar perfil Alumno";
-    cout << endl << "3) Desactivar perfil Alumno";
-    cout << endl << "4) Volver al Menú Directivo";
-    cout << endl << endl;
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
-        cout << "¡Bienvenido!" << endl;
-        cout << "Seleccione la opción que desee: " << endl;
-
-        cout << endl << "1) Crear perfil Alumno";
-        cout << endl << "2) Activar perfil Alumno";
-        cout << endl << "3) Desactivar perfil Alumno";
-        cout << endl << "4) Volver al Menú Directivo";
-        cout << endl << endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "                   GESTIÓN ALUMNO                   "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "1. CREAR PERFIL ALUMNO                              "<< endl;
+        cout << "2. ACTIVAR PERFIL ALUMNO                            "<< endl;
+        cout << "3. DESACTIVAR PERFIL ALUMNO                         "<< endl;
+        cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+        cout << "----------------------------------------------------"<< endl;
 
         opcion = _getch();
     }
@@ -827,7 +851,7 @@ void subMenuDirectivoAlumno() {
             system("cls");
             subMenuDirectivoAlumno();
             break;
-        case 52:
+        case 48:
             system("cls");
             cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
             Sleep(2000);
@@ -842,139 +866,132 @@ void subMenuDirectivoAlumno() {
 ///--- MENÚ PROFESOR ---\\
 
 void menuProfesor() {
-     system("cls");
-    system("title PROYECTO 2024");
     int opcion;
-    do{
-//        marco(12, 10, 80, 48, 9);
-  //      setColor(15);
-        /*gotoxy(25,16);cout << "----------------------------------------------------"<< endl;
-        gotoxy(25,17);cout << "                   MENU PROFESOR                    "<< endl;
-        gotoxy(25,18);cout << "----------------------------------------------------"<< endl;
-        gotoxy(25,20);cout << "1. CARGAR NOTAS                                     "<< endl;
-        gotoxy(25,21);cout << "2. MODIFICAR NOTAS                                  "<< endl;
-        gotoxy(25,22);cout << "3. CARGAR FECHA DE EXAMEN                           "<< endl;
-        gotoxy(25,23);cout << "4. VER MATERIAS ASIGNADAS                           "<< endl;
-        gotoxy(25,24);cout << "0. SALIR                                            "<< endl;
-        gotoxy(25,25);cout << "----------------------------------------------------"<< endl;
-        gotoxy(25,26);cout << "- SELECCIONE UNA OPCION: -    "<< endl;
-        gotoxy(25,27);cout << "----------------------------------------------------"<< endl;
-        gotoxy(25,28);cout << " --> ";cin>>opcion;*/
+
+    cout << "----------------------------------------------------"<< endl;
+    cout << "                   MENÚ PROFESOR                    "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "1. CARGAR NOTAS                                     "<< endl;
+    cout << "2. MODIFICAR NOTAS                                  "<< endl;
+    cout << "3. CARGAR FECHA DE EXAMEN                           "<< endl;
+    cout << "4. VER MATERIAS ASIGNADAS                           "<< endl;
+    cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+
+    opcion = _getch();
+
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48){
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        Sleep(500);
+        system("cls");
 
         cout << "----------------------------------------------------"<< endl;
-        cout << "                   MENU PROFESOR                    "<< endl;
+        cout << "                   MENÚ PROFESOR                    "<< endl;
         cout << "----------------------------------------------------"<< endl;
         cout << "1. CARGAR NOTAS                                     "<< endl;
         cout << "2. MODIFICAR NOTAS                                  "<< endl;
         cout << "3. CARGAR FECHA DE EXAMEN                           "<< endl;
         cout << "4. VER MATERIAS ASIGNADAS                           "<< endl;
-        cout << "0. SALIR                                            "<< endl;
+        cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
         cout << "----------------------------------------------------"<< endl;
-        cout << "- SELECCIONE UNA OPCION: -    "<< endl;
+        cout << "             - SELECCIONE UNA OPCIÓN: -             "<< endl;
         cout << "----------------------------------------------------"<< endl;
-        cout << " --> ";cin>>opcion;
 
+        opcion = _getch();
 
-        switch(opcion){
-            case 1:
-                ///-- >> FUNCION CARGA DE NOTAS
-            break;
-            case 2:
-                ///-- >> FUNCION MODIFICACION DE NOTAS
-            break;
-            case 3:
-                ///-- >> FUNCION CARGA FECHA DE EXAMEN
-            break;
-            case 4:
-                ///-- >> FUNCION DE LISTADO DE MATERIAS ASIGNADAS
-            break;
+    }
 
-            case 0:
-                return;
+    switch(opcion) {
+        case 49:
+            system("cls");
+            ///-- >> FUNCION CARGA DE NOTAS
             break;
-            default:
-                cout << "OPCION INCORRECTA. REINGRESE LA OPCION NUEVAMENTE.";
+        case 50:
+            system("cls");
+            ///-- >> FUNCION MODIFICACION DE NOTAS
             break;
-        }
-
-    }while(opcion != 0);
-
-
+        case 51:
+            system("cls");
+            ///-- >> FUNCION CARGA FECHA DE EXAMEN
+            break;
+        case 52:
+            system("cls");
+            ///-- >> FUNCION DE LISTADO DE MATERIAS ASIGNADAS
+            break;
+        case 48:
+            system("cls");
+            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
+            Sleep(2000);
+            system("cls");
+            menuPrincipal();
+            break;
+        default:
+            cout << "Opción no válida." << endl;
+    }
 }
 
 ///--- MENÚ ALUMNO ---\\
 
 void menuAlumno() {
-    int OPC;
-    while(true) {
-        system ("cls");
-        cout<<"############################"<<endl;
-        cout<<"######Sub Menu Alumno#######"<<endl;
-        cout<<"# 1-Materias               #"<<endl;
-        cout<<"# 2-Examenes               #"<<endl;
-        cout<<"# 3-Cambiar Contrasena     #"<<endl;
-        cout<<"# 0-SALIR                  #"<<endl;
-        cout<<"----------------------------"<<endl;
-        cout<<"Opcion: ";
-        cin>>OPC;
+    int opcion;
 
-        switch (OPC!=0)
-        {
-        case 1:
-        system ("cls");
-        cout<<"############################"<<endl;
-        cout<<"######    Materias   #######"<<endl;
-        cout<<"# 1-Inscribirse            #"<<endl;
-        cout<<"# 2-Notas                  #"<<endl;
-        cout<<"# 3-Darse De Baja          #"<<endl;
-        cout<<"# 0-Menu Anterior          #"<<endl;
-        cout<<"----------------------------"<<endl;
-        cout<<"Opcion: ";
-        cin>>OPC;
-        switch (OPC)
-        {
-        case 1:
+    cout << "----------------------------------------------------"<< endl;
+    cout << "                    MENÚ ALUMNO                     "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "1. GESTIÓN MATERIAS                                 "<< endl;
+    cout << "2. GESTIÓN EXÁMENES                                 "<< endl;
+    cout << "3. CAMBIAR CONTRASEÑA                               "<< endl;
+    cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+    cout << "----------------------------------------------------"<< endl;
 
-            break;
+    opcion = _getch();
 
-        case 2:
-            break;
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        Sleep(500);
+        system("cls");
 
-        case 3:
-            break;
-        case 0:
-            break;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "                    MENÚ ALUMNO                     "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "1. GESTIÓN MATERIAS                                 "<< endl;
+        cout << "2. GESTIÓN EXÁMENES                                 "<< endl;
+        cout << "3. CAMBIAR CONTRASEÑA                               "<< endl;
+        cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
+        cout << "----------------------------------------------------"<< endl;
 
-        default:
-            cout << endl;
-            cout<<"OPCION INCORRECTA"<<endl;
-            system("pause");
-            break;
-}
-            break;
-///------------------------------------------------------------------
-        case 2:
-            break;
-///------------------------------------------------------------------
-        case 3:
-            break;
-///------------------------------------------------------------------
-        case 0:
+        opcion = _getch();
+
+    }
+
+    switch(opcion) {
+        case 49:
             system("cls");
-            cout << "GRACIAS POR USAR ESTE PROGRAMA !!" << endl << endl;
-            system("pause");
-            return;
-
+            ///-- >> FUNCION / MENÚ GESTIÓN MATERIAS
             break;
-
+        case 50:
+            system("cls");
+            ///-- >> FUNCION / MENÚ GESTIÓN EXÁMENES
+            break;
+        case 51:
+            system("cls");
+            ///-- >> FUNCION CAMBIAR CONTRASEÑA
+            break;
+        case 48:
+            system("cls");
+            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
+            Sleep(2000);
+            system("cls");
+            menuPrincipal();
+            break;
         default:
-            cout << endl;
-            cout<<"OPCION INCORRECTA"<<endl;
-            system("pause");
-            break;
-
-
-        }
+            cout << "Opción no válida." << endl;
     }
 }
 
