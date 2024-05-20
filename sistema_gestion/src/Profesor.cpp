@@ -87,7 +87,7 @@ void Profesor::leerEnDiscoProfesor() {
         return;
     }
 
-    cout << "MOSTRANDO PERFILES ALUMNO:" << endl;
+    cout << "MOSTRANDO PERFILES PROFESOR:" << endl;
     while(fread(this, sizeof(Profesor), 1, pProfesor)) {
         this->mostrarProfesor();
     };
