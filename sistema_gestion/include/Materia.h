@@ -8,8 +8,9 @@ class Materia
     private:
         int _id;
         int _legajoProfesor;
-        char _nombreMateria[20];
+        char _nombreMateria[30];
 
+        int GenerarId();
     public:
 
          ///---- CONSTRUCTOR ----\\\
@@ -18,7 +19,7 @@ class Materia
 
         ///---- SETTERS ----\\\
 
-        void setId(int);
+        void setId();
 
         void setLegajoProfesor(int);
 
@@ -44,7 +45,8 @@ class Materia
 
         void grabarEnDiscoMateria();
 
-        int leerEnDiscoMateria();
+        void leerEnDiscoMateria();
+
 
 };
 

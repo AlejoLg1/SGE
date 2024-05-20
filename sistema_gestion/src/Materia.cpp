@@ -2,6 +2,7 @@
 #include <cstring>
 #include <limits>
 #include "Materia.h"
+#include "Profesor.h"
 
 
 using namespace std;
@@ -9,97 +10,120 @@ using namespace std;
 
 ///---- CONSTRUCTOR ----\\\
 
-Materia::Materia()
-{
-    //_id=GenerarLegajo(); hay que crear la funcion
+Materia::Materia() {
+    _id = 0;
     _legajoProfesor = 0;
     strncpy(_nombreMateria, "-", 20);
-    //Fecha _nacimiento;
 }
 
 ///---- SETTERS ----\\\
 
-void Materia::setId(int id)
-{
-    _id = id;
-
+void Materia::setId() {
+    _id = GenerarId();
 }
 
-void Materia::setLegajoProfesor(int legajo)
-{
+void Materia::setLegajoProfesor(int legajo) {
     _legajoProfesor = legajo;
-
 }
 
 
-void Materia::setNombreMateria(char* nombre)
-{
+void Materia::setNombreMateria(char* nombre) {
     strncpy(_nombreMateria, nombre, 20);
-
 }
 
         ///---- GETTERS ----\\\
 
-int Materia::getId()
-{
+int Materia::getId() {
     return _id;
 }
 
-int Materia::getLegajoProfesor()
-{
+int Materia::getLegajoProfesor() {
     return _legajoProfesor;
 }
 
-char* Materia::getNombreMateria()
-{
+char* Materia::getNombreMateria() {
     return _nombreMateria;
 }
 
 ///---- MÉTODOS ----\\\
 
-void Materia::cargarMateria()
-{
+void Materia::cargarMateria() {
+    int legajoProfesor;
+
+    setId();
+
+    cout << endl << "\t - ID Materia: ";
+    cout << getId() << endl;
+
+    setLegajoProfesor(-1);
+
+    /*
     cout << endl << "\t - Legajo Profesor: ";
-    cin >> _legajoProfesor;
-    cout << endl << "\t - Nombre De La Materia: ";
+    cin >> legajoProfesor;
+
+    */
+
+
+
+
+    cout << endl << "\t - Nombre de la Materia: ";
     cin >> _nombreMateria;
 
-
 }
-void Materia::mostrarMateria()
-{
-    cout << endl << "\t - ID: " << _id << endl;
+void Materia::mostrarMateria() {
+    cout << endl << "\t - ID: " << _id;
     cout << endl << "\t - Legajo Profesor: " << _legajoProfesor << endl;
-    cout << "\t - Nombre De La Materia: " << _nombreMateria;
+    cout << "\t - Nombre de la Materia: " << _nombreMateria << endl;
 
 
 }
-void Materia::grabarEnDiscoMateria()
-{
-FILE *p;
-    p=fopen ("Materia.dat","ab");
-    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO CREAR O ABRIR"<<endl;}
+void Materia::grabarEnDiscoMateria() {
+    FILE *pMat;
+
+    if(!(pMat = fopen("materias.dat", "ab"))) {
+        system("cls");
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
 
     this->cargarMateria();
-    fwrite (this, sizeof (Materia),1,p);
+    fwrite(this, sizeof(Materia), 1, pMat);
 
-    fclose (p);
+    fclose(pMat);
+
 }
 
-/*int Materia::leerEnDiscoMateria(int pos) ARREGLAR PARA QUE NO NECESITO UN PARÁMETRO
-{
-     FILE *p;
-    bool Leyo;
+void Materia::leerEnDiscoMateria() {
+    FILE *pMat;
 
-    p=fopen ("Materia.dat","rb");
-    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl;return false;}
+    if(!(pMat = fopen("materias.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
 
-    fseek (p,sizeof(Materia)*pos,0);
+    cout << "MOSTRANDO MATERIAS:" << endl;
+    while(fread(this, sizeof(Materia), 1, pMat)){
+        this->mostrarMateria();
+    };
 
-    Leyo=fread(this,sizeof (Materia),1,p);
+    fclose(pMat);
+}
 
-    fclose(p);
-    return Leyo;
-}  */
+int Materia::GenerarId() {
+    FILE *pMat;
+    int idsTotales = 1;
 
+    if(!(pMat = fopen("materias.dat", "ab"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return -1;
+    }
+
+    fseek(pMat, 0, SEEK_END);
+    idsTotales += ftell(pMat) / sizeof(Materia);
+    fseek(pMat, 0, SEEK_SET);
+    fclose(pMat);
+
+
+    return idsTotales;
+}
 

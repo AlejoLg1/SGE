@@ -44,7 +44,13 @@ void menuDirectivo();
 void subMenuDirectivoProfesor();
 void subMenuDirectivoAlumno();
 
+void subMenuDirectivoPlanEstudio();
+int contarMaterias();
+void asignarProfesores();
+
+
 void menuProfesor();
+
 void menuAlumno();
 
 #endif // FUNCIONES_H_INCLUDED

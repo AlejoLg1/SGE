@@ -3,7 +3,6 @@
 #include "Alumno.h"
 #include "Persona.h"
 #include "Director.h"
-#include "Listados.h"
 #include "Funciones.h"
 
 using namespace std;
