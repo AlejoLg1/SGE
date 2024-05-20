@@ -30,7 +30,7 @@ class Profesor : public Persona
         void cargarProfesor();
         void mostrarProfesor();
         void grabarEnDiscoProfesor();
-        bool leerEnDiscoProfesor();
+        void leerEnDiscoProfesor();
 
 };
 

@@ -38,16 +38,30 @@ bool Profesor::getEstado(){
 ///MÉTODOS
 
 void Profesor::cargarProfesor(){
-    this->cargar();
-    cout << "Legajo: ";
-    cin >> _legajo;
-    cout << "Clave (numérica): ";
+
+    cout << "CREANDO PERFIL DIRECTOR" << endl;
+
+    cout<< endl <<"\t - Legajo: ";
+    setLegajo();
+    cout << getLegajo();
+    cout << endl;
+
+    Persona::cargar();
+
+    cout<< endl << "\t - Clave: ";
     cin >> _clave;
+
+    cout << endl << "\t - Estado (1 para activo, 0 para inactivo): ";
+    cin >> _estado;
+
 }
 void Profesor::mostrarProfesor(){
-    this->mostrar();
-    cout << "Legajo: " << getLegajo();
-    cout << "Clave: " << getClave();
+    Persona::mostrar();
+    cout << endl;
+    cout <<"Legajo: " << _legajo<<endl;
+    cout <<"Clave: " << _clave<<endl;
+    cout << endl << "Estado: " << _estado<<endl;
+    cout << endl << endl;
 }
 void Profesor::grabarEnDiscoProfesor(){
     FILE *p;
@@ -58,28 +72,26 @@ void Profesor::grabarEnDiscoProfesor(){
         cout << "ERROR DE ARCHIVO.";
     }
 
-    this->cargar();
+    this->cargarProfesor();
     fwrite(this, sizeof(Profesor), 1, p);
 
     fclose(p);
 
 }
 
-/*bool Profesor::leerEnDiscoProfesor(int pos){ ARREGLAR PARA QUE NO NECESITE PARÁMETRO
-    FILE *p;
+void Profesor::leerEnDiscoProfesor() {
+    FILE *pProfesor;
 
-    p = fopen("profesores.dat", "rb");
-
-    if(p == nullptr){
-        cout << "ERROR DE ARCHIVO.";
-        return false;
+    if(!(pProfesor = fopen("profesor.dat", "rb"))) {
+        cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
     }
 
-    fseek(p, sizeof(Profesor)*pos, SEEK_SET);
+    cout << "MOSTRANDO PERFILES ALUMNO:" << endl;
+    while(fread(this, sizeof(Profesor), 1, pProfesor)) {
+        this->mostrarProfesor();
+    };
 
-    bool leyo = fread(this, sizeof(Profesor), 1, p);
-
-    fclose(p);
-    return leyo;
-} */
+    fclose(pProfesor);
+}
 
