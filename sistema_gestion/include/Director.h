@@ -50,7 +50,7 @@ class Director : public Persona
 
         void grabarEnDiscoDirector();
 
-        int leerEnDiscoDirector(int);
+        void leerEnDiscoDirector();
 
 
 

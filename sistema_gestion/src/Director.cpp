@@ -209,19 +209,22 @@ void Director::grabarEnDiscoDirector()
     fclose (p);
 
 }
-int Director::leerEnDiscoDirector(int pos)
+
+void Director::leerEnDiscoDirector()
 {
-    FILE *p;
-    bool Leyo;
+    FILE *pDir;
 
-    p=fopen ("directores.dat","rb");
-    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl;return false;}
+    if(!(pDir = fopen("directores.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
 
-    fseek (p,sizeof(Director)*pos,0);
+    cout << "MOSTRANDO PERFILES DIRECTORES:" << endl;
+    while(fread(this, sizeof(Director), 1, pDir)){
+        this->mostrarDirector();
+    };
 
-    Leyo=fread(this,sizeof (Director),1,p);
 
-    fclose(p);
-    return Leyo;
+    fclose(pDir);
 
 }
