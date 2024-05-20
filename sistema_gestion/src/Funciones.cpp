@@ -636,7 +636,8 @@ void menuDirectivo() {
     cout << "1. GESTIÓN PERFIL PROFESOR                          "<< endl;
     cout << "2. GESTIÓN PERFIL ALUMNO                            "<< endl;
     cout << "3. GESTIÓN PLAN DE ESTUDIO                          "<< endl;
-    cout << "4. CAMBIAR CONTRASEÑA                               "<< endl;
+    cout << "4. GESTIÓN AVISOS                                   "<< endl;
+    cout << "5. CAMBIAR CONTRASEÑA                               "<< endl;
     cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
     cout << "----------------------------------------------------"<< endl;
     cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -655,7 +656,8 @@ void menuDirectivo() {
         cout << "1. GESTIÓN PERFIL PROFESOR                          "<< endl;
         cout << "2. GESTIÓN PERFIL ALUMNO                            "<< endl;
         cout << "3. GESTIÓN PLAN DE ESTUDIO                          "<< endl;
-        cout << "4. CAMBIAR CONTRASEÑA                               "<< endl;
+        cout << "4. GESTIÓN AVISOS                                   "<< endl;
+        cout << "5. CAMBIAR CONTRASEÑA                               "<< endl;
         cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
         cout << "----------------------------------------------------"<< endl;
         cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -679,6 +681,11 @@ void menuDirectivo() {
             subMenuDirectivoPlanEstudio();
             break;
         case 52:
+            //FALTA HACER LA CLASE AVISOS
+            system("cls");
+            menuDirectivo();
+            break;
+        case 53:
             system("cls");
             cout << "CAMBIANDO CONTRASEÑA" << endl;
 
@@ -1078,10 +1085,10 @@ void menuProfesor() {
     cout << "----------------------------------------------------"<< endl;
     cout << "                   MENÚ PROFESOR                    "<< endl;
     cout << "----------------------------------------------------"<< endl;
-    cout << "1. CARGAR NOTAS                                     "<< endl;
-    cout << "2. MODIFICAR NOTAS                                  "<< endl;
-    cout << "3. CARGAR FECHA DE EXAMEN                           "<< endl;
-    cout << "4. VER MATERIAS ASIGNADAS                           "<< endl;
+    cout << "1. GESTIÓN MATERIAS                                 "<< endl;
+    cout << "2. VER MATERIAS ASIGNADAS                           "<< endl;
+    cout << "3. VER AVISOS                                       "<< endl;
+    cout << "4. CAMBIAR CONTRASEÑA                               "<< endl;
     cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
     cout << "----------------------------------------------------"<< endl;
     cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -1097,13 +1104,13 @@ void menuProfesor() {
         cout << "----------------------------------------------------"<< endl;
         cout << "                   MENÚ PROFESOR                    "<< endl;
         cout << "----------------------------------------------------"<< endl;
-        cout << "1. CARGAR NOTAS                                     "<< endl;
-        cout << "2. MODIFICAR NOTAS                                  "<< endl;
-        cout << "3. CARGAR FECHA DE EXAMEN                           "<< endl;
-        cout << "4. VER MATERIAS ASIGNADAS                           "<< endl;
+        cout << "1. GESTIÓN MATERIAS                                 "<< endl;
+        cout << "2. VER MATERIAS ASIGNADAS                           "<< endl;
+        cout << "3. VER AVISOS                                       "<< endl;
+        cout << "4. CAMBIAR CONTRASEÑA                               "<< endl;
         cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
         cout << "----------------------------------------------------"<< endl;
-        cout << "             - SELECCIONE UNA OPCIÓN: -             "<< endl;
+        cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
         cout << "----------------------------------------------------"<< endl;
 
         opcion = _getch();
@@ -1113,19 +1120,19 @@ void menuProfesor() {
     switch(opcion) {
         case 49:
             system("cls");
-            ///-- >> FUNCION CARGA DE NOTAS
+            ///-- >> FUNCION VER MATERIAS ASIGNADAS
             break;
         case 50:
             system("cls");
-            ///-- >> FUNCION MODIFICACION DE NOTAS
+            ///-- >> MENÚ GESTIONAR MATERIAS
             break;
         case 51:
             system("cls");
-            ///-- >> FUNCION CARGA FECHA DE EXAMEN
+            ///-- >> FUNCION VER AVISOS
             break;
         case 52:
             system("cls");
-            ///-- >> FUNCION DE LISTADO DE MATERIAS ASIGNADAS
+            ///-- >> FUNCION CAMBIAR CONTRASEÑA
             break;
         case 48:
             system("cls");
@@ -1147,8 +1154,9 @@ void menuAlumno() {
     cout << "----------------------------------------------------"<< endl;
     cout << "                    MENÚ ALUMNO                     "<< endl;
     cout << "----------------------------------------------------"<< endl;
-    cout << "1. GESTIÓN MATERIAS                                 "<< endl;
-    cout << "2. GESTIÓN EXÁMENES                                 "<< endl;
+    cout << "1. GESTIÓN CURSADA                                  "<< endl;
+    cout << "2. VER PLAN DE ESTUDIO                              "<< endl;
+    cout << "3. VER AVISOS                                       "<< endl;
     cout << "3. CAMBIAR CONTRASEÑA                               "<< endl;
     cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1165,8 +1173,9 @@ void menuAlumno() {
         cout << "----------------------------------------------------"<< endl;
         cout << "                    MENÚ ALUMNO                     "<< endl;
         cout << "----------------------------------------------------"<< endl;
-        cout << "1. GESTIÓN MATERIAS                                 "<< endl;
-        cout << "2. GESTIÓN EXÁMENES                                 "<< endl;
+        cout << "1. GESTIÓN CURSADA                                  "<< endl;
+        cout << "2. VER PLAN DE ESTUDIO                              "<< endl;
+        cout << "3. VER AVISOS                                       "<< endl;
         cout << "3. CAMBIAR CONTRASEÑA                               "<< endl;
         cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
         cout << "----------------------------------------------------"<< endl;
@@ -1180,13 +1189,17 @@ void menuAlumno() {
     switch(opcion) {
         case 49:
             system("cls");
-            ///-- >> FUNCION / MENÚ GESTIÓN MATERIAS
+            ///-- >> MENÚ PLANIFICAR CURSADA
             break;
         case 50:
             system("cls");
-            ///-- >> FUNCION / MENÚ GESTIÓN EXÁMENES
+            ///-- >> FUNCION VER PLAN DE ESTUDIO
             break;
         case 51:
+            system("cls");
+            ///-- >> FUNCION VER AVISOS
+            break;
+        case 52:
             system("cls");
             ///-- >> FUNCION CAMBIAR CONTRASEÑA
             break;
