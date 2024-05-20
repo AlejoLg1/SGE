@@ -10,7 +10,7 @@ int seleccionarRol(int);
 
 ///--- SETTEAR LEGAJO AUTOMÁTICO ---\\
 
-int contarLegajos(FILE* [], const char* [], int []);
+int contarLegajos(const char* [], int []);
 
 int settearNuevoLegajo();
 
@@ -18,7 +18,7 @@ int settearNuevoLegajo();
 
 bool usuariosCargados();
 
-bool usuariosEspecificosCargados(std::string, FILE* [], const char* [], int [], std::string []);
+bool usuariosEspecificosCargados(std::string, const char* [], int [], std::string []);
 
 void mensajeUsuariosNoEncontrados(std::string);
 
@@ -28,11 +28,11 @@ void login(int, std::string);
 
 ///--- VALIDAR CREDENCIALES LOGIN ---\\
 
-bool usuarioValido(std::string, int, FILE* [], const char* [], int [], std::string []);
+bool usuarioValido(std::string, int, const char* [], int [], std::string []);
 
-bool claveValida(std::string, int, int, FILE* [], const char* [], int [], std::string []);
+bool claveValida(std::string, int, int, const char* [], int [], std::string []);
 
-bool estadoValido(std::string, int, FILE* [], const char* [], int [], std::string []);
+bool estadoValido(std::string, int, const char* [], int [], std::string []);
 
 void validarLegajo(int legajo);
 

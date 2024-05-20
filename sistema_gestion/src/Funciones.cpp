@@ -24,7 +24,6 @@ FILE *pProfesor;
 FILE *pAlumno;
 
 //VECTORES ARCHIVOS
-FILE* vecPFiles[CANTIDADOBJETOS] = {pAdm, pDirectivo, pProfesor, pAlumno};
 const char* vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "directores.dat", "profesores.dat", "alumnos.dat"};
 int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Director), sizeof(Profesor), sizeof(Alumno)};
 string vecNombresRoles[CANTIDADOBJETOS] = {"ADMINISTRADOR", "DIRECTOR", "PROFESOR", "ALUMNO"};
@@ -96,7 +95,7 @@ void menuPrincipal() {
             case 50: //DIRECTOR
                 system("cls");
                 if(usuariosCargados()){
-                    if(!usuariosEspecificosCargados("DIRECTOR", vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)){
+                    if(!usuariosEspecificosCargados("DIRECTOR", vecNombresFiles, vecTamObjetos, vecNombresRoles)){
                         mensajeUsuariosNoEncontrados("DIRECTOR");
                     }
                     else{
@@ -111,7 +110,7 @@ void menuPrincipal() {
             case 51: //PROFESOR
                 system("cls");
                 if(usuariosCargados()){
-                    if(!usuariosEspecificosCargados("PROFESOR", vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)){
+                    if(!usuariosEspecificosCargados("PROFESOR", vecNombresFiles, vecTamObjetos, vecNombresRoles)){
                         mensajeUsuariosNoEncontrados("PROFESOR");
                     }
                     else{
@@ -126,7 +125,7 @@ void menuPrincipal() {
             case 52: // ALUMNO
                 system("cls");
                 if(usuariosCargados()){
-                    if(!usuariosEspecificosCargados("ALUMNO", vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)){
+                    if(!usuariosEspecificosCargados("ALUMNO", vecNombresFiles, vecTamObjetos, vecNombresRoles)){
                         mensajeUsuariosNoEncontrados("ALUMNO");
                     }
                     else{
@@ -207,28 +206,29 @@ int settearNuevoLegajo() {
     int nuevoLegajo = 0;
 
 
-    nuevoLegajo = contarLegajos(vecPFiles, vecNombresFiles, vecTamObjetos) + 1;
+    nuevoLegajo = contarLegajos(vecNombresFiles, vecTamObjetos) + 1;
 
     return nuevoLegajo;
 
 }
 
 
-int contarLegajos(FILE* vecPFiles[], const char* vecNombresFiles[], int vecTamObjetos[]) {
+int contarLegajos(const char* vecNombresFiles[], int vecTamObjetos[]) {
     int legajosTotales = 0;
+    FILE* pFile = nullptr;
 
     for(x = 0; x < CANTIDADOBJETOS; x++){
-        if(!(vecPFiles[x] = fopen(vecNombresFiles[x], "rb+"))) {
-            if (!(vecPFiles[x] = fopen(vecNombresFiles[x], "wb+"))) {
+        if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
+            if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
                 cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                 return 0;
             }
         }
 
-        fseek(vecPFiles[x], 0, SEEK_END);
-        legajosTotales += ftell(vecPFiles[x]) / vecTamObjetos[x];
-        fseek(vecPFiles[x], 0, SEEK_SET);
-        fclose(vecPFiles[x]);
+        fseek(pFile, 0, SEEK_END);
+        legajosTotales += ftell(pFile) / vecTamObjetos[x];
+        fseek(pFile, 0, SEEK_SET);
+        fclose(pFile);
     }
 
     return legajosTotales;
@@ -238,27 +238,28 @@ int contarLegajos(FILE* vecPFiles[], const char* vecNombresFiles[], int vecTamOb
 ///--- VALIDAR EXISTENCIA DE USUARIOS ---\\
 
 bool usuariosCargados() {
-    return contarLegajos(vecPFiles, vecNombresFiles, vecTamObjetos) == 0 ? false : true;
+    return contarLegajos(vecNombresFiles, vecTamObjetos) == 0 ? false : true;
 }
 
-bool usuariosEspecificosCargados(string Rol, FILE* vecPFiles[], const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
+bool usuariosEspecificosCargados(string Rol, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
     int usuariosEspecificos = 0;
     bool existe = true;
+    FILE* pFile = nullptr;
 
     for(x = 0; x < CANTIDADOBJETOS; x++){
         if(Rol == vecNombresRoles[x]) {
-            if(!(vecPFiles[x] = fopen(vecNombresFiles[x], "rb+"))) {
+            if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
                 cout << endl << "No encontró el archivo" << endl;
-                if (!(vecPFiles[x] = fopen(vecNombresFiles[x], "wb+"))) {
+                if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
                 }
             }
 
-            fseek(vecPFiles[x], 0, SEEK_END);
-            usuariosEspecificos += ftell(vecPFiles[x]) / vecTamObjetos[x];
-            fseek(vecPFiles[x], 0, SEEK_SET);
-            fclose(vecPFiles[x]);
+            fseek(pFile, 0, SEEK_END);
+            usuariosEspecificos += ftell(pFile) / vecTamObjetos[x];
+            fseek(pFile, 0, SEEK_SET);
+            fclose(pFile);
 
             if(usuariosEspecificos == 0){
                 existe = false;
@@ -292,7 +293,7 @@ void login(int rol, string Rol) {
         system("cls");
         menuPrincipal();
     }
-    if(!usuarioValido(Rol, legajo, vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
+    if(!usuarioValido(Rol, legajo, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
         cout << endl << "---- ERROR: NO SE ENCONTRÓ UN USUARIO " << Rol << " CON LEGAJO '" << legajo << "' CARGADO EN EL SISTEMA ----" << endl << endl;
         cout << endl << endl;
         system("pause");
@@ -302,7 +303,7 @@ void login(int rol, string Rol) {
 
     cout << endl << "\t - Contraseña (numérica): ";
     cin >> clave;
-    if(!claveValida(Rol, legajo, clave, vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
+    if(!claveValida(Rol, legajo, clave, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
         cout << endl << "---- ERROR: CONTRASEÑA INCORRECTA ----" << endl << endl;
         cout << endl << endl;
         system("pause");
@@ -310,7 +311,7 @@ void login(int rol, string Rol) {
         login(rol, Rol);
     }
 
-    if(!estadoValido(Rol, legajo, vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
+    if(!estadoValido(Rol, legajo, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
         cout << endl << "---- ERROR: USUARIO INACTIVO ----" << endl << endl;
         cout << endl << endl;
         system("pause");
@@ -344,13 +345,14 @@ void login(int rol, string Rol) {
 
 ///--- VALIDAR CREDENCIALES LOGIN ---\\
 
-bool usuarioValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
+bool usuarioValido(string Rol, int legajo, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
     bool valido = false;
+    FILE* pFile = nullptr;
 
     for(x = 0; x < CANTIDADOBJETOS; x++){
         if(Rol == vecNombresRoles[x]) {
-            if(!(vecPFiles[x] = fopen(vecNombresFiles[x], "rb+"))) {
-                if (!(vecPFiles[x] = fopen(vecNombresFiles[x], "wb+"))) {
+            if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
+                if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
                 }
@@ -358,7 +360,7 @@ bool usuarioValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNom
 
             if(Rol == "ADMINISTRADOR"){
                 Administrador obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getId() == legajo)
                         valido = true;
                         return valido;
@@ -366,7 +368,7 @@ bool usuarioValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNom
                 }
             else if(Rol == "DIRECTOR"){
                 Director obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         valido = true;
                         return valido;
@@ -375,7 +377,7 @@ bool usuarioValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNom
             }
             else if(Rol == "PROFESOR"){
                 Profesor obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         valido = true;
                         return valido;
@@ -384,7 +386,7 @@ bool usuarioValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNom
             }
             else{
                 Alumno obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         valido = true;
                         return valido;
@@ -397,13 +399,14 @@ bool usuarioValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNom
     return valido;
 }
 
-bool claveValida(string Rol, int legajo, int clave, FILE* vecPFiles[], const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
+bool claveValida(string Rol, int legajo, int clave, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
     bool valida = false;
+    FILE* pFile = nullptr;
 
     for(x = 0; x < CANTIDADOBJETOS; x++){
         if(Rol == vecNombresRoles[x]) {
-            if(!(vecPFiles[x] = fopen(vecNombresFiles[x], "rb+"))) {
-                if (!(vecPFiles[x] = fopen(vecNombresFiles[x], "wb+"))) {
+            if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
+                if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
                 }
@@ -411,7 +414,7 @@ bool claveValida(string Rol, int legajo, int clave, FILE* vecPFiles[], const cha
 
             if(Rol == "ADMINISTRADOR"){
                 Administrador obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getId() == legajo){
                         if(obj.getClave() == clave){
                             valida = true;
@@ -422,7 +425,7 @@ bool claveValida(string Rol, int legajo, int clave, FILE* vecPFiles[], const cha
             }
             else if(Rol == "DIRECTOR"){
                 Director obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         if(obj.getClave() == clave){
                             valida = true;
@@ -433,7 +436,7 @@ bool claveValida(string Rol, int legajo, int clave, FILE* vecPFiles[], const cha
             }
             else if(Rol == "PROFESOR"){
                 Profesor obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         if(obj.getClave() == clave){
                             valida = true;
@@ -444,7 +447,7 @@ bool claveValida(string Rol, int legajo, int clave, FILE* vecPFiles[], const cha
             }
             else{
                 Alumno obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         if(obj.getClave() == clave){
                             valida = true;
@@ -459,13 +462,14 @@ bool claveValida(string Rol, int legajo, int clave, FILE* vecPFiles[], const cha
     return valida;
 }
 
-bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
+bool estadoValido(string Rol, int legajo, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
     bool valido = false;
+    FILE* pFile = nullptr;
 
     for(x = 0; x < CANTIDADOBJETOS; x++){
         if(Rol == vecNombresRoles[x]) {
-            if(!(vecPFiles[x] = fopen(vecNombresFiles[x], "rb+"))) {
-                if (!(vecPFiles[x] = fopen(vecNombresFiles[x], "wb+"))) {
+            if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
+                if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
                 }
@@ -473,7 +477,7 @@ bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNomb
 
             if(Rol == "ADMINISTRADOR"){
                 Administrador obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getId() == legajo)
                         valido = true;
                         return valido;
@@ -481,7 +485,7 @@ bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNomb
                 }
             else if(Rol == "DIRECTOR"){
                 Director obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         if(obj.getEstado() == true){
                             valido = true;
@@ -492,7 +496,7 @@ bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNomb
             }
             else if(Rol == "PROFESOR"){
                 Profesor obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         if(obj.getEstado() == true){
                             valido = true;
@@ -503,7 +507,7 @@ bool estadoValido(string Rol, int legajo, FILE* vecPFiles[], const char* vecNomb
             }
             else{
                 Alumno obj;
-                while (fread(&obj, vecTamObjetos[x], 1, vecPFiles[x])) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
                     if(obj.getLegajo() == legajo){
                         if(obj.getEstado() == true){
                             valido = true;
@@ -966,7 +970,7 @@ void subMenuDirectivoPlanEstudio() {
 
             cout << "ASIGNANDO PROFESORES - PLAN DE ESTUDIO 2003" << endl;
 
-            if(!usuariosEspecificosCargados("PROFESOR", vecPFiles, vecNombresFiles, vecTamObjetos, vecNombresRoles)){
+            if(!usuariosEspecificosCargados("PROFESOR", vecNombresFiles, vecTamObjetos, vecNombresRoles)){
                 cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL 'PROFESOR' CARGADOS EN EL SISTEMA ----" << endl << endl;
                 cout << endl << endl;
                 system("pause");
