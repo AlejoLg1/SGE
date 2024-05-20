@@ -77,7 +77,7 @@ void Director::activarDirector(int legajo)
     bool usuarioEncontrado = false;
     FILE *pDirectivo;
 
-    if(!(pDirectivo = fopen("Director.dat", "rb+"))) {
+    if(!(pDirectivo = fopen("directores.dat", "rb+"))) {
         system("cls");
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return;
@@ -115,7 +115,7 @@ void Director::desactivarDirector(int legajo)
     bool usuarioEncontrado = false;
     FILE *pDirectivo;
 
-    if(!(pDirectivo = fopen("Director.dat", "rb+"))) {
+    if(!(pDirectivo = fopen("directores.dat", "rb+"))) {
         system("cls");
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return;
@@ -152,7 +152,7 @@ void Director::cambiarClave(int legajo, int clave) {
     bool usuarioEncontrado = false;
     FILE *pDirectivo;
 
-    if(!(pDirectivo = fopen("Director.dat", "rb+"))) {
+    if(!(pDirectivo = fopen("directores.dat", "rb+"))) {
         system("cls");
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return;
@@ -200,7 +200,7 @@ void Director::mostrarDirector()
 void Director::grabarEnDiscoDirector()
 {
     FILE *p;
-    p=fopen ("Director.dat","ab");
+    p=fopen ("directores.dat","ab");
     if (p==NULL){cout<<"El ARCHIVO NO SE PUDO CREAR O ABRIR"<<endl;}
 
     this->cargarDirector();
@@ -214,7 +214,7 @@ int Director::leerEnDiscoDirector(int pos)
     FILE *p;
     bool Leyo;
 
-    p=fopen ("Director.dat","rb");
+    p=fopen ("directores.dat","rb");
     if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl;return false;}
 
     fseek (p,sizeof(Director)*pos,0);

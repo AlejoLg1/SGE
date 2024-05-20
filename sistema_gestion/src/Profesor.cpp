@@ -82,7 +82,7 @@ void Profesor::grabarEnDiscoProfesor(){
 void Profesor::leerEnDiscoProfesor() {
     FILE *pProfesor;
 
-    if(!(pProfesor = fopen("profesor.dat", "rb"))) {
+    if(!(pProfesor = fopen("profesores.dat", "rb"))) {
         cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return;
     }

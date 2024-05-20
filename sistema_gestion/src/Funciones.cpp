@@ -24,7 +24,7 @@ FILE *pAlumno;
 
 //VECTORES ARCHIVOS
 FILE* vecPFiles[CANTIDADOBJETOS] = {pAdm, pDirectivo, pProfesor, pAlumno};
-const char* vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "Director.dat", "profesores.dat", "alumnos.dat"};
+const char* vecNombresFiles[CANTIDADOBJETOS] = {"administradores.dat", "directores.dat", "profesores.dat", "alumnos.dat"};
 int vecTamObjetos[CANTIDADOBJETOS] = {sizeof(Administrador), sizeof(Director), sizeof(Profesor), sizeof(Alumno)};
 string vecNombresRoles[CANTIDADOBJETOS] = {"ADMINISTRADOR", "DIRECTOR", "PROFESOR", "ALUMNO"};
 
