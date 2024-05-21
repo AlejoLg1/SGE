@@ -47,7 +47,7 @@ void subMenuDirectivoAlumno();
 void subMenuDirectivoPlanEstudio();
 int contarMaterias();
 void asignarProfesores();
-
+void mostrarPlanEstudio();
 
 void menuProfesor();
 

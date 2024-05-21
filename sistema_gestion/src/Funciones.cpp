@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <limits>
+#include <iomanip>
 #include "Funciones.h"
 #include "Administrador.h"
 #include "Director.h"
@@ -605,11 +606,13 @@ void menuAdministrador() {
             system("cls");
             cout << "CAMBIANDO CONTRASEÑA" << endl;
 
-            cout << endl << "\t - Contraseña anterior: " << administradorObj.getClave() << endl;
+            cout << endl << "\t - Contraseña anterior: " << clave << endl;
             cout << endl << "\t - Contraseña nueva (numérica): ";
             cin >> nuevaClave;
 
             administradorObj.cambiarClave(legajo, nuevaClave);
+
+            clave = nuevaClave;
 
             system("cls");
             menuAdministrador();
@@ -649,7 +652,7 @@ void menuDirectivo() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 48){
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -693,11 +696,13 @@ void menuDirectivo() {
             system("cls");
             cout << "CAMBIANDO CONTRASEÑA" << endl;
 
-            cout << endl << "\t - Contraseña anterior: " << directorObj.getClave() << endl;
+            cout << endl << "\t - Contraseña anterior: " << clave << endl;
             cout << endl << "\t - Contraseña nueva (numérica): ";
             cin >> nuevaClave;
 
             directorObj.cambiarClave(legajo, nuevaClave);
+
+            clave = nuevaClave;
 
             system("cls");
             menuDirectivo();
@@ -891,6 +896,7 @@ void subMenuDirectivoPlanEstudio() {
     cout << "1. CARGAR MATERIAS                                  "<< endl;
     cout << "2. ASIGNAR CORRELATIVAS                             "<< endl;
     cout << "3. ASIGNAR PROFESORES                               "<< endl;
+    cout << "4. VER PLAN DE ESTUDIO                              "<< endl;
     cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
     cout << "----------------------------------------------------"<< endl;
     cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -899,7 +905,7 @@ void subMenuDirectivoPlanEstudio() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48){
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -910,6 +916,7 @@ void subMenuDirectivoPlanEstudio() {
         cout << "1. CARGAR MATERIAS                                  "<< endl;
         cout << "2. ASIGNAR CORRELATIVAS                             "<< endl;
         cout << "3. ASIGNAR PROFESORES                               "<< endl;
+        cout << "4. VER PLAN DE ESTUDIO                              "<< endl;
         cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
         cout << "----------------------------------------------------"<< endl;
         cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -949,10 +956,7 @@ void subMenuDirectivoPlanEstudio() {
             }
             else{
                 cout << endl <<"---- LÍMITE DE MATERIAS CARGADAS ALCANZADO ----" << endl;
-                system("pause");
-
-                system("cls");
-                materiaObj.leerEnDiscoMateria();
+                cout << endl << endl;
                 system("pause");
             }
 
@@ -988,6 +992,24 @@ void subMenuDirectivoPlanEstudio() {
                 }
             }
 
+
+            system("cls");
+            subMenuDirectivoPlanEstudio();
+            break;
+        case 52:
+            system("cls");
+
+            if(contarMaterias() > 0){
+                cout << "PLAN DE ESTUDIO 2003" << endl << endl;
+                mostrarPlanEstudio();
+                system("pause");
+            }
+            else{
+                cout << endl << "---- ERROR: NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
+                cout << endl << endl;
+                system("pause");
+                system("cls");
+            }
 
             system("cls");
             subMenuDirectivoPlanEstudio();
@@ -1050,6 +1072,8 @@ void asignarProfesores() {
                 return;
             }
 
+
+            cout << endl << "\t - Materia: " << materiaObj.getNombreMateria();
             cout << endl << "\t - Legajo Profesor: ";
             cin >> legajoProfesor;
 
@@ -1073,13 +1097,42 @@ void asignarProfesores() {
         fflush(pMat);
 
         fseek(pMat, offset + sizeof(Materia), SEEK_SET);
+
     }
 
     fclose(pMat);
     system("pause");
 }
 
+void mostrarPlanEstudio() {
+    FILE *pMat;
+    Materia materiaObj;
+    int anchoID = 6;
+    int anchoMateria = 21;
+    int anchoProfesor = 16;
 
+
+    if(!(pMat = fopen("materias.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return ;
+    }
+
+    cout << left << setw(anchoID) << "ID";
+    cout << "|";
+    cout << left << setw(anchoMateria) << "Materia";
+    cout << "|";
+    cout << left << setw(anchoProfesor) << "Legajo Profesor" << endl;
+
+    cout << string(anchoID, '-') << "+" << string(anchoMateria, '-') << "+" << string(anchoProfesor, '-') << endl;
+
+    while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
+        cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << "|" << left << setw(anchoProfesor) << (materiaObj.getLegajoProfesor() == -1? "No Asignado" : to_string(materiaObj.getLegajoProfesor())) << endl;
+    }
+
+    cout << endl << endl;
+
+    fclose(pMat);
+}
 
 ///--- MENÚ PROFESOR ---\\
 

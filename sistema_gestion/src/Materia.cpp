@@ -71,9 +71,15 @@ void Materia::cargarMateria() {
 
 }
 void Materia::mostrarMateria() {
-    cout << endl << "\t - ID: " << _id;
-    cout << endl << "\t - Legajo Profesor: " << _legajoProfesor << endl;
-    cout << "\t - Nombre de la Materia: " << _nombreMateria << endl;
+    cout << endl << "\t - ID: " << this->getId();
+    cout << endl <<"\t - Nombre de la Materia: " << this->getNombreMateria();
+    cout << endl << "\t - Legajo Profesor: ";
+    if(this->getLegajoProfesor() == -1){
+        cout << "No asignado" << endl;
+    }
+    else{
+        cout << this->getLegajoProfesor() << endl;
+    }
 
 
 }
