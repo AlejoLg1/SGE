@@ -54,7 +54,7 @@ void Profesor::activarProfesor(int legajo){
                 this->setEstado(true);
                 long offset = ftell(pProf) - sizeof(Profesor);
                 fseek(pProf, offset, SEEK_SET);
-                fwrite(this, sizeof(Director), 1, pProf);
+                fwrite(this, sizeof(Profesor), 1, pProf);
                 cout << endl << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl << endl;
                 system("pause");
                 break;

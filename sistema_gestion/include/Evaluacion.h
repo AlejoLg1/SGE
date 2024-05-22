@@ -1,6 +1,6 @@
 #ifndef EVALUACION_H
 #define EVALUACION_H
-
+#include "Fecha.h"
 
 class Evaluacion
 {

@@ -53,7 +53,7 @@ void Evaluacion::cargarEvaluacion(){
     cout << "ID PROFESOR: ";
     cin >> _idProfesor;
     cout << "FECHA: ";
-    cin >> _fecha.CargarFecha();
+    _fecha.CargarFecha();
     setEstado(true);
 }
 
@@ -64,28 +64,34 @@ void Evaluacion::mostrarEvaluacion(){
     cout << "ESTADO: " << _estado;
 }
 
-void Evaluacion::grabarEnDisco(){
+void Evaluacion::grabarEnDisco() {
+    FILE *pEvaluacion;
 
-    FILE pEvaluacion = fopen("evaluaciones.dat", "ab");
-
-    if(pEvaluacion == nullptr){cout << "ERROR AL ABRIR EL ARCHIVO.";}
+    if(!(pEvaluacion = fopen("evaluaciones.dat", "ab"))) {
+        system("cls");
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
 
     this->cargarEvaluacion();
+
     fwrite(this,sizeof(Evaluacion), 1, pEvaluacion);
 
     fclose(pEvaluacion);
-
 }
 
-void Evaluacion::leerEnDisco(){
+void Evaluacion::leerEnDisco() {
+    FILE *pEvaluacion;
 
-    FILE pEvaluacion = fopen("evaluaciones.dat", "rb");
-
-    if(pEvaluacion == nullptr){cout << "ERROR AL ABRIR EL ARCHIVO";}
+    if(!(pEvaluacion = fopen("evaluaciones.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
 
     while(fread(this,sizeof(Evaluacion),1, pEvaluacion)){
         this->mostrarEvaluacion();
-    }
+    };
+
 
     fclose(pEvaluacion);
 }
