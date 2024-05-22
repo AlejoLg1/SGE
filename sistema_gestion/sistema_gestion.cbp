@@ -37,11 +37,13 @@
 		<Unit filename="include/Administrador.h" />
 		<Unit filename="include/Alumno.h" />
 		<Unit filename="include/Director.h" />
+		<Unit filename="include/Evaluacion.h" />
 		<Unit filename="include/Factura.h" />
 		<Unit filename="include/FacturaArchivo.h" />
 		<Unit filename="include/FacturaManager.h" />
 		<Unit filename="include/Fecha.h" />
 		<Unit filename="include/Funciones.h" />
+		<Unit filename="include/InscripcionMateria.h" />
 		<Unit filename="include/Materia.h" />
 		<Unit filename="include/Persona.h" />
 		<Unit filename="include/Profesor.h" />
@@ -50,11 +52,13 @@
 		<Unit filename="src/Administrador.cpp" />
 		<Unit filename="src/Alumno.cpp" />
 		<Unit filename="src/Director.cpp" />
+		<Unit filename="src/Evaluacion.cpp" />
 		<Unit filename="src/Factura.cpp" />
 		<Unit filename="src/FacturaArchivo.cpp" />
 		<Unit filename="src/FacturaManager.cpp" />
 		<Unit filename="src/Fecha.cpp" />
 		<Unit filename="src/Funciones.cpp" />
+		<Unit filename="src/InscripcionMateria.cpp" />
 		<Unit filename="src/Materia.cpp" />
 		<Unit filename="src/Persona.cpp" />
 		<Unit filename="src/Profesor.cpp" />

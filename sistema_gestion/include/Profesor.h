@@ -27,6 +27,9 @@ class Profesor : public Persona
 
         ///MÉTODOS
 
+        void activarProfesor(int);
+        void desactivarProfesor(int);
+        void cambiarClave(int, int);
         void cargarProfesor();
         void mostrarProfesor();
         void grabarEnDiscoProfesor();
