@@ -1,5 +1,7 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
+#include "Alumno.h"
+#include "Materia.h"
 #include <string>
 
 //void marco(int, int, int, int, int);
@@ -22,6 +24,10 @@ bool usuariosEspecificosCargados(std::string, const char* [], int [], std::strin
 
 void mensajeUsuariosNoEncontrados(std::string);
 
+Alumno buscarAlumno(int);
+
+Materia buscarMateria(int);
+
 ///--- LOGIN ROLES ---\\
 
 void login(int, std::string);
@@ -35,6 +41,8 @@ bool claveValida(std::string, int, int, const char* [], int [], std::string []);
 bool estadoValido(std::string, int, const char* [], int [], std::string []);
 
 void validarLegajo(int legajo);
+
+bool validarMateria(int ID);
 
 ///--- MENÚS ROLES ---\\
 

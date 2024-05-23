@@ -11,6 +11,7 @@
 #include "Profesor.h"
 #include "Alumno.h"
 #include "Materia.h"
+#include "InscripcionMateria.h"
 //#include "rlutil.h"
 
 using namespace std;
@@ -34,6 +35,8 @@ Administrador administradorObj;
 Director directorObj;
 Profesor profesorObj;
 Alumno alumnoObj;
+InscripcionMateria inscripcionMateriaObj;
+
 
 //VARIABLES GLOBALES
 int rol;
@@ -521,6 +524,38 @@ bool estadoValido(string Rol, int legajo, const char* vecNombresFiles[], int vec
     }
 
     return valido;
+}
+
+Alumno buscarAlumno(int ID)
+{
+Alumno aux;
+int pos=0;
+
+    while (aux.leerEnDiscoAlumnoPorPosicion(pos))
+    {
+        if (aux.getLegajo() == ID)
+        {
+            return aux;
+        }
+        pos++;
+    }
+
+}
+
+Materia buscarMateria(int ID)
+{
+Materia aux;
+int pos=0;
+
+    while (aux.leerEnDiscoMateriaPorPosicion(pos))
+    {
+        if (aux.getId() == ID)
+        {
+            return aux;
+        }
+        pos++;
+    }
+
 }
 
 
@@ -1246,10 +1281,12 @@ void menuAlumno() {
     switch(opcion) {
         case 49:
             system("cls");
+            inscripcionMateriaObj.inscribirseMateria(legajo);
             ///-- >> MENÚ PLANIFICAR CURSADA
             break;
         case 50:
             system("cls");
+            inscripcionMateriaObj.mostrarRegistroDeIncriccionesMateria(legajo);
             ///-- >> FUNCION VER PLAN DE ESTUDIO
             break;
         case 51:
@@ -1281,4 +1318,22 @@ void validarLegajo(int legajo) {
         cout << endl << "\t - Legajo: ";
         cin >> legajo;
     }
+}
+
+bool validarMateria(int ID)
+{
+    Materia aux;
+    int posicion = 0;
+
+    while (aux.leerEnDiscoMateriaPorPosicion(posicion))
+    {
+        if (aux.getId() == ID)
+        {
+            return true;
+        }
+        posicion++;
+    }
+
+    return false;
+
 }

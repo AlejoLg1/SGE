@@ -133,3 +133,21 @@ int Materia::GenerarId() {
     return idsTotales;
 }
 
+bool Materia::leerEnDiscoMateriaPorPosicion(int pos)
+{
+    FILE *p;
+    bool Leyo;
+
+    p=fopen ("materias.dat","rb");
+    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl; return false;}
+
+    fseek (p,sizeof(Materia)*pos,0);
+
+    Leyo=fread(this,sizeof (Materia),1,p);
+
+    fclose(p);
+    return Leyo;
+
+}
+
+

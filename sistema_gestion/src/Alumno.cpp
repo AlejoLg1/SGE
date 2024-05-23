@@ -231,3 +231,19 @@ void Alumno::leerEnDiscoAlumno() {
 
     fclose(pAlumno);
 }
+
+bool Alumno::leerEnDiscoAlumnoPorPosicion(int pos)
+{
+    FILE *p;
+    bool Leyo;
+
+    p=fopen ("alumnos.dat","rb");
+    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl; return false;}
+
+    fseek (p,sizeof(Alumno)*pos,0);
+
+    Leyo=fread(this,sizeof (Alumno),1,p);
+
+    fclose(p);
+    return Leyo;
+}

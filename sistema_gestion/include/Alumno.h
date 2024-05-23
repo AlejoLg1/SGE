@@ -44,6 +44,8 @@ class Alumno : public Persona{
 
         void leerEnDiscoAlumno();
 
+        bool leerEnDiscoAlumnoPorPosicion(int);
+
 };
 
 

@@ -47,6 +47,8 @@ class Materia
 
         void leerEnDiscoMateria();
 
+        bool leerEnDiscoMateriaPorPosicion(int);
+
 
 };
 

@@ -6,12 +6,15 @@
 #include "Materia.h"
 
 
+
 class InscripcionMateria
 {
     private:
         Alumno _alumno;
-        std::vector<Materia> _materias;
-        std::vector<bool> _estadoMaterias;
+        Materia _materias[7];  // Arreglo de tamaño fijo para las materias
+        bool _estadoMaterias[7];  // Arreglo de tamaño fijo para los estados de las materias
+        int _numMaterias; // Variable para rastrear el número actual de materias
+
 
     public:
 
@@ -31,19 +34,25 @@ class InscripcionMateria
 
         Alumno getAlumno();
 
-        std::vector<Materia> getMaterias();
+        Materia* getMaterias();
 
-        std::vector<bool> getEstadoMaterias();
+        bool* getEstadoMaterias();
 
         ///---- MÉTODOS ----\\\
 
-        void cargarInscripcionMateria(const Alumno& alumno, const Materia& materia);
+        bool cargarInscripcionMateria(const Alumno& alumno, const Materia& materia);
+
+        void inscribirseMateria(int);
 
         void mostrarInscripcionMateria();
+
+        void mostrarRegistroDeIncriccionesMateria(int);
 
         void grabarEnDiscoInscripcionMateria(const Alumno& alumno, const Materia& materia);
 
         void leerEnDiscoInscripcionMateria();
+
+        bool leerEnDiscoInscripcionMateriaPorPosicion(int);
 
 
 
