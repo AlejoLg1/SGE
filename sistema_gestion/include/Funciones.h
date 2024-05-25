@@ -2,6 +2,7 @@
 #define FUNCIONES_H_INCLUDED
 #include "Alumno.h"
 #include "Materia.h"
+#include "InscripcionMateria.h"
 #include <string>
 
 //void marco(int, int, int, int, int);
@@ -24,9 +25,6 @@ bool usuariosEspecificosCargados(std::string, const char* [], int [], std::strin
 
 void mensajeUsuariosNoEncontrados(std::string);
 
-Alumno buscarAlumno(int);
-
-Materia buscarMateria(int);
 
 ///--- LOGIN ROLES ---\\
 
@@ -44,6 +42,16 @@ void validarLegajo(int legajo);
 
 bool validarMateria(int ID);
 
+///--- BUSCAR --\\\
+
+Alumno buscarAlumno(int);
+
+Materia buscarMateria(int);
+
+int buscarInscripcionMateria(int);
+
+bool estaAlumnoInscritoEnMateria (int, int);
+
 ///--- MENÚS ROLES ---\\
 
 void menuAdministrador();
@@ -59,6 +67,13 @@ void mostrarPlanEstudio();
 
 void menuProfesor();
 
+
 void menuAlumno();
+void subMenuAlumnoPlanificacionCursada();
+void opcionCambiarContrasenaAlumno(int);
+
+///---FUNCIONES EXTRAS ---\\
+
+void CARGANDO();
 
 #endif // FUNCIONES_H_INCLUDED

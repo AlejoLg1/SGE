@@ -72,89 +72,107 @@ int clave;
 }*/
 
 
-void menuPrincipal() {
+void menuPrincipal()
+{
     setlocale(LC_ALL, "Spanish");
     rol = seleccionarRol(rol);
 
-    while(true) {
+    while(true)
+    {
         //marco(12, 10, 80, 48, 9);
         //setColor(15);
-        switch (rol) {
-            case 49: //ADMINISTRADOR
+        switch (rol)
+        {
+        case 49: //ADMINISTRADOR
+            system("cls");
+            if(usuariosCargados())
+            {
                 system("cls");
-                if(usuariosCargados()){
-                    system("cls");
-                    login(rol, "ADMINISTRADOR");
-                }
-                else{
-                    cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL 'ADMINISTRADOR' CARGADOS ----" << endl << endl;
-                    cout << endl << endl;
-                    system("pause");
-                    system("cls");
-                    administradorObj.grabarEnDiscoAdministrador();
-                    system("cls");
-                    rol = seleccionarRol(rol);
-                }
-                break;
-            case 50: //DIRECTOR
+                login(rol, "ADMINISTRADOR");
+            }
+            else
+            {
+                cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL 'ADMINISTRADOR' CARGADOS ----" << endl << endl;
+                cout << endl << endl;
+                system("pause");
                 system("cls");
-                if(usuariosCargados()){
-                    if(!usuariosEspecificosCargados("DIRECTOR", vecNombresFiles, vecTamObjetos, vecNombresRoles)){
-                        mensajeUsuariosNoEncontrados("DIRECTOR");
-                    }
-                    else{
-                        system("cls");
-                        login(rol, "DIRECTOR");
-                    }
-                }
-                else{
+                administradorObj.grabarEnDiscoAdministrador();
+                system("cls");
+                rol = seleccionarRol(rol);
+            }
+            break;
+        case 50: //DIRECTOR
+            system("cls");
+            if(usuariosCargados())
+            {
+                if(!usuariosEspecificosCargados("DIRECTOR", vecNombresFiles, vecTamObjetos, vecNombresRoles))
+                {
                     mensajeUsuariosNoEncontrados("DIRECTOR");
                 }
-                break;
-            case 51: //PROFESOR
-                system("cls");
-                if(usuariosCargados()){
-                    if(!usuariosEspecificosCargados("PROFESOR", vecNombresFiles, vecTamObjetos, vecNombresRoles)){
-                        mensajeUsuariosNoEncontrados("PROFESOR");
-                    }
-                    else{
-                        system("cls");
-                        login(rol, "PROFESOR");
-                    }
+                else
+                {
+                    system("cls");
+                    login(rol, "DIRECTOR");
                 }
-                else{
+            }
+            else
+            {
+                mensajeUsuariosNoEncontrados("DIRECTOR");
+            }
+            break;
+        case 51: //PROFESOR
+            system("cls");
+            if(usuariosCargados())
+            {
+                if(!usuariosEspecificosCargados("PROFESOR", vecNombresFiles, vecTamObjetos, vecNombresRoles))
+                {
                     mensajeUsuariosNoEncontrados("PROFESOR");
                 }
-                break;
-            case 52: // ALUMNO
-                system("cls");
-                if(usuariosCargados()){
-                    if(!usuariosEspecificosCargados("ALUMNO", vecNombresFiles, vecTamObjetos, vecNombresRoles)){
-                        mensajeUsuariosNoEncontrados("ALUMNO");
-                    }
-                    else{
-                        system("cls");
-                        login(rol, "ALUMNO");
-                    }
+                else
+                {
+                    system("cls");
+                    login(rol, "PROFESOR");
                 }
-                else{
+            }
+            else
+            {
+                mensajeUsuariosNoEncontrados("PROFESOR");
+            }
+            break;
+        case 52: // ALUMNO
+            system("cls");
+            if(usuariosCargados())
+            {
+                if(!usuariosEspecificosCargados("ALUMNO", vecNombresFiles, vecTamObjetos, vecNombresRoles))
+                {
                     mensajeUsuariosNoEncontrados("ALUMNO");
                 }
-                break;
-            case 48: // SALIR
-                system("cls");
-                cout << endl << "SALIENDO...." << endl;
-                Sleep(2000);
-                return;
-                break;
-            default:
-                cout << "Opcion invalida." << endl;
-                break;
+                else
+                {
+                    system("cls");
+                    login(rol, "ALUMNO");
+                }
+            }
+            else
+            {
+                mensajeUsuariosNoEncontrados("ALUMNO");
+            }
+            break;
+        case 48: // SALIR
+            system("cls");
+            cout << endl << "SALIENDO...." << endl;
+            Sleep(2000);
+            return;
+            break;
+        default:
+            cout << "Opcion invalida." << endl;
+            break;
         }
     }
 }
 
-int seleccionarRol(int rol) {
+int seleccionarRol(int rol)
+{
     setlocale(LC_ALL, "Spanish");
     /*marco(12, 10, 80, 48, 9);
     setColor(15);
@@ -180,7 +198,8 @@ int seleccionarRol(int rol) {
 
     rol = _getch();
 
-    while(rol != 49 && rol != 50 && rol != 51 && rol != 52 && rol != 48){
+    while(rol != 49 && rol != 50 && rol != 51 && rol != 52 && rol != 48)
+    {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -205,7 +224,8 @@ int seleccionarRol(int rol) {
 
 ///--- SETTEAR LEGAJO AUTOMÁTICO ---\\
 
-int settearNuevoLegajo() {
+int settearNuevoLegajo()
+{
 
     int nuevoLegajo = 0;
 
@@ -217,13 +237,17 @@ int settearNuevoLegajo() {
 }
 
 
-int contarLegajos(const char* vecNombresFiles[], int vecTamObjetos[]) {
+int contarLegajos(const char* vecNombresFiles[], int vecTamObjetos[])
+{
     int legajosTotales = 0;
     FILE* pFile = nullptr;
 
-    for(x = 0; x < CANTIDADOBJETOS; x++){
-        if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
-            if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
+    for(x = 0; x < CANTIDADOBJETOS; x++)
+    {
+        if(!(pFile = fopen(vecNombresFiles[x], "rb+")))
+        {
+            if (!(pFile = fopen(vecNombresFiles[x], "wb+")))
+            {
                 cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                 return 0;
             }
@@ -241,20 +265,26 @@ int contarLegajos(const char* vecNombresFiles[], int vecTamObjetos[]) {
 
 ///--- VALIDAR EXISTENCIA DE USUARIOS ---\\
 
-bool usuariosCargados() {
+bool usuariosCargados()
+{
     return contarLegajos(vecNombresFiles, vecTamObjetos) == 0 ? false : true;
 }
 
-bool usuariosEspecificosCargados(string Rol, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
+bool usuariosEspecificosCargados(string Rol, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[])
+{
     int usuariosEspecificos = 0;
     bool existe = true;
     FILE* pFile = nullptr;
 
-    for(x = 0; x < CANTIDADOBJETOS; x++){
-        if(Rol == vecNombresRoles[x]) {
-            if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
+    for(x = 0; x < CANTIDADOBJETOS; x++)
+    {
+        if(Rol == vecNombresRoles[x])
+        {
+            if(!(pFile = fopen(vecNombresFiles[x], "rb+")))
+            {
                 cout << endl << "No encontró el archivo" << endl;
-                if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
+                if (!(pFile = fopen(vecNombresFiles[x], "wb+")))
+                {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
                 }
@@ -265,7 +295,8 @@ bool usuariosEspecificosCargados(string Rol, const char* vecNombresFiles[], int 
             fseek(pFile, 0, SEEK_SET);
             fclose(pFile);
 
-            if(usuariosEspecificos == 0){
+            if(usuariosEspecificos == 0)
+            {
                 existe = false;
                 return existe;
             }
@@ -275,7 +306,8 @@ bool usuariosEspecificosCargados(string Rol, const char* vecNombresFiles[], int 
     }
 }
 
-void mensajeUsuariosNoEncontrados(string Rol) {
+void mensajeUsuariosNoEncontrados(string Rol)
+{
     cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL '" << Rol << "' CARGADOS EN EL SISTEMA ----" << endl << endl;
     cout << endl << endl;
     system("pause");
@@ -286,18 +318,21 @@ void mensajeUsuariosNoEncontrados(string Rol) {
 
 ///--- LOGIN ROLES ---\\
 
-void login(int rol, string Rol) {
+void login(int rol, string Rol)
+{
     setlocale(LC_ALL, "Spanish");
 
     cout << Rol << ": INICIO DE SESIÓN (Nro. de Legajo 0 para salir)" << endl;
     cout << endl << endl << "\t - Legajo: ";
     cin >> legajo;
 
-    if(legajo == 0){
+    if(legajo == 0)
+    {
         system("cls");
         menuPrincipal();
     }
-    if(!usuarioValido(Rol, legajo, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
+    if(!usuarioValido(Rol, legajo, vecNombresFiles, vecTamObjetos, vecNombresRoles))
+    {
         cout << endl << "---- ERROR: NO SE ENCONTRÓ UN USUARIO " << Rol << " CON LEGAJO '" << legajo << "' CARGADO EN EL SISTEMA ----" << endl << endl;
         cout << endl << endl;
         system("pause");
@@ -307,7 +342,8 @@ void login(int rol, string Rol) {
 
     cout << endl << "\t - Contraseña (numérica): ";
     cin >> clave;
-    if(!claveValida(Rol, legajo, clave, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
+    if(!claveValida(Rol, legajo, clave, vecNombresFiles, vecTamObjetos, vecNombresRoles))
+    {
         cout << endl << "---- ERROR: CONTRASEÑA INCORRECTA ----" << endl << endl;
         cout << endl << endl;
         system("pause");
@@ -315,7 +351,8 @@ void login(int rol, string Rol) {
         login(rol, Rol);
     }
 
-    if(!estadoValido(Rol, legajo, vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
+    if(!estadoValido(Rol, legajo, vecNombresFiles, vecTamObjetos, vecNombresRoles))
+    {
         cout << endl << "---- ERROR: USUARIO INACTIVO ----" << endl << endl;
         cout << endl << endl;
         system("pause");
@@ -324,74 +361,91 @@ void login(int rol, string Rol) {
     }
 
 
-    switch (rol) {
-        case 49: //ADMINISTRADOR
-            system("cls");
-            menuAdministrador();
-            break;
-        case 50: //DIRECTOR
-            system("cls");
-            menuDirectivo();
-            break;
-        case 51: //PROFESOR
-            system("cls");
-            menuProfesor();
-            break;
-        case 52: //ALUMNO
-            system("cls");
-            menuAlumno();
-            break;
-        default:
-            cout << "Opcion invalida." << endl;
-            break;
+    switch (rol)
+    {
+    case 49: //ADMINISTRADOR
+        system("cls");
+        menuAdministrador();
+        break;
+    case 50: //DIRECTOR
+        system("cls");
+        menuDirectivo();
+        break;
+    case 51: //PROFESOR
+        system("cls");
+        menuProfesor();
+        break;
+    case 52: //ALUMNO
+        system("cls");
+        menuAlumno();
+        break;
+    default:
+        cout << "Opcion invalida." << endl;
+        break;
     }
 }
 
 ///--- VALIDAR CREDENCIALES LOGIN ---\\
 
-bool usuarioValido(string Rol, int legajo, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
+bool usuarioValido(string Rol, int legajo, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[])
+{
     bool valido = false;
     FILE* pFile = nullptr;
 
-    for(x = 0; x < CANTIDADOBJETOS; x++){
-        if(Rol == vecNombresRoles[x]) {
-            if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
-                if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
+    for(x = 0; x < CANTIDADOBJETOS; x++)
+    {
+        if(Rol == vecNombresRoles[x])
+        {
+            if(!(pFile = fopen(vecNombresFiles[x], "rb+")))
+            {
+                if (!(pFile = fopen(vecNombresFiles[x], "wb+")))
+                {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
                 }
             }
 
-            if(Rol == "ADMINISTRADOR"){
+            if(Rol == "ADMINISTRADOR")
+            {
                 Administrador obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
                     if(obj.getId() == legajo)
                         valido = true;
-                        return valido;
-                    }
+                    return valido;
                 }
-            else if(Rol == "DIRECTOR"){
+            }
+            else if(Rol == "DIRECTOR")
+            {
                 Director obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
                         valido = true;
                         return valido;
                     }
                 }
             }
-            else if(Rol == "PROFESOR"){
+            else if(Rol == "PROFESOR")
+            {
                 Profesor obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
                         valido = true;
                         return valido;
                     }
                 }
             }
-            else{
+            else
+            {
                 Alumno obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
                         valido = true;
                         return valido;
                     }
@@ -403,57 +457,78 @@ bool usuarioValido(string Rol, int legajo, const char* vecNombresFiles[], int ve
     return valido;
 }
 
-bool claveValida(string Rol, int legajo, int clave, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
+bool claveValida(string Rol, int legajo, int clave, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[])
+{
     bool valida = false;
     FILE* pFile = nullptr;
 
-    for(x = 0; x < CANTIDADOBJETOS; x++){
-        if(Rol == vecNombresRoles[x]) {
-            if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
-                if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
+    for(x = 0; x < CANTIDADOBJETOS; x++)
+    {
+        if(Rol == vecNombresRoles[x])
+        {
+            if(!(pFile = fopen(vecNombresFiles[x], "rb+")))
+            {
+                if (!(pFile = fopen(vecNombresFiles[x], "wb+")))
+                {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
                 }
             }
 
-            if(Rol == "ADMINISTRADOR"){
+            if(Rol == "ADMINISTRADOR")
+            {
                 Administrador obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getId() == legajo){
-                        if(obj.getClave() == clave){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getId() == legajo)
+                    {
+                        if(obj.getClave() == clave)
+                        {
                             valida = true;
                             return valida;
                         }
                     }
                 }
             }
-            else if(Rol == "DIRECTOR"){
+            else if(Rol == "DIRECTOR")
+            {
                 Director obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
-                        if(obj.getClave() == clave){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
+                        if(obj.getClave() == clave)
+                        {
                             valida = true;
                             return valida;
                         }
                     }
                 }
             }
-            else if(Rol == "PROFESOR"){
+            else if(Rol == "PROFESOR")
+            {
                 Profesor obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
-                        if(obj.getClave() == clave){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
+                        if(obj.getClave() == clave)
+                        {
                             valida = true;
                             return valida;
                         }
                     }
                 }
             }
-            else{
+            else
+            {
                 Alumno obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
-                        if(obj.getClave() == clave){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
+                        if(obj.getClave() == clave)
+                        {
                             valida = true;
                             return valida;
                         }
@@ -466,54 +541,73 @@ bool claveValida(string Rol, int legajo, int clave, const char* vecNombresFiles[
     return valida;
 }
 
-bool estadoValido(string Rol, int legajo, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[]) {
+bool estadoValido(string Rol, int legajo, const char* vecNombresFiles[], int vecTamObjetos[], string vecNombresRoles[])
+{
     bool valido = false;
     FILE* pFile = nullptr;
 
-    for(x = 0; x < CANTIDADOBJETOS; x++){
-        if(Rol == vecNombresRoles[x]) {
-            if(!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
-                if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
+    for(x = 0; x < CANTIDADOBJETOS; x++)
+    {
+        if(Rol == vecNombresRoles[x])
+        {
+            if(!(pFile = fopen(vecNombresFiles[x], "rb+")))
+            {
+                if (!(pFile = fopen(vecNombresFiles[x], "wb+")))
+                {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
                     return false;
                 }
             }
 
-            if(Rol == "ADMINISTRADOR"){
+            if(Rol == "ADMINISTRADOR")
+            {
                 Administrador obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
                     if(obj.getId() == legajo)
                         valido = true;
-                        return valido;
-                    }
+                    return valido;
                 }
-            else if(Rol == "DIRECTOR"){
+            }
+            else if(Rol == "DIRECTOR")
+            {
                 Director obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
-                        if(obj.getEstado() == true){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
+                        if(obj.getEstado() == true)
+                        {
                             valido = true;
                             return valido;
                         }
                     }
                 }
             }
-            else if(Rol == "PROFESOR"){
+            else if(Rol == "PROFESOR")
+            {
                 Profesor obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
-                        if(obj.getEstado() == true){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
+                        if(obj.getEstado() == true)
+                        {
                             valido = true;
                             return valido;
                         }
                     }
                 }
             }
-            else{
+            else
+            {
                 Alumno obj;
-                while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
-                    if(obj.getLegajo() == legajo){
-                        if(obj.getEstado() == true){
+                while (fread(&obj, vecTamObjetos[x], 1, pFile))
+                {
+                    if(obj.getLegajo() == legajo)
+                    {
+                        if(obj.getEstado() == true)
+                        {
                             valido = true;
                             return valido;
                         }
@@ -528,8 +622,8 @@ bool estadoValido(string Rol, int legajo, const char* vecNombresFiles[], int vec
 
 Alumno buscarAlumno(int ID)
 {
-Alumno aux;
-int pos=0;
+    Alumno aux;
+    int pos=0;
 
     while (aux.leerEnDiscoAlumnoPorPosicion(pos))
     {
@@ -544,8 +638,8 @@ int pos=0;
 
 Materia buscarMateria(int ID)
 {
-Materia aux;
-int pos=0;
+    Materia aux;
+    int pos=0;
 
     while (aux.leerEnDiscoMateriaPorPosicion(pos))
     {
@@ -558,12 +652,62 @@ int pos=0;
 
 }
 
+int buscarInscripcionMateria(int Legajo)
+{
+    InscripcionMateria aux;
+    int pos=0;
+
+    while (aux.leerEnDiscoInscripcionMateriaPorPosicion(pos))
+    {
+        if(aux.getAlumno().getLegajo()==Legajo)
+        {
+            return pos;
+        }
+        pos++;
+    }
+    cout<<"No Hay inscriciones aun"<<endl;
+    system("pause");
+    return -1;
+}
+
+bool estaAlumnoInscritoEnMateria (int legAlumno, int idMateria)
+{
+    InscripcionMateria aux;
+    int pos=0;
+
+    while (aux.leerEnDiscoInscripcionMateriaPorPosicion(pos))
+    {
+
+        if (aux.getAlumno().getLegajo() == legAlumno)
+        {
+            Materia* materias = aux.getMaterias();  // Obtener el puntero al arreglo de materias
+            for (int i = 0; i < 7; i++)
+            {
+
+
+                if (materias[i].getId() == idMateria)
+                {
+                    return true;
+
+                }
+
+            }
+        }
+        pos++;
+    }
+
+
+    return false;
+
+}
+
 
 ///--- MENÚS ROLES ---\\
 
 ///--- MENÚ ADMINISTRADOR ---\\
 
-void menuAdministrador() {
+void menuAdministrador()
+{
 
     int opcion;
     int legajoDirector;
@@ -583,7 +727,8 @@ void menuAdministrador() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48)
+    {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -604,70 +749,72 @@ void menuAdministrador() {
 
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
-            directorObj.grabarEnDiscoDirector();
-            system("cls");
-            menuAdministrador();
-            break;
-        case 50:
-            system("cls");
-            cout << "ACTIVANDO PERFIL DIRECTOR" << endl;
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+        directorObj.grabarEnDiscoDirector();
+        system("cls");
+        menuAdministrador();
+        break;
+    case 50:
+        system("cls");
+        cout << "ACTIVANDO PERFIL DIRECTOR" << endl;
 
-            cout << endl << "\t- Legajo: ";
-            cin >> legajoDirector;
-            validarLegajo(legajoDirector);
+        cout << endl << "\t- Legajo: ";
+        cin >> legajoDirector;
+        validarLegajo(legajoDirector);
 
-            directorObj.activarDirector(legajoDirector);
+        directorObj.activarDirector(legajoDirector);
 
-            system("cls");
-            menuAdministrador();
-            break;
-        case 51:
-            system("cls");
-            cout << "DESACTIVANDO PERFIL DIRECTOR" << endl;
+        system("cls");
+        menuAdministrador();
+        break;
+    case 51:
+        system("cls");
+        cout << "DESACTIVANDO PERFIL DIRECTOR" << endl;
 
-            cout << endl << "\t- Legajo: ";
-            cin >> legajoDirector;
-            validarLegajo(legajoDirector);
+        cout << endl << "\t- Legajo: ";
+        cin >> legajoDirector;
+        validarLegajo(legajoDirector);
 
-            directorObj.desactivarDirector(legajoDirector);
+        directorObj.desactivarDirector(legajoDirector);
 
-            system("cls");
-            menuAdministrador();
-            break;
-        case 52:
-            system("cls");
-            cout << "CAMBIANDO CONTRASEÑA" << endl;
+        system("cls");
+        menuAdministrador();
+        break;
+    case 52:
+        system("cls");
+        cout << "CAMBIANDO CONTRASEÑA" << endl;
 
-            cout << endl << "\t - Contraseña anterior: " << clave << endl;
-            cout << endl << "\t - Contraseña nueva (numérica): ";
-            cin >> nuevaClave;
+        cout << endl << "\t - Contraseña anterior: " << clave << endl;
+        cout << endl << "\t - Contraseña nueva (numérica): ";
+        cin >> nuevaClave;
 
-            administradorObj.cambiarClave(legajo, nuevaClave);
+        administradorObj.cambiarClave(legajo, nuevaClave);
 
-            clave = nuevaClave;
+        clave = nuevaClave;
 
-            system("cls");
-            menuAdministrador();
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuPrincipal();
-            break;
-        default:
-            cout << "Opción no válida." << endl;
+        system("cls");
+        menuAdministrador();
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuPrincipal();
+        break;
+    default:
+        cout << "Opción no válida." << endl;
     }
 
 }
 
 ///--- MENÚ DIRECTIVO ---\\
 
-void menuDirectivo() {
+void menuDirectivo()
+{
     int opcion;
     int legajoDirector;
     int nuevaClave;
@@ -687,7 +834,8 @@ void menuDirectivo() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 48)
+    {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -709,52 +857,54 @@ void menuDirectivo() {
 
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
-            subMenuDirectivoProfesor();
-            break;
-        case 50:
-            system("cls");
-            subMenuDirectivoAlumno();
-            break;
-        case 51:
-            system("cls");
-            subMenuDirectivoPlanEstudio();
-            break;
-        case 52:
-            //FALTA HACER LA CLASE AVISOS
-            system("cls");
-            menuDirectivo();
-            break;
-        case 53:
-            system("cls");
-            cout << "CAMBIANDO CONTRASEÑA" << endl;
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+        subMenuDirectivoProfesor();
+        break;
+    case 50:
+        system("cls");
+        subMenuDirectivoAlumno();
+        break;
+    case 51:
+        system("cls");
+        subMenuDirectivoPlanEstudio();
+        break;
+    case 52:
+        //FALTA HACER LA CLASE AVISOS
+        system("cls");
+        menuDirectivo();
+        break;
+    case 53:
+        system("cls");
+        cout << "CAMBIANDO CONTRASEÑA" << endl;
 
-            cout << endl << "\t - Contraseña anterior: " << clave << endl;
-            cout << endl << "\t - Contraseña nueva (numérica): ";
-            cin >> nuevaClave;
+        cout << endl << "\t - Contraseña anterior: " << clave << endl;
+        cout << endl << "\t - Contraseña nueva (numérica): ";
+        cin >> nuevaClave;
 
-            directorObj.cambiarClave(legajo, nuevaClave);
+        directorObj.cambiarClave(legajo, nuevaClave);
 
-            clave = nuevaClave;
+        clave = nuevaClave;
 
-            system("cls");
-            menuDirectivo();
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuPrincipal();
-            break;
-        default:
-            cout << "Opción no válida." << endl;
+        system("cls");
+        menuDirectivo();
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuPrincipal();
+        break;
+    default:
+        cout << "Opción no válida." << endl;
     }
 }
 
-void subMenuDirectivoProfesor() {
+void subMenuDirectivoProfesor()
+{
     int opcion;
     int legajoProfesor;
     int nuevaClave;
@@ -772,7 +922,8 @@ void subMenuDirectivoProfesor() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
+    {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -791,53 +942,55 @@ void subMenuDirectivoProfesor() {
         opcion = _getch();
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
-            profesorObj.grabarEnDiscoProfesor();
-            system("cls");
-            subMenuDirectivoProfesor();
-            break;
-        case 50:
-            system("cls");
-            cout << "ACTIVANDO PERFIL PROFESOR" << endl;
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+        profesorObj.grabarEnDiscoProfesor();
+        system("cls");
+        subMenuDirectivoProfesor();
+        break;
+    case 50:
+        system("cls");
+        cout << "ACTIVANDO PERFIL PROFESOR" << endl;
 
-            cout << endl << "\t- Legajo: ";
-            cin >> legajoProfesor;
-            validarLegajo(legajoProfesor);
+        cout << endl << "\t- Legajo: ";
+        cin >> legajoProfesor;
+        validarLegajo(legajoProfesor);
 
-            //profesorObj.activarProfesor(legajoProfesor);
+        //profesorObj.activarProfesor(legajoProfesor);
 
-            system("cls");
-            subMenuDirectivoProfesor();
-            break;
-        case 51:
-            system("cls");
-            cout << "DESACTIVANDO PERFIL PROFESOR" << endl;
+        system("cls");
+        subMenuDirectivoProfesor();
+        break;
+    case 51:
+        system("cls");
+        cout << "DESACTIVANDO PERFIL PROFESOR" << endl;
 
-            cout << endl << "\t- Legajo: ";
-            cin >> legajoProfesor;
-            validarLegajo(legajoProfesor);
+        cout << endl << "\t- Legajo: ";
+        cin >> legajoProfesor;
+        validarLegajo(legajoProfesor);
 
-            //profesorObj.desactivarProfesor(legajoProfesor);
+        //profesorObj.desactivarProfesor(legajoProfesor);
 
-            system("cls");
-            subMenuDirectivoProfesor();
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuDirectivo();
-            break;
-        default:
-            cout << "Opción no válida." << endl;
+        system("cls");
+        subMenuDirectivoProfesor();
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuDirectivo();
+        break;
+    default:
+        cout << "Opción no válida." << endl;
     }
 
 }
 
-void subMenuDirectivoAlumno() {
+void subMenuDirectivoAlumno()
+{
     int opcion;
     int legajoAlumno;
     int nuevaClave;
@@ -856,7 +1009,8 @@ void subMenuDirectivoAlumno() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
+    {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -875,52 +1029,54 @@ void subMenuDirectivoAlumno() {
         opcion = _getch();
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
-            alumnoObj.grabarEnDiscoAlumno();
-            system("cls");
-            subMenuDirectivoAlumno();
-            break;
-        case 50:
-            system("cls");
-            cout << "ACTIVANDO PERFIL ALUMNO" << endl;
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+        alumnoObj.grabarEnDiscoAlumno();
+        system("cls");
+        subMenuDirectivoAlumno();
+        break;
+    case 50:
+        system("cls");
+        cout << "ACTIVANDO PERFIL ALUMNO" << endl;
 
-            cout << endl << "\t- Legajo: ";
-            cin >> legajoAlumno;
-            validarLegajo(legajoAlumno);
+        cout << endl << "\t- Legajo: ";
+        cin >> legajoAlumno;
+        validarLegajo(legajoAlumno);
 
-            alumnoObj.activarAlumno(legajoAlumno);
+        alumnoObj.activarAlumno(legajoAlumno);
 
-            system("cls");
-            subMenuDirectivoAlumno();
-            break;
-        case 51:
-            system("cls");
-            cout << "DESACTIVANDO PERFIL ALUMNO" << endl;
+        system("cls");
+        subMenuDirectivoAlumno();
+        break;
+    case 51:
+        system("cls");
+        cout << "DESACTIVANDO PERFIL ALUMNO" << endl;
 
-            cout << endl << "\t- Legajo: ";
-            cin >> legajoAlumno;
-            validarLegajo(legajoAlumno);
+        cout << endl << "\t- Legajo: ";
+        cin >> legajoAlumno;
+        validarLegajo(legajoAlumno);
 
-            alumnoObj.desactivarAlumno(legajoAlumno);
+        alumnoObj.desactivarAlumno(legajoAlumno);
 
-            system("cls");
-            subMenuDirectivoAlumno();
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuDirectivo();
-            break;
-        default:
-            cout << "Opción no válida." << endl;
+        system("cls");
+        subMenuDirectivoAlumno();
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuDirectivo();
+        break;
+    default:
+        cout << "Opción no válida." << endl;
     }
 }
 
-void subMenuDirectivoPlanEstudio() {
+void subMenuDirectivoPlanEstudio()
+{
     int opcion;
     int cantMaterias;
     Materia materiaObj;
@@ -940,7 +1096,8 @@ void subMenuDirectivoPlanEstudio() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48)
+    {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -960,112 +1117,125 @@ void subMenuDirectivoPlanEstudio() {
         opcion = _getch();
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
 
-            cout << "CARGANDO MATERIAS - PLAN DE ESTUDIO 2003" << endl;
+        cout << "CARGANDO MATERIAS - PLAN DE ESTUDIO 2003" << endl;
 
-            if(contarMaterias() < 21){
+        if(contarMaterias() < 21)
+        {
+            cout << endl << "\t- Cantidad de materias a cargar: ";
+            cin >> cantMaterias;
+
+            while(cantMaterias > 21 || cantMaterias > (21 - contarMaterias()) || cantMaterias <= 0)
+            {
+                cout << endl <<"---- ERROR: CANTIDAD DISPONIBLE: " << (21 - contarMaterias()) << " ----" << endl;
+                Sleep(1500);
+                system("cls");
+
+                cout << "CARGANDO MATERIAS - PLAN DE ESTUDIO 2003" << endl;
+
                 cout << endl << "\t- Cantidad de materias a cargar: ";
                 cin >> cantMaterias;
-
-                while(cantMaterias > 21 || cantMaterias > (21 - contarMaterias()) || cantMaterias <= 0){
-                    cout << endl <<"---- ERROR: CANTIDAD DISPONIBLE: " << (21 - contarMaterias()) << " ----" << endl;
-                    Sleep(1500);
-                    system("cls");
-
-                    cout << "CARGANDO MATERIAS - PLAN DE ESTUDIO 2003" << endl;
-
-                    cout << endl << "\t- Cantidad de materias a cargar: ";
-                    cin >> cantMaterias;
-                }
-
-
-                for(int x = 0; x < cantMaterias; x++){
-                    system("cls");
-                    cout << "CARGANDO MATERIAS - PLAN DE ESTUDIO 2003" << endl;
-                    materiaObj.grabarEnDiscoMateria();
-                }
-
-            }
-            else{
-                cout << endl <<"---- LÍMITE DE MATERIAS CARGADAS ALCANZADO ----" << endl;
-                cout << endl << endl;
-                system("pause");
             }
 
-            system("cls");
-            subMenuDirectivoPlanEstudio();
-            break;
-        case 50:
-            system("cls");
-            /// --> FUNCIÓN MATERIAS CORRELATIVAS
-            system("cls");
-            subMenuDirectivoPlanEstudio();
-            break;
-        case 51:
-            system("cls");
 
-            cout << "ASIGNANDO PROFESORES - PLAN DE ESTUDIO 2003" << endl;
+            for(int x = 0; x < cantMaterias; x++)
+            {
+                system("cls");
+                cout << "CARGANDO MATERIAS - PLAN DE ESTUDIO 2003" << endl;
+                materiaObj.grabarEnDiscoMateria();
+            }
 
-            if(!usuariosEspecificosCargados("PROFESOR", vecNombresFiles, vecTamObjetos, vecNombresRoles)){
-                cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL 'PROFESOR' CARGADOS EN EL SISTEMA ----" << endl << endl;
+        }
+        else
+        {
+            cout << endl <<"---- LÍMITE DE MATERIAS CARGADAS ALCANZADO ----" << endl;
+            cout << endl << endl;
+            system("pause");
+        }
+
+        system("cls");
+        subMenuDirectivoPlanEstudio();
+        break;
+    case 50:
+        system("cls");
+        /// --> FUNCIÓN MATERIAS CORRELATIVAS
+        system("cls");
+        subMenuDirectivoPlanEstudio();
+        break;
+    case 51:
+        system("cls");
+
+        cout << "ASIGNANDO PROFESORES - PLAN DE ESTUDIO 2003" << endl;
+
+        if(!usuariosEspecificosCargados("PROFESOR", vecNombresFiles, vecTamObjetos, vecNombresRoles))
+        {
+            cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL 'PROFESOR' CARGADOS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << endl;
+            system("pause");
+            system("cls");
+        }
+        else
+        {
+            if(contarMaterias() < 21)
+            {
+                cout << endl << "---- ERROR: PLAN DE ESTUDIOS INCOMPLETO, " << 21 - contarMaterias() << " MATERIAS RESTANTES POR CARGAR ----" << endl << endl;
                 cout << endl << endl;
                 system("pause");
                 system("cls");
             }
-            else{
-                if(contarMaterias() < 21){
-                    cout << endl << "---- ERROR: PLAN DE ESTUDIOS INCOMPLETO, " << 21 - contarMaterias() << " MATERIAS RESTANTES POR CARGAR ----" << endl << endl;
-                    cout << endl << endl;
-                    system("pause");
-                    system("cls");
-                }
-                else{
-                    asignarProfesores();
-                }
+            else
+            {
+                asignarProfesores();
             }
+        }
 
 
-            system("cls");
-            subMenuDirectivoPlanEstudio();
-            break;
-        case 52:
-            system("cls");
+        system("cls");
+        subMenuDirectivoPlanEstudio();
+        break;
+    case 52:
+        system("cls");
 
-            if(contarMaterias() > 0){
-                cout << "PLAN DE ESTUDIO 2003" << endl << endl;
-                mostrarPlanEstudio();
-                system("pause");
-            }
-            else{
-                cout << endl << "---- ERROR: NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
-                cout << endl << endl;
-                system("pause");
-                system("cls");
-            }
+        if(contarMaterias() > 0)
+        {
+            cout << "PLAN DE ESTUDIO 2003" << endl << endl;
+            mostrarPlanEstudio();
+            system("pause");
+        }
+        else
+        {
+            cout << endl << "---- ERROR: NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << endl;
+            system("pause");
+            system("cls");
+        }
 
-            system("cls");
-            subMenuDirectivoPlanEstudio();
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuDirectivo();
-            break;
-        default:
-            cout << "Opción no válida." << endl;
+        system("cls");
+        subMenuDirectivoPlanEstudio();
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuDirectivo();
+        break;
+    default:
+        cout << "Opción no válida." << endl;
     }
 }
 
-int contarMaterias() {
+int contarMaterias()
+{
     FILE *pMat;
     int cantMaterias = 0;
 
-    if(!(pMat = fopen("materias.dat", "ab"))) {
+    if(!(pMat = fopen("materias.dat", "ab")))
+    {
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return -1;
     }
@@ -1078,7 +1248,8 @@ int contarMaterias() {
     return cantMaterias;
 }
 
-void asignarProfesores() {
+void asignarProfesores()
+{
     int legajoProfesor;
 
     FILE *pMat;
@@ -1087,20 +1258,25 @@ void asignarProfesores() {
     Profesor profesorObj;
     FILE *pProfesor;
 
-    if (!(pMat = fopen("materias.dat", "rb+"))) {
+    if (!(pMat = fopen("materias.dat", "rb+")))
+    {
         cout << endl << "--- NO SE ENCONTRARON REGISTROS DE MATERIAS ----" << endl;
         return;
     }
 
-    while (fread(&materiaObj, sizeof(Materia), 1, pMat)) {
-        if (materiaObj.getLegajoProfesor() != -1) {
+    while (fread(&materiaObj, sizeof(Materia), 1, pMat))
+    {
+        if (materiaObj.getLegajoProfesor() != -1)
+        {
             continue;
         }
 
         bool valido = false;
 
-        while (!valido) {
-            if (!(pProfesor = fopen("profesores.dat", "rb"))) {
+        while (!valido)
+        {
+            if (!(pProfesor = fopen("profesores.dat", "rb")))
+            {
                 system("cls");
                 cout << endl << "---- ERROR AL ABRIR EL ARCHIVO DE PROFESORES ----" << endl;
                 fclose(pMat);
@@ -1112,15 +1288,18 @@ void asignarProfesores() {
             cout << endl << "\t - Legajo Profesor: ";
             cin >> legajoProfesor;
 
-            while (fread(&profesorObj, sizeof(Profesor), 1, pProfesor)) {
-                if (profesorObj.getLegajo() == legajoProfesor) {
+            while (fread(&profesorObj, sizeof(Profesor), 1, pProfesor))
+            {
+                if (profesorObj.getLegajo() == legajoProfesor)
+                {
                     valido = true;
                     break;
                 }
             }
             fclose(pProfesor);
 
-            if (!valido) {
+            if (!valido)
+            {
                 cout << endl << "---- ERROR: NO SE ENCONTRÓ UN PROFESOR CON LEGAJO '" << legajoProfesor << "' CARGADO EN EL SISTEMA ----" << endl;
             }
         }
@@ -1139,7 +1318,8 @@ void asignarProfesores() {
     system("pause");
 }
 
-void mostrarPlanEstudio() {
+void mostrarPlanEstudio()
+{
     FILE *pMat;
     Materia materiaObj;
     int anchoID = 6;
@@ -1147,7 +1327,8 @@ void mostrarPlanEstudio() {
     int anchoProfesor = 16;
 
 
-    if(!(pMat = fopen("materias.dat", "rb"))) {
+    if(!(pMat = fopen("materias.dat", "rb")))
+    {
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return ;
     }
@@ -1160,7 +1341,8 @@ void mostrarPlanEstudio() {
 
     cout << string(anchoID, '-') << "+" << string(anchoMateria, '-') << "+" << string(anchoProfesor, '-') << endl;
 
-    while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
+    while(fread(&materiaObj, sizeof(Materia), 1, pMat))
+    {
         cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << "|" << left << setw(anchoProfesor) << (materiaObj.getLegajoProfesor() == -1? "No Asignado" : to_string(materiaObj.getLegajoProfesor())) << endl;
     }
 
@@ -1171,7 +1353,8 @@ void mostrarPlanEstudio() {
 
 ///--- MENÚ PROFESOR ---\\
 
-void menuProfesor() {
+void menuProfesor()
+{
     int opcion;
 
     cout << "----------------------------------------------------"<< endl;
@@ -1188,7 +1371,8 @@ void menuProfesor() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48)
+    {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -1209,47 +1393,50 @@ void menuProfesor() {
 
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
-            ///-- >> FUNCION VER MATERIAS ASIGNADAS
-            break;
-        case 50:
-            system("cls");
-            ///-- >> MENÚ GESTIONAR MATERIAS
-            break;
-        case 51:
-            system("cls");
-            ///-- >> FUNCION VER AVISOS
-            break;
-        case 52:
-            system("cls");
-            ///-- >> FUNCION CAMBIAR CONTRASEÑA
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuPrincipal();
-            break;
-        default:
-            cout << "Opción no válida." << endl;
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+        ///-- >> FUNCION VER MATERIAS ASIGNADAS
+        break;
+    case 50:
+        system("cls");
+        ///-- >> MENÚ GESTIONAR MATERIAS
+        break;
+    case 51:
+        system("cls");
+        ///-- >> FUNCION VER AVISOS
+        break;
+    case 52:
+        system("cls");
+        ///-- >> FUNCION CAMBIAR CONTRASEÑA
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuPrincipal();
+        break;
+    default:
+        cout << "Opción no válida." << endl;
     }
 }
 
 ///--- MENÚ ALUMNO ---\\
 
-void menuAlumno() {
+void menuAlumno()
+{
     int opcion;
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                    MENÚ ALUMNO                     "<< endl;
     cout << "----------------------------------------------------"<< endl;
     cout << "1. GESTIÓN CURSADA                                  "<< endl;
     cout << "2. VER PLAN DE ESTUDIO                              "<< endl;
     cout << "3. VER AVISOS                                       "<< endl;
-    cout << "3. CAMBIAR CONTRASEÑA                               "<< endl;
+    cout << "4. CAMBIAR CONTRASEÑA                               "<< endl;
     cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
     cout << "----------------------------------------------------"<< endl;
     cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -1257,7 +1444,8 @@ void menuAlumno() {
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion !=52 && opcion != 48)
+    {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -1268,7 +1456,7 @@ void menuAlumno() {
         cout << "1. GESTIÓN CURSADA                                  "<< endl;
         cout << "2. VER PLAN DE ESTUDIO                              "<< endl;
         cout << "3. VER AVISOS                                       "<< endl;
-        cout << "3. CAMBIAR CONTRASEÑA                               "<< endl;
+        cout << "4. CAMBIAR CONTRASEÑA                               "<< endl;
         cout << "0. VOLVER AL MENÚ PRINCIPAL                         "<< endl;
         cout << "----------------------------------------------------"<< endl;
         cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -1278,40 +1466,48 @@ void menuAlumno() {
 
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
-            inscripcionMateriaObj.inscribirseMateria(legajo);
-            ///-- >> MENÚ PLANIFICAR CURSADA
-            break;
-        case 50:
-            system("cls");
-            inscripcionMateriaObj.mostrarRegistroDeIncriccionesMateria(legajo);
-            ///-- >> FUNCION VER PLAN DE ESTUDIO
-            break;
-        case 51:
-            system("cls");
-            ///-- >> FUNCION VER AVISOS
-            break;
-        case 52:
-            system("cls");
-            ///-- >> FUNCION CAMBIAR CONTRASEÑA
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuPrincipal();
-            break;
-        default:
-            cout << "Opción no válida." << endl;
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+        subMenuAlumnoPlanificacionCursada();
+        menuAlumno();
+        ///-- >> MENÚ PLANIFICAR CURSADA
+        break;
+    case 50:
+        system("cls");
+        mostrarPlanEstudio();
+        system("pause");
+        menuAlumno();
+        ///-- >> FUNCION VER PLAN DE ESTUDIO
+        break;
+    case 51:
+        system("cls");
+        ///-- >> FUNCION VER AVISOS
+        break;
+    case 52:
+        system("cls");
+        opcionCambiarContrasenaAlumno(legajo);
+        menuAlumno();
+        ///-- >> FUNCION CAMBIAR CONTRASEÑA
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuPrincipal();
+        break;
+    default:
+        cout << "Opción no válida." << endl;
     }
 }
 
-void validarLegajo(int legajo) {
+void validarLegajo(int legajo)
+{
 
-    while(legajo < 0 || cin.fail()) {
+    while(legajo < 0 || cin.fail())
+    {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << endl << "\t---- ERROR : LEGAJO INVÁLIDO ----" << endl;
@@ -1337,3 +1533,151 @@ bool validarMateria(int ID)
     return false;
 
 }
+
+void subMenuAlumnoPlanificacionCursada()
+{
+    int opcion;
+
+    CARGANDO();
+    cout << "-----------------------------------------------------"<< endl;
+    cout << "               MENÚ PLANIFICAR CURSADA               "<< endl;
+    cout << "-----------------------------------------------------"<< endl;
+    cout << "1. VER PLANIFICACION                                 "<< endl;
+    cout << "2. ANOTARSE A MATERIAS                               "<< endl;
+    cout << "3. DARSE DE BAJA A MATERIAS                          "<< endl;
+    cout << "3. ANOTARSE A INSTANCIA DE EVALUACION                "<< endl;
+    cout << "0. VOLVER AL MENÚ ALUMNO                             "<< endl;
+    cout << "-----------------------------------------------------"<< endl;
+    cout << "             - SELECCIONE UNA OPCION: -              "<< endl;
+    cout << "-----------------------------------------------------"<< endl;
+
+    opcion = _getch();
+
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
+    {
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        Sleep(500);
+        system("cls");
+
+        CARGANDO();
+        cout << "-----------------------------------------------------"<< endl;
+        cout << "               MENÚ PLANIFICAR CURSADA               "<< endl;
+        cout << "-----------------------------------------------------"<< endl;
+        cout << "1. VER PLANIFICACION                                 "<< endl;
+        cout << "2. ANOTARSE A MATERIAS                               "<< endl;
+        cout << "3. DARSE DE BAJA A MATERIAS                          "<< endl;
+        cout << "3. ANOTARSE A INSTANCIA DE EVALUACION                "<< endl;
+        cout << "0. VOLVER AL MENÚ ALUMNO                             "<< endl;
+        cout << "-----------------------------------------------------"<< endl;
+        cout << "             - SELECCIONE UNA OPCION: -              "<< endl;
+        cout << "-----------------------------------------------------"<< endl;
+
+        opcion = _getch();
+
+    }
+
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+        inscripcionMateriaObj.mostrarRegistroDeIncriccionesMateria(legajo);
+        subMenuAlumnoPlanificacionCursada();
+        ///-- >>
+        break;
+    case 50:
+        system("cls");
+        inscripcionMateriaObj.inscribirseMateria(legajo);
+        subMenuAlumnoPlanificacionCursada();
+        ///-- >>
+        break;
+    case 51:
+        system("cls");
+        inscripcionMateriaObj.DarseDeBajaMateria(legajo);
+        subMenuAlumnoPlanificacionCursada();
+        ///-- >>
+        break;
+    case 52:
+        system("cls");
+        ///-- >>
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MENÚ ALUMNO..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuAlumno();
+        break;
+    default:
+        cout << "Opción no válida." << endl;
+    }
+
+}
+
+
+void opcionCambiarContrasenaAlumno(int legajo)
+{
+int opcion,claveNueva,claveNueva2=0;
+bool continuar=false;
+
+
+while (continuar==false)
+{
+system("cls");
+cout<<"Ingrese Nueva Clave: ";
+cin>>claveNueva;
+cout<<"Repita la Nueva Clave: ";
+cin>>claveNueva2;
+
+if(claveNueva == claveNueva2)
+{
+    continuar=true;
+}
+else
+{
+    cout<<"LAS CLAVES NO SON IGUALES, VUELVA A INGRESARLAS"<<endl;
+    system("pause");
+}
+
+}
+
+
+cout<<"---------------------------------- "<<endl;
+cout<<"SEGURO QUE QUIERE CAMBIAR DE CLAVE "<<endl;
+cout<<"---------------------------------- "<<endl;
+cout<<"SI=1     NO=0                      "<<endl;
+cout<<"---------------------------------- "<<endl;
+cout<<"OPCION: ";
+cin>>opcion;
+
+if(opcion=1)
+{
+    alumnoObj.cambiarClave(legajo,claveNueva);
+
+}
+else
+{
+cout<<"---------------------------------- "<<endl;
+cout<<"   CAMBIO DE CLAVE CANCELADO       "<<endl;
+cout<<"---------------------------------- "<<endl;
+}
+
+
+}
+
+
+void CARGANDO()
+{
+    system("cls");
+    cout<<"CARGANDO";
+    Sleep(300);
+    cout<<".";
+    Sleep(300);
+    cout<<".";
+    Sleep(300);
+    cout<<".";
+    Sleep(300);
+    cout<<".";
+    system("cls");
+
+}
+

@@ -8,14 +8,14 @@
 using namespace std;
 
 
-        ///---- CONSTRUCTOR ----\\\
+///---- CONSTRUCTOR ----\\\
 
 InscripcionMateria::InscripcionMateria()
 {
     //ctor
 }
 
-        ///---- SETTERS ----\\\
+///---- SETTERS ----\\\
 
 void InscripcionMateria::setAlumno(Alumno aux)
 {
@@ -49,7 +49,7 @@ void InscripcionMateria::setEstadoMaterias(bool aux, int pos)
     }
 }
 
-        ///---- GETTERS ----\\\
+///---- GETTERS ----\\\
 
 Alumno InscripcionMateria::getAlumno()
 {
@@ -67,9 +67,9 @@ bool* InscripcionMateria::getEstadoMaterias()
     return _estadoMaterias;  // Devuelve un puntero al arreglo de estados de materias
 }
 
-        ///---- MÉTODOS ----\\\
+///---- MÉTODOS ----\\\
 
-bool InscripcionMateria::cargarInscripcionMateria(const Alumno& alumno, const Materia& materia)
+int InscripcionMateria::cargarInscripcionMateria(const Alumno& alumno, const Materia& materia,int Legajo)
 {
     if (_numMaterias >= 7)
     {
@@ -78,13 +78,26 @@ bool InscripcionMateria::cargarInscripcionMateria(const Alumno& alumno, const Ma
     }
     else
     {
-        _alumno = alumno;
-        _materias[_numMaterias] = materia;  // Agrega la materia al final del arreglo
-        _estadoMaterias[_numMaterias] = true;  // Agrega el estado de la materia al final del arreglo
-        _numMaterias++; // Incrementa el contador de materias
+        if(int posicion = buscarInscripcionMateria(Legajo)== -1)
+        {
+            _alumno = alumno;
+            _materias[_numMaterias] = materia;  // Agrega la materia al final del arreglo
+            _estadoMaterias[_numMaterias] = true;  // Agrega el estado de la materia al final del arreglo
+            _numMaterias++; // Incrementa el contador de materias
+            return -1;
+        }
+
+        else
+        {
+            _alumno = alumno;
+            _materias[_numMaterias] = materia;  // Agrega la materia al final del arreglo
+            _estadoMaterias[_numMaterias] = true;  // Agrega el estado de la materia al final del arreglo
+            _numMaterias++; // Incrementa el contador de materia
+            return posicion;
+        }
     }
 
-    return true;;
+    return -1;;
 }
 
 void InscripcionMateria::inscribirseMateria(int legajo)
@@ -92,9 +105,9 @@ void InscripcionMateria::inscribirseMateria(int legajo)
     Alumno legAux;
     Materia matAux;
     int idMateria = 0, opcion = 0;
-    bool validacion = false;
+    bool continuar = true;
 
-    while (!validacion)
+    while (continuar)
     {
         std::system("cls");
 
@@ -103,64 +116,56 @@ void InscripcionMateria::inscribirseMateria(int legajo)
         std::cout << "    INCRIPCION DE MATERIA    " << std::endl;
         std::cout << "-----------------------------" << std::endl;
         std::cout << "Ingrese la ID de la Materia: ";
-        std::cin >> idMateria;
 
-        if (std::cin.fail()) {
-            std::cin.clear(); // Limpiar el estado de error
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Descartar entrada inválida
+        if (!leerEntrada(idMateria))
+        {
             std::cout << "Entrada inválida. Por favor, ingrese un número válido." << std::endl;
             continue;
         }
 
         if (!validarMateria(idMateria))
         {
+            system("cls");
             std::cout << "La ID ingresada no Existe" << std::endl;
-            std::cout << "-------------------------------" << std::endl;
-            std::cout << "Quiere volver a ingresar la ID?" << std::endl;
-            std::cout << "SI = 1      NO = 0             " << std::endl;
-            std::cout << "-------------------------------" << std::endl;
-            std::cin >> opcion;
-
-            if (std::cin.fail()) {
-                std::cin.clear(); // Limpiar el estado de error
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Descartar entrada inválida
-                std::cout << "Opción inválida. Intente de nuevo." << std::endl;
-                continue;
-            }
-
-            switch (opcion)
+            if (!preguntarContinuar("Quiere volver a ingresar la ID?"))
             {
-                case 1:
-                    validacion = false;
-                    break;
-                case 0:
-                    return; // Sale de la función si el usuario elige no continuar
-                default:
-                    std::cout << "Opción incorrecta. Intente de nuevo." << std::endl;
-                    break;
+                return;
             }
+            continue;
+        }
+
+        if (estaAlumnoInscritoEnMateria(legajo, idMateria))
+        {
+            system("cls");
+            std::cout << " Ya Esta Inscripto en Esa Materia  " << std::endl;
+            if (!preguntarContinuar("Quiere inscribirse en otra materia?"))
+            {
+                return;
+            }
+            continue;
+        }
+
+        legAux = buscarAlumno(legajo);
+        matAux = buscarMateria(idMateria);
+        int posicionDeInscripcion = cargarInscripcionMateria(legAux, matAux, legajo);
+
+        if (posicionDeInscripcion == -1)
+        {
+            grabarEnDiscoInscripcionMateria(legAux, matAux);
+            std::cout << "Materia Cargada correctamente" << std::endl;
         }
         else
         {
-            validacion = true;
+            ModificarEnDiscoInscripcionMateria(posicionDeInscripcion);
+            std::cout << "Materia Agregada correctamente" << std::endl;
         }
-    }
-
-   legAux = buscarAlumno(legajo);
-    matAux = buscarMateria(idMateria);
-
-    if (cargarInscripcionMateria(legAux , matAux))
-    {
-        grabarEnDiscoInscripcionMateria(legAux,matAux);
-        std::cout << "Materia Cargada correctamente" << std::endl;
-    }
-    else
-    {
-        std::cout << "NO SE PUDO CARGAR LA MATERIA" << std::endl;
+        system("Pause");
+        continuar = false;
     }
 }
 
-void InscripcionMateria::mostrarInscripcionMateria() {
+void InscripcionMateria::mostrarInscripcionMateria()
+{
 // Mostrar detalles del alumno
     std::cout << "----------------------------- " <<std::endl;
     std::cout << "Nombre: " << _alumno.getNombre() << std::endl;
@@ -169,45 +174,165 @@ void InscripcionMateria::mostrarInscripcionMateria() {
 
     // Mostrar materias inscritas y sus estados
     std::cout << "Materias inscritas:" << std::endl;
-    for (int i = 0; i < 7; ++i) {
-        std::cout << "Materia " << i+1 << ": " << _materias[i].getNombreMateria() << std::endl;
+    for (int i = 0; i < 7; ++i)
+    {
+        if(_estadoMaterias[i]== true)
+        {
+            std::cout<< "| " << _materias[i].getNombreMateria()<< std::endl;
+        }
     }
     std::cout << "----------------------------- " <<std::endl;
     system("pause");
 }
 
-void InscripcionMateria::mostrarRegistroDeIncriccionesMateria(int legajo)
+void InscripcionMateria::mostrarInscripcionMateriaSinElNombreDeUsuario(int legajo)
 {
-Alumno legAux;
-int pos=0;
+
+    Alumno legAux;
+    int pos=0;
 
     legAux = buscarAlumno(legajo);
 
     while (leerEnDiscoInscripcionMateriaPorPosicion(pos))
-     {
-         if(_alumno.getLegajo()== legAux.getLegajo())
-         {
-            mostrarInscripcionMateria();
+    {
+        if(_alumno.getLegajo()== legAux.getLegajo())
+        {
+            std::cout << "Materias inscritas:" << std::endl;
+            for (int i = 0; i < 7; ++i)
+            {
+                if(_estadoMaterias[i]== true)
+                {
+                    std::cout<<"| ID :"<<_materias[i].getId()<< "| Materia : " << _materias[i].getNombreMateria()<< std::endl;
+                }
+            }
+            std::cout << "----------------------------- " <<std::endl;
 
-         }
+        }
 
         pos++;
-     }
+    }
+
+}
+
+void InscripcionMateria::mostrarRegistroDeIncriccionesMateria(int legajo)
+{
+    Alumno legAux;
+    int pos=0;
+
+    legAux = buscarAlumno(legajo);
+
+    while (leerEnDiscoInscripcionMateriaPorPosicion(pos))
+    {
+        if(_alumno.getLegajo()== legAux.getLegajo())
+        {
+            mostrarInscripcionMateria();
+
+        }
+
+        pos++;
+    }
 
 
 }
+
+void InscripcionMateria::DarseDeBajaMateria(int legajo)
+{
+    Alumno legAux;
+    Materia matAux;
+    int idMateria = 0, opcion = 0;
+    bool continuar = true;
+
+
+
+    while (continuar)
+    {
+        std::system("cls");
+        mostrarInscripcionMateriaSinElNombreDeUsuario( legajo);
+
+        std::cout << "   DARSE DE BAJA EN MATERIA  " << std::endl;
+        std::cout << "-----------------------------" << std::endl;
+        std::cout << "Ingrese la ID de la Materia: ";
+
+        if (!leerEntrada(idMateria)) ///chequea qe sea un numero y no otra cosa
+        {
+            std::cout << "Entrada inválida. Por favor, ingrese un número válido." << std::endl;
+            continue;
+        }
+
+        if (!validarMateria(idMateria))
+        {
+            system("cls");
+            std::cout << "La ID ingresada no Existe" << std::endl;
+            if (!preguntarContinuar("Quiere volver a ingresar la ID?"))
+            {
+                return;
+            }
+            continue;
+        }
+
+        if (estaAlumnoInscritoEnMateria(legajo, idMateria)== false)
+        {
+            system("cls");
+            std::cout << "No Esta Inscripto en Esa Materia  " << std::endl;
+            if (!preguntarContinuar("Quiere volver a ingresar la ID?"))
+            {
+                return;
+            }
+            continue;
+        }
+
+        legAux = buscarAlumno(legajo);
+        matAux = buscarMateria(idMateria);
+
+        int posicionDeInscripcion = cargarBajaDeUnRegistroDeIncriccionesMateria(legAux, matAux, legajo, idMateria);
+
+
+        ModificarEnDiscoInscripcionMateria(posicionDeInscripcion);
+        std::cout << "Materia Dada de baja" << std::endl;
+
+        system("Pause");
+        continuar = false;
+    }
+
+}
+
+
+
+int InscripcionMateria::cargarBajaDeUnRegistroDeIncriccionesMateria(const Alumno& alumno,const Materia& materia,int Legajo,int idMateriaBaja )
+{
+
+
+    int posicion = buscarInscripcionMateria(Legajo);
+
+    _alumno = alumno;
+    for(int i=0; i<7; i++)
+    {
+        if(_materias[i].getId() == idMateriaBaja)
+        {
+            _estadoMaterias[i] = false;
+            return posicion;
+        }
+    }
+
+    _numMaterias; // No lo descuenta ya que se supone que el alumno esta cursando
+    return posicion;
+}
+
+
+
 
 void InscripcionMateria::grabarEnDiscoInscripcionMateria(const Alumno& alumno, const Materia& materia)
 {
     FILE *p;
 
-    if(!(p = fopen("InscripcionMateria.dat", "ab"))) {
+    if(!(p = fopen("InscripcionMateria.dat", "ab")))
+    {
 
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return;
     }
 
-    this->cargarInscripcionMateria(alumno,materia);
+
     fwrite(this, sizeof(InscripcionMateria), 1, p);
 
     fclose(p);
@@ -216,19 +341,39 @@ void InscripcionMateria::grabarEnDiscoInscripcionMateria(const Alumno& alumno, c
 
 }
 
+void InscripcionMateria::ModificarEnDiscoInscripcionMateria(int pos)
+{
+    FILE *p;
+
+
+    p=fopen("InscripcionMateria.dat","rb+");
+    if (p==NULL)
+    {
+        cout<<"NO SE PUDO ABRIR/CREAR EL ARCHIVO"<<endl;
+    }
+
+    fseek(p,sizeof(InscripcionMateria)*pos,0);
+
+    fwrite(this,sizeof(InscripcionMateria),1,p);
+
+    fclose (p);
+}
+
 
 void InscripcionMateria::leerEnDiscoInscripcionMateria()
 {
 
     FILE *p;
 
-    if(!(p = fopen("InscripcionMateria.dat", "rb"))) {
+    if(!(p = fopen("InscripcionMateria.dat", "rb")))
+    {
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return;
     }
 
     cout << "MOSTRANDO INSCRIPCIONES:" << endl;
-    while(fread(this, sizeof(InscripcionMateria), 1, p)){
+    while(fread(this, sizeof(InscripcionMateria), 1, p))
+    {
         this->mostrarInscripcionMateria();
     };
 
@@ -243,7 +388,10 @@ bool InscripcionMateria::leerEnDiscoInscripcionMateriaPorPosicion(int pos)
     bool Leyo;
 
     p=fopen ("InscripcionMateria.dat","rb");
-    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl; return false;}
+    if (p==NULL)
+    {
+        return false;
+    }
 
     fseek (p,sizeof(InscripcionMateria)*pos,0);
 
@@ -252,5 +400,30 @@ bool InscripcionMateria::leerEnDiscoInscripcionMateriaPorPosicion(int pos)
     fclose(p);
     return Leyo;
 
+}
+
+bool InscripcionMateria::leerEntrada(int& entrada)
+{
+    std::cin >> entrada;
+    if (std::cin.fail())
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return false;
+    }
+    return true;
+}
+
+bool InscripcionMateria::preguntarContinuar(const std::string& mensaje)
+{
+    int opcion = 0;
+    std::cout << mensaje << std::endl;
+    std::cout << "SI = 1      NO = 0" << std::endl;
+    if (!leerEntrada(opcion))
+    {
+        std::cout << "Opción inválida. Intente de nuevo." << std::endl;
+        return false;
+    }
+    return opcion == 1;
 }
 

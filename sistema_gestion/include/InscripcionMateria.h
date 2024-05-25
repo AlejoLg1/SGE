@@ -40,19 +40,31 @@ class InscripcionMateria
 
         ///---- MÉTODOS ----\\\
 
-        bool cargarInscripcionMateria(const Alumno& alumno, const Materia& materia);
+        int cargarInscripcionMateria(const Alumno& alumno, const Materia& materia, int);
 
         void inscribirseMateria(int);
 
         void mostrarInscripcionMateria();
 
+        void mostrarInscripcionMateriaSinElNombreDeUsuario(int );
+
         void mostrarRegistroDeIncriccionesMateria(int);
 
+        void DarseDeBajaMateria(int);
+
+        int cargarBajaDeUnRegistroDeIncriccionesMateria(const Alumno& alumno,const Materia& materia,int ,int );
+
         void grabarEnDiscoInscripcionMateria(const Alumno& alumno, const Materia& materia);
+
+        void ModificarEnDiscoInscripcionMateria(int pos);
 
         void leerEnDiscoInscripcionMateria();
 
         bool leerEnDiscoInscripcionMateriaPorPosicion(int);
+
+        bool leerEntrada(int& entrada);
+
+        bool preguntarContinuar(const std::string& mensaje);
 
 
 
