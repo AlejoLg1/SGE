@@ -141,7 +141,7 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
     }
 
     cout << "\t - Fecha: " << endl;
-    _fecha.CargarFecha(getId(), getIdProfesor(), getIdMateria());
+    _fecha.CargarFechaEvaluacion(getId(), getIdProfesor(), getIdMateria());
 
     tm specificDate = createDate(_fecha.getDia(), _fecha.getMes(), _fecha.getAnio());
     time_t specificTime = mktime(&specificDate);
@@ -165,7 +165,7 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
 
         cout << "\t - Fecha: " << endl;
 
-        _fecha.CargarFecha(getId(), getIdProfesor(), getIdMateria());
+        _fecha.CargarFechaEvaluacion(getId(), getIdProfesor(), getIdMateria());
         specificDate = createDate(_fecha.getDia(), _fecha.getMes(), _fecha.getAnio());
         specificTime = mktime(&specificDate);
     }

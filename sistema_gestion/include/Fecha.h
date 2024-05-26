@@ -23,7 +23,8 @@ public:
     void setMes(int);
     void setAnio(int);
 
-    void CargarFecha(int, int, int);
+    void CargarFecha();
+    void CargarFechaEvaluacion(int, int, int);
 
     void AgregarDias(int);
 
