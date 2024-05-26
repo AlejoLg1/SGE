@@ -8,6 +8,7 @@ class Materia
     private:
         int _id;
         int _legajoProfesor;
+        int _nivel;
         char _nombreMateria[30];
 
         int generarId();
@@ -23,6 +24,8 @@ class Materia
 
         void setLegajoProfesor(int);
 
+        void setNivel(int);
+
         void setNombreMateria(char*);
 
 
@@ -31,6 +34,8 @@ class Materia
         int getId();
 
         int getLegajoProfesor();
+
+        int getNivel();
 
         char* getNombreMateria();
 
