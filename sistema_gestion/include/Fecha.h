@@ -23,9 +23,11 @@ public:
     void setMes(int);
     void setAnio(int);
 
-    void CargarFecha();
+    void CargarFecha(int, int, int);
 
     void AgregarDias(int);
+
+    void precargarCargaEvaluacion(int , int, int);
 
     std::string toString(std::string formatoFecha = "DD/MM/YYYY");
 

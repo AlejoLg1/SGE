@@ -101,60 +101,88 @@ Fecha::Fecha(int dia, int mes, int anio){
     }
 }
 
-void Fecha::CargarFecha(){
+void Fecha::CargarFecha(int idEvaluacion, int legajoProfesor, int idMateria){
     int dias[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    cout << "DIA: ";
+    cout << "\t\t - Día: ";
     cin >> _dia;
+    cout << endl;
 
     while(_dia < 1 || _dia > dias[_mes-1]){
-        system("cls");
         cin.clear();
-        cout << "EL DIA INGRESADO ES INVALIDO. VUELVA A INGRESAR EL DIA: >";
+        cout << "\t\t ---- ERROR : DÍA INVÁLIDO ----" << endl << endl;
+        Sleep(1000);
+        system("cls");
+        precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
+        cout << "\t\t - Día: ";
         cin >> _dia;
+        cout << endl;
     }
 
-    cout << "MES: ";
+    cout << "\t\t - Mes: ";
     cin >> _mes;
+    cout << endl;
 
     while(_mes < 1 || _mes > 12){
-        system("cls");
         cin.clear();
-        cout << "EL MES INGRESADO ES INVALIDO. VUELVA A INGRESAR EL MES: >";
+        cout << "\t\t ---- ERROR : MES INVÁLIDO ----" << endl << endl;
+        Sleep(1000);
+        system("cls");
+        precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
+        cout << "\t\t - Día: " << _dia << endl;
+        cout << endl;
+        cout << "\t\t - Mes: ";
         cin >> _mes;
+        cout << endl;
     }
 
-    cout << "ANIO: ";
+    cout << "\t\t - Año: ";
     cin >> _anio;
-
+    cout << endl;
 
     while(_anio < 1900 || !esBisiesto()){
         int dias[12] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-        system("cls");
         cin.clear();
-        cout << "LA FECHA INGRESADA ES INCORRECTA (* NO ES ANIO BISIESTO *) - VUELVA A INGRESAR LA FECHA: >";
-        cout << "DIA: ";
+        cout << "\t\t ---- ERROR : FECHA INCORRECTA, EL AÑO NO ES BISIESTO  ----" << endl << endl;
+        Sleep(1000);
+        system("cls");
+        precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
+
+        cout << "\t\t - Día: ";
         cin >> _dia;
+        cout << endl;
 
         while(_dia < 1 || _dia > dias[_mes-1]){
-            system("cls");
             cin.clear();
-            cout << "EL DIA INGRESADO ES INVALIDO. VUELVA A INGRESAR EL DIA: >";
+            cout << "\t\t ---- ERROR : DÍA INVÁLIDO ----" << endl << endl;
+            Sleep(1000);
+            system("cls");
+            precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
+            cout << "\t\t - Día: ";
             cin >> _dia;
+            cout << endl;
         }
 
-        cout << "MES: ";
+        cout << "\t\t - Mes: ";
         cin >> _mes;
+        cout << endl;
 
         while(_mes < 1 || _mes > 12){
-            system("cls");
             cin.clear();
-            cout << "EL MES INGRESADO ES INVALIDO. VUELVA A INGRESAR EL MES: >";
+            cout << "\t\t ---- ERROR : MES INVÁLIDO ----" << endl << endl;
+            Sleep(1000);
+            system("cls");
+            precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
+            cout << "\t\t - Día: " << _dia << endl;
+            cout << endl;
+            cout << "\t\t - Mes: ";
             cin >> _mes;
+            cout << endl;
         }
 
-        cout << "ANIO: ";
+        cout << "\t\t - Año: ";
         cin >> _anio;
+        cout << endl;
     }
 }
 
@@ -200,3 +228,18 @@ int Fecha::getAnio(){
 void Fecha::setDia(int dia){_dia = dia;}
 void Fecha::setMes(int mes){_mes = mes;}
 void Fecha::setAnio(int anio){_anio = anio;}
+
+void Fecha::precargarCargaEvaluacion(int idEvaluacion, int legajoProfesor, int idMateria) {
+    cout << "CREANDO EXÁMEN FINAL" << endl << endl;
+
+    cout << "\t - ID Final: ";
+    cout << idEvaluacion << endl << endl;
+
+    cout << "\t - Legajo Profesor: ";
+    cout << legajoProfesor << endl << endl;
+
+    cout << "\t - ID Materia: ";
+    cout << idMateria << endl << endl;
+
+    cout << "\t - Fecha: " << endl;
+}
