@@ -66,6 +66,9 @@ void asignarProfesores();
 void mostrarPlanEstudio();
 
 void menuProfesor();
+void subMenuProfesorGestionMaterias();
+void verMateriasAsignadas();
+void verExamenesFinalesProfesor();
 
 
 void menuAlumno();
