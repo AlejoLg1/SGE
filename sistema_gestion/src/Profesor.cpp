@@ -91,7 +91,7 @@ void Profesor::desactivarProfesor(int legajo){
                 long offset = ftell(pProf) - sizeof(Profesor);
                 fseek(pProf, offset, SEEK_SET);
                 fwrite(this, sizeof(Profesor), 1, pProf);
-                cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl;
+                cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl << endl;
                 system("pause");
                 break;
             }
