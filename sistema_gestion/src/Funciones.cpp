@@ -714,6 +714,7 @@ void menuAdministrador()
     int opcion;
     int legajoDirector;
     int nuevaClave;
+    int legajoAux = -1;
 
     cout << "----------------------------------------------------"<< endl;
     cout << "                 MEN� ADMINISTRADOR                 "<< endl;
@@ -721,7 +722,10 @@ void menuAdministrador()
     cout << "1. CREAR PERFIL DIRECTOR                            "<< endl;
     cout << "2. ACTIVAR PERFIL DIRECTOR                          "<< endl;
     cout << "3. DESACTIVAR PERFIL DIRECTOR                       "<< endl;
-    cout << "4. CAMBIAR CONTRASE�A                               "<< endl;
+    cout << "4. BLANQUEAR CONTRASEÑA DIRECTOR                    "<< endl;
+    cout << "5. BLANQUEAR CONTRASEÑA PROFESOR                    "<< endl;
+    cout << "6. BLANQUEAR CONTRASEÑA ALUMNO                      "<< endl;
+    cout << "7. CAMBIAR CONTRASE�A                               "<< endl;
     cout << "0. VOLVER AL MEN� PRINCIPAL                         "<< endl;
     cout << "----------------------------------------------------"<< endl;
     cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -729,7 +733,7 @@ void menuAdministrador()
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48)
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 48)
     {
         cout << "---- ERROR: OPCI�N INV�LIDA ----" << endl;
         Sleep(500);
@@ -741,7 +745,10 @@ void menuAdministrador()
         cout << "1. CREAR PERFIL DIRECTOR                            "<< endl;
         cout << "2. ACTIVAR PERFIL DIRECTOR                          "<< endl;
         cout << "3. DESACTIVAR PERFIL DIRECTOR                       "<< endl;
-        cout << "4. CAMBIAR CONTRASE�A                               "<< endl;
+        cout << "4. BLANQUEAR CONTRASEÑA DIRECTOR                    "<< endl;
+        cout << "5. BLANQUEAR CONTRASEÑA PROFESOR                    "<< endl;
+        cout << "6. BLANQUEAR CONTRASEÑA ALUMNO                      "<< endl;
+        cout << "7. CAMBIAR CONTRASE�A                               "<< endl;
         cout << "0. VOLVER AL MEN� PRINCIPAL                         "<< endl;
         cout << "----------------------------------------------------"<< endl;
         cout << "             - SELECCIONE UNA OPCION: -             "<< endl;
@@ -786,6 +793,39 @@ void menuAdministrador()
         menuAdministrador();
         break;
     case 52:
+        system("cls");
+        cout << "BLANQUEANDO CONTRASEÑA PERFIL DIRECTOR" << endl;
+        system("cls");
+
+        cout << endl << "\t - Legajo Director : ";
+        cin >> legajoAux;
+        administradorObj.cambiarClave(legajoAux, legajoAux);
+
+        menuAdministrador();
+        break;
+    case 53:
+        system("cls");
+        cout << "BLANQUEANDO CONTRASEÑA PERFIL PROFESOR" << endl;
+
+        cout << endl << "\t - Legajo Profesor : ";
+        cin >> legajoAux;
+        profesorObj.cambiarClave(legajoAux, legajoAux);
+
+        system("cls");
+        menuAdministrador();
+        break;
+    case 54:
+        system("cls");
+        cout << "BLANQUEANDO CONTRASEÑA PERFIL ALUMNO" << endl;
+
+        cout << endl << "\t - Legajo Alumno : ";
+        cin >> legajoAux;
+        alumnoObj.cambiarClave(legajoAux, legajoAux);
+
+        system("cls");
+        menuAdministrador();
+        break;
+    case 55:
         system("cls");
         cout << "CAMBIANDO CONTRASE�A" << endl;
 
