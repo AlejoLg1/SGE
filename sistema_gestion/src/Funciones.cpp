@@ -960,7 +960,7 @@ void subMenuDirectivoProfesor()
         cin >> legajoProfesor;
         validarLegajo(legajoProfesor);
 
-            profesorObj.activarProfesor(legajoProfesor);
+        profesorObj.activarProfesor(legajoProfesor);
 
         system("cls");
         subMenuDirectivoProfesor();
@@ -973,7 +973,7 @@ void subMenuDirectivoProfesor()
         cin >> legajoProfesor;
         validarLegajo(legajoProfesor);
 
-            profesorObj.desactivarProfesor(legajoProfesor);
+        profesorObj.desactivarProfesor(legajoProfesor);
 
         system("cls");
         subMenuDirectivoProfesor();
@@ -1373,7 +1373,8 @@ void menuProfesor()
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
+    {
         cout << "---- ERROR: OPCI�N INV�LIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -1393,48 +1394,50 @@ void menuProfesor()
 
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
-            ///-- >> SUB MEN� GESTI�N MATERIAS
-            subMenuProfesorGestionMaterias();
-            break;
-        case 50:
-            system("cls");
-            ///-- >> VER AVISOS
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+        ///-- >> SUB MEN� GESTI�N MATERIAS
+        subMenuProfesorGestionMaterias();
+        break;
+    case 50:
+        system("cls");
+        ///-- >> VER AVISOS
 
-            system("cls");
-            menuProfesor();
-            break;
-        case 51:
-            system("cls");
-            cout << "CAMBIANDO CONTRASE�A" << endl;
+        system("cls");
+        menuProfesor();
+        break;
+    case 51:
+        system("cls");
+        cout << "CAMBIANDO CONTRASE�A" << endl;
 
-            cout << endl << "\t - Contrase�a anterior: " << clave << endl;
-            cout << endl << "\t - Contrase�a nueva (num�rica): ";
-            cin >> nuevaClave;
+        cout << endl << "\t - Contrase�a anterior: " << clave << endl;
+        cout << endl << "\t - Contrase�a nueva (num�rica): ";
+        cin >> nuevaClave;
 
-            profesorObj.cambiarClave(legajo, nuevaClave);
+        profesorObj.cambiarClave(legajo, nuevaClave);
 
-            clave = nuevaClave;
+        clave = nuevaClave;
 
-            system("cls");
-            menuProfesor();
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MEN� PRINCIPAL..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuPrincipal();
-            break;
-        default:
-            cout << "Opci�n no v�lida." << endl;
+        system("cls");
+        menuProfesor();
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MEN� PRINCIPAL..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuPrincipal();
+        break;
+    default:
+        cout << "Opci�n no v�lida." << endl;
     }
 }
 
 
-void subMenuProfesorGestionMaterias() {
+void subMenuProfesorGestionMaterias()
+{
     int opcion;
     Evaluacion evaluacionObj;
 
@@ -1454,7 +1457,8 @@ void subMenuProfesorGestionMaterias() {
     opcion = _getch();
 
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 &&  opcion != 48){
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 &&  opcion != 48)
+    {
         cout << "---- ERROR: OPCI�N INV�LIDA ----" << endl;
         Sleep(500);
         system("cls");
@@ -1476,69 +1480,72 @@ void subMenuProfesorGestionMaterias() {
 
     }
 
-    switch(opcion) {
-        case 49:
-            system("cls");
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
 
-            cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl << endl;
-            verMateriasAsignadas();
-            system("pause");
+        cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl << endl;
+        verMateriasAsignadas();
+        system("pause");
 
-            system("cls");
-            subMenuProfesorGestionMaterias();
-            break;
-        case 50:
-            system("cls");
+        system("cls");
+        subMenuProfesorGestionMaterias();
+        break;
+    case 50:
+        system("cls");
 
-            evaluacionObj.grabarEnDisco(legajo);
-            system("pause");
+        evaluacionObj.grabarEnDisco(legajo);
+        system("pause");
 
-            system("cls");
-            subMenuProfesorGestionMaterias();
-            break;
-        case 51:
-            system("cls");
-            cout << "MOSTRANDO EXAMENES FINALES" << endl << endl;
+        system("cls");
+        subMenuProfesorGestionMaterias();
+        break;
+    case 51:
+        system("cls");
+        cout << "MOSTRANDO EXAMENES FINALES" << endl << endl;
 
-            verExamenesFinalesProfesor();
-            system("pause");
+        verExamenesFinalesProfesor();
+        system("pause");
 
-            system("cls");
-            subMenuProfesorGestionMaterias();
-            break;
-        case 52:
-            system("cls");
-            ///-- >> CARGAR NOTAS
+        system("cls");
+        subMenuProfesorGestionMaterias();
+        break;
+    case 52:
+        system("cls");
+        ///-- >> CARGAR NOTAS
 
-            system("cls");
-            subMenuProfesorGestionMaterias();
-            break;
-        case 53:
-            system("cls");
-            ///-- >> MODIFICAR NOTAS
+        system("cls");
+        subMenuProfesorGestionMaterias();
+        break;
+    case 53:
+        system("cls");
+        ///-- >> MODIFICAR NOTAS
 
-            system("cls");
-            subMenuProfesorGestionMaterias();
-            break;
-        case 48:
-            system("cls");
-            cout << "VOLVIENDO AL MEN� PROFESOR..." << endl;
-            Sleep(2000);
-            system("cls");
-            menuProfesor();
-            break;
-        default:
-            cout << "Opci�n no v�lida." << endl;
+        system("cls");
+        subMenuProfesorGestionMaterias();
+        break;
+    case 48:
+        system("cls");
+        cout << "VOLVIENDO AL MEN� PROFESOR..." << endl;
+        Sleep(2000);
+        system("cls");
+        menuProfesor();
+        break;
+    default:
+        cout << "Opci�n no v�lida." << endl;
     }
 }
 
-void verMateriasAsignadas() {
+void verMateriasAsignadas()
+{
     FILE *pMat;
     Materia materiaObj;
     int anchoID = 6;
     int anchoMateria = 16;
 
-    if(!(pMat = fopen("materias.dat", "rb"))) {
+    if(!(pMat = fopen("materias.dat", "rb")))
+    {
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return ;
     }
@@ -1549,9 +1556,11 @@ void verMateriasAsignadas() {
 
     cout << string(anchoID, '-') << "+" << string(anchoMateria, '-') << endl;
 
-    while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
-        if(materiaObj.getLegajoProfesor() == legajo){
-        cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << endl;
+    while(fread(&materiaObj, sizeof(Materia), 1, pMat))
+    {
+        if(materiaObj.getLegajoProfesor() == legajo)
+        {
+            cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << endl;
         }
         //ESTO VA A QUEDAR AS� CON EL CAMBIO DE PROPIEDAD EN LA CLASE MATERIA:
         /*if((materiaObj.getProfesor()).getLegajo() == legajo){
@@ -1564,7 +1573,8 @@ void verMateriasAsignadas() {
     fclose(pMat);
 }
 
-void verExamenesFinalesProfesor() {
+void verExamenesFinalesProfesor()
+{
     FILE *pEval;
     Evaluacion evaluacionObj;
 
@@ -1580,7 +1590,8 @@ void verExamenesFinalesProfesor() {
     int anchoMateria = 8;
     int anchoFecha = 12;
 
-    if(!(pEval = fopen("evaluaciones.dat", "rb"))) {
+    if(!(pEval = fopen("evaluaciones.dat", "rb")))
+    {
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return ;
     }
@@ -1593,14 +1604,18 @@ void verExamenesFinalesProfesor() {
 
     cout << string(anchoFecha, '-') << "+" << string(anchoID, '-') << "+" << string(anchoMateria, '-') << endl;
 
-    while(fread(&evaluacionObj, sizeof(Evaluacion), 1, pEval)) {
+    while(fread(&evaluacionObj, sizeof(Evaluacion), 1, pEval))
+    {
 
-        if(!(pMat = fopen("materias.dat", "rb"))) {
+        if(!(pMat = fopen("materias.dat", "rb")))
+        {
             cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
             return ;
         }
-        while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
-            if(materiaObj.getLegajoProfesor() == legajo && evaluacionObj.getIdMateria() == materiaObj.getId()){
+        while(fread(&materiaObj, sizeof(Materia), 1, pMat))
+        {
+            if(materiaObj.getLegajoProfesor() == legajo && evaluacionObj.getIdMateria() == materiaObj.getId())
+            {
                 break;
             }
         }
@@ -1608,8 +1623,10 @@ void verExamenesFinalesProfesor() {
         tm specificDate = evaluacionObj.createDate(evaluacionObj.getFecha().getDia(), evaluacionObj.getFecha().getMes(), evaluacionObj.getFecha().getAnio());
         time_t specificTime = mktime(&specificDate);
 
-        if(difftime(specificTime, currentTime) > 0){
-            if(evaluacionObj.getIdProfesor() == legajo ){
+        if(difftime(specificTime, currentTime) > 0)
+        {
+            if(evaluacionObj.getIdProfesor() == legajo )
+            {
                 cout << left << setw(anchoFecha) << evaluacionObj.getFecha().toString("DD/MM/YYYY") << "|" << left << setw(anchoID) << evaluacionObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << endl;
             }
         }
@@ -1743,7 +1760,7 @@ void subMenuAlumnoPlanificacionCursada()
     cout << "1. VER PLANIFICACION                                 "<< endl;
     cout << "2. ANOTARSE A MATERIAS                               "<< endl;
     cout << "3. DARSE DE BAJA A MATERIAS                          "<< endl;
-    cout << "3. ANOTARSE A INSTANCIA DE EVALUACION                "<< endl;
+    cout << "4. ANOTARSE A INSTANCIA DE EVALUACION                "<< endl;
     cout << "0. VOLVER AL MEN� ALUMNO                             "<< endl;
     cout << "-----------------------------------------------------"<< endl;
     cout << "             - SELECCIONE UNA OPCION: -              "<< endl;
@@ -1764,7 +1781,7 @@ void subMenuAlumnoPlanificacionCursada()
         cout << "1. VER PLANIFICACION                                 "<< endl;
         cout << "2. ANOTARSE A MATERIAS                               "<< endl;
         cout << "3. DARSE DE BAJA A MATERIAS                          "<< endl;
-        cout << "3. ANOTARSE A INSTANCIA DE EVALUACION                "<< endl;
+        cout << "4. ANOTARSE A INSTANCIA DE EVALUACION                "<< endl;
         cout << "0. VOLVER AL MEN� ALUMNO                             "<< endl;
         cout << "-----------------------------------------------------"<< endl;
         cout << "             - SELECCIONE UNA OPCION: -              "<< endl;
@@ -1814,50 +1831,50 @@ void subMenuAlumnoPlanificacionCursada()
 
 void opcionCambiarContrasenaAlumno(int legajo)
 {
-int opcion,claveNueva,claveNueva2=0;
-bool continuar=false;
+    int opcion,claveNueva,claveNueva2=0;
+    bool continuar=false;
 
 
-while (continuar==false)
-{
-system("cls");
-cout<<"Ingrese Nueva Clave: ";
-cin>>claveNueva;
-cout<<"Repita la Nueva Clave: ";
-cin>>claveNueva2;
+    while (continuar==false)
+    {
+        system("cls");
+        cout<<"Ingrese Nueva Clave: ";
+        cin>>claveNueva;
+        cout<<"Repita la Nueva Clave: ";
+        cin>>claveNueva2;
 
-if(claveNueva == claveNueva2)
-{
-    continuar=true;
-}
-else
-{
-    cout<<"LAS CLAVES NO SON IGUALES, VUELVA A INGRESARLAS"<<endl;
-    system("pause");
-}
+        if(claveNueva == claveNueva2)
+        {
+            continuar=true;
+        }
+        else
+        {
+            cout<<"LAS CLAVES NO SON IGUALES, VUELVA A INGRESARLAS"<<endl;
+            system("pause");
+        }
 
-}
+    }
 
 
-cout<<"---------------------------------- "<<endl;
-cout<<"SEGURO QUE QUIERE CAMBIAR DE CLAVE "<<endl;
-cout<<"---------------------------------- "<<endl;
-cout<<"SI=1     NO=0                      "<<endl;
-cout<<"---------------------------------- "<<endl;
-cout<<"OPCION: ";
-cin>>opcion;
+    cout<<"---------------------------------- "<<endl;
+    cout<<"SEGURO QUE QUIERE CAMBIAR DE CLAVE "<<endl;
+    cout<<"---------------------------------- "<<endl;
+    cout<<"SI=1     NO=0                      "<<endl;
+    cout<<"---------------------------------- "<<endl;
+    cout<<"OPCION: ";
+    cin>>opcion;
 
-if(opcion=1)
-{
-    alumnoObj.cambiarClave(legajo,claveNueva);
+    if(opcion=1)
+    {
+        alumnoObj.cambiarClave(legajo,claveNueva);
 
-}
-else
-{
-cout<<"---------------------------------- "<<endl;
-cout<<"   CAMBIO DE CLAVE CANCELADO       "<<endl;
-cout<<"---------------------------------- "<<endl;
-}
+    }
+    else
+    {
+        cout<<"---------------------------------- "<<endl;
+        cout<<"   CAMBIO DE CLAVE CANCELADO       "<<endl;
+        cout<<"---------------------------------- "<<endl;
+    }
 
 
 }
