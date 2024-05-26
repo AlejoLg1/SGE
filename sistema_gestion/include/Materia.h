@@ -10,7 +10,7 @@ class Materia
         int _legajoProfesor;
         char _nombreMateria[30];
 
-        int GenerarId();
+        int generarId();
     public:
 
          ///---- CONSTRUCTOR ----\\\

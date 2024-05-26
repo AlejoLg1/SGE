@@ -19,7 +19,7 @@ Materia::Materia() {
 ///---- SETTERS ----\\\
 
 void Materia::setId() {
-    _id = GenerarId();
+    _id = generarId();
 }
 
 void Materia::setLegajoProfesor(int legajo) {
@@ -56,15 +56,6 @@ void Materia::cargarMateria() {
     cout << getId() << endl;
 
     setLegajoProfesor(-1);
-
-    /*
-    cout << endl << "\t - Legajo Profesor: ";
-    cin >> legajoProfesor;
-
-    */
-
-
-
 
     cout << endl << "\t - Nombre de la Materia: ";
     cin >> _nombreMateria;
@@ -115,7 +106,7 @@ void Materia::leerEnDiscoMateria() {
     fclose(pMat);
 }
 
-int Materia::GenerarId() {
+int Materia::generarId() {
     FILE *pMat;
     int idsTotales = 1;
 
