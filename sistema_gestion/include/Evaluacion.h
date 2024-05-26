@@ -7,28 +7,36 @@ class Evaluacion
     private:
         int _id;
         int _idProfesor;
+        int _idMateria;
         Fecha _fecha;
         bool _estado;
+
+        int generarId();
+
+        bool validarExistenciaFinal(int);
     public:
         Evaluacion();
 
         ///SETTERS
-        void setId(int);
+        void setId();
         void setIdProfesor(int);
+        bool setIdMateria(int);
         void setFecha(Fecha);
         void setEstado(bool);
 
         ///GEETERS
         int getId();
         int getIdProfesor();
+        int getIdMateria();
         Fecha getFecha();
         bool getEstado();
 
         ///METODOS
-        void cargarEvaluacion();
+        bool cargarEvaluacion(int);
         void mostrarEvaluacion();
-        void grabarEnDisco();
+        void grabarEnDisco(int);
         void leerEnDisco();
+        tm createDate(int, int, int);
 
 };
 
