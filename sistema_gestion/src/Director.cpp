@@ -128,7 +128,7 @@ void Director::desactivarDirector(int legajo)
                 long offset = ftell(pDirectivo) - sizeof(Director);
                 fseek(pDirectivo, offset, SEEK_SET);
                 fwrite(this, sizeof(Director), 1, pDirectivo);
-                cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl;
+                cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl << endl;
                 system("pause");
                 break;
             }
