@@ -1,6 +1,6 @@
 #ifndef PERSONA_H
 #define PERSONA_H
-
+#include <locale.h>
 
 class Persona
 {

@@ -1,6 +1,6 @@
 #ifndef MATERIA_H
 #define MATERIA_H
-
+#include <locale.h>
 
 class Materia
 {

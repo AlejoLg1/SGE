@@ -51,6 +51,8 @@ int clave;
 void menuPrincipal()
 {
     setlocale(LC_ALL, "Spanish");
+
+
     rol = seleccionarRol(rol);
 
     while(true)

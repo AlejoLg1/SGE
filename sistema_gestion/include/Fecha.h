@@ -1,4 +1,5 @@
 #pragma once
+#include <locale.h>
 
 class Fecha
 {

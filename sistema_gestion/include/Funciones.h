@@ -1,9 +1,10 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
+#include <string>
+#include <locale.h>
 #include "Alumno.h"
 #include "Materia.h"
 #include "InscripcionMateria.h"
-#include <string>
 
 //void marco(int, int, int, int, int);
 

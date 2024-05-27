@@ -1,5 +1,6 @@
 #ifndef PROFESOR_H_INCLUDED
 #define PROFESOR_H_INCLUDED
+#include <locale.h>
 #include "Persona.h"
 
 class Profesor : public Persona

@@ -2,6 +2,7 @@
 #define INSCRIPCIONMATERIA_H
 #include <iostream>
 #include <vector>
+#include <locale.h>
 #include "Alumno.h"
 #include "Materia.h"
 

@@ -1,5 +1,6 @@
 #ifndef ADMINISTRADOR_H_INCLUDED
 #define ADMINISTRADOR_H_INCLUDED
+#include <locale.h>
 
 class Administrador {
     private:

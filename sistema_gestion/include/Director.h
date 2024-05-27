@@ -1,5 +1,6 @@
 #ifndef DIRECTOR_H
 #define DIRECTOR_H
+#include <locale.h>
 #include "Persona.h"
 
 
