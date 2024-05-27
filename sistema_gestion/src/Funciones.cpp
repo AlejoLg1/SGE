@@ -151,6 +151,7 @@ int seleccionarRol(int rol)
 {
     setlocale(LC_ALL, "Spanish");
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                     MENÚ ROLES                     "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -680,7 +681,7 @@ void menuAdministrador()
     int legajoDirector;
     int nuevaClave;
 
-
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                 MENÚ ADMINISTRADOR                 "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -789,6 +790,7 @@ void subMenuAdministradorClaves() {
     int opcion;
     int legajoAux = -1;
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                  MENÚ CONTRASEÑAS                  "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -887,6 +889,7 @@ void menuDirectivo()
     int legajoDirector;
     int nuevaClave;
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                   MENÚ DIRECTIVO                   "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -977,6 +980,7 @@ void subMenuDirectivoProfesor()
     int legajoProfesor;
     int nuevaClave;
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                  GESTIÓN PROFESOR                  "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1063,6 +1067,7 @@ void subMenuDirectivoAlumno()
     int legajoAlumno;
     int nuevaClave;
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                   GESTIÓN ALUMNO                   "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1149,6 +1154,7 @@ void subMenuDirectivoPlanEstudio()
     int cantMaterias;
     Materia materiaObj;
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "               GESTIÓN PLAN DE ESTUDIO              "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1426,6 +1432,7 @@ void menuProfesor()
     int opcion;
     int nuevaClave;
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                   MENÚ PROFESOR                    "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1507,6 +1514,7 @@ void subMenuProfesorGestionMaterias()
     int opcion;
     Evaluacion evaluacionObj;
 
+    CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                  GESTIÓN MATERIAS                  "<< endl;
     cout << "----------------------------------------------------"<< endl;
