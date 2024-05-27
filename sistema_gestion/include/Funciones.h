@@ -55,6 +55,7 @@ bool estaAlumnoInscritoEnMateria (int, int);
 ///--- MENÚS ROLES ---\\
 
 void menuAdministrador();
+void subMenuAdministradorClaves();
 
 void menuDirectivo();
 void subMenuDirectivoProfesor();
@@ -68,12 +69,14 @@ void mostrarPlanEstudio();
 void menuProfesor();
 void subMenuProfesorGestionMaterias();
 void verMateriasAsignadas();
+bool MateriasAsignadas();
 void verExamenesFinalesProfesor();
 
 
 void menuAlumno();
 void subMenuAlumnoPlanificacionCursada();
 void opcionCambiarContrasenaAlumno(int);
+bool inscriptoMaterias();
 
 ///---FUNCIONES EXTRAS ---\\
 
