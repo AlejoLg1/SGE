@@ -149,7 +149,7 @@ int seleccionarRol(int rol)
 {
     setlocale(LC_ALL, "Spanish");
 
-    CARGANDO();
+    //CARGANDO();
 
     cout << "----------------------------------------------------"<< endl;
     cout << "                     MENÚ ROLES                     "<< endl;
@@ -680,7 +680,7 @@ void menuAdministrador()
     int legajoDirector;
     int nuevaClave;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                 MENÚ ADMINISTRADOR                 "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -786,7 +786,7 @@ void subMenuAdministradorClaves() {
     int opcion;
     int legajoAux = -1;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                  MENÚ CONTRASEÑAS                  "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -882,7 +882,7 @@ void menuDirectivo()
     int legajoDirector;
     int nuevaClave;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                   MENÚ DIRECTIVO                   "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -970,7 +970,7 @@ void subMenuDirectivoProfesor()
     int legajoProfesor;
     int nuevaClave;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                  GESTIÓN PROFESOR                  "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1054,7 +1054,7 @@ void subMenuDirectivoAlumno()
     int legajoAlumno;
     int nuevaClave;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                   GESTIÓN ALUMNO                   "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1138,14 +1138,13 @@ void subMenuDirectivoPlanEstudio()
     int cantMaterias;
     Materia materiaObj;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "               GESTIÓN PLAN DE ESTUDIO              "<< endl;
     cout << "----------------------------------------------------"<< endl;
     cout << "1. CARGAR MATERIAS                                  "<< endl;
-    cout << "2. ASIGNAR CORRELATIVAS                             "<< endl;
-    cout << "3. ASIGNAR PROFESORES                               "<< endl;
-    cout << "4. VER PLAN DE ESTUDIO                              "<< endl;
+    cout << "2. ASIGNAR PROFESORES                               "<< endl;
+    cout << "3. VER PLAN DE ESTUDIO                              "<< endl;
     cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
     cout << "----------------------------------------------------"<< endl;
     cout << "             - SELECCIONE UNA OPCIÓN: -             "<< endl;
@@ -1154,7 +1153,7 @@ void subMenuDirectivoPlanEstudio()
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48)
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
     {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
@@ -1164,9 +1163,8 @@ void subMenuDirectivoPlanEstudio()
         cout << "               GESTIÓN PLAN DE ESTUDIO              "<< endl;
         cout << "----------------------------------------------------"<< endl;
         cout << "1. CARGAR MATERIAS                                  "<< endl;
-        cout << "2. ASIGNAR CORRELATIVAS                             "<< endl;
-        cout << "3. ASIGNAR PROFESORES                               "<< endl;
-        cout << "4. VER PLAN DE ESTUDIO                              "<< endl;
+        cout << "2. ASIGNAR PROFESORES                               "<< endl;
+        cout << "3. VER PLAN DE ESTUDIO                              "<< endl;
         cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
         cout << "----------------------------------------------------"<< endl;
         cout << "             - SELECCIONE UNA OPCIÓN: -             "<< endl;
@@ -1220,12 +1218,6 @@ void subMenuDirectivoPlanEstudio()
         break;
     case 50:
         system("cls");
-        /// --> FUNCIÓN MATERIAS CORRELATIVAS
-        system("cls");
-        subMenuDirectivoPlanEstudio();
-        break;
-    case 51:
-        system("cls");
 
         cout << "ASIGNANDO PROFESORES - PLAN DE ESTUDIO 2003" << endl;
 
@@ -1255,12 +1247,12 @@ void subMenuDirectivoPlanEstudio()
         system("cls");
         subMenuDirectivoPlanEstudio();
         break;
-    case 52:
+    case 51:
         system("cls");
 
+        cout << "PLAN DE ESTUDIO 2003" << endl << endl;
         if(contarMaterias() > 0)
         {
-            cout << "PLAN DE ESTUDIO 2003" << endl << endl;
             mostrarPlanEstudio();
             system("pause");
         }
@@ -1321,7 +1313,7 @@ void asignarProfesores()
 
     while (fread(&materiaObj, sizeof(Materia), 1, pMat))
     {
-        if (materiaObj.getProfesor().getLegajo() != -1)
+        if (materiaObj.getProfesor().getLegajo() != 0)
         {
             continue;
         }
@@ -1338,10 +1330,18 @@ void asignarProfesores()
                 return;
             }
 
+            system("cls");
+            cout << "ASIGNANDO PROFESORES - PLAN DE ESTUDIO 2003 (Nro. de Legajo 0 para salir)" << endl;
 
-            cout << endl << "\t - Materia: " << materiaObj.getNombreMateria();
+            cout << endl << "\t - Materia: " << materiaObj.getNombreMateria() << endl;
             cout << endl << "\t - Legajo Profesor: ";
             cin >> legajoProfesor;
+
+            if(legajoProfesor == 0){
+                fclose(pProfesor);
+                fclose(pMat);
+                return;
+            }
 
             while (fread(&profesorObj, sizeof(Profesor), 1, pProfesor))
             {
@@ -1355,7 +1355,8 @@ void asignarProfesores()
 
             if (!valido)
             {
-                cout << endl << "---- ERROR: NO SE ENCONTRÓ UN PROFESOR CON LEGAJO '" << legajoProfesor << "' CARGADO EN EL SISTEMA ----" << endl;
+                cout << endl << "---- ERROR: NO SE ENCONTRÓ UN PROFESOR CON LEGAJO '" << legajoProfesor << "' CARGADO EN EL SISTEMA ----" << endl << endl;
+                system("pause");
             }
         }
 
@@ -1370,6 +1371,7 @@ void asignarProfesores()
     }
 
     fclose(pMat);
+    cout << endl << "¡PLAN DE ESTUDIO CARGADO CON ÉXITO!" << endl << endl;
     system("pause");
 }
 
@@ -1398,7 +1400,7 @@ void mostrarPlanEstudio()
 
     while(fread(&materiaObj, sizeof(Materia), 1, pMat))
     {
-        cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << "|" << left << setw(anchoProfesor) << (materiaObj.getProfesor().getLegajo() == -1? "No Asignado" : to_string(materiaObj.getProfesor().getLegajo())) << endl;
+        cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << "|" << left << setw(anchoProfesor) << (materiaObj.getProfesor().getLegajo() == 0? "No Asignado" : to_string(materiaObj.getProfesor().getLegajo())) << endl;
     }
 
     cout << endl << endl;
@@ -1413,7 +1415,7 @@ void menuProfesor()
     int opcion;
     int nuevaClave;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                   MENÚ PROFESOR                    "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1492,7 +1494,7 @@ void subMenuProfesorGestionMaterias()
     int opcion;
     Evaluacion evaluacionObj;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                  GESTIÓN MATERIAS                  "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1608,10 +1610,6 @@ bool MateriasAsignadas()
         {
             return true;
         }
-        //ESTO VA A QUEDAR ASÍ CON EL CAMBIO DE PROPIEDAD EN LA CLASE MATERIA:
-        /*if((materiaObj.getProfesor()).getLegajo() == legajo){
-            cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << endl;
-        }*/
     }
 
     fclose(pMat);
@@ -1629,7 +1627,7 @@ void verMateriasAsignadas()
 
     if(!(pMat = fopen("materias.dat", "rb")))
     {
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        cout << endl << "---- NO SE ENCONTRARON REGISTROS DE MATERIAS ASIGNADAS ----" << endl << endl;
         return ;
     }
 
@@ -1645,10 +1643,6 @@ void verMateriasAsignadas()
         {
             cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << endl;
         }
-        //ESTO VA A QUEDAR ASÍ CON EL CAMBIO DE PROPIEDAD EN LA CLASE MATERIA:
-        /*if((materiaObj.getProfesor()).getLegajo() == legajo){
-            cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << endl;
-        }*/
     }
 
     cout << endl << endl;
@@ -1675,7 +1669,7 @@ void verExamenesFinalesProfesor()
 
     if(!(pEval = fopen("evaluaciones.dat", "rb")))
     {
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        cout << endl << "---- NO SE ENCONTRARON REGISTROS DE EXAMENES FINALES ----" << endl << endl;
         return ;
     }
 
@@ -1728,7 +1722,7 @@ void menuAlumno()
     int opcion;
     int nuevaClave;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
     cout << "                    MENÚ ALUMNO                     "<< endl;
     cout << "----------------------------------------------------"<< endl;
@@ -1851,7 +1845,7 @@ void subMenuAlumnoPlanificacionCursada()
 {
     int opcion;
 
-    CARGANDO();
+    //CARGANDO();
     cout << "-----------------------------------------------------"<< endl;
     cout << "               MENÚ PLANIFICAR CURSADA               "<< endl;
     cout << "-----------------------------------------------------"<< endl;
