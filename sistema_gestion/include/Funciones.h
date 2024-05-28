@@ -82,5 +82,6 @@ bool inscriptoMaterias();
 ///---FUNCIONES EXTRAS ---\\
 
 void CARGANDO();
+void SALIENDO();
 
 #endif // FUNCIONES_H_INCLUDED

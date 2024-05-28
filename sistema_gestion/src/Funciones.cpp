@@ -135,9 +135,7 @@ void menuPrincipal()
             }
             break;
         case 48: // SALIR
-            system("cls");
-            cout << endl << "SALIENDO...." << endl;
-            Sleep(2000);
+            SALIENDO();
             return;
             break;
         default:
@@ -776,9 +774,6 @@ void menuAdministrador()
         break;
     case 48:
         system("cls");
-        cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
-        Sleep(2000);
-        system("cls");
         menuPrincipal();
         break;
     default:
@@ -872,9 +867,6 @@ void subMenuAdministradorClaves() {
         break;
     case 48:
         system("cls");
-        cout << "VOLVIENDO AL MENÚ ADMINISTRADOR..." << endl;
-        Sleep(2000);
-        system("cls");
         menuAdministrador();
         break;
     default:
@@ -965,9 +957,6 @@ void menuDirectivo()
         break;
     case 48:
         system("cls");
-        cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
-        Sleep(2000);
-        system("cls");
         menuPrincipal();
         break;
     default:
@@ -1050,9 +1039,6 @@ void subMenuDirectivoProfesor()
         subMenuDirectivoProfesor();
         break;
     case 48:
-        system("cls");
-        cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
-        Sleep(2000);
         system("cls");
         menuDirectivo();
         break;
@@ -1138,9 +1124,6 @@ void subMenuDirectivoAlumno()
         subMenuDirectivoAlumno();
         break;
     case 48:
-        system("cls");
-        cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
-        Sleep(2000);
         system("cls");
         menuDirectivo();
         break;
@@ -1293,9 +1276,6 @@ void subMenuDirectivoPlanEstudio()
         subMenuDirectivoPlanEstudio();
         break;
     case 48:
-        system("cls");
-        cout << "VOLVIENDO AL MENÚ DIRECTIVO..." << endl;
-        Sleep(2000);
         system("cls");
         menuDirectivo();
         break;
@@ -1499,9 +1479,6 @@ void menuProfesor()
         break;
     case 48:
         system("cls");
-        cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
-        Sleep(2000);
-        system("cls");
         menuPrincipal();
         break;
     default:
@@ -1604,9 +1581,6 @@ void subMenuProfesorGestionMaterias()
         subMenuProfesorGestionMaterias();
         break;
     case 48:
-        system("cls");
-        cout << "VOLVIENDO AL MENÚ PROFESOR..." << endl;
-        Sleep(2000);
         system("cls");
         menuProfesor();
         break;
@@ -1835,9 +1809,6 @@ void menuAlumno()
         break;
     case 48:
         system("cls");
-        cout << "VOLVIENDO AL MENÚ PRINCIPAL..." << endl;
-        Sleep(2000);
-        system("cls");
         menuPrincipal();
         break;
     default:
@@ -1983,9 +1954,6 @@ void subMenuAlumnoPlanificacionCursada()
         break;
     case 48:
         system("cls");
-        cout << "VOLVIENDO AL MENÚ ALUMNO..." << endl;
-        Sleep(2000);
-        system("cls");
         menuAlumno();
         break;
     default:
@@ -2033,5 +2001,20 @@ void CARGANDO()
     cout<<".";
     system("cls");
 
+}
+
+void SALIENDO()
+{
+    system("cls");
+    cout<<"SALIENDO";
+    Sleep(300);
+    cout<<".";
+    Sleep(300);
+    cout<<".";
+    Sleep(300);
+    cout<<".";
+    Sleep(300);
+    cout<<".";
+    cout << endl;
 }
 
