@@ -107,7 +107,7 @@
 	"Listados.h"
 	"Director.h"
 
-1715138784 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\persona.cpp
+1716869754 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\persona.cpp
 	<iostream>
 	<cstring>
 	<limits>
@@ -281,7 +281,7 @@
 
 1715298979 source:c:\users\lucas\documents\github\lab2-proyect\sistema_gestion\src\funciones.cpp
 
-1716859583 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\funciones.cpp
+1716877896 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\funciones.cpp
 	<iostream>
 	<conio.h>
 	<windows.h>
@@ -325,15 +325,16 @@
 	<locale.h>
 	"Persona.h"
 
-1716695346 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\materia.cpp
+1716875315 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\materia.cpp
 	<iostream>
 	<cstring>
 	<limits>
 	"Materia.h"
 	"Profesor.h"
 
-1716778699 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\materia.h
+1716867171 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\materia.h
 	<locale.h>
+	"Profesor.h"
 
 1716778697 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\inscripcionmateria.h
 	<iostream>
@@ -342,7 +343,7 @@
 	"Alumno.h"
 	"Materia.h"
 
-1716694386 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\evaluacion.cpp
+1716879188 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\evaluacion.cpp
 	<iostream>
 	<cstdlib>
 	<windows.h>
@@ -350,7 +351,7 @@
 	"Materia.h"
 	"Evaluacion.h"
 
-1716778684 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\evaluacion.h
+1716873452 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\evaluacion.h
 	<locale.h>
 	"Fecha.h"
 
