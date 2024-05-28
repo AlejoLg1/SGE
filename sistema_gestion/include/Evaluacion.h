@@ -21,7 +21,7 @@ class Evaluacion
         ///SETTERS
         void setId();
         void setIdProfesor(int);
-        bool setIdMateria(int);
+        bool setIdMateria(int, int);
         void setFecha(Fecha);
         void setEstado(bool);
 

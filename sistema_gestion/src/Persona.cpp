@@ -12,7 +12,6 @@ Persona::Persona()
 {
     strncpy(_nombre, "-", 16);
     strncpy(_apellido, "-", 16);
-    //Fecha _nacimiento;
 }
 
 ///---- SETTERS ----\\\
@@ -30,12 +29,6 @@ void Persona::setApellido(char* apellido)
 
 }
 
-/*void Persona::setNacimiento (Fecha nacimiento)
-{
-    _nacimiento = nacimiento;
-}
-*/
-
 
  ///---- GETTERS ----\\\
 
@@ -48,12 +41,6 @@ char* Persona::getApellido()
 {
     return _apellido;
 }
-/*
-bool Persona::getNacimiento()
-{
-    return _nacimiento;
-}
-*/
 
 ///---- MÉTODOS ----\\\
 
@@ -64,16 +51,12 @@ void Persona::cargar()
     cout << endl << "\t - Apellido: ";
     cin >> _apellido;
 
-   // _nacimiento.Cargar(); Falta clase Fecha
-
 }
 void Persona::mostrar()
 {
 
     cout << endl << "\t - Nombre: " << _nombre << endl;
     cout << "\t - Apellido: " << _apellido;
-    // _nacimiento.Cargar(); Falta clase Fecha
-
 
 }
 void Persona::grabarEnDisco()

@@ -1178,14 +1178,20 @@ void subMenuDirectivoPlanEstudio()
     case 49:
         system("cls");
 
-        cout << "CARGANDO MATERIAS - PLAN DE ESTUDIO 2003" << endl;
+        cout << "CARGANDO MATERIAS - PLAN DE ESTUDIO 2003 (Cant. materias 0 para salir)" << endl;
 
         if(contarMaterias() < 21)
         {
             cout << endl << "\t- Cantidad de materias a cargar: ";
             cin >> cantMaterias;
 
-            while(cantMaterias > 21 || cantMaterias > (21 - contarMaterias()) || cantMaterias <= 0)
+            if(cantMaterias == 0){
+                system("cls");
+                subMenuDirectivoPlanEstudio();
+                break;
+            }
+
+            while(cantMaterias > 21 || cantMaterias > (21 - contarMaterias()) || cantMaterias < 0)
             {
                 cout << endl <<"---- ERROR: CANTIDAD DISPONIBLE: " << (21 - contarMaterias()) << " ----" << endl;
                 Sleep(1500);
@@ -1319,8 +1325,9 @@ void asignarProfesores()
         }
 
         bool valido = false;
+        bool activo = false;
 
-        while (!valido)
+        while (!valido || !activo)
         {
             if (!(pProfesor = fopen("profesores.dat", "rb")))
             {
@@ -1348,6 +1355,9 @@ void asignarProfesores()
                 if (profesorObj.getLegajo() == legajoProfesor)
                 {
                     valido = true;
+                    if(profesorObj.getEstado()){
+                        activo = true;
+                    }
                     break;
                 }
             }
@@ -1358,6 +1368,14 @@ void asignarProfesores()
                 cout << endl << "---- ERROR: NO SE ENCONTRÓ UN PROFESOR CON LEGAJO '" << legajoProfesor << "' CARGADO EN EL SISTEMA ----" << endl << endl;
                 system("pause");
             }
+
+            if(valido && !activo)
+            {
+                cout << endl << "---- ERROR: EL PROFESOR CON LEGAJO '" << legajoProfesor << "' SE ENCUENTRA INACTIVO ----" << endl << endl;
+                valido = false;
+                system("pause");
+            }
+
         }
 
         materiaObj.setProfesor(legajoProfesor);
@@ -1553,7 +1571,6 @@ void subMenuProfesorGestionMaterias()
         if(MateriasAsignadas()){
             evaluacionObj.grabarEnDisco(legajo);
         }
-        system("pause");
 
         system("cls");
         subMenuProfesorGestionMaterias();
@@ -1664,7 +1681,7 @@ void verExamenesFinalesProfesor()
 
 
     int anchoID = 9;
-    int anchoMateria = 8;
+    int anchoMateria = 15;
     int anchoFecha = 12;
 
     if(!(pEval = fopen("evaluaciones.dat", "rb")))
@@ -1702,7 +1719,8 @@ void verExamenesFinalesProfesor()
 
         if(difftime(specificTime, currentTime) > 0)
         {
-            if(evaluacionObj.getIdProfesor() == legajo )
+
+            if(evaluacionObj.getIdProfesor() == legajo)
             {
                 cout << left << setw(anchoFecha) << evaluacionObj.getFecha().toString("DD/MM/YYYY") << "|" << left << setw(anchoID) << evaluacionObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << endl;
             }

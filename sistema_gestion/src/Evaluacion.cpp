@@ -26,7 +26,7 @@ void Evaluacion::setIdProfesor(int idProfesor){
     _idProfesor = idProfesor;
 }
 
-bool Evaluacion::setIdMateria(int idMateria){
+bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor){
     FILE *pMat;
     Materia materiaObj;
     bool exito = false;
@@ -35,44 +35,40 @@ bool Evaluacion::setIdMateria(int idMateria){
         cout << endl << "\t ---- ERROR : LA MATERIA ESPECIFICADA YA CUENTA CON UN EXÁMEN FINAL GENERADO ----" << endl << endl;
         Sleep(1500);
         system("cls");
-
         return false;
     }
 
     if(idMateria <= 0 || idMateria > 21){
-        cout << endl << "\t ---- ERROR : ID DE MATERIA INEXISTENTE "  << endl << endl;
+        cout << endl << "\t ---- ERROR : ID DE MATERIA INEXISTENTE ----"  << endl << endl;
         Sleep(1500);
         system("cls");
-
         return false;
     }
-
 
     if(!(pMat = fopen("materias.dat", "rb"))) {
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return false;
     }
-    while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
 
+
+    while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
         if(materiaObj.getId() == idMateria){
-            if(materiaObj.getProfesor().getLegajo() == getIdProfesor()){ //Esto va a cambiar por (materiaObj.getProfesor()).getLegajo()
+            if(materiaObj.getProfesor().getLegajo() == legajoProfesor){
                 exito = true;
                 _idMateria = idMateria;
                 break;
             }
         }
     }
-    if(!exito) {
-        cout << endl << "\t ---- ERROR : LA MATERIA CON ID " << idMateria << " NO CORRESPONDE AL PROFESOR CON LEGAJO " << materiaObj.getProfesor().getLegajo() << endl << endl;
-        Sleep(1500);
-        system("cls");
-
-        return false;
-    }
-
-    cout << endl;
 
     fclose(pMat);
+
+    if(!exito) {
+        cout << endl << "\t ---- ERROR : LA MATERIA CON ID " << idMateria << " NO CORRESPONDE AL PROFESOR CON LEGAJO " << legajoProfesor << " ----" << endl << endl;
+        Sleep(1500);
+        system("cls");
+        return false;
+    }
 
     return true;
 }
@@ -85,7 +81,7 @@ void Evaluacion::setEstado(bool estado){
     _estado = estado;
 }
 
-///GEETERS
+///GETTERS
 
 int Evaluacion::getId(){
     return _id;
@@ -113,11 +109,10 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
     tm* now = localtime(&t);
     time_t currentTime = mktime(now);
 
-    cout << "CREANDO EXÁMEN FINAL" << endl << endl;
+    cout << "CREANDO EXÁMEN FINAL (ID Materia 0 para salir)" << endl << endl;
 
     setId();
-    cout << "\t - ID Final: ";
-    cout << getId() << endl << endl;
+    cout << "\t - ID Final: " << getId() << endl << endl;
 
     cout << "\t - Legajo Profesor: ";
     setIdProfesor(legajoProfesor);
@@ -126,21 +121,33 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
     cout << "\t - ID Materia: ";
     cin >> idMateria;
 
-    while(!setIdMateria(idMateria)){
-        cout << "CREANDO EXÁMEN FINAL" << endl << endl;
+    if(idMateria == 0){
+        return false;
+    }
+
+    while(!setIdMateria(idMateria, legajoProfesor)){
+        cout << "CREANDO EXÁMEN FINAL (ID Materia 0 para salir)" << endl << endl;
 
         setId();
-        cout << "\t - ID Final: ";
-        cout << getId() << endl << endl;
+        cout << "\t - ID Final: " << getId() << endl << endl;
 
         cout << "\t - Legajo Profesor: ";
+        setIdProfesor(legajoProfesor);
         cout << getIdProfesor() << endl << endl;
 
         cout << "\t - ID Materia: ";
         cin >> idMateria;
+
+        if(idMateria == 0){
+            return false;
+        }
     }
 
-    cout << "\t - Fecha: " << endl;
+    setIdProfesor(legajoProfesor);
+    setIdMateria(idMateria, legajoProfesor);
+    setId();
+
+    cout << endl <<"\t - Fecha: " << endl;
     _fecha.CargarFechaEvaluacion(getId(), getIdProfesor(), getIdMateria());
 
     tm specificDate = createDate(_fecha.getDia(), _fecha.getMes(), _fecha.getAnio());
@@ -154,14 +161,11 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
         cout << "CREANDO EXÁMEN FINAL" << endl << endl;
 
         setId();
-        cout << "\t - ID Final: ";
-        cout << getId() << endl << endl;
+        cout << "\t - ID Final: " << getId() << endl << endl;
 
-        cout << "\t - Legajo Profesor: ";
-        cout << getIdProfesor() << endl << endl;
+        cout << "\t - Legajo Profesor: " << getIdProfesor() << endl << endl;
 
-        cout << "\t - ID Materia: ";
-        cout << getIdMateria() << endl << endl;
+        cout << "\t - ID Materia: " << getIdMateria() << endl << endl;
 
         cout << "\t - Fecha: " << endl;
 
@@ -171,23 +175,17 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
     }
 
     cout << endl << "¡EXAMEN FINAL CREADO CON ÉXITO!" << endl << endl;
-    return true;
-
+    system("pause");
     setEstado(true);
+
+    return true;
 }
 
 void Evaluacion::mostrarEvaluacion(){
-    cout << "\t - ID Final: ";
-    cout << getId() << endl << endl;
-
-    cout << "\t - Legajo Profesor: ";
-    cout << getIdProfesor() << endl << endl;
-    cout << "\t - ID Materia: ";
-    cout << getIdMateria() << endl << endl;
-    cout << "\t - Fecha: ";
-    cout << getFecha().toString("DD/MM/YYYY") << endl << endl;
-
-    cout << endl;
+    cout << "\t - ID Final: " << getId() << endl << endl;
+    cout << "\t - Legajo Profesor: " << getIdProfesor() << endl << endl;
+    cout << "\t - ID Materia: " << getIdMateria() << endl << endl;
+    cout << "\t - Fecha: " << getFecha().toString("DD/MM/YYYY") << endl << endl;
 }
 
 void Evaluacion::grabarEnDisco(int legajoProfesor) {
@@ -219,12 +217,11 @@ void Evaluacion::leerEnDisco() {
         return;
     }
 
-
-    while(fread(this,sizeof(Evaluacion),1, pEvaluacion)){
+    while(fread(this, sizeof(Evaluacion), 1, pEvaluacion)){
         this->mostrarEvaluacion();
-    };
+    }
 
-     if(generarId() == 1){
+    if(generarId() == 1){
         cout << endl <<"---- NO HAY EXAMENES FINALES CARGADOS ----" << endl << endl;
     }
 
@@ -244,7 +241,6 @@ int Evaluacion::generarId() {
     idsTotales += ftell(pEval) / sizeof(Evaluacion);
     fseek(pEval, 0, SEEK_SET);
     fclose(pEval);
-
 
     return idsTotales;
 }

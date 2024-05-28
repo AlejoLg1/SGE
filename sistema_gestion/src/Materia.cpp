@@ -60,6 +60,7 @@ char* Materia::getNombreMateria() {
 void Materia::cargarMateria() {
     int legajoProfesor;
     int nivel;
+    char nombreMateria[30];
 
     setId();
     cout << endl << "\t - ID Materia: ";
@@ -68,7 +69,8 @@ void Materia::cargarMateria() {
     setProfesor(-1);
 
     cout << endl << "\t - Nombre de la Materia: ";
-    cin >> _nombreMateria;
+    cin >> nombreMateria;
+    setNombreMateria(nombreMateria);
 
     cout << endl << "\t - Nivel (1 a 4): ";
     cin >> nivel;
