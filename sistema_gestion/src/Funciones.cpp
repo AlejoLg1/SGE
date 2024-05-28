@@ -1340,7 +1340,7 @@ void asignarProfesores()
 
     while (fread(&materiaObj, sizeof(Materia), 1, pMat))
     {
-        if (materiaObj.getLegajoProfesor() != -1)
+        if (materiaObj.getProfesor().getLegajo() != -1)
         {
             continue;
         }
@@ -1378,7 +1378,7 @@ void asignarProfesores()
             }
         }
 
-        materiaObj.setLegajoProfesor(legajoProfesor);
+        materiaObj.setProfesor(legajoProfesor);
         long offset = ftell(pMat) - sizeof(Materia);
         fseek(pMat, offset, SEEK_SET);
         fwrite(&materiaObj, sizeof(Materia), 1, pMat);
@@ -1417,7 +1417,7 @@ void mostrarPlanEstudio()
 
     while(fread(&materiaObj, sizeof(Materia), 1, pMat))
     {
-        cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << "|" << left << setw(anchoProfesor) << (materiaObj.getLegajoProfesor() == -1? "No Asignado" : to_string(materiaObj.getLegajoProfesor())) << endl;
+        cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << "|" << left << setw(anchoProfesor) << (materiaObj.getProfesor().getLegajo() == -1? "No Asignado" : to_string(materiaObj.getProfesor().getLegajo())) << endl;
     }
 
     cout << endl << endl;
@@ -1629,7 +1629,7 @@ bool MateriasAsignadas()
 
     while(fread(&materiaObj, sizeof(Materia), 1, pMat))
     {
-        if(materiaObj.getLegajoProfesor() == legajo)
+        if(materiaObj.getProfesor().getLegajo() == legajo)
         {
             return true;
         }
@@ -1666,7 +1666,7 @@ void verMateriasAsignadas()
 
     while(fread(&materiaObj, sizeof(Materia), 1, pMat))
     {
-        if(materiaObj.getLegajoProfesor() == legajo)
+        if(materiaObj.getProfesor().getLegajo() == legajo)
         {
             cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << endl;
         }
@@ -1722,7 +1722,7 @@ void verExamenesFinalesProfesor()
         }
         while(fread(&materiaObj, sizeof(Materia), 1, pMat))
         {
-            if(materiaObj.getLegajoProfesor() == legajo && evaluacionObj.getIdMateria() == materiaObj.getId())
+            if(materiaObj.getProfesor().getLegajo() == legajo && evaluacionObj.getIdMateria() == materiaObj.getId())
             {
                 break;
             }

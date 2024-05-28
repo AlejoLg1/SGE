@@ -12,7 +12,7 @@ using namespace std;
 
 Materia::Materia() {
     _id = 0;
-    _legajoProfesor = 0;
+    _profesor = Profesor();
     _nivel = 0;
     strncpy(_nombreMateria, "-", 20);
 }
@@ -23,8 +23,8 @@ void Materia::setId() {
     _id = generarId();
 }
 
-void Materia::setLegajoProfesor(int legajo) {
-    _legajoProfesor = legajo;
+void Materia::setProfesor(int legajo) {
+    _profesor = BuscarProfesor(legajo);
 }
 
 void Materia::setNivel(int nivel) {
@@ -46,8 +46,8 @@ int Materia::getId() {
     return _id;
 }
 
-int Materia::getLegajoProfesor() {
-    return _legajoProfesor;
+Profesor Materia::getProfesor() {
+    return _profesor;
 }
 
 int Materia::getNivel() {
@@ -69,7 +69,7 @@ void Materia::cargarMateria() {
     cout << endl << "\t - ID Materia: ";
     cout << getId() << endl;
 
-    setLegajoProfesor(-1);
+    setProfesor(-1);
 
     cout << endl << "\t - Nombre de la Materia: ";
     cin >> _nombreMateria;
@@ -84,11 +84,17 @@ void Materia::mostrarMateria() {
     cout << endl <<"\t - Nombre de la Materia: " << this->getNombreMateria();
     cout << endl <<"\t - Nivel: " << this->getNivel();
     cout << endl << "\t - Legajo Profesor: ";
-    if(this->getLegajoProfesor() == -1){
+    if(this->getProfesor().getLegajo() == -1){
         cout << "No asignado" << endl;
     }
     else{
-        cout << this->getLegajoProfesor() << endl;
+        std::strcat(this->getProfesor().getNombre(), this->getProfesor().getApellido());
+
+        /*std::string nombreCompleto = "";
+        string nombre = this->getProfesor().getNombre().toString();
+        string apellido = this->getProfesor().getNombre().toString();
+        nombreCompleto = nombre + " - " apellido;*/
+        cout << endl;
     }
 
 
@@ -141,6 +147,23 @@ int Materia::generarId() {
 
 
     return idsTotales;
+}
+
+Profesor Materia::BuscarProfesor(int legajoProfesor){
+    FILE *pProf;
+    Profesor profObj;
+
+    if(!(pProf = fopen("profesores.dat", "rb"))){
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    }
+
+    fseek(pProf, 0, SEEK_SET);
+    while(fread(this, sizeof(Profesor), 1, pProf)){
+        if(profObj.getLegajo() == legajoProfesor)    return profObj;
+    }
+
+    return Profesor();
+    fclose(pProf);
 }
 
 bool Materia::leerEnDiscoMateriaPorPosicion(int pos)

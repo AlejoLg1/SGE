@@ -55,7 +55,7 @@ bool Evaluacion::setIdMateria(int idMateria){
     while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
 
         if(materiaObj.getId() == idMateria){
-            if(materiaObj.getLegajoProfesor() == getIdProfesor()){ //Esto va a cambiar por (materiaObj.getProfesor()).getLegajo()
+            if(materiaObj.getProfesor().getLegajo() == getIdProfesor()){ //Esto va a cambiar por (materiaObj.getProfesor()).getLegajo()
                 exito = true;
                 _idMateria = idMateria;
                 break;
@@ -63,7 +63,7 @@ bool Evaluacion::setIdMateria(int idMateria){
         }
     }
     if(!exito) {
-        cout << endl << "\t ---- ERROR : LA MATERIA CON ID " << idMateria << " NO CORRESPONDE AL PROFESOR CON LEGAJO " << materiaObj.getLegajoProfesor() << endl << endl;
+        cout << endl << "\t ---- ERROR : LA MATERIA CON ID " << idMateria << " NO CORRESPONDE AL PROFESOR CON LEGAJO " << materiaObj.getProfesor().getLegajo() << endl << endl;
         Sleep(1500);
         system("cls");
 

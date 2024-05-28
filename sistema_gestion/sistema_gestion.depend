@@ -362,3 +362,133 @@
 	"Alumno.h"
 	"Materia.h"
 
+1716741486 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\fecha.cpp
+	<iostream>
+	<cstdlib>
+	<string>
+	"Fecha.h"
+	"rlutil.h"
+
+1716836003 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\fecha.h
+	<locale.h>
+
+1716480380 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1716480380 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\main.cpp
+	<iostream>
+	"Administrador.h"
+	"Alumno.h"
+	"Persona.h"
+	"Director.h"
+	"Funciones.h"
+
+1716836003 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\administrador.h
+	<locale.h>
+
+1716480380 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\alumno.h
+	"Persona.h"
+
+1716836003 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\persona.h
+	<locale.h>
+
+1716836003 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\director.h
+	<locale.h>
+	"Persona.h"
+
+1716836003 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\funciones.h
+	<string>
+	<locale.h>
+	"Alumno.h"
+	"Materia.h"
+	"InscripcionMateria.h"
+
+1716858769 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\materia.h
+	<locale.h>
+	"Profesor.h"
+
+1716836003 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\profesor.h
+	<locale.h>
+	"Persona.h"
+
+1716836003 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\inscripcionmateria.h
+	<iostream>
+	<vector>
+	<locale.h>
+	"Alumno.h"
+	"Materia.h"
+
+1716480380 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\administrador.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Funciones.h"
+	"Director.h"
+	"Administrador.h"
+
+1716480380 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\alumno.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Funciones.h"
+	"Alumno.h"
+	"Persona.h"
+
+1716741486 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\director.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	<windows.h>
+	"Funciones.h"
+	"Director.h"
+
+1716741486 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\inscripcionmateria.cpp
+	"InscripcionMateria.h"
+	<cstdlib>
+	<limits>
+	"Funciones.h"
+	"Alumno.h"
+	"Materia.h"
+
+1716858747 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\materia.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Materia.h"
+	"Profesor.h"
+
+1716480380 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\persona.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	"Persona.h"
+
+1716741486 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\profesor.cpp
+	<iostream>
+	<cstdlib>
+	"Funciones.h"
+	"Profesor.h"
+
+1716858869 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\evaluacion.cpp
+	<iostream>
+	<cstdlib>
+	<windows.h>
+	<ctime>
+	"Materia.h"
+	"Evaluacion.h"
+
+1716836003 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\evaluacion.h
+	<locale.h>
+	"Fecha.h"
+

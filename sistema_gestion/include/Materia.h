@@ -1,17 +1,19 @@
 #ifndef MATERIA_H
 #define MATERIA_H
 #include <locale.h>
+#include "Profesor.h"
 
 class Materia
 {
 
     private:
         int _id;
-        int _legajoProfesor;
+        Profesor _profesor;
         int _nivel;
         char _nombreMateria[30];
 
         int generarId();
+        Profesor BuscarProfesor(int);
     public:
 
          ///---- CONSTRUCTOR ----\\\
@@ -22,7 +24,7 @@ class Materia
 
         void setId();
 
-        void setLegajoProfesor(int);
+        void setProfesor(int);
 
         void setNivel(int);
 
@@ -33,7 +35,7 @@ class Materia
 
         int getId();
 
-        int getLegajoProfesor();
+        Profesor getProfesor();
 
         int getNivel();
 
