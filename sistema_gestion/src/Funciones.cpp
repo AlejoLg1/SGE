@@ -1401,7 +1401,6 @@ void mostrarPlanEstudio()
     int anchoMateria = 21;
     int anchoProfesor = 16;
 
-
     if(!(pMat = fopen("materias.dat", "rb")))
     {
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
@@ -1412,13 +1411,25 @@ void mostrarPlanEstudio()
     cout << "|";
     cout << left << setw(anchoMateria) << "Materia";
     cout << "|";
-    cout << left << setw(anchoProfesor) << "Legajo Profesor" << endl;
+    cout << left << setw(anchoProfesor) << "Profesor" << endl;
 
     cout << string(anchoID, '-') << "+" << string(anchoMateria, '-') << "+" << string(anchoProfesor, '-') << endl;
 
     while(fread(&materiaObj, sizeof(Materia), 1, pMat))
     {
-        cout << left << setw(anchoID) << materiaObj.getId() << "|" << left << setw(anchoMateria) << materiaObj.getNombreMateria() << "|" << left << setw(anchoProfesor) << (materiaObj.getProfesor().getLegajo() == 0? "No Asignado" : to_string(materiaObj.getProfesor().getLegajo())) << endl;
+        cout << left << setw(anchoID) << materiaObj.getId() << "|"
+             << left << setw(anchoMateria) << materiaObj.getNombreMateria() << "|";
+
+        if (materiaObj.getProfesor().getLegajo() == 0)
+        {
+            cout << left << setw(anchoProfesor) << "No Asignado";
+        }
+        else
+        {
+            string nombreCompleto = string(materiaObj.getProfesor().getNombre()) + " " + string(materiaObj.getProfesor().getApellido());
+            cout << left << setw(anchoProfesor) << nombreCompleto;
+        }
+        cout << endl;
     }
 
     cout << endl << endl;
