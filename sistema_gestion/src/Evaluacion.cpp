@@ -7,8 +7,7 @@
 
 using namespace std;
 
-Evaluacion::Evaluacion()
-{
+Evaluacion::Evaluacion() {
     _id = 0;
     _idProfesor = 0;
     _idMateria = 0;
@@ -16,17 +15,19 @@ Evaluacion::Evaluacion()
     _estado = false;
 }
 
-///SETTERS
+/// SETTERS
 
-void Evaluacion::setId(){
+void Evaluacion::setId() {
     _id = generarId();
+    cout << "ID asignado: " << _id << endl;  // Depuración
 }
 
-void Evaluacion::setIdProfesor(int idProfesor){
+void Evaluacion::setIdProfesor(int idProfesor) {
     _idProfesor = idProfesor;
+    cout << "Legajo Profesor asignado: " << _idProfesor << endl;  // Depuración
 }
 
-bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor){
+bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor) {
     FILE *pMat;
     Materia materiaObj;
     bool exito = false;
@@ -50,12 +51,12 @@ bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor){
         return false;
     }
 
-
     while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
         if(materiaObj.getId() == idMateria){
             if(materiaObj.getProfesor().getLegajo() == legajoProfesor){
                 exito = true;
                 _idMateria = idMateria;
+                cout << "ID Materia asignado: " << _idMateria << endl;  // Depuración
                 break;
             }
         }
@@ -73,37 +74,38 @@ bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor){
     return true;
 }
 
-void Evaluacion::setFecha(Fecha fecha){
+void Evaluacion::setFecha(Fecha fecha) {
     _fecha = fecha;
+    cout << "Fecha asignada: " << _fecha.toString("DD/MM/YYYY") << endl;  // Depuración
 }
 
-void Evaluacion::setEstado(bool estado){
+void Evaluacion::setEstado(bool estado) {
     _estado = estado;
 }
 
-///GETTERS
+/// GETTERS
 
-int Evaluacion::getId(){
+int Evaluacion::getId() {
     return _id;
 }
 
-int Evaluacion::getIdProfesor(){
+int Evaluacion::getIdProfesor() {
     return _idProfesor;
 }
 
-int Evaluacion::getIdMateria(){
+int Evaluacion::getIdMateria() {
     return _idMateria;
 }
 
-Fecha Evaluacion::getFecha(){
+Fecha Evaluacion::getFecha() {
     return _fecha;
 }
 
-bool Evaluacion::getEstado(){
+bool Evaluacion::getEstado() {
     return _estado;
 }
 
-bool Evaluacion::cargarEvaluacion(int legajoProfesor){
+bool Evaluacion::cargarEvaluacion(int legajoProfesor) {
     int idMateria;
     time_t t = time(nullptr);
     tm* now = localtime(&t);
@@ -112,11 +114,9 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
     cout << "CREANDO EXÁMEN FINAL (ID Materia 0 para salir)" << endl << endl;
 
     setId();
-    cout << "\t - ID Final: " << getId() << endl << endl;
-
-    cout << "\t - Legajo Profesor: ";
     setIdProfesor(legajoProfesor);
-    cout << getIdProfesor() << endl << endl;
+    cout << "\t - ID Final: " << getId() << endl << endl;
+    cout << "\t - Legajo Profesor: " << getIdProfesor() << endl << endl;
 
     cout << "\t - ID Materia: ";
     cin >> idMateria;
@@ -129,11 +129,9 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
         cout << "CREANDO EXÁMEN FINAL (ID Materia 0 para salir)" << endl << endl;
 
         setId();
-        cout << "\t - ID Final: " << getId() << endl << endl;
-
-        cout << "\t - Legajo Profesor: ";
         setIdProfesor(legajoProfesor);
-        cout << getIdProfesor() << endl << endl;
+        cout << "\t - ID Final: " << getId() << endl << endl;
+        cout << "\t - Legajo Profesor: " << getIdProfesor() << endl << endl;
 
         cout << "\t - ID Materia: ";
         cin >> idMateria;
@@ -143,17 +141,15 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
         }
     }
 
-    setIdProfesor(legajoProfesor);
-    setIdMateria(idMateria, legajoProfesor);
     setId();
+    setIdProfesor(legajoProfesor);
 
-    cout << endl <<"\t - Fecha: " << endl;
+    cout << endl << "\t - Fecha: " << endl;
     _fecha.CargarFechaEvaluacion(getId(), getIdProfesor(), getIdMateria());
 
     tm specificDate = createDate(_fecha.getDia(), _fecha.getMes(), _fecha.getAnio());
     time_t specificTime = mktime(&specificDate);
-
-    while(difftime(specificTime, currentTime) < 0 || difftime(specificTime, currentTime) == 0){
+    while(difftime(specificTime, currentTime) <= 0){
         cout << "\t ---- ERROR : LA FECHA ESPECIFICADA ES ANTERIOR O IGUAL A LA FECHA ACTUAL ----" << endl << endl;
         Sleep(1000);
         system("cls");
@@ -161,27 +157,25 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor){
         cout << "CREANDO EXÁMEN FINAL" << endl << endl;
 
         setId();
+        setIdProfesor(legajoProfesor);
         cout << "\t - ID Final: " << getId() << endl << endl;
-
         cout << "\t - Legajo Profesor: " << getIdProfesor() << endl << endl;
-
         cout << "\t - ID Materia: " << getIdMateria() << endl << endl;
-
         cout << "\t - Fecha: " << endl;
-
         _fecha.CargarFechaEvaluacion(getId(), getIdProfesor(), getIdMateria());
         specificDate = createDate(_fecha.getDia(), _fecha.getMes(), _fecha.getAnio());
         specificTime = mktime(&specificDate);
     }
 
+    setFecha(_fecha);
+    setEstado(true);
     cout << endl << "¡EXAMEN FINAL CREADO CON ÉXITO!" << endl << endl;
     system("pause");
-    setEstado(true);
 
     return true;
 }
 
-void Evaluacion::mostrarEvaluacion(){
+void Evaluacion::mostrarEvaluacion() {
     cout << "\t - ID Final: " << getId() << endl << endl;
     cout << "\t - Legajo Profesor: " << getIdProfesor() << endl << endl;
     cout << "\t - ID Materia: " << getIdMateria() << endl << endl;
@@ -239,9 +233,9 @@ int Evaluacion::generarId() {
 
     fseek(pEval, 0, SEEK_END);
     idsTotales += ftell(pEval) / sizeof(Evaluacion);
-    fseek(pEval, 0, SEEK_SET);
     fclose(pEval);
 
+    cout << "Nuevo ID generado: " << idsTotales << endl;  // Depuración
     return idsTotales;
 }
 
