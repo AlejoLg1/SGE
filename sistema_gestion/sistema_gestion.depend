@@ -121,7 +121,7 @@
 	"Director.h"
 	"Administrador.h"
 
-1716692093 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\alumno.cpp
+1717024612 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\alumno.cpp
 	<iostream>
 	<cstring>
 	<limits>
@@ -181,7 +181,7 @@
 
 1714422848 source:c:\users\lucas\documents\github\lab2-proyect\sistema_gestion\src\factura.cpp
 
-1716859597 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\funciones.h
+1717030740 c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\include\funciones.h
 	<string>
 	<locale.h>
 	"Alumno.h"
@@ -281,7 +281,7 @@
 
 1715298979 source:c:\users\lucas\documents\github\lab2-proyect\sistema_gestion\src\funciones.cpp
 
-1716877896 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\funciones.cpp
+1717030789 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\funciones.cpp
 	<iostream>
 	<conio.h>
 	<windows.h>
@@ -343,7 +343,7 @@
 	"Alumno.h"
 	"Materia.h"
 
-1716879188 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\evaluacion.cpp
+1716879467 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\evaluacion.cpp
 	<iostream>
 	<cstdlib>
 	<windows.h>
@@ -355,7 +355,7 @@
 	<locale.h>
 	"Fecha.h"
 
-1716692093 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\inscripcionmateria.cpp
+1717029040 source:c:\users\alejo legname\documents\facultad\labo_dos\proyecto_integrador\lab2-proyect\sistema_gestion\src\inscripcionmateria.cpp
 	"InscripcionMateria.h"
 	<cstdlib>
 	<limits>
