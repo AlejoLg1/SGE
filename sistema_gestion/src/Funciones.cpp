@@ -936,9 +936,8 @@ void menuDirectivo()
         subMenuDirectivoPlanEstudio();
         break;
     case 52:
-        //FALTA HACER LA CLASE AVISOS
         system("cls");
-        menuDirectivo();
+        subMenuDirectivoAvisos();
         break;
     case 53:
         system("cls");
@@ -1122,6 +1121,71 @@ void subMenuDirectivoAlumno()
 
         system("cls");
         subMenuDirectivoAlumno();
+        break;
+    case 48:
+        system("cls");
+        menuDirectivo();
+        break;
+    default:
+        cout << "OPCIÓN no válida." << endl;
+    }
+}
+
+void subMenuDirectivoAvisos(){
+        int opcion;
+    int legajoAlumno;
+    int nuevaClave;
+
+    //CARGANDO();
+    cout << "----------------------------------------------------"<< endl;
+    cout << "                   GESTIÓN AVISOS                   "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "1. CREAR AVISO                                      "<< endl;
+    cout << "2. VER AVISOS                                       "<< endl;
+    cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+    cout << "             - SELECCIONE UNA OPCIÓN: -             "<< endl;
+    cout << "----------------------------------------------------"<< endl;
+
+
+    opcion = _getch();
+
+    while(opcion != 49 && opcion != 50 && opcion != 48)
+    {
+        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        Sleep(500);
+        system("cls");
+
+        cout << "----------------------------------------------------"<< endl;
+        cout << "                   GESTIÓN AVISOS                   "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "1. CREAR AVISO                                      "<< endl;
+        cout << "2. VER AVISOS                                       "<< endl;
+        cout << "0. VOLVER AL MENÚ DIRECTIVO                         "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+        cout << "             - SELECCIONE UNA OPCIÓN: -             "<< endl;
+        cout << "----------------------------------------------------"<< endl;
+
+        opcion = _getch();
+    }
+
+    switch(opcion)
+    {
+    case 49:
+        system("cls");
+
+        //avisosObj.grabarEnDisco()
+        system("cls");
+        subMenuDirectivoAvisos();
+        //subMenuDirectivoAlumno();
+        break;
+    case 50:
+        system("cls");
+
+        //avisosObj.leerEnDisco()
+        system("cls");
+        subMenuDirectivoAvisos();
+        //subMenuDirectivoAlumno();
         break;
     case 48:
         system("cls");

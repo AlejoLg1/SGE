@@ -61,6 +61,7 @@ void subMenuAdministradorClaves();
 void menuDirectivo();
 void subMenuDirectivoProfesor();
 void subMenuDirectivoAlumno();
+void subMenuDirectivoAvisos();
 
 void subMenuDirectivoPlanEstudio();
 int contarMaterias();
