@@ -61,7 +61,7 @@ void menuPrincipal()
         {
         case 49: //ADMINISTRADOR
             system("cls");
-            if(usuariosCargados())
+            if(usuariosCargados()) //Si devuelve true, existen usuarios
             {
                 system("cls");
                 login(rol, "ADMINISTRADOR");
@@ -209,7 +209,7 @@ int contarLegajos(const char* vecNombresFiles[], int vecTamObjetos[])
     int legajosTotales = 0;
     FILE* pFile = nullptr;
 
-    for(x = 0; x < CANTIDADOBJETOS; x++)
+    for(x = 0; x < CANTIDADOBJETOS; x++) // recorrer los archivos .dat de admin, director, prof y alumno
     {
         if(!(pFile = fopen(vecNombresFiles[x], "rb+")))
         {
@@ -221,7 +221,7 @@ int contarLegajos(const char* vecNombresFiles[], int vecTamObjetos[])
         }
 
         fseek(pFile, 0, SEEK_END);
-        legajosTotales += ftell(pFile) / vecTamObjetos[x];
+        legajosTotales += ftell(pFile) / vecTamObjetos[x]; // sumamos cantidad de objetos que se encuentran dentro de cada archivo
         fseek(pFile, 0, SEEK_SET);
         fclose(pFile);
     }
@@ -1828,6 +1828,9 @@ void menuAlumno()
         cin >> nuevaClave;
 
         alumnoObj.cambiarClave(legajo, nuevaClave);
+
+        clave = nuevaClave;
+
         menuAlumno();
         break;
     case 48:
@@ -1882,7 +1885,8 @@ void subMenuAlumnoPlanificacionCursada()
     cout << "2. ANOTARSE A MATERIAS                               "<< endl;
     cout << "3. DARSE DE BAJA A MATERIAS                          "<< endl;
     cout << "4. ANOTARSE A EXAMEN FINAL                           "<< endl;
-    cout << "5. VER EXAMENES FINALES INSCRIPTO                    "<< endl;
+    cout << "5. VER EXAMENES FINALES                              "<< endl;
+    cout << "6. VER EXAMENES FINALES INSCRIPTO                    "<< endl;
     cout << "0. VOLVER AL MENÚ ALUMNO                             "<< endl;
     cout << "-----------------------------------------------------"<< endl;
     cout << "             - SELECCIONE UNA OPCIÓN: -              "<< endl;
@@ -1890,7 +1894,7 @@ void subMenuAlumnoPlanificacionCursada()
 
     opcion = _getch();
 
-    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 48)
+    while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 48)
     {
         cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
@@ -1903,7 +1907,8 @@ void subMenuAlumnoPlanificacionCursada()
         cout << "2. ANOTARSE A MATERIAS                               "<< endl;
         cout << "3. DARSE DE BAJA A MATERIAS                          "<< endl;
         cout << "4. ANOTARSE A EXAMEN FINAL                           "<< endl;
-        cout << "5. VER EXAMENES FINALES INSCRIPTO                    "<< endl;
+        cout << "5. VER EXAMENES FINALES                              "<< endl;
+        cout << "6. VER EXAMENES FINALES INSCRIPTO                    "<< endl;
         cout << "0. VOLVER AL MENÚ ALUMNO                             "<< endl;
         cout << "-----------------------------------------------------"<< endl;
         cout << "             - SELECCIONE UNA OPCIÓN: -              "<< endl;
@@ -1928,6 +1933,7 @@ void subMenuAlumnoPlanificacionCursada()
             system("cls");
         }
 
+        system("cls");
         subMenuAlumnoPlanificacionCursada();
         break;
     case 50: ///ANOTARSE A MATERIAS
@@ -1944,6 +1950,7 @@ void subMenuAlumnoPlanificacionCursada()
             system("cls");
         }
 
+        system("cls");
         subMenuAlumnoPlanificacionCursada();
         break;
     case 51: ///DARSE DE BAJA A MATERIAS
@@ -1960,6 +1967,7 @@ void subMenuAlumnoPlanificacionCursada()
             system("cls");
         }
 
+        system("cls");
         subMenuAlumnoPlanificacionCursada();
         break;
     case 52: ///INSCRIBIRSE A FINALES
@@ -1967,12 +1975,21 @@ void subMenuAlumnoPlanificacionCursada()
 
         subMenuAlumnoPlanificacionCursada();
         break;
-    case 53: /// VER FINALES INSCRIPTO
+    case 53: /// VER FINALES
         system("cls");
 
         // Hay que recorrer el archivo.dat que genere la clase InscripcionEvaluacion, validar si en algun registro coincide
         // el legajo del alumno del registro, con el del alumno actual y mostrar el registro si corresponde.
 
+        system("cls");
+        subMenuAlumnoPlanificacionCursada();
+        break;
+    case 54: /// VER FINALES INSCRIPTO
+        system("cls");
+
+        // LÓGICA SIMILAR A ARRIBA PERO VALIANDO CONTRA LAS MATERIAS INSCRIPTO
+
+        system("cls");
         subMenuAlumnoPlanificacionCursada();
         break;
     case 48:

@@ -188,6 +188,7 @@ void Alumno::cambiarClave(int legajo, int clave) {
         system("pause");
     }
 
+    system("cls");
     fclose(pAlumno);
 }
 

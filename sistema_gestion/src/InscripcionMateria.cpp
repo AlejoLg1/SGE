@@ -152,12 +152,12 @@ void InscripcionMateria::inscribirseMateria(int legajo)
         if (posicionDeInscripcion == -1)
         {
             grabarEnDiscoInscripcionMateria(legAux, matAux);
-            std::cout << "Materia Cargada correctamente" << std::endl;
+            std::cout << std::endl << "Materia Cargada correctamente" << std::endl << std::endl;
         }
         else
         {
             ModificarEnDiscoInscripcionMateria(posicionDeInscripcion);
-            std::cout << "Materia Agregada correctamente" << std::endl;
+            std::cout << std::endl << "Materia Agregada correctamente" << std::endl << std::endl;
         }
         system("Pause");
         continuar = false;
