@@ -37,6 +37,7 @@
 		</Compiler>
 		<Unit filename="include/Administrador.h" />
 		<Unit filename="include/Alumno.h" />
+		<Unit filename="include/Aviso.h" />
 		<Unit filename="include/Director.h" />
 		<Unit filename="include/Evaluacion.h" />
 		<Unit filename="include/Fecha.h" />
@@ -49,6 +50,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Administrador.cpp" />
 		<Unit filename="src/Alumno.cpp" />
+		<Unit filename="src/Aviso.cpp" />
 		<Unit filename="src/Director.cpp" />
 		<Unit filename="src/Evaluacion.cpp" />
 		<Unit filename="src/Fecha.cpp" />
