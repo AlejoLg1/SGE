@@ -67,6 +67,7 @@ void subMenuDirectivoPlanEstudio();
 int contarMaterias();
 void asignarProfesores();
 void mostrarPlanEstudio();
+int contarAvisos();
 
 void menuProfesor();
 void subMenuProfesorGestionMaterias();
@@ -79,6 +80,7 @@ void menuAlumno();
 void subMenuAlumnoPlanificacionCursada();
 void opcionCambiarContrasenaAlumno(int);
 bool inscriptoMaterias();
+
 
 ///---FUNCIONES EXTRAS ---\\
 

@@ -15,10 +15,9 @@
 #include "Materia.h"
 #include "InscripcionMateria.h"
 #include "Evaluacion.h"
-//#include "rlutil.h"
+#include "Aviso.h"
 
 using namespace std;
-//using namespace rlutil;
 
 const int CANTIDADOBJETOS = 4;
 
@@ -1132,9 +1131,10 @@ void subMenuDirectivoAlumno()
 }
 
 void subMenuDirectivoAvisos(){
-        int opcion;
+    int opcion;
     int legajoAlumno;
     int nuevaClave;
+    Aviso AvisoObj;
 
     //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
@@ -1174,18 +1174,25 @@ void subMenuDirectivoAvisos(){
     case 49:
         system("cls");
 
-        //avisosObj.grabarEnDisco()
+        AvisoObj.grabarEnDisco();
+
         system("cls");
         subMenuDirectivoAvisos();
-        //subMenuDirectivoAlumno();
         break;
     case 50:
         system("cls");
 
-        //avisosObj.leerEnDisco()
+        if(contarAvisos() > 0) {
+            AvisoObj.leerEnDisco();
+        }
+        else {
+            cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << endl;
+        }
+
+        system("pause");
         system("cls");
         subMenuDirectivoAvisos();
-        //subMenuDirectivoAlumno();
         break;
     case 48:
         system("cls");
@@ -1507,6 +1514,7 @@ void menuProfesor()
 {
     int opcion;
     int nuevaClave;
+    Aviso AvisoObj;
 
     //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
@@ -1552,8 +1560,16 @@ void menuProfesor()
         break;
     case 50:
         system("cls");
-        ///-- >> VER AVISOS
 
+        if(contarAvisos() > 0) {
+            AvisoObj.leerEnDisco();
+        }
+        else {
+            cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << endl;
+        }
+
+        system("pause");
         system("cls");
         menuProfesor();
         break;
@@ -1814,6 +1830,7 @@ void menuAlumno()
 {
     int opcion;
     int nuevaClave;
+    Aviso AvisoObj;
 
     //CARGANDO();
     cout << "----------------------------------------------------"<< endl;
@@ -1872,15 +1889,24 @@ void menuAlumno()
             cout << endl << "---- ERROR: NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
             system("pause");
-            system("cls");
         }
 
+        system("cls");
         menuAlumno();
         break;
     case 51:
         system("cls");
-        ///-- >> FUNCION VER AVISOS
 
+        if(contarAvisos() > 0) {
+            AvisoObj.leerEnDisco();
+        }
+        else {
+            cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << endl;
+        }
+
+        system("pause");
+        system("cls");
         menuAlumno();
         break;
     case 52:
@@ -2125,7 +2151,7 @@ void SALIENDO()
 string cargaDescripcion(){
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    std::cout << "--- ** Escribe tu mensaje. Presiona Ctrl+G para terminar. ** ---\n";
+    std::cout << "             --- ** Escribe tu mensaje. Presiona Ctrl+G para terminar. ** ---\n" << endl << endl;
 
     char ch;
     std::string input;
@@ -2156,4 +2182,22 @@ string cargaDescripcion(){
     }
 
     return input;
+}
+
+int contarAvisos() {
+    FILE *pAvi;
+    int cantAvisos = 0;
+
+    if(!(pAvi = fopen("avisos.dat", "ab")))
+    {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return -1;
+    }
+
+    fseek(pAvi, 0, SEEK_END);
+    cantAvisos += ftell(pAvi) / sizeof(Aviso);
+    fseek(pAvi, 0, SEEK_SET);
+    fclose(pAvi);
+
+    return cantAvisos;
 }

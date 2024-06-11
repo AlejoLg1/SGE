@@ -1,7 +1,8 @@
 #include <iostream>
-#include "Aviso.h"
 #include <cstring>
 #include <string>
+#include <limits>
+#include "Aviso.h"
 #include "Funciones.h"
 
 using namespace std;
@@ -52,11 +53,14 @@ void Aviso::cargarAviso(){
     std::string asunto, descripcion;
     Fecha f;
     setFecha(f.FechaActual());
-    cout << "INGRESE EL ASUNTO: >";
+
+    cin.sync();
+    cin.clear();
+    cout << "INGRESE EL ASUNTO: > ";
     getline(cin, asunto);
     setAsunto(asunto);
-    cout << "----- ** REVISAR ANTES DE CONFIRMAR LA DESCRIPCION COMPLETA - NO SE PODRA EDITAR. ** -----" << endl;
-    cout << "INGRESE LA DESCRIPCION DEL AVISO: >";
+
+    cout << endl << endl << "----- ** REVISAR ANTES DE CONFIRMAR LA DESCRIPCION COMPLETA - NO SE PODRA EDITAR. ** -----" << endl;
     setDescripcion(cargaDescripcion());
 
 
@@ -65,17 +69,15 @@ void Aviso::cargarAviso(){
 
 void Aviso::mostrarAviso(){
     cout << "------------------------------->++<--------------------------------+" << endl;
-    cout << "ID: \t" << this->_id << endl;
-    cout << "FECHA: \t" << this->_fecha << endl;
-    cout << "ASUNTO: \t" << this->_asunto << endl;
-    cout << "DESCRIPCION: \t" << this->_descripcion << endl;
+    cout << "- Fecha: " << this->_fecha << endl;
+    cout << "- Asunto: " << this->_asunto << endl;
+    cout << "- Descripción:" << endl << endl << this->_descripcion << endl;
     cout << "------------------------------->++<--------------------------------+" << endl;
 
 }
 
 void Aviso::grabarEnDisco(){
     FILE *pAviso;
-    ;
 
     if(!(pAviso = fopen("avisos.dat", "ab"))){
 
@@ -87,19 +89,24 @@ void Aviso::grabarEnDisco(){
     fwrite(this, sizeof(Aviso), 1, pAviso);
 
     fclose(pAviso);
+
+    cout << endl << endl << endl << endl << "---- AVISO GENERADO CON ÉXITO ----" << endl << endl;
+
+    system("pause");
 }
 
 void Aviso::leerEnDisco(){
     FILE *pAviso;
 
     if(!(pAviso = fopen("avisos.dat", "rb"))){
-
         cout << "ERROR AL ABRIR EL ARCHIVO.";
     }
 
     while(fread(this, sizeof(Aviso), 1, pAviso)){
         this->mostrarAviso();
+        cout << endl;
     }
+    cout << endl;
 
     fclose(pAviso);
 }
