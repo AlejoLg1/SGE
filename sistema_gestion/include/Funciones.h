@@ -85,4 +85,6 @@ bool inscriptoMaterias();
 void CARGANDO();
 void SALIENDO();
 
+std::string cargaDescripcion();
+
 #endif // FUNCIONES_H_INCLUDED

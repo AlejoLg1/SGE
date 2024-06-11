@@ -2122,3 +2122,38 @@ void SALIENDO()
     cout << endl;
 }
 
+string cargaDescripcion(){
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    std::cout << "--- ** Escribe tu mensaje. Presiona Ctrl+G para terminar. ** ---\n";
+
+    char ch;
+    std::string input;
+
+
+    while ((ch = _getch()) != 7) {
+
+        if (ch == 8) {
+            if (!input.empty()) {
+                input.pop_back();
+                CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+                GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+                COORD cursorPosition = consoleInfo.dwCursorPosition;
+                cursorPosition.X--;
+                SetConsoleCursorPosition(hConsole, cursorPosition);
+                cout << ' ';
+                SetConsoleCursorPosition(hConsole, cursorPosition);
+            }
+        } else {
+            input.push_back(ch);
+            cout << ch;
+        }
+
+        if (ch == 13) {
+            input.push_back('\n');
+            cout << "\n";
+        }
+    }
+
+    return input;
+}
