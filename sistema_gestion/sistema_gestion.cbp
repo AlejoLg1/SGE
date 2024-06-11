@@ -46,7 +46,6 @@
 		<Unit filename="include/Materia.h" />
 		<Unit filename="include/Persona.h" />
 		<Unit filename="include/Profesor.h" />
-		<Unit filename="include/rlutil.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Administrador.cpp" />
 		<Unit filename="src/Alumno.cpp" />
