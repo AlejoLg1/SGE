@@ -21,14 +21,28 @@ void Director::setLegajo() {
     _legajo = settearNuevoLegajo();
 }
 
-void Director::setClave(int clave)
-{
+void Director::setClave(int clave) {
+
+    while(cin.fail()){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << endl << "\t---- ERROR : CONTRASEÑA INVÁLIDA ----" << endl;
+        cout <<  endl << "\t - Contraseña (numérica): ";
+        cin >> clave;
+    }
     _clave = clave;
 
 }
 
-void Director::setEstado(bool estado)
-{
+void Director::setEstado(bool estado) {
+
+    while((estado != 1 && estado != 0) || cin.fail()){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << endl << "\t---- ERROR : ESTADO INVÁLIDO ----" << endl;
+        cout <<  endl << "\t - Estado (1 para activo, 0 para inactivo): ";
+        cin >> estado;
+    }
     _estado = estado;
 
 }
@@ -54,22 +68,26 @@ bool Director::getEstado ()
 
 ///---- MÉTODOS ----\\\
 
-void Director::cargarDirector()
-{
+void Director::cargarDirector() {
+    int clave;
+    bool estado;
+
     cout << "CREANDO PERFIL DIRECTOR" << endl;
 
-    cout<< endl <<"\t - Legajo: ";
+    cout << endl <<"\t - Legajo: ";
     setLegajo();
     cout << getLegajo();
     cout << endl;
 
     Persona::cargar();
 
-    cout<< endl << "\t - Clave: ";
-    cin >> _clave;
+    cout << endl << "\t - Contraseña (numérica): ";
+    cin >> clave;
+    setClave(clave);
 
     cout << endl << "\t - Estado (1 para activo, 0 para inactivo): ";
-    cin >> _estado;
+    cin >> estado;
+    setEstado(estado);
 }
 
 void Director::activarDirector(int legajo)

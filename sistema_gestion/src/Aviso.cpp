@@ -49,15 +49,21 @@ const char* Aviso::getAsunto(){return _asunto;}
 
     /// METODOS
 
-void Aviso::cargarAviso(){
+bool Aviso::cargarAviso(){
     std::string asunto, descripcion;
     Fecha f;
-    setFecha(f.FechaActual());
+
 
     cin.sync();
     cin.clear();
-    cout << "INGRESE EL ASUNTO: > ";
+    cout << "INGRESE EL ASUNTO (Asunto X para salir): > ";
     getline(cin, asunto);
+
+    if(asunto == "X"){
+        return false;
+    }
+
+    setFecha(f.FechaActual());
     setAsunto(asunto);
 
     cout << endl << endl << "----- ** REVISAR ANTES DE CONFIRMAR LA DESCRIPCION COMPLETA - NO SE PODRA EDITAR. ** -----" << endl;
@@ -65,6 +71,8 @@ void Aviso::cargarAviso(){
 
 
     setId();
+
+    return true;
 }
 
 void Aviso::mostrarAviso(){
@@ -84,7 +92,9 @@ void Aviso::grabarEnDisco(){
         cout << "ERROR AL ABRIR EL ARCHIVO.";
     }
 
-    this->cargarAviso();
+    if(!this->cargarAviso()) {
+        return;
+    }
 
     fwrite(this, sizeof(Aviso), 1, pAviso);
 

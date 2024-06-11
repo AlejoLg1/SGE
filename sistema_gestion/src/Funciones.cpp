@@ -1723,6 +1723,7 @@ bool MateriasAsignadas()
     fclose(pMat);
     cout << endl << "---- ERROR : EL PROFESOR CON LEGAJO " << legajo << " NO POSEE MATERIAS ASIGNADAS PARA CREAR EXAMENES FINALES ----" << endl << endl;
 
+    system("pause");
     return false;
 }
 

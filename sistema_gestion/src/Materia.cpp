@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <limits>
+#include <string>
 #include "Materia.h"
 #include "Profesor.h"
 
@@ -33,8 +34,9 @@ void Materia::setNivel(int nivel) {
     _nivel = nivel;
 }
 
-void Materia::setNombreMateria(char* nombre) {
-    strncpy(_nombreMateria, nombre, 20);
+void Materia::setNombreMateria(string nombre) {
+    strncpy(_nombreMateria, nombre.c_str(), sizeof(_nombreMateria) - 1);
+    _nombreMateria[sizeof(_nombreMateria) - 1] = '\0';
 }
 
 ///---- GETTERS ----\\\
@@ -60,7 +62,7 @@ char* Materia::getNombreMateria() {
 void Materia::cargarMateria() {
     int legajoProfesor;
     int nivel;
-    char nombreMateria[30];
+    string nombreMateria;
 
     setId();
     cout << endl << "\t - ID Materia: ";
@@ -69,13 +71,20 @@ void Materia::cargarMateria() {
     setProfesor(-1);
 
     cout << endl << "\t - Nombre de la Materia: ";
-    cin >> nombreMateria;
+
+    cin.sync();
+    cin.clear();
+    getline(cin, nombreMateria);
+    cout << endl << nombreMateria;
+
     setNombreMateria(nombreMateria);
 
     cout << endl << "\t - Nivel (1 a 4): ";
     cin >> nivel;
     setNivel(nivel);
+
 }
+
 
 void Materia::mostrarMateria() {
     cout << endl << "\t - ID: " <<  this->getId();

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <limits>
 #include "Funciones.h"
 #include "Profesor.h"
 
@@ -17,9 +18,27 @@ void Profesor::setLegajo(){
     _legajo = settearNuevoLegajo();
 }
 void Profesor::setClave(int clave){
+
+    while(cin.fail()){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << endl << "\t---- ERROR : CONTRASEÑA INVÁLIDA ----" << endl;
+        cout <<  endl << "\t - Contraseña (numérica): ";
+        cin >> clave;
+    }
+
     _clave = clave;
 }
 void Profesor::setEstado(bool estado){
+
+    while((estado != 1 && estado != 0) || cin.fail()){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << endl << "\t---- ERROR : ESTADO INVÁLIDO ----" << endl;
+        cout <<  endl << "\t - Estado (1 para activo, 0 para inactivo): ";
+        cin >> estado;
+    }
+
     _estado = estado;
 }
 
@@ -150,6 +169,8 @@ void Profesor::cambiarClave(int legajo, int clave) {
 }
 
 void Profesor::cargarProfesor(){
+    int clave;
+    bool estado;
 
     cout << "CREANDO PERFIL DIRECTOR" << endl;
 
@@ -160,11 +181,13 @@ void Profesor::cargarProfesor(){
 
     Persona::cargar();
 
-    cout<< endl << "\t - Clave: ";
-    cin >> _clave;
+    cout<< endl << "\t - Contraseña (numérica): ";
+    cin >> clave;
+    setClave(clave);
 
     cout << endl << "\t - Estado (1 para activo, 0 para inactivo): ";
-    cin >> _estado;
+    cin >> estado;
+    setEstado(estado);
 
 }
 void Profesor::mostrarProfesor(){

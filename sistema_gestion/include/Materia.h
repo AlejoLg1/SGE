@@ -1,7 +1,10 @@
 #ifndef MATERIA_H
 #define MATERIA_H
 #include <locale.h>
+#include <string>
 #include "Profesor.h"
+
+using namespace std;
 
 class Materia
 {
@@ -28,8 +31,7 @@ class Materia
 
         void setNivel(int);
 
-        void setNombreMateria(char*);
-
+        void setNombreMateria(string);
 
         ///---- GETTERS ----\\\
 

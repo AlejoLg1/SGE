@@ -7,7 +7,6 @@ class Persona
     private:
         char _nombre [16];
         char _apellido [16];
-        //Fecha _nacimiento;
 
 
     public:
@@ -17,11 +16,12 @@ class Persona
 
         ///---- SETTERS ----\\\
 
+        bool esValido(const char*);
+
         void setNombre(char*);
 
         void setApellido(char*);
 
-        //void setNacimiento(Fecha);
 
 
         ///---- GETTERS ----\\\
@@ -29,9 +29,6 @@ class Persona
         char* getNombre();
 
         char* getApellido();
-
-        //bool getFecha(Fecha);
-
 
 
         ///---- MÉTODOS ----\\\

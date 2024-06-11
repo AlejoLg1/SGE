@@ -16,6 +16,8 @@ class Administrador {
 
         void setClave(int);
 
+        bool esValido(const char*);
+
         void setNombre(char*);
 
         ///---- GETTERS ----\\\

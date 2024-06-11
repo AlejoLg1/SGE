@@ -31,7 +31,7 @@ class Aviso
 
         /// METODOS
 
-        void cargarAviso();
+        bool cargarAviso();
         void mostrarAviso();
         void grabarEnDisco();
         void leerEnDisco();

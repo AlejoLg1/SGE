@@ -18,8 +18,8 @@ void Alumno::setClave(int clave) {
     while(cin.fail()){
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << endl << "\t---- ERROR : CLAVE INVÁLIDA ----" << endl;
-        cout <<  endl << "\t - Clave (numérica): ";
+        cout << endl << "\t---- ERROR : CONTRASEÑA INVÁLIDA ----" << endl;
+        cout <<  endl << "\t - Contraseña (numérica): ";
         cin >> clave;
     }
     _clave = clave;
@@ -70,7 +70,7 @@ void Alumno::cargar() {
 
     Persona::cargar();
 
-    cout << endl << "\t - Clave (numérica): ";
+    cout << endl << "\t - Contraseña (numérica): ";
     cin >> clave;
     setClave(clave);
 
