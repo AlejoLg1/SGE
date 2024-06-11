@@ -2,6 +2,8 @@
 using namespace std;
 #include <cstdlib>
 #include <string>
+#include <ctime>
+#include <cstring>
 #include "Fecha.h"
 #include "rlutil.h"
 
@@ -79,6 +81,18 @@ void Fecha::AgregarDias(int cantidadDias){
 
 Fecha::Fecha(){
     establecerFechaPorDefecto();
+}
+
+std::string Fecha::FechaActual(){
+
+    time_t tSac = time(NULL);
+    struct tm* pt1 = localtime(&tSac);
+    char fecha[11];
+
+
+    snprintf(fecha, sizeof(fecha), "%02d/%02d/%04d", pt1->tm_mday, pt1->tm_mon + 1, pt1->tm_year + 1900);
+    return std::string(fecha);
+
 }
 
 Fecha::Fecha(int dia, int mes, int anio){

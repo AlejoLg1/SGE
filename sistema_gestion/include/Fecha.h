@@ -31,6 +31,7 @@ public:
 
     void precargarCargaEvaluacion(int , int, int);
 
+    std::string FechaActual();
     std::string toString(std::string formatoFecha = "DD/MM/YYYY");
 
 
