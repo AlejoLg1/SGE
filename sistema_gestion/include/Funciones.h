@@ -4,6 +4,7 @@
 #include <locale.h>
 #include "Alumno.h"
 #include "Materia.h"
+#include "Evaluacion.h"
 #include "InscripcionMateria.h"
 
 //void marco(int, int, int, int, int);
@@ -43,15 +44,23 @@ void validarLegajo(int legajo);
 
 bool validarMateria(int ID);
 
+bool validarEvaluacion (int ID);
+
 ///--- BUSCAR --\\\
 
 Alumno buscarAlumno(int);
 
 Materia buscarMateria(int);
 
+Evaluacion buscarEvaluacion(int);
+
 int buscarInscripcionMateria(int);
 
+int buscarInscripcionEvaluacion(int);
+
 bool estaAlumnoInscritoEnMateria (int, int);
+
+bool estaAlumnoInscritoEnEvaluacion (int, int);
 
 ///--- MENÚS ROLES ---\\
 

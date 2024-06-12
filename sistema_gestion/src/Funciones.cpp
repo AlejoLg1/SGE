@@ -14,6 +14,7 @@
 #include "Alumno.h"
 #include "Materia.h"
 #include "InscripcionMateria.h"
+#include "InscripcionEvalucion.h"
 #include "Evaluacion.h"
 #include "Aviso.h"
 
@@ -38,6 +39,7 @@ Director directorObj;
 Profesor profesorObj;
 Alumno alumnoObj;
 InscripcionMateria inscripcionMateriaObj;
+InscripcionEvalucion inscripcionEvaluacionObj;
 
 
 
@@ -618,6 +620,22 @@ Materia buscarMateria(int ID)
 
 }
 
+Evaluacion buscarEvaluacion(int ID)
+{
+    Evaluacion aux;
+    int pos=0;
+
+    while (aux.leerEnDiscoEvaluacionPorPosicion(pos))
+    {
+        if (aux.getId() == ID)
+        {
+            return aux;
+        }
+        pos++;
+    }
+
+}
+
 int buscarInscripcionMateria(int Legajo)
 {
     InscripcionMateria aux;
@@ -636,12 +654,61 @@ int buscarInscripcionMateria(int Legajo)
     return -1;
 }
 
+int buscarInscripcionEvaluacion(int Legajo)
+{
+    InscripcionEvalucion aux;
+    int pos=0;
+
+    while (aux.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
+    {
+        if(aux.getAlumno().getLegajo()==Legajo)
+        {
+            return pos;
+        }
+        pos++;
+    }
+    cout<<"No Hay inscriciones aun"<<endl;
+    system("pause");
+    return -1;
+}
+
 bool estaAlumnoInscritoEnMateria (int legAlumno, int idMateria)
 {
     InscripcionMateria aux;
     int pos=0;
 
     while (aux.leerEnDiscoInscripcionMateriaPorPosicion(pos))
+    {
+
+        if (aux.getAlumno().getLegajo() == legAlumno)
+        {
+            Materia* materias = aux.getMaterias();  // Obtener el puntero al arreglo de materias
+            for (int i = 0; i < 7; i++)
+            {
+
+
+                if (materias[i].getId() == idMateria)
+                {
+                    return true;
+
+                }
+
+            }
+        }
+        pos++;
+    }
+
+
+    return false;
+
+}
+
+bool estaAlumnoInscritoEnEvaluacion (int legAlumno, int idMateria)
+{
+    InscripcionEvalucion aux;
+    int pos=0;
+
+    while (aux.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
     {
 
         if (aux.getAlumno().getLegajo() == legAlumno)
@@ -1964,6 +2031,24 @@ bool validarMateria(int ID)
 
 }
 
+bool validarEvaluacion (int ID)
+{
+    Evaluacion aux;
+    int posicion = 0;
+
+    while (aux.leerEnDiscoEvaluacionPorPosicion(posicion))
+    {
+        if (aux.getId() == ID)
+        {
+            return true;
+        }
+        posicion++;
+    }
+
+    return false;
+
+}
+
 void subMenuAlumnoPlanificacionCursada()
 {
     int opcion;
@@ -2063,6 +2148,7 @@ void subMenuAlumnoPlanificacionCursada()
         break;
     case 52: ///INSCRIBIRSE A FINALES
         system("cls");
+        inscripcionEvaluacionObj.inscribirseEvaluacion(legajo);
 
         subMenuAlumnoPlanificacionCursada();
         break;
@@ -2077,6 +2163,8 @@ void subMenuAlumnoPlanificacionCursada()
         break;
     case 54: /// VER FINALES INSCRIPTO
         system("cls");
+
+        inscripcionEvaluacionObj.mostrarRegistroDeIncriccionesEvaluacion(legajo);
 
         // LÓGICA SIMILAR A ARRIBA PERO VALIANDO CONTRA LAS MATERIAS INSCRIPTO
 

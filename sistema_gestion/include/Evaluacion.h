@@ -37,6 +37,7 @@ class Evaluacion
         void mostrarEvaluacion();
         void grabarEnDisco(int);
         void leerEnDisco();
+        bool leerEnDiscoEvaluacionPorPosicion(int);
         tm createDate(int, int, int);
 
 };

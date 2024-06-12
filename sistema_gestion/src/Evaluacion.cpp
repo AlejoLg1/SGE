@@ -222,6 +222,25 @@ void Evaluacion::leerEnDisco() {
     fclose(pEvaluacion);
 }
 
+bool Evaluacion::leerEnDiscoEvaluacionPorPosicion(int pos) {
+
+ FILE *p;
+    bool leyo;
+
+    p = fopen("evaluaciones.dat", "rb");
+    if (p == nullptr)
+    {
+        return false;
+    }
+
+    fseek(p, sizeof(Evaluacion) * pos, 0);
+    leyo = fread(this, sizeof(Evaluacion), 1, p);
+    fclose(p);
+    return leyo;
+
+
+}
+
 int Evaluacion::generarId() {
     FILE *pEval;
     int idsTotales = 1;
