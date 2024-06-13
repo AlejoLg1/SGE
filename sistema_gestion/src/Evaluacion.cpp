@@ -175,12 +175,12 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor) {
 void Evaluacion::mostrarEvaluacion() {
 Materia materia = buscarMateria(getIdMateria());
 
-    cout << "--------------------------------------"<<endl;
+    cout << "-------------------------------------"<<endl;
     cout << "\t - ID Final: " << getId() <<endl;
     cout << "\t - Profesor: " << materia.getProfesor().getNombre()<<" "<<materia.getProfesor().getApellido()<< endl;
     cout << "\t - Materia: " << materia.getNombreMateria() << endl;
     cout << "\t - Fecha: " << getFecha().toString("DD/MM/YYYY") << endl;
-    cout << "--------------------------------------"<<endl;
+    cout << "-------------------------------------"<<endl;
 
 
 }

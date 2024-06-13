@@ -1889,11 +1889,13 @@ Evaluacion evaluaciones;
 
 void BuscarEvaluacionesInscritoAlumno(const InscripcionEvaluacion& evaluacionInscripto)
 {
-  int pos=0;
-Evaluacion evaluaciones;
+    bool hayInscripciones = false;
+    int pos=0;
+    Evaluacion evaluaciones;
 
-                cout << "--------------------------------------"<<endl;
-                cout << "-     EVALUACIONES INSCRIPTO          "<<endl;
+
+    cout << "-------------------------------------"<<endl;
+    cout << "    INCRIPCIONES EXAMENES FINALES    "<<endl;
     while (evaluaciones.leerEnDiscoEvaluacionPorPosicion(pos))
     {
         for( int i=0; i<7; i++)
@@ -1902,17 +1904,22 @@ Evaluacion evaluaciones;
 
             if(evaluaciones.getIdMateria() == evaluacionInscripto.getMaterias2(i))
             {
+                hayInscripciones = true;
                 evaluaciones.mostrarEvaluacion();
-
-
-
             }
         }
-
 
         pos++;
     }
 
+
+    if(!hayInscripciones){
+        system("cls");
+        cout << endl << "---- NO SE ENCONTRARON INSCRIPCIONES A EXÁMENES FINALES ----" << endl << endl;
+        return;
+    }
+
+    cout << endl << endl;
 }
 
 
