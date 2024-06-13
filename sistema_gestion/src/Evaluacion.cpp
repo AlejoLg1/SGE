@@ -20,12 +20,10 @@ Evaluacion::Evaluacion() {
 
 void Evaluacion::setId() {
     _id = generarId();
-    cout << "ID asignado: " << _id << endl;  // Depuración
 }
 
 void Evaluacion::setIdProfesor(int idProfesor) {
     _idProfesor = idProfesor;
-    cout << "Legajo Profesor asignado: " << _idProfesor << endl;  // Depuración
 }
 
 bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor) {
@@ -57,7 +55,6 @@ bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor) {
             if(materiaObj.getProfesor().getLegajo() == legajoProfesor){
                 exito = true;
                 _idMateria = idMateria;
-                cout << "ID Materia asignado: " << _idMateria << endl;  // Depuración
                 break;
             }
         }
@@ -77,7 +74,6 @@ bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor) {
 
 void Evaluacion::setFecha(Fecha fecha) {
     _fecha = fecha;
-    cout << "Fecha asignada: " << _fecha.toString("DD/MM/YYYY") << endl;  // Depuración
 }
 
 void Evaluacion::setEstado(bool estado) {
@@ -261,7 +257,6 @@ int Evaluacion::generarId() {
     idsTotales += ftell(pEval) / sizeof(Evaluacion);
     fclose(pEval);
 
-    cout << "Nuevo ID generado: " << idsTotales << endl;  // Depuración
     return idsTotales;
 }
 
