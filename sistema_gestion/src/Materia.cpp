@@ -27,7 +27,7 @@ void Materia::setProfesor(int legajo) {
 }
 
 void Materia::setNivel(int nivel) {
-    while(nivel < 0 || nivel > 4){
+    while(nivel < 0 || nivel > 4) {
         cout << endl << "---- ERROR : NIVEL INVÁLIDO ----" << endl;
         cin >> nivel;
     }
@@ -91,7 +91,7 @@ void Materia::mostrarMateria() {
     cout << endl << "\t - Nombre de la Materia: " << this->getNombreMateria();
     cout << endl << "\t - Nivel: " << this->getNivel();
     cout << endl << "\t - Legajo Profesor: ";
-    if(this->getProfesor().getLegajo() == 0){
+    if(this->getProfesor().getLegajo() == 0) {
         cout << "No asignado" << endl;
     }
     else{
@@ -125,7 +125,7 @@ void Materia::leerEnDiscoMateria() {
     }
 
     cout << "MOSTRANDO MATERIAS:" << endl;
-    while(fread(this, sizeof(Materia), 1, pMat)){
+    while(fread(this, sizeof(Materia), 1, pMat)) {
         this->mostrarMateria();
     }
 
@@ -148,16 +148,16 @@ int Materia::generarId() {
     return idsTotales;
 }
 
-Profesor Materia::BuscarProfesor(int legajoProfesor){
+Profesor Materia::BuscarProfesor(int legajoProfesor) {
     FILE *pProf;
     Profesor profObj;
 
-    if(!(pProf = fopen("profesores.dat", "rb"))){
+    if(!(pProf = fopen("profesores.dat", "rb"))) {
         cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return Profesor();
     }
 
-    while(fread(&profObj, sizeof(Profesor), 1, pProf)){
+    while(fread(&profObj, sizeof(Profesor), 1, pProf)) {
         if(profObj.getLegajo() == legajoProfesor) {
             fclose(pProf);
             return profObj;

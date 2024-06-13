@@ -16,7 +16,7 @@ void Administrador::setId() {
 
 void Administrador::setClave(int clave) {
 
-    while(cin.fail()){
+    while(cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << endl << "\t---- ERROR : CONTRASEÑA INVÁLIDA ----" << endl;
@@ -103,9 +103,9 @@ void Administrador::cambiarClave(int legajo, int clave) {
     }
 
     while (fread(this, sizeof(Administrador), 1, pAdministrador)) {
-        if(this->getId() == legajo){
+        if(this->getId() == legajo) {
             usuarioEncontrado = true;
-            if(this->getClave() != clave){
+            if(this->getClave() != clave) {
                 this->setClave(clave);
                 long offset = ftell(pAdministrador) - sizeof(Administrador);
                 fseek(pAdministrador, offset, SEEK_SET);
@@ -114,7 +114,7 @@ void Administrador::cambiarClave(int legajo, int clave) {
                 system("pause");
                 break;
             }
-            else{
+            else {
                 cout << endl << "---- ERROR: CONTRASEÑAS IGUALES ----" << endl << endl;
                 system("pause");
             }
@@ -155,7 +155,7 @@ void Administrador::leerEnDiscoAdministrador() {
     }
 
     cout << "MOSTRANDO PERFILES ADMINISTRADOR:" << endl;
-    while(fread(this, sizeof(Administrador), 1, pAdm)){
+    while(fread(this, sizeof(Administrador), 1, pAdm)) {
         this->mostrar();
     };
 

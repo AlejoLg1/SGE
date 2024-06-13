@@ -15,7 +15,7 @@ void Alumno::setlegajo() {
 
 void Alumno::setClave(int clave) {
 
-    while(cin.fail()){
+    while(cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << endl << "\t---- ERROR : CONTRASEÑA INVÁLIDA ----" << endl;
@@ -26,7 +26,7 @@ void Alumno::setClave(int clave) {
 }
 
 void Alumno::setEstado(bool estado) {
-    while((estado != 1 && estado != 0) || cin.fail()){
+    while((estado != 1 && estado != 0) || cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << endl << "\t---- ERROR : ESTADO INVÁLIDO ----" << endl;
@@ -91,9 +91,9 @@ void Alumno::activarAlumno(int legajo) {
     }
 
     while (fread(this, sizeof(Alumno), 1, pAlumno)) {
-        if(this->getLegajo() == legajo){
+        if(this->getLegajo() == legajo) {
             usuarioEncontrado = true;
-            if(this->getEstado() == false){
+            if(this->getEstado() == false) {
                 this->setEstado(true);
                 long offset = ftell(pAlumno) - sizeof(Alumno);
                 fseek(pAlumno, offset, SEEK_SET);
@@ -102,7 +102,7 @@ void Alumno::activarAlumno(int legajo) {
                 system("pause");
                 break;
             }
-            else{
+            else {
                 cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO PREVIAMENTE ----" << endl << endl;
                 system("pause");
             }
@@ -127,9 +127,9 @@ void Alumno::desactivarAlumno(int legajo) {
         return;
     };
     while (fread(this, sizeof(Alumno), 1, pAlumno)) {
-        if(this->getLegajo() == legajo){
+        if(this->getLegajo() == legajo) {
             usuarioEncontrado = true;
-            if(this->getEstado() == true){
+            if(this->getEstado() == true) {
                 this->setEstado(false);
                 long offset = ftell(pAlumno) - sizeof(Alumno);
                 fseek(pAlumno, offset, SEEK_SET);
@@ -138,7 +138,7 @@ void Alumno::desactivarAlumno(int legajo) {
                 system("pause");
                 break;
             }
-            else{
+            else {
                 cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO PREVIAMENTE ----" << endl;
                 system("pause");
             }
@@ -165,9 +165,9 @@ void Alumno::cambiarClave(int legajo, int clave) {
     }
 
     while (fread(this, sizeof(Alumno), 1, pAlumno)) {
-        if(this->getLegajo() == legajo){
+        if(this->getLegajo() == legajo) {
             usuarioEncontrado = true;
-            if(this->getClave() != clave){
+            if(this->getClave() != clave) {
                 this->setClave(clave);
                 long offset = ftell(pAlumno) - sizeof(Alumno);
                 fseek(pAlumno, offset, SEEK_SET);
@@ -176,7 +176,7 @@ void Alumno::cambiarClave(int legajo, int clave) {
                 system("pause");
                 break;
             }
-            else{
+            else {
                 cout << endl << "---- ERROR: CONTRASEÑAS IGUALES ----" << endl << endl;
                 system("pause");
             }
@@ -239,7 +239,7 @@ bool Alumno::leerEnDiscoAlumnoPorPosicion(int pos)
     bool Leyo;
 
     p=fopen ("alumnos.dat","rb");
-    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl; return false;}
+    if (p==NULL) {cout<<"El ARCHIVO NO SE PUDO LEER"<<endl; return false;}
 
     fseek (p,sizeof(Alumno)*pos,0);
 

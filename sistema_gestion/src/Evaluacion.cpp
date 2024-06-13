@@ -31,14 +31,14 @@ bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor) {
     Materia materiaObj;
     bool exito = false;
 
-    if(validarExistenciaFinal(idMateria)){
+    if(validarExistenciaFinal(idMateria)) {
         cout << endl << "\t ---- ERROR : LA MATERIA ESPECIFICADA YA CUENTA CON UN EXÁMEN FINAL GENERADO ----" << endl << endl;
         Sleep(1500);
         system("cls");
         return false;
     }
 
-    if(idMateria <= 0 || idMateria > 21){
+    if(idMateria <= 0 || idMateria > 21) {
         cout << endl << "\t ---- ERROR : ID DE MATERIA INEXISTENTE ----"  << endl << endl;
         Sleep(1500);
         system("cls");
@@ -51,8 +51,8 @@ bool Evaluacion::setIdMateria(int idMateria, int legajoProfesor) {
     }
 
     while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
-        if(materiaObj.getId() == idMateria){
-            if(materiaObj.getProfesor().getLegajo() == legajoProfesor){
+        if(materiaObj.getId() == idMateria) {
+            if(materiaObj.getProfesor().getLegajo() == legajoProfesor) {
                 exito = true;
                 _idMateria = idMateria;
                 break;
@@ -118,11 +118,11 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor) {
     cout << "\t - ID Materia: ";
     cin >> idMateria;
 
-    if(idMateria == 0){
+    if(idMateria == 0) {
         return false;
     }
 
-    while(!setIdMateria(idMateria, legajoProfesor)){
+    while(!setIdMateria(idMateria, legajoProfesor)) {
         cout << "CREANDO EXÁMEN FINAL (ID Materia 0 para salir)" << endl << endl;
 
         setId();
@@ -133,7 +133,7 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor) {
         cout << "\t - ID Materia: ";
         cin >> idMateria;
 
-        if(idMateria == 0){
+        if(idMateria == 0) {
             return false;
         }
     }
@@ -146,7 +146,7 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor) {
 
     tm specificDate = createDate(_fecha.getDia(), _fecha.getMes(), _fecha.getAnio());
     time_t specificTime = mktime(&specificDate);
-    while(difftime(specificTime, currentTime) <= 0){
+    while(difftime(specificTime, currentTime) <= 0) {
         cout << "\t ---- ERROR : LA FECHA ESPECIFICADA ES ANTERIOR O IGUAL A LA FECHA ACTUAL ----" << endl << endl;
         Sleep(1000);
         system("cls");
@@ -205,20 +205,20 @@ void Evaluacion::leerEnDisco() {
     FILE *pEvaluacion;
 
     if(!(pEvaluacion = fopen("evaluaciones.dat", "rb"))) {
-        if(generarId() == 1){
+        if(generarId() == 1) {
             cout << endl <<"---- NO HAY EXAMENES FINALES CARGADOS ----" << endl << endl;
         }
-        else{
+        else {
             cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         }
         return;
     }
 
-    while(fread(this, sizeof(Evaluacion), 1, pEvaluacion)){
+    while(fread(this, sizeof(Evaluacion), 1, pEvaluacion)) {
         this->mostrarEvaluacion();
     }
 
-    if(generarId() == 1){
+    if(generarId() == 1) {
         cout << endl <<"---- NO HAY EXAMENES FINALES CARGADOS ----" << endl << endl;
     }
 
@@ -278,7 +278,7 @@ bool Evaluacion::validarExistenciaFinal(int idMateria) {
     }
 
     while (fread(this, sizeof(Evaluacion), 1, pEvaluacion)) {
-        if(this->getIdMateria() == idMateria){
+        if(this->getIdMateria() == idMateria) {
             fclose(pEvaluacion);
             return true;
         }

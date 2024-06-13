@@ -14,12 +14,12 @@ Profesor::Profesor()
     _estado = false;
 }
 
-void Profesor::setLegajo(){
+void Profesor::setLegajo() {
     _legajo = settearNuevoLegajo();
 }
-void Profesor::setClave(int clave){
+void Profesor::setClave(int clave) {
 
-    while(cin.fail()){
+    while(cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << endl << "\t---- ERROR : CONTRASEÑA INVÁLIDA ----" << endl;
@@ -29,9 +29,9 @@ void Profesor::setClave(int clave){
 
     _clave = clave;
 }
-void Profesor::setEstado(bool estado){
+void Profesor::setEstado(bool estado) {
 
-    while((estado != 1 && estado != 0) || cin.fail()){
+    while((estado != 1 && estado != 0) || cin.fail()) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << endl << "\t---- ERROR : ESTADO INVÁLIDO ----" << endl;
@@ -44,19 +44,19 @@ void Profesor::setEstado(bool estado){
 
 ///GETTERS
 
-int Profesor::getLegajo(){
+int Profesor::getLegajo() {
     return _legajo;
 }
-int Profesor::getClave(){
+int Profesor::getClave() {
     return _clave;
 }
-bool Profesor::getEstado(){
+bool Profesor::getEstado() {
     return _estado;
 }
 
 ///MÉTODOS
 
-void Profesor::activarProfesor(int legajo){
+void Profesor::activarProfesor(int legajo) {
     bool usuarioEncontrado = false;
     FILE *pProf;
 
@@ -67,9 +67,9 @@ void Profesor::activarProfesor(int legajo){
     }
 
     while (fread(this, sizeof(Profesor), 1, pProf)) {
-        if(this->getLegajo() == legajo){
+        if(this->getLegajo() == legajo) {
             usuarioEncontrado = true;
-            if(this->getEstado() == false){
+            if(this->getEstado() == false) {
                 this->setEstado(true);
                 long offset = ftell(pProf) - sizeof(Profesor);
                 fseek(pProf, offset, SEEK_SET);
@@ -78,7 +78,7 @@ void Profesor::activarProfesor(int legajo){
                 system("pause");
                 break;
             }
-            else{
+            else {
                 cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO PREVIAMENTE ----" << endl << endl;
                 system("pause");
             }
@@ -93,7 +93,7 @@ void Profesor::activarProfesor(int legajo){
     fclose(pProf);
 }
 
-void Profesor::desactivarProfesor(int legajo){
+void Profesor::desactivarProfesor(int legajo) {
     bool usuarioEncontrado = false;
     FILE *pProf;
 
@@ -103,9 +103,9 @@ void Profesor::desactivarProfesor(int legajo){
         return;
     };
     while (fread(this, sizeof(Profesor), 1, pProf)) {
-        if(this->getLegajo() == legajo){
+        if(this->getLegajo() == legajo) {
             usuarioEncontrado = true;
-            if(this->getEstado() == true){
+            if(this->getEstado() == true) {
                 this->setEstado(false);
                 long offset = ftell(pProf) - sizeof(Profesor);
                 fseek(pProf, offset, SEEK_SET);
@@ -114,7 +114,7 @@ void Profesor::desactivarProfesor(int legajo){
                 system("pause");
                 break;
             }
-            else{
+            else {
                 cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO PREVIAMENTE ----" << endl;
                 system("pause");
             }
@@ -142,9 +142,9 @@ void Profesor::cambiarClave(int legajo, int clave) {
     }
 
     while (fread(this, sizeof(Profesor), 1, pProf)) {
-        if(this->getLegajo() == legajo){
+        if(this->getLegajo() == legajo) {
             usuarioEncontrado = true;
-            if(this->getClave() != clave){
+            if(this->getClave() != clave) {
                 this->setClave(clave);
                 long offset = ftell(pProf) - sizeof(Profesor);
                 fseek(pProf, offset, SEEK_SET);
@@ -153,7 +153,7 @@ void Profesor::cambiarClave(int legajo, int clave) {
                 system("pause");
                 break;
             }
-            else{
+            else {
                 cout << endl << "---- ERROR: CONTRASEÑAS IGUALES ----" << endl << endl;
                 system("pause");
             }
@@ -168,7 +168,7 @@ void Profesor::cambiarClave(int legajo, int clave) {
     fclose(pProf);
 }
 
-void Profesor::cargarProfesor(){
+void Profesor::cargarProfesor() {
     int clave;
     bool estado;
 
@@ -190,7 +190,7 @@ void Profesor::cargarProfesor(){
     setEstado(estado);
 
 }
-void Profesor::mostrarProfesor(){
+void Profesor::mostrarProfesor() {
     Persona::mostrar();
     cout << endl;
     cout <<"Legajo: " << _legajo<<endl;
@@ -198,12 +198,12 @@ void Profesor::mostrarProfesor(){
     cout << endl << "Estado: " << _estado<<endl;
     cout << endl << endl;
 }
-void Profesor::grabarEnDiscoProfesor(){
+void Profesor::grabarEnDiscoProfesor() {
     FILE *p;
 
     p = fopen("profesores.dat", "ab");
 
-    if(p == nullptr){
+    if(p == nullptr) {
         cout << "ERROR DE ARCHIVO.";
     }
 
@@ -236,7 +236,7 @@ bool Profesor::leerEnDiscoProfesorPorPosicion(int pos)
     bool Leyo;
 
     p=fopen ("profesores.dat","rb");
-    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl; return false;}
+    if (p==NULL) {cout<<"El ARCHIVO NO SE PUDO LEER"<<endl; return false;}
 
     fseek (p,sizeof(Profesor)*pos,0);
 
