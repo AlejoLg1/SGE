@@ -1,5 +1,6 @@
 #pragma once
 #include <locale.h>
+#include <string>
 
 class Fecha
 {

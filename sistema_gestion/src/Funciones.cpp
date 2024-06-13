@@ -8,8 +8,10 @@
 #include <iomanip>
 #include <iostream>
 #include <limits>
+#include <cstdlib>
 #include <string>
 #include <vector>
+
 
 #include "Administrador.h"
 #include "Alumno.h"
@@ -53,6 +55,7 @@ int x;
 int legajo;
 int clave;
 
+
 void menuPrincipal() {
   setlocale(LC_ALL, "Spanish");
 
@@ -60,12 +63,14 @@ void menuPrincipal() {
 
   while (true) {
     switch (rol) {
+      cout << endl << "ROL: " << rol << endl;
+      system("pause");
       case 49:  // ADMINISTRADOR
         system("cls");
         if (usuariosCargados()) {  // Si devuelve true, existen usuarios
           system("cls");
           login(rol, "ADMINISTRADOR");
-        } 
+        }
         else {
           cout << endl << "---- ERROR : NO SE ENCONTRARON USUARIOS CON ROL 'ADMINISTRADOR' CARGADOS ----" << endl << endl;
           cout << endl << endl;
@@ -81,12 +86,12 @@ void menuPrincipal() {
         if (usuariosCargados()) {
           if (!usuariosEspecificosCargados("DIRECTOR", vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
             mensajeUsuariosNoEncontrados("DIRECTOR");
-          } 
+          }
           else {
             system("cls");
             login(rol, "DIRECTOR");
           }
-        } 
+        }
         else {
           mensajeUsuariosNoEncontrados("DIRECTOR");
         }
@@ -96,12 +101,12 @@ void menuPrincipal() {
         if (usuariosCargados()) {
           if (!usuariosEspecificosCargados("PROFESOR", vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
             mensajeUsuariosNoEncontrados("PROFESOR");
-          } 
+          }
           else {
             system("cls");
             login(rol, "PROFESOR");
           }
-        } 
+        }
         else {
           mensajeUsuariosNoEncontrados("PROFESOR");
         }
@@ -111,18 +116,19 @@ void menuPrincipal() {
         if (usuariosCargados()) {
           if (!usuariosEspecificosCargados("ALUMNO", vecNombresFiles, vecTamObjetos, vecNombresRoles)) {
             mensajeUsuariosNoEncontrados("ALUMNO");
-          } 
+          }
           else {
             system("cls");
             login(rol, "ALUMNO");
           }
-        } 
+        }
         else {
           mensajeUsuariosNoEncontrados("ALUMNO");
         }
         break;
       case 48:  // SALIR
         SALIENDO();
+        exit(0);
         return;
         break;
       default:
@@ -189,7 +195,7 @@ int contarLegajos(const char *vecNombresFiles[], int vecTamObjetos[]) {
   FILE *pFile = nullptr;
 
   for (x = 0; x < CANTIDADOBJETOS; x++) { // recorrer los archivos .dat de admin, director, prof y alumno
-  
+
     if (!(pFile = fopen(vecNombresFiles[x], "rb+"))) {
       if (!(pFile = fopen(vecNombresFiles[x], "wb+"))) {
         cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
@@ -356,7 +362,7 @@ bool usuarioValido(string Rol, int legajo, const char *vecNombresFiles[], int ve
             return valido;
           }
         }
-      } 
+      }
       else {
         Alumno obj;
         while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
@@ -415,7 +421,7 @@ bool claveValida(string Rol, int legajo, int clave, const char *vecNombresFiles[
             }
           }
         }
-      } 
+      }
       else {
         Alumno obj;
         while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
@@ -474,7 +480,7 @@ bool estadoValido(string Rol, int legajo, const char *vecNombresFiles[],
             }
           }
         }
-      } 
+      }
       else {
         Alumno obj;
         while (fread(&obj, vecTamObjetos[x], 1, pFile)) {
@@ -1113,7 +1119,7 @@ void subMenuDirectivoAvisos() {
 
       if (contarAvisos() > 0) {
         AvisoObj.leerEnDisco();
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----"
@@ -1209,7 +1215,7 @@ void subMenuDirectivoPlanEstudio() {
           materiaObj.grabarEnDiscoMateria();
         }
 
-      } 
+      }
       else {
         cout << endl << "---- LÍMITE DE MATERIAS CARGADAS ALCANZADO ----" << endl;
         cout << endl << endl;
@@ -1232,7 +1238,7 @@ void subMenuDirectivoPlanEstudio() {
         cout << endl << endl;
         system("pause");
         system("cls");
-      } 
+      }
       else {
         if (contarMaterias() < 21) {
           cout << endl
@@ -1243,7 +1249,7 @@ void subMenuDirectivoPlanEstudio() {
           cout << endl << endl;
           system("pause");
           system("cls");
-        } 
+        }
 else {
           asignarProfesores();
         }
@@ -1259,7 +1265,7 @@ else {
       if (contarMaterias() > 0) {
         mostrarPlanEstudio();
         system("pause");
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----"
@@ -1411,7 +1417,7 @@ void mostrarPlanEstudio() {
 
     if (materiaObj.getProfesor().getLegajo() == 0) {
       cout << left << setw(anchoProfesor) << "No Asignado";
-    } 
+    }
     else {
       string nombreCompleto = string(materiaObj.getProfesor().getNombre()) +
                               " " +
@@ -1477,7 +1483,7 @@ void menuProfesor() {
 
       if (contarAvisos() > 0) {
         AvisoObj.leerEnDisco();
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----"
@@ -1871,7 +1877,7 @@ void menuAlumno() {
         cout << "PLAN DE ESTUDIO 2003" << endl << endl;
         mostrarPlanEstudio();
         system("pause");
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----"
@@ -1889,7 +1895,7 @@ void menuAlumno() {
 
       if (contarAvisos() > 0) {
         AvisoObj.leerEnDisco();
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----"
@@ -2013,7 +2019,7 @@ void subMenuAlumnoPlanificacionCursada() {
 
       if (inscriptoMaterias()) {
         inscripcionMateriaObj.mostrarRegistroDeIncriccionesMateria(legajo);
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo
@@ -2031,7 +2037,7 @@ void subMenuAlumnoPlanificacionCursada() {
       system("cls");
       if (contarMaterias() > 0) {
         inscripcionMateriaObj.inscribirseMateria(legajo);
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----"
@@ -2050,7 +2056,7 @@ void subMenuAlumnoPlanificacionCursada() {
 
       if (inscriptoMaterias()) {
         inscripcionMateriaObj.DarseDeBajaMateria(legajo);
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo
@@ -2082,7 +2088,7 @@ void subMenuAlumnoPlanificacionCursada() {
                  << endl
                  << endl;
           }
-        } 
+        }
         else {
           cout << endl
                << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo
@@ -2090,7 +2096,7 @@ void subMenuAlumnoPlanificacionCursada() {
                << endl;
           cout << endl << endl;
         }
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CARGADOS EN EL SISTEMA ----"
@@ -2109,7 +2115,7 @@ void subMenuAlumnoPlanificacionCursada() {
       if (contarEvaluaciones() > 0) {
         if (inscriptoMaterias()) {
           verExamenesFinalesAlumno();
-        } 
+        }
         else {
           cout << endl
                << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo
@@ -2117,7 +2123,7 @@ void subMenuAlumnoPlanificacionCursada() {
                << endl;
           cout << endl << endl;
         }
-      } 
+      }
       else {
         cout << endl
              << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CARGADOS EN EL SISTEMA ----"
@@ -2308,7 +2314,7 @@ string cargaDescripcion() {
         cout << ' ';
         SetConsoleCursorPosition(hConsole, cursorPosition);
       }
-    } 
+    }
     else {
       input.push_back(ch);
       cout << ch;
