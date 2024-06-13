@@ -31,6 +31,7 @@ class InscripcionMateria
 
         void setEstadoMaterias(bool, int);
 
+        void setNumMaterias(bool);
         ///---- GETTERS ----\\\
 
         Alumno getAlumno();
@@ -40,6 +41,8 @@ class InscripcionMateria
         int getMaterias2(int pos) const;
 
         bool* getEstadoMaterias();
+
+        int getNumMaterias();
 
         ///---- MÉTODOS ----\\\
 

@@ -1,4 +1,4 @@
-#include "InscripcionEvalucion.h"
+#include "InscripcionEvaluacion.h"
 #include <iostream>
 #include <stdexcept>  // Necesario para std::out_of_range
 #include <limits>     // Necesario para std::numeric_limits
@@ -7,19 +7,19 @@
 #include "Alumno.h"
 #include "Evaluacion.h"
 
-InscripcionEvalucion::InscripcionEvalucion()
+InscripcionEvaluacion::InscripcionEvaluacion()
 {
     //ctor
 }
 
 ///---- SETTERS ----\\\
 
-void InscripcionEvalucion::setAlumno(Alumno aux)
+void InscripcionEvaluacion::setAlumno(Alumno aux)
 {
     _alumno = aux;
 }
 
-void InscripcionEvalucion::setMaterias(const Materia& aux, int pos)
+void InscripcionEvaluacion::setMaterias(const Materia& aux, int pos)
 {
     if (pos >= 0 && pos < 7)
     {
@@ -27,11 +27,12 @@ void InscripcionEvalucion::setMaterias(const Materia& aux, int pos)
     }
     else
     {
-        throw std::out_of_range("Posición fuera de rango");
+        cout << endl << "---- ERROR : POSICIÓN FUERA DE RANGO ----" << endl << endl;
+        system("pause");
     }
 }
 
-void InscripcionEvalucion::setMateriasNotas(float nota, int pos)
+void InscripcionEvaluacion::setMateriasNotas(float nota, int pos)
 {
     if (pos >= 0 && pos < 7)
     {
@@ -39,46 +40,47 @@ void InscripcionEvalucion::setMateriasNotas(float nota, int pos)
     }
     else
     {
-        throw std::out_of_range("Posición fuera de rango");
+        cout << endl << "---- ERROR : POSICIÓN FUERA DE RANGO ----" << endl << endl;
+        system("pause");
     }
 }
 
-void InscripcionEvalucion::setNumMaterias(int num)
+void InscripcionEvaluacion::setNumMaterias(int num)
 {
     _numMaterias = num;
 }
 
 ///---- GETTERS ----\\\
 
-Alumno InscripcionEvalucion::getAlumno()
+Alumno InscripcionEvaluacion::getAlumno()
 {
     return _alumno;
 }
 
-Materia* InscripcionEvalucion::getMaterias()
+Materia* InscripcionEvaluacion::getMaterias()
 {
     return _materias;
 }
 
-int InscripcionEvalucion::getMaterias2(int pos)const
+int InscripcionEvaluacion::getMaterias2(int pos)const
 {
 
     return _materias[pos].getId();
 }
 
-float* InscripcionEvalucion::getMateriasNotas()
+float* InscripcionEvaluacion::getMateriasNotas()
 {
     return _materiasNotas;
 }
 
-int InscripcionEvalucion::getNumMaterias()
+int InscripcionEvaluacion::getNumMaterias()
 {
     return _numMaterias;
 }
 
 ///---- MÉTODOS ----\\\
 
-int InscripcionEvalucion::cargarInscripcionEvaluacion(const Alumno& alumno, const Materia& materia, int legajo)
+int InscripcionEvaluacion::cargarInscripcionEvaluacion(const Alumno& alumno, const Materia& materia, int legajo)
 {
     if (_numMaterias >= 7)
     {
@@ -109,7 +111,7 @@ int InscripcionEvalucion::cargarInscripcionEvaluacion(const Alumno& alumno, cons
     return -1;
 }
 
-void InscripcionEvalucion::inscribirseEvaluacion(int legajo)
+void InscripcionEvaluacion::inscribirseEvaluacion(int legajo)
 {
     Alumno legAux;
     Evaluacion evalAux;
@@ -122,12 +124,11 @@ void InscripcionEvalucion::inscribirseEvaluacion(int legajo)
     while (continuar)
     {
         std::system("cls");
-         ListarEvaluaciones(legajo);
-        //mostrarEvaluaciones();
-        std::cout << "-----------------------------" << std::endl;
-        std::cout << "  INSCRIPCION DE EVALUACION  " << std::endl;
-        std::cout << "-----------------------------" << std::endl;
-        std::cout << "Ingrese la ID de la Evaluacion: ";
+
+        std::cout << "------------------------------" << std::endl;
+        std::cout << "  INSCRIPCIÓN A EXAMEN FINAL  " << std::endl;
+        std::cout << "------------------------------" << std::endl;
+        std::cout << "Ingrese el ID del examen final (ID examen final 0 para salir): ";
 
         if (!leerEntrada(idEvaluacion))
         {
@@ -135,22 +136,32 @@ void InscripcionEvalucion::inscribirseEvaluacion(int legajo)
             continue;
         }
 
-        if (!validarEvaluacion(idEvaluacion))  // Assuming there's a function to validate the evaluation ID
+        if(idEvaluacion == 0){
+            return;
+        }
+
+        if (!validarEvaluacion(idEvaluacion))
         {
             system("cls");
-            std::cout << "La ID ingresada no Existe" << std::endl;
-            if (!preguntarContinuar("Quiere volver a ingresar la ID?"))
+            std::cout << "El ID ingresado no existe" << std::endl;
+            if (!preguntarContinuar("¿Quiere volver a ingresar el ID?"))
             {
                 return;
             }
             continue;
         }
 
-        if (estaAlumnoInscritoEnEvaluacion(legajo, idEvaluacion))  // Assuming there's a function to check if the student is already enrolled
+        if(!finalDisponible(idEvaluacion)){
+            cout << endl << "---- ERROR : EL EXAMEN FINAL NO CORRESPONDE A LAS MATERIAS INSCRIPTAS ----" << endl << endl;
+            system("pause");
+            return;
+        }
+
+        if (estaAlumnoInscritoEnEvaluacion(legajo, idEvaluacion))
         {
             system("cls");
-            std::cout << " Ya Esta Inscripto en Esa Evaluacion " << std::endl;
-            if (!preguntarContinuar("Quiere inscribirse en otra evaluacion?"))
+            std::cout << "Ya esta inscripto en ese exámen final " << std::endl;
+            if (!preguntarContinuar("¿Quiere realizar otra inscripción?"))
             {
                 return;
             }
@@ -165,19 +176,19 @@ void InscripcionEvalucion::inscribirseEvaluacion(int legajo)
         if (posicionDeInscripcion == -1)
         {
             grabarEnDiscoInscripcionEvaluacion(legAux, evalAux);
-            std::cout << std::endl << "Evaluacion Cargada correctamente" << std::endl << std::endl;
         }
         else
         {
             ModificarEnDiscoInscripcionEvaluacion(posicionDeInscripcion);
-            std::cout << std::endl << "Evaluacion Agregada correctamente" << std::endl << std::endl;
         }
+
+        std::cout << std::endl << std::endl << "---- INSCRIPCIÓN REALIZADA CON ÉXITO ----" <<  std::endl;
         system("Pause");
         continuar = false;
     }
 }
 
-void InscripcionEvalucion::mostrarInscripcionEvaluacion()
+void InscripcionEvaluacion::mostrarInscripcionEvaluacion()
 {
     // Mostrar detalles del alumno
     std::cout << "----------------------------- " << std::endl;
@@ -195,7 +206,7 @@ void InscripcionEvalucion::mostrarInscripcionEvaluacion()
     system("pause");
 }
 
-void InscripcionEvalucion::mostrarInscripcionEvaluacionSinElNombreDeUsuario(int legajo)
+void InscripcionEvaluacion::mostrarInscripcionEvaluacionSinElNombreDeUsuario(int legajo)
 {
     Alumno legAux;
     int pos = 0;
@@ -217,7 +228,7 @@ void InscripcionEvalucion::mostrarInscripcionEvaluacionSinElNombreDeUsuario(int 
     }
 }
 
-void InscripcionEvalucion::mostrarRegistroDeIncriccionesEvaluacion(int legajo)
+void InscripcionEvaluacion::mostrarRegistroDeIncriccionesEvaluacion(int legajo)
 {
     Alumno legAux;
     int pos = 0;
@@ -234,7 +245,7 @@ void InscripcionEvalucion::mostrarRegistroDeIncriccionesEvaluacion(int legajo)
     }
 }
 
-void InscripcionEvalucion::DarseDeBajaEvaluacion(int legajo)
+void InscripcionEvaluacion::DarseDeBajaEvaluacion(int legajo) // no vamos a permitir esto
 {
     Alumno legAux;
     Materia matAux;
@@ -248,7 +259,7 @@ void InscripcionEvalucion::DarseDeBajaEvaluacion(int legajo)
 
         std::cout << "   DARSE DE BAJA EN EVALUACION  " << std::endl;
         std::cout << "-----------------------------" << std::endl;
-        std::cout << "Ingrese la ID de la Evaluacion: ";
+        std::cout << "Ingrese el ID de la Evaluacion: ";
 
         if (!leerEntrada(idEvaluacion)) // chequea que sea un número y no otra cosa
         {
@@ -259,8 +270,8 @@ void InscripcionEvalucion::DarseDeBajaEvaluacion(int legajo)
         if (!validarEvaluacion(idEvaluacion))
         {
             system("cls");
-            std::cout << "La ID ingresada no Existe" << std::endl;
-            if (!preguntarContinuar("Quiere volver a ingresar la ID?"))
+            std::cout << "El ID ingresado no existe" << std::endl;
+            if (!preguntarContinuar("¿Quiere volver a ingresar el ID?"))
             {
                 return;
             }
@@ -271,7 +282,7 @@ void InscripcionEvalucion::DarseDeBajaEvaluacion(int legajo)
         {
             system("cls");
             std::cout << "No Esta Inscripto en Esa Evaluacion" << std::endl;
-            if (!preguntarContinuar("Quiere volver a ingresar la ID?"))
+            if (!preguntarContinuar("¿Quiere volver a ingresar el ID?"))
             {
                 return;
             }
@@ -291,7 +302,7 @@ void InscripcionEvalucion::DarseDeBajaEvaluacion(int legajo)
     }
 }
 
-int InscripcionEvalucion::cargarBajaDeUnRegistroDeIncriccionesEvaluacion(const Alumno& alumno, const Materia& materia, int Legajo, int idEvaluacionBaja)
+int InscripcionEvaluacion::cargarBajaDeUnRegistroDeIncriccionesEvaluacion(const Alumno& alumno, const Materia& materia, int Legajo, int idEvaluacionBaja)
 {
     int posicion = buscarInscripcionEvaluacion(Legajo);  // Assuming there's a function to find the enrollment position
 
@@ -307,7 +318,7 @@ int InscripcionEvalucion::cargarBajaDeUnRegistroDeIncriccionesEvaluacion(const A
     return posicion;
 }
 
-void InscripcionEvalucion::grabarEnDiscoInscripcionEvaluacion(const Alumno& alumno, const Evaluacion& evaluacion)
+void InscripcionEvaluacion::grabarEnDiscoInscripcionEvaluacion(const Alumno& alumno, const Evaluacion& evaluacion)
 {
     FILE *p;
 
@@ -317,11 +328,11 @@ void InscripcionEvalucion::grabarEnDiscoInscripcionEvaluacion(const Alumno& alum
         return;
     }
 
-    fwrite(this, sizeof(InscripcionEvalucion), 1, p);
+    fwrite(this, sizeof(InscripcionEvaluacion), 1, p);
     fclose(p);
 }
 
-void InscripcionEvalucion::ModificarEnDiscoInscripcionEvaluacion(int pos)
+void InscripcionEvaluacion::ModificarEnDiscoInscripcionEvaluacion(int pos)
 {
     FILE *p;
 
@@ -332,12 +343,12 @@ void InscripcionEvalucion::ModificarEnDiscoInscripcionEvaluacion(int pos)
         return;
     }
 
-    fseek(p, sizeof(InscripcionEvalucion) * pos, 0);
-    fwrite(this, sizeof(InscripcionEvalucion), 1, p);
+    fseek(p, sizeof(InscripcionEvaluacion) * pos, 0);
+    fwrite(this, sizeof(InscripcionEvaluacion), 1, p);
     fclose(p);
 }
 
-void InscripcionEvalucion::leerEnDiscoInscripcionEvaluacion()
+void InscripcionEvaluacion::leerEnDiscoInscripcionEvaluacion()
 {
     FILE *p;
 
@@ -348,14 +359,14 @@ void InscripcionEvalucion::leerEnDiscoInscripcionEvaluacion()
     }
 
     std::cout << "MOSTRANDO INSCRIPCIONES:" << std::endl;
-    while (fread(this, sizeof(InscripcionEvalucion), 1, p))
+    while (fread(this, sizeof(InscripcionEvaluacion), 1, p))
     {
         this->mostrarInscripcionEvaluacion();
     }
     fclose(p);
 }
 
-bool InscripcionEvalucion::leerEnDiscoInscripcionEvaluacionPorPosicion(int pos)
+bool InscripcionEvaluacion::leerEnDiscoInscripcionEvaluacionPorPosicion(int pos)
 {
     FILE *p;
     bool leyo;
@@ -366,13 +377,13 @@ bool InscripcionEvalucion::leerEnDiscoInscripcionEvaluacionPorPosicion(int pos)
         return false;
     }
 
-    fseek(p, sizeof(InscripcionEvalucion) * pos, 0);
-    leyo = fread(this, sizeof(InscripcionEvalucion), 1, p);
+    fseek(p, sizeof(InscripcionEvaluacion) * pos, 0);
+    leyo = fread(this, sizeof(InscripcionEvaluacion), 1, p);
     fclose(p);
     return leyo;
 }
 
-bool InscripcionEvalucion::leerEntrada(int& entrada)
+bool InscripcionEvaluacion::leerEntrada(int& entrada)
 {
     std::cin >> entrada;
     if (std::cin.fail())
@@ -384,11 +395,13 @@ bool InscripcionEvalucion::leerEntrada(int& entrada)
     return true;
 }
 
-bool InscripcionEvalucion::preguntarContinuar(const std::string& mensaje)
+bool InscripcionEvaluacion::preguntarContinuar(const std::string& mensaje)
 {
     int opcion = 0;
     std::cout << mensaje << std::endl;
-    std::cout << "SI = 1      NO = 0" << std::endl;
+    std::cout << "SI = 1      NO = 0" << std::endl << std::endl;
+
+    std::cout << "> ";
     if (!leerEntrada(opcion))
     {
         std::cout << "Opción inválida. Intente de nuevo." << std::endl;
