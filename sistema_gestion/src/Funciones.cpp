@@ -14,7 +14,7 @@
 #include "Alumno.h"
 #include "Materia.h"
 #include "InscripcionMateria.h"
-#include "InscripcionEvalucion.h"
+#include "InscripcionEvaluacion.h"
 #include "Evaluacion.h"
 #include "Aviso.h"
 
@@ -39,7 +39,7 @@ Director directorObj;
 Profesor profesorObj;
 Alumno alumnoObj;
 InscripcionMateria inscripcionMateriaObj;
-InscripcionEvalucion inscripcionEvaluacionObj;
+InscripcionEvaluacion inscripcionEvaluacionObj;
 
 
 
@@ -69,7 +69,7 @@ void menuPrincipal()
             }
             else
             {
-                cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL 'ADMINISTRADOR' CARGADOS ----" << endl << endl;
+                cout << endl << "---- ERROR : NO SE ENCONTRARON USUARIOS CON ROL 'ADMINISTRADOR' CARGADOS ----" << endl << endl;
                 cout << endl << endl;
                 system("pause");
                 system("cls");
@@ -168,7 +168,7 @@ int seleccionarRol(int rol)
 
     while(rol != 49 && rol != 50 && rol != 51 && rol != 52 && rol != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -250,7 +250,7 @@ bool usuariosEspecificosCargados(string Rol, const char* vecNombresFiles[], int 
         {
             if(!(pFile = fopen(vecNombresFiles[x], "rb+")))
             {
-                cout << endl << "No encontró el archivo" << endl;
+                cout << endl << "No encontrÓ el archivo" << endl;
                 if (!(pFile = fopen(vecNombresFiles[x], "wb+")))
                 {
                     cout << endl << "---- ERROR AL ABRIR O CREAR EL ARCHIVO ----" << endl;
@@ -276,7 +276,7 @@ bool usuariosEspecificosCargados(string Rol, const char* vecNombresFiles[], int 
 
 void mensajeUsuariosNoEncontrados(string Rol)
 {
-    cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL '" << Rol << "' CARGADOS EN EL SISTEMA ----" << endl << endl;
+    cout << endl << "---- ERROR : NO SE ENCONTRARON USUARIOS CON ROL '" << Rol << "' CARGADOS EN EL SISTEMA ----" << endl << endl;
     cout << endl << endl;
     system("pause");
     system("cls");
@@ -301,7 +301,7 @@ void login(int rol, string Rol)
     }
     if(!usuarioValido(Rol, legajo, vecNombresFiles, vecTamObjetos, vecNombresRoles))
     {
-        cout << endl << "---- ERROR: NO SE ENCONTRÓ UN USUARIO " << Rol << " CON LEGAJO '" << legajo << "' CARGADO EN EL SISTEMA ----" << endl << endl;
+        cout << endl << "---- ERROR : NO SE ENCONTRÓ UN USUARIO " << Rol << " CON LEGAJO '" << legajo << "' CARGADO EN EL SISTEMA ----" << endl << endl;
         cout << endl << endl;
         system("pause");
         system("cls");
@@ -312,7 +312,7 @@ void login(int rol, string Rol)
     cin >> clave;
     if(!claveValida(Rol, legajo, clave, vecNombresFiles, vecTamObjetos, vecNombresRoles))
     {
-        cout << endl << "---- ERROR: CONTRASEÑA INCORRECTA ----" << endl << endl;
+        cout << endl << "---- ERROR : CONTRASEÑA INCORRECTA ----" << endl << endl;
         cout << endl << endl;
         system("pause");
         system("cls");
@@ -321,7 +321,7 @@ void login(int rol, string Rol)
 
     if(!estadoValido(Rol, legajo, vecNombresFiles, vecTamObjetos, vecNombresRoles))
     {
-        cout << endl << "---- ERROR: USUARIO INACTIVO ----" << endl << endl;
+        cout << endl << "---- ERROR : USUARIO INACTIVO ----" << endl << endl;
         cout << endl << endl;
         system("pause");
         system("cls");
@@ -664,14 +664,12 @@ int buscarInscripcionMateria(int Legajo)
         }
         pos++;
     }
-    cout<<"No Hay inscriciones aun"<<endl;
-    system("pause");
     return -1;
 }
 
 int buscarInscripcionEvaluacion(int Legajo)
 {
-    InscripcionEvalucion aux;
+    InscripcionEvaluacion aux;
     int pos=0;
 
     while (aux.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
@@ -682,8 +680,7 @@ int buscarInscripcionEvaluacion(int Legajo)
         }
         pos++;
     }
-    cout<<"No Hay inscriciones aun"<<endl;
-    system("pause");
+
     return -1;
 }
 
@@ -718,22 +715,22 @@ bool estaAlumnoInscritoEnMateria (int legAlumno, int idMateria)
 
 }
 
-bool estaAlumnoInscritoEnEvaluacion (int legAlumno, int idMateria)
+bool estaAlumnoInscritoEnEvaluacion (int legAlumno, int idEvaluacion)
 {
-    InscripcionEvalucion aux;
+    InscripcionEvaluacion inscEvaluacionObj;
     int pos=0;
 
-    while (aux.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
+    while (inscEvaluacionObj.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
     {
 
-        if (aux.getAlumno().getLegajo() == legAlumno)
+        if (inscEvaluacionObj.getAlumno().getLegajo() == legAlumno) //encuentro al alumno
         {
-            Materia* materias = aux.getMaterias();  // Obtener el puntero al arreglo de materias
+            Materia* materias = inscEvaluacionObj.getMaterias(); // agarro su vector de materias
             for (int i = 0; i < 7; i++)
             {
 
 
-                if (materias[i].getId() == idMateria)
+                if (materias[i].getId() == idMateriaPorIdEvaluacion(idEvaluacion))
                 {
                     return true;
 
@@ -744,9 +741,24 @@ bool estaAlumnoInscritoEnEvaluacion (int legAlumno, int idMateria)
         pos++;
     }
 
-
     return false;
 
+}
+
+int idMateriaPorIdEvaluacion(int idEvaluacion) {
+    FILE *pEvaluacion;
+    Evaluacion evaluacionObj;
+
+    if(!(pEvaluacion = fopen("evaluaciones.dat", "rb"))) {
+            cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return -1;
+    }
+
+    while(fread(&evaluacionObj, sizeof(Evaluacion), 1, pEvaluacion)) {
+        if(evaluacionObj.getId() == idEvaluacion){
+            return evaluacionObj.getIdMateria();
+        }
+    }
 }
 
 
@@ -779,7 +791,7 @@ void menuAdministrador()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -884,7 +896,7 @@ void subMenuAdministradorClaves()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -982,7 +994,7 @@ void menuDirectivo()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -1067,7 +1079,7 @@ void subMenuDirectivoProfesor()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -1152,7 +1164,7 @@ void subMenuDirectivoAlumno()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -1236,7 +1248,7 @@ void subMenuDirectivoAvisos()
 
     while(opcion != 49 && opcion != 50 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -1270,9 +1282,8 @@ void subMenuDirectivoAvisos()
         {
             AvisoObj.leerEnDisco();
         }
-        else
-        {
-            cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
+        else {
+            cout << endl << "---- ERROR : NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
         }
 
@@ -1312,7 +1323,7 @@ void subMenuDirectivoPlanEstudio()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -1351,7 +1362,7 @@ void subMenuDirectivoPlanEstudio()
 
             while(cantMaterias > 21 || cantMaterias > (21 - contarMaterias()) || cantMaterias < 0)
             {
-                cout << endl <<"---- ERROR: CANTIDAD DISPONIBLE: " << (21 - contarMaterias()) << " ----" << endl;
+                cout << endl <<"---- ERROR : CANTIDAD DISPONIBLE: " << (21 - contarMaterias()) << " ----" << endl;
                 Sleep(1500);
                 system("cls");
 
@@ -1387,7 +1398,7 @@ void subMenuDirectivoPlanEstudio()
 
         if(!usuariosEspecificosCargados("PROFESOR", vecNombresFiles, vecTamObjetos, vecNombresRoles))
         {
-            cout << endl << "---- ERROR: NO SE ENCONTRARON USUARIOS CON ROL 'PROFESOR' CARGADOS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << "---- ERROR : NO SE ENCONTRARON USUARIOS CON ROL 'PROFESOR' CARGADOS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
             system("pause");
             system("cls");
@@ -1396,7 +1407,7 @@ void subMenuDirectivoPlanEstudio()
         {
             if(contarMaterias() < 21)
             {
-                cout << endl << "---- ERROR: PLAN DE ESTUDIOS INCOMPLETO, " << 21 - contarMaterias() << " MATERIAS RESTANTES POR CARGAR ----" << endl << endl;
+                cout << endl << "---- ERROR : PLAN DE ESTUDIOS INCOMPLETO, " << 21 - contarMaterias() << " MATERIAS RESTANTES POR CARGAR ----" << endl << endl;
                 cout << endl << endl;
                 system("pause");
                 system("cls");
@@ -1422,7 +1433,7 @@ void subMenuDirectivoPlanEstudio()
         }
         else
         {
-            cout << endl << "---- ERROR: NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
             system("pause");
             system("cls");
@@ -1525,13 +1536,13 @@ void asignarProfesores()
 
             if (!valido)
             {
-                cout << endl << "---- ERROR: NO SE ENCONTRÓ UN PROFESOR CON LEGAJO '" << legajoProfesor << "' CARGADO EN EL SISTEMA ----" << endl << endl;
+                cout << endl << "---- ERROR : NO SE ENCONTRÓ UN PROFESOR CON LEGAJO '" << legajoProfesor << "' CARGADO EN EL SISTEMA ----" << endl << endl;
                 system("pause");
             }
 
             if(valido && !activo)
             {
-                cout << endl << "---- ERROR: EL PROFESOR CON LEGAJO '" << legajoProfesor << "' SE ENCUENTRA INACTIVO ----" << endl << endl;
+                cout << endl << "---- ERROR : EL PROFESOR CON LEGAJO '" << legajoProfesor << "' SE ENCUENTRA INACTIVO ----" << endl << endl;
                 valido = false;
                 system("pause");
             }
@@ -1621,7 +1632,7 @@ void menuProfesor()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -1654,9 +1665,8 @@ void menuProfesor()
         {
             AvisoObj.leerEnDisco();
         }
-        else
-        {
-            cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
+        else {
+            cout << endl << "---- ERROR : NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
         }
 
@@ -1713,7 +1723,7 @@ void subMenuProfesorGestionMaterias()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 &&  opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -1877,7 +1887,7 @@ Evaluacion evaluaciones;
 
 }
 
-void BuscarEvaluacionesInscritoAlumno(const InscripcionEvalucion& evaluacionInscripto)
+void BuscarEvaluacionesInscritoAlumno(const InscripcionEvaluacion& evaluacionInscripto)
 {
   int pos=0;
 Evaluacion evaluaciones;
@@ -1924,9 +1934,9 @@ InscripcionMateria BuscarArchvoInscripcionMateria(int legajo)
 
 }
 
-InscripcionEvalucion BuscarArchivoInscripcionEvaluacion(int legajo)
+InscripcionEvaluacion BuscarArchivoInscripcionEvaluacion(int legajo)
 {
-     InscripcionEvalucion archivoInscripcionEvaluacion;
+     InscripcionEvaluacion archivoInscripcionEvaluacion;
  int pos=0;
 
  while (archivoInscripcionEvaluacion.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
@@ -2047,7 +2057,7 @@ void menuAlumno()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion !=52 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
@@ -2084,7 +2094,7 @@ void menuAlumno()
         }
         else
         {
-            cout << endl << "---- ERROR: NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
             system("pause");
         }
@@ -2099,9 +2109,8 @@ void menuAlumno()
         {
             AvisoObj.leerEnDisco();
         }
-        else
-        {
-            cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
+        else {
+            cout << endl << "---- ERROR : NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
         }
 
@@ -2184,10 +2193,12 @@ bool validarEvaluacion (int ID)
 void subMenuAlumnoPlanificacionCursada()
 {
     int opcion;
+    Evaluacion EvaluacionObj;
+    FILE *pEval;
 
     //CARGANDO();
     cout << "-----------------------------------------------------"<< endl;
-    cout << "               MENÚ PLANIFICAR CURSADA               "<< endl;
+    cout << "                MENÚ GESTIÓN CURSADA                 "<< endl;
     cout << "-----------------------------------------------------"<< endl;
     cout << "1. VER PLANIFICACION                                 "<< endl;
     cout << "2. ANOTARSE A MATERIAS                               "<< endl;
@@ -2204,12 +2215,12 @@ void subMenuAlumnoPlanificacionCursada()
 
     while(opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 48)
     {
-        cout << "---- ERROR: OPCIÓN INVÁLIDA ----" << endl;
+        cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
         Sleep(500);
         system("cls");
 
         cout << "-----------------------------------------------------"<< endl;
-        cout << "               MENÚ PLANIFICAR CURSADA               "<< endl;
+        cout << "                MENÚ GESTIÓN CURSADA                 "<< endl;
         cout << "-----------------------------------------------------"<< endl;
         cout << "1. VER PLANIFICACION                                 "<< endl;
         cout << "2. ANOTARSE A MATERIAS                               "<< endl;
@@ -2254,7 +2265,7 @@ void subMenuAlumnoPlanificacionCursada()
         }
         else
         {
-            cout << endl << "---- ERROR: NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
             system("pause");
             system("cls");
@@ -2285,14 +2296,52 @@ void subMenuAlumnoPlanificacionCursada()
     case 52: ///INSCRIBIRSE A FINALES
         system("cls");
 
-        inscripcionEvaluacionObj.inscribirseEvaluacion(legajo);
+        if(contarEvaluaciones() > 0) {
+            if(inscriptoMaterias()){
+                if(finalesDisponibles()){
+                    inscripcionEvaluacionObj.inscribirseEvaluacion(legajo);
+                    system("cls");
+                    subMenuAlumnoPlanificacionCursada();
+                    break;
 
+                }
+
+                else{
+                    cout << endl << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CORRESPONDIENTES A LAS MATERIAS INSCRIPTAS ----" << endl << endl;
+                }
+            }
+            else{
+                cout << endl << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo << " NO SE ENCUENTRA INSCRIPTO A MATERIAS ----" << endl << endl;
+                cout << endl << endl;
+            }
+        }
+        else {
+            cout << endl << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CARGADOS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << endl;
+        }
+
+
+        system("pause");
+        system("cls");
         subMenuAlumnoPlanificacionCursada();
         break;
     case 53: /// VER FINALES
         system("cls");
 
-        ListarEvaluaciones(legajo);
+        if(contarEvaluaciones() > 0) {
+            if(inscriptoMaterias()){
+                verExamenesFinalesAlumno();
+            }
+            else{
+                cout << endl << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo << " NO SE ENCUENTRA INSCRIPTO A MATERIAS ----" << endl << endl;
+                cout << endl << endl;
+            }
+        }
+        else {
+            cout << endl << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CARGADOS EN EL SISTEMA ----" << endl << endl;
+            cout << endl << endl;
+        }
+
         system("pause");
         system("cls");
         subMenuAlumnoPlanificacionCursada();
@@ -2300,7 +2349,7 @@ void subMenuAlumnoPlanificacionCursada()
     case 54: /// VER FINALES INSCRIPTO
         system("cls");
 
-        ListarEvaluacionesInscripto (legajo);
+        ListarEvaluacionesInscripto(legajo);
         system("pause");
 
         // LÓGICA SIMILAR A ARRIBA PERO VALIANDO CONTRA LAS MATERIAS INSCRIPTO
@@ -2335,11 +2384,107 @@ bool inscriptoMaterias()
     {
         if(inscripcionObj.getAlumno().getLegajo() == legajo)
         {
-            return true;
+            for(int x = 0; x <7; x++) {
+                if(inscripcionObj.getEstadoMaterias()[x]){
+                return true;
+                }
+            }
         }
     }
 
     fclose(pInscMat);
+    return false;
+}
+
+bool finalesDisponibles()
+{
+    FILE *pEval;
+    Evaluacion evaluacionObj;
+
+    FILE *pInscMat;
+    InscripcionMateria inscMatObj;
+
+    if(!(pEval = fopen("evaluaciones.dat", "rb")))
+    {
+        cout << endl << "---- NO SE ENCONTRARON REGISTROS DE EXÁMENES FINALES ----" << endl << endl;
+        return false;
+    }
+
+    while(fread(&evaluacionObj, sizeof(Evaluacion), 1, pEval))
+    {
+        if(!(pInscMat = fopen("InscripcionMateria.dat", "rb")))
+        {
+            cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+            return false;
+        }
+
+        while(fread(&inscMatObj, sizeof(InscripcionMateria), 1, pInscMat))
+        {
+            if(inscMatObj.getAlumno().getLegajo() == legajo)
+            {
+                for(int x = 0; x < 7; x++) {
+                    if(evaluacionObj.getIdMateria() == inscMatObj.getMaterias()[x].getId() && inscMatObj.getEstadoMaterias()[x]) {
+                            fclose(pInscMat);
+                            fclose(pEval);
+                            return true;
+                    }
+                }
+            }
+        }
+
+        fclose(pInscMat);
+
+    }
+
+    fclose(pEval);
+
+    return false;
+}
+
+bool finalDisponible(int idEvaluacion)
+{
+    FILE *pEval;
+    Evaluacion evaluacionObj;
+
+    FILE *pInscMat;
+    InscripcionMateria inscMatObj;
+
+    if(!(pEval = fopen("evaluaciones.dat", "rb")))
+    {
+        cout << endl << "---- NO SE ENCONTRARON REGISTROS DE EXÁMENES FINALES ----" << endl << endl;
+        return false;
+    }
+
+    while(fread(&evaluacionObj, sizeof(Evaluacion), 1, pEval))
+    {
+        if(!(pInscMat = fopen("InscripcionMateria.dat", "rb")))
+        {
+            cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+            return false;
+        }
+
+        while(fread(&inscMatObj, sizeof(InscripcionMateria), 1, pInscMat))
+        {
+            if(inscMatObj.getAlumno().getLegajo() == legajo)
+            {
+                for(int x = 0; x < 7; x++) {
+                    if(evaluacionObj.getIdMateria() == inscMatObj.getMaterias()[x].getId() && inscMatObj.getEstadoMaterias()[x]) {
+                        if(evaluacionObj.getId() == idEvaluacion){
+                            fclose(pInscMat);
+                            fclose(pEval);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        fclose(pInscMat);
+
+    }
+
+    fclose(pEval);
+
     return false;
 }
 
@@ -2434,4 +2579,97 @@ int contarAvisos()
     fclose(pAvi);
 
     return cantAvisos;
+}
+
+int contarEvaluaciones() {
+    FILE *pEval;
+    int cantEvals = 0;
+
+    if(!(pEval = fopen("evaluaciones.dat", "ab")))
+    {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return -1;
+    }
+
+    fseek(pEval, 0, SEEK_END);
+    cantEvals += ftell(pEval) / sizeof(Evaluacion);
+    fseek(pEval, 0, SEEK_SET);
+    fclose(pEval);
+
+    return cantEvals;
+}
+
+void verExamenesFinalesAlumno()
+{
+    FILE *pEval;
+    Evaluacion evaluacionObj;
+
+    FILE *pInscMat;
+    InscripcionMateria inscMatObj;
+
+    time_t t = time(nullptr);
+    tm* now = localtime(&t);
+    time_t currentTime = mktime(now);
+
+
+    int anchoID = 9;
+    int anchoMateria = 15;
+    int anchoFecha = 12;
+
+    bool hayFinales = false;
+
+    if(!(pEval = fopen("evaluaciones.dat", "rb")))
+    {
+        cout << endl << "---- NO SE ENCONTRARON REGISTROS DE EXAMENES FINALES ----" << endl << endl;
+        return ;
+    }
+
+    cout << left << setw(anchoFecha) << "Fecha";
+    cout << "|";
+    cout << left << setw(anchoID) << "ID Final";
+    cout << "|";
+    cout << left << setw(anchoMateria) << "Materia" << endl;
+
+    cout << string(anchoFecha, '-') << "+" << string(anchoID, '-') << "+" << string(anchoMateria, '-') << endl;
+
+    while(fread(&evaluacionObj, sizeof(Evaluacion), 1, pEval))
+    {
+
+        tm specificDate = evaluacionObj.createDate(evaluacionObj.getFecha().getDia(), evaluacionObj.getFecha().getMes(), evaluacionObj.getFecha().getAnio());
+        time_t specificTime = mktime(&specificDate);
+
+        if(difftime(specificTime, currentTime) > 0)
+        {
+
+            if(!(pInscMat = fopen("InscripcionMateria.dat", "rb")))
+            {
+                cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+                return ;
+            }
+
+            while(fread(&inscMatObj, sizeof(InscripcionMateria), 1, pInscMat))
+            {
+                if(inscMatObj.getAlumno().getLegajo() == legajo)
+                {
+                    for(int x = 0; x < 7; x++) {
+                        if(evaluacionObj.getIdMateria() == inscMatObj.getMaterias()[x].getId() && inscMatObj.getEstadoMaterias()[x]) {
+                            cout << left << setw(anchoFecha) << evaluacionObj.getFecha().toString("DD/MM/YYYY") << "|" << left << setw(anchoID) << evaluacionObj.getId() << "|" << left << setw(anchoMateria) << inscMatObj.getMaterias()[x].getNombreMateria() << endl;
+                            hayFinales = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            fclose(pInscMat);
+        }
+    }
+
+    if(!hayFinales){
+        system("cls");
+        cout << endl << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES DISPONIBLES ----" << endl << endl;
+    }
+    cout << endl << endl;
+
+    fclose(pEval);
 }

@@ -6,7 +6,7 @@
 #include "Materia.h"
 #include "Evaluacion.h"
 #include "InscripcionMateria.h"
-#include "InscripcionEvalucion.h"
+#include "InscripcionEvaluacion.h"
 
 //void marco(int, int, int, int, int);
 
@@ -67,11 +67,11 @@ bool estaAlumnoInscritoEnEvaluacion (int, int);
 
 void BuscarEvaluacionesDeMateriasAsignadasAlumno(const InscripcionMateria& materiasInscripto);
 
-void BuscarEvaluacionesInscritoAlumno(const InscripcionEvalucion& evaluacionInscripto);
+void BuscarEvaluacionesInscritoAlumno(const InscripcionEvaluacion& evaluacionInscripto);
 
 InscripcionMateria BuscarArchvoInscripcionMateria(int legajo);
 
-InscripcionEvalucion BuscarArchivoInscripcionEvaluacion(int legajo);
+InscripcionEvaluacion BuscarArchivoInscripcionEvaluacion(int legajo);
 
 ///--- MENÚS ROLES ---\\
 
@@ -95,6 +95,11 @@ void menuAlumno();
 void subMenuAlumnoPlanificacionCursada();
 void opcionCambiarContrasenaAlumno(int);
 bool inscriptoMaterias();
+int contarEvaluaciones();
+void verExamenesFinalesAlumno();
+bool finalesDisponibles();
+bool finalDisponible(int);
+int idMateriaPorIdEvaluacion(int);
 
 ///---LISTADOS ---\\
 
