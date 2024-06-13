@@ -37,6 +37,8 @@ class InscripcionMateria
 
         Materia* getMaterias();
 
+        int getMaterias2(int pos) const;
+
         bool* getEstadoMaterias();
 
         ///---- MÉTODOS ----\\\

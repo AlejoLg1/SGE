@@ -41,7 +41,7 @@ void Materia::setNombreMateria(string nombre) {
 
 ///---- GETTERS ----\\\
 
-int Materia::getId() {
+int Materia::getId() const{
     return _id;
 }
 

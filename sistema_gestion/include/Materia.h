@@ -35,7 +35,7 @@ class Materia
 
         ///---- GETTERS ----\\\
 
-        int getId();
+        int getId()const;
 
         Profesor getProfesor();
 

@@ -34,6 +34,8 @@ class InscripcionEvalucion
 
         Materia* getMaterias();
 
+        int getMaterias2(int pos) const;
+
         float* getMateriasNotas();
 
         int getNumMaterias();

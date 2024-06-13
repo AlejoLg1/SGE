@@ -230,3 +230,19 @@ void Profesor::leerEnDiscoProfesor() {
     fclose(pProfesor);
 }
 
+bool Profesor::leerEnDiscoProfesorPorPosicion(int pos)
+{
+    FILE *p;
+    bool Leyo;
+
+    p=fopen ("profesores.dat","rb");
+    if (p==NULL){cout<<"El ARCHIVO NO SE PUDO LEER"<<endl; return false;}
+
+    fseek (p,sizeof(Profesor)*pos,0);
+
+    Leyo=fread(this,sizeof (Profesor),1,p);
+
+    fclose(p);
+    return Leyo;
+}
+

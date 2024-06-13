@@ -6,6 +6,7 @@
 #include "Materia.h"
 #include "Evaluacion.h"
 #include "InscripcionMateria.h"
+#include "InscripcionEvalucion.h"
 
 //void marco(int, int, int, int, int);
 
@@ -50,6 +51,8 @@ bool validarEvaluacion (int ID);
 
 Alumno buscarAlumno(int);
 
+Profesor buscarProfesor(int);
+
 Materia buscarMateria(int);
 
 Evaluacion buscarEvaluacion(int);
@@ -61,6 +64,14 @@ int buscarInscripcionEvaluacion(int);
 bool estaAlumnoInscritoEnMateria (int, int);
 
 bool estaAlumnoInscritoEnEvaluacion (int, int);
+
+void BuscarEvaluacionesDeMateriasAsignadasAlumno(const InscripcionMateria& materiasInscripto);
+
+void BuscarEvaluacionesInscritoAlumno(const InscripcionEvalucion& evaluacionInscripto);
+
+InscripcionMateria BuscarArchvoInscripcionMateria(int legajo);
+
+InscripcionEvalucion BuscarArchivoInscripcionEvaluacion(int legajo);
 
 ///--- MENÚS ROLES ---\\
 
@@ -75,21 +86,25 @@ void subMenuDirectivoAvisos();
 void subMenuDirectivoPlanEstudio();
 int contarMaterias();
 void asignarProfesores();
-void mostrarPlanEstudio();
 int contarAvisos();
 
 void menuProfesor();
 void subMenuProfesorGestionMaterias();
-void verMateriasAsignadas();
-bool MateriasAsignadas();
-void verExamenesFinalesProfesor();
-
 
 void menuAlumno();
 void subMenuAlumnoPlanificacionCursada();
 void opcionCambiarContrasenaAlumno(int);
 bool inscriptoMaterias();
 
+///---LISTADOS ---\\
+
+void ListarEvaluaciones (int legajo);
+void ListarEvaluacionesInscripto (int legajo);
+bool MateriasAsignadas();
+void verExamenesFinalesProfesor();
+void verMateriasAsignadas();
+void mostrarPlanEstudio();
+void verMateriasAsignadas();
 
 ///---FUNCIONES EXTRAS ---\\
 

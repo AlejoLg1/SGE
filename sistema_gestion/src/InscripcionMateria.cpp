@@ -62,6 +62,12 @@ Materia* InscripcionMateria::getMaterias()
     return _materias;  // Devuelve un puntero al arreglo de materias
 }
 
+int InscripcionMateria::getMaterias2(int pos)const
+{
+
+    return _materias[pos].getId();
+}
+
 bool* InscripcionMateria::getEstadoMaterias()
 {
     return _estadoMaterias;  // Devuelve un puntero al arreglo de estados de materias

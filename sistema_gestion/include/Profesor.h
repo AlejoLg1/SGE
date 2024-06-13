@@ -35,6 +35,7 @@ class Profesor : public Persona
         void mostrarProfesor();
         void grabarEnDiscoProfesor();
         void leerEnDiscoProfesor();
+        bool leerEnDiscoProfesorPorPosicion(int);
 
 };
 

@@ -604,6 +604,21 @@ Alumno buscarAlumno(int ID)
 
 }
 
+Profesor buscarProfesor(int ID)
+{
+Profesor aux;
+    int pos=0;
+
+    while (aux.leerEnDiscoProfesorPorPosicion(pos))
+    {
+        if (aux.getLegajo() == ID)
+        {
+            return aux;
+        }
+        pos++;
+    }
+}
+
 Materia buscarMateria(int ID)
 {
     Materia aux;
@@ -848,7 +863,8 @@ void menuAdministrador()
 
 }
 
-void subMenuAdministradorClaves() {
+void subMenuAdministradorClaves()
+{
     int opcion;
     int legajoAux = -1;
 
@@ -1197,7 +1213,8 @@ void subMenuDirectivoAlumno()
     }
 }
 
-void subMenuDirectivoAvisos(){
+void subMenuDirectivoAvisos()
+{
     int opcion;
     int legajoAlumno;
     int nuevaClave;
@@ -1249,10 +1266,12 @@ void subMenuDirectivoAvisos(){
     case 50:
         system("cls");
 
-        if(contarAvisos() > 0) {
+        if(contarAvisos() > 0)
+        {
             AvisoObj.leerEnDisco();
         }
-        else {
+        else
+        {
             cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
         }
@@ -1323,7 +1342,8 @@ void subMenuDirectivoPlanEstudio()
             cout << endl << "\t- Cantidad de materias a cargar: ";
             cin >> cantMaterias;
 
-            if(cantMaterias == 0){
+            if(cantMaterias == 0)
+            {
                 system("cls");
                 subMenuDirectivoPlanEstudio();
                 break;
@@ -1482,7 +1502,8 @@ void asignarProfesores()
             cout << endl << "\t - Legajo Profesor: ";
             cin >> legajoProfesor;
 
-            if(legajoProfesor == 0){
+            if(legajoProfesor == 0)
+            {
                 fclose(pProfesor);
                 fclose(pMat);
                 return;
@@ -1493,7 +1514,8 @@ void asignarProfesores()
                 if (profesorObj.getLegajo() == legajoProfesor)
                 {
                     valido = true;
-                    if(profesorObj.getEstado()){
+                    if(profesorObj.getEstado())
+                    {
                         activo = true;
                     }
                     break;
@@ -1628,10 +1650,12 @@ void menuProfesor()
     case 50:
         system("cls");
 
-        if(contarAvisos() > 0) {
+        if(contarAvisos() > 0)
+        {
             AvisoObj.leerEnDisco();
         }
-        else {
+        else
+        {
             cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
         }
@@ -1726,7 +1750,8 @@ void subMenuProfesorGestionMaterias()
     case 50:
         system("cls");
 
-        if(MateriasAsignadas()){
+        if(MateriasAsignadas())
+        {
             evaluacionObj.grabarEnDisco(legajo);
         }
 
@@ -1825,6 +1850,111 @@ void verMateriasAsignadas()
 
     fclose(pMat);
 }
+
+void BuscarEvaluacionesDeMateriasAsignadasAlumno(const InscripcionMateria& materiasInscripto)
+{
+int pos=0;
+Evaluacion evaluaciones;
+
+                cout << "--------------------------------------"<<endl;
+                cout << "-     EVALUACIONES DISPONIBLES        "<<endl;
+    while (evaluaciones.leerEnDiscoEvaluacionPorPosicion(pos))
+    {
+        for( int i=0; i<7; i++)
+        {
+
+
+            if(evaluaciones.getIdMateria() == materiasInscripto.getMaterias2(i))
+            {
+                evaluaciones.mostrarEvaluacion();
+
+            }
+        }
+
+
+        pos++;
+    }
+
+}
+
+void BuscarEvaluacionesInscritoAlumno(const InscripcionEvalucion& evaluacionInscripto)
+{
+  int pos=0;
+Evaluacion evaluaciones;
+
+                cout << "--------------------------------------"<<endl;
+                cout << "-     EVALUACIONES INSCRIPTO          "<<endl;
+    while (evaluaciones.leerEnDiscoEvaluacionPorPosicion(pos))
+    {
+        for( int i=0; i<7; i++)
+        {
+
+
+            if(evaluaciones.getIdMateria() == evaluacionInscripto.getMaterias2(i))
+            {
+                evaluaciones.mostrarEvaluacion();
+
+
+
+            }
+        }
+
+
+        pos++;
+    }
+
+}
+
+
+
+InscripcionMateria BuscarArchvoInscripcionMateria(int legajo)
+{
+ InscripcionMateria archivoInscripcionMateria;
+ int pos=0;
+
+ while (archivoInscripcionMateria.leerEnDiscoInscripcionMateriaPorPosicion(pos))
+ {
+     if (archivoInscripcionMateria.getAlumno().getLegajo() == legajo)
+     {
+         return archivoInscripcionMateria;
+     }
+
+     pos++;
+ }
+
+}
+
+InscripcionEvalucion BuscarArchivoInscripcionEvaluacion(int legajo)
+{
+     InscripcionEvalucion archivoInscripcionEvaluacion;
+ int pos=0;
+
+ while (archivoInscripcionEvaluacion.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
+ {
+     if (archivoInscripcionEvaluacion.getAlumno().getLegajo() == legajo)
+     {
+         return archivoInscripcionEvaluacion;
+     }
+
+     pos++;
+ }
+
+}
+
+
+
+void ListarEvaluaciones (int legajo)
+{
+    BuscarEvaluacionesDeMateriasAsignadasAlumno(BuscarArchvoInscripcionMateria(legajo));
+
+}
+
+void ListarEvaluacionesInscripto (int legajo)
+{
+    BuscarEvaluacionesInscritoAlumno(BuscarArchivoInscripcionEvaluacion(legajo));
+}
+
+
 
 void verExamenesFinalesProfesor()
 {
@@ -1965,10 +2095,12 @@ void menuAlumno()
     case 51:
         system("cls");
 
-        if(contarAvisos() > 0) {
+        if(contarAvisos() > 0)
+        {
             AvisoObj.leerEnDisco();
         }
-        else {
+        else
+        {
             cout << endl << "---- ERROR: NO SE ENCONTRARON AVISOS CARGADOS EN EL SISTEMA ----" << endl << endl;
             cout << endl << endl;
         }
@@ -2099,10 +2231,12 @@ void subMenuAlumnoPlanificacionCursada()
     case 49: ///VER PLANIF
         system("cls");
 
-        if(inscriptoMaterias()) {
+        if(inscriptoMaterias())
+        {
             inscripcionMateriaObj.mostrarRegistroDeIncriccionesMateria(legajo);
         }
-        else {
+        else
+        {
             cout << endl << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo << " NO SE ENCUENTRA INSCRIPTO A MATERIAS ----" << endl << endl;
             cout << endl << endl;
             system("pause");
@@ -2132,11 +2266,13 @@ void subMenuAlumnoPlanificacionCursada()
     case 51: ///DARSE DE BAJA A MATERIAS
         system("cls");
 
-        if(inscriptoMaterias()) {
+        if(inscriptoMaterias())
+        {
 
             inscripcionMateriaObj.DarseDeBajaMateria(legajo);
         }
-        else{
+        else
+        {
             cout << endl << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo << " NO SE ENCUENTRA INSCRIPTO A MATERIAS ----" << endl << endl;
             cout << endl << endl;
             system("pause");
@@ -2148,6 +2284,7 @@ void subMenuAlumnoPlanificacionCursada()
         break;
     case 52: ///INSCRIBIRSE A FINALES
         system("cls");
+
         inscripcionEvaluacionObj.inscribirseEvaluacion(legajo);
 
         subMenuAlumnoPlanificacionCursada();
@@ -2155,16 +2292,16 @@ void subMenuAlumnoPlanificacionCursada()
     case 53: /// VER FINALES
         system("cls");
 
-        // Hay que recorrer el archivo.dat que genere la clase InscripcionEvaluacion, validar si en algun registro coincide
-        // el legajo del alumno del registro, con el del alumno actual y mostrar el registro si corresponde.
-
+        ListarEvaluaciones(legajo);
+        system("pause");
         system("cls");
         subMenuAlumnoPlanificacionCursada();
         break;
     case 54: /// VER FINALES INSCRIPTO
         system("cls");
 
-        inscripcionEvaluacionObj.mostrarRegistroDeIncriccionesEvaluacion(legajo);
+        ListarEvaluacionesInscripto (legajo);
+        system("pause");
 
         // LÓGICA SIMILAR A ARRIBA PERO VALIANDO CONTRA LAS MATERIAS INSCRIPTO
 
@@ -2237,7 +2374,8 @@ void SALIENDO()
     cout << endl;
 }
 
-string cargaDescripcion(){
+string cargaDescripcion()
+{
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     std::cout << "             --- ** Escribe tu mensaje. Presiona Ctrl+G para terminar. ** ---\n" << endl << endl;
@@ -2246,10 +2384,13 @@ string cargaDescripcion(){
     std::string input;
 
 
-    while ((ch = _getch()) != 7) {
+    while ((ch = _getch()) != 7)
+    {
 
-        if (ch == 8) {
-            if (!input.empty()) {
+        if (ch == 8)
+        {
+            if (!input.empty())
+            {
                 input.pop_back();
                 CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
                 GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
@@ -2259,12 +2400,15 @@ string cargaDescripcion(){
                 cout << ' ';
                 SetConsoleCursorPosition(hConsole, cursorPosition);
             }
-        } else {
+        }
+        else
+        {
             input.push_back(ch);
             cout << ch;
         }
 
-        if (ch == 13) {
+        if (ch == 13)
+        {
             input.push_back('\n');
             cout << "\n";
         }
@@ -2273,7 +2417,8 @@ string cargaDescripcion(){
     return input;
 }
 
-int contarAvisos() {
+int contarAvisos()
+{
     FILE *pAvi;
     int cantAvisos = 0;
 

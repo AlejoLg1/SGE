@@ -60,6 +60,12 @@ Materia* InscripcionEvalucion::getMaterias()
     return _materias;
 }
 
+int InscripcionEvalucion::getMaterias2(int pos)const
+{
+
+    return _materias[pos].getId();
+}
+
 float* InscripcionEvalucion::getMateriasNotas()
 {
     return _materiasNotas;
@@ -111,10 +117,12 @@ void InscripcionEvalucion::inscribirseEvaluacion(int legajo)
     int idEvaluacion = 0;
     bool continuar = true;
 
+
+
     while (continuar)
     {
         std::system("cls");
-
+         ListarEvaluaciones(legajo);
         //mostrarEvaluaciones();
         std::cout << "-----------------------------" << std::endl;
         std::cout << "  INSCRIPCION DE EVALUACION  " << std::endl;
@@ -151,6 +159,7 @@ void InscripcionEvalucion::inscribirseEvaluacion(int legajo)
 
         legAux = buscarAlumno(legajo);
         evalAux = buscarEvaluacion(idEvaluacion);
+        matAux = buscarMateria(evalAux.getIdMateria());
         int posicionDeInscripcion = cargarInscripcionEvaluacion(legAux, matAux, legajo);
 
         if (posicionDeInscripcion == -1)

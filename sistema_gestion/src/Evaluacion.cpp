@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <windows.h>
 #include <ctime>
+#include "Funciones.h"
 #include "Materia.h"
 #include "Evaluacion.h"
 
@@ -176,10 +177,16 @@ bool Evaluacion::cargarEvaluacion(int legajoProfesor) {
 }
 
 void Evaluacion::mostrarEvaluacion() {
-    cout << "\t - ID Final: " << getId() << endl << endl;
-    cout << "\t - Legajo Profesor: " << getIdProfesor() << endl << endl;
-    cout << "\t - ID Materia: " << getIdMateria() << endl << endl;
-    cout << "\t - Fecha: " << getFecha().toString("DD/MM/YYYY") << endl << endl;
+Materia materia = buscarMateria(getIdMateria());
+
+    cout << "--------------------------------------"<<endl;
+    cout << "\t - ID Final: " << getId() <<endl;
+    cout << "\t - Profesor: " << materia.getProfesor().getNombre()<<" "<<materia.getProfesor().getApellido()<< endl;
+    cout << "\t - Materia: " << materia.getNombreMateria() << endl;
+    cout << "\t - Fecha: " << getFecha().toString("DD/MM/YYYY") << endl;
+    cout << "--------------------------------------"<<endl;
+
+
 }
 
 void Evaluacion::grabarEnDisco(int legajoProfesor) {
