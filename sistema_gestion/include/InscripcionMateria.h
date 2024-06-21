@@ -23,6 +23,11 @@ class InscripcionMateria
 
         InscripcionMateria();
 
+        ///---- DESTRUCTOR ----
+
+        //~InscripcionMateria();
+
+
         ///---- SETTERS ----\\\
 
         void setAlumno(Alumno);
@@ -40,7 +45,7 @@ class InscripcionMateria
 
         int getMaterias2(int pos) const;
 
-        bool* getEstadoMaterias();
+        bool getEstadoMaterias(int);
 
         int getNumMaterias();
 
@@ -60,7 +65,7 @@ class InscripcionMateria
 
         int cargarBajaDeUnRegistroDeIncriccionesMateria(const Alumno& alumno,const Materia& materia,int ,int );
 
-        void grabarEnDiscoInscripcionMateria(const Alumno& alumno, const Materia& materia);
+        void grabarEnDiscoInscripcionMateria();
 
         void ModificarEnDiscoInscripcionMateria(int pos);
 
@@ -72,6 +77,11 @@ class InscripcionMateria
 
         bool preguntarContinuar(const std::string& mensaje);
 
+
+
+        void MostrarTodosLosRegistrosIncripcionMateria (); ///LO ARME PARA VER QUE NO SE ESTEN DUPLICANDO LOS REGISTROS
+
+        void reset();  // Inicializa los miembros con valores predeterminados
 
 
 

@@ -101,6 +101,8 @@ bool finalesDisponibles();
 bool finalDisponible(int);
 int idMateriaPorIdEvaluacion(int);
 
+void inscribirseMateriaAlumno(int);
+
 ///---LISTADOS ---\\
 
 void ListarEvaluaciones (int legajo);

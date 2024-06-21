@@ -627,6 +627,14 @@ int idMateriaPorIdEvaluacion(int idEvaluacion) {
   }
 }
 
+void inscribirseMateriaAlumno (int legajo)
+{ InscripcionMateria aux;
+
+aux.inscribirseMateria(legajo);
+
+}
+
+
 ///--- MENÚS ROLES ---\\
 
 ///--- MENÚ ADMINISTRADOR ---\\
@@ -2016,37 +2024,14 @@ void subMenuAlumnoPlanificacionCursada() {
   switch (opcion) {
     case 49:  /// VER PLANIF
       system("cls");
-
-      if (inscriptoMaterias()) {
         inscripcionMateriaObj.mostrarRegistroDeIncriccionesMateria(legajo);
-      }
-      else {
-        cout << endl
-             << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo
-             << " NO SE ENCUENTRA INSCRIPTO A MATERIAS ----" << endl
-             << endl;
-        cout << endl << endl;
-        system("pause");
-        system("cls");
-      }
 
       system("cls");
       subMenuAlumnoPlanificacionCursada();
       break;
     case 50:  /// ANOTARSE A MATERIAS
       system("cls");
-      if (contarMaterias() > 0) {
-        inscripcionMateriaObj.inscribirseMateria(legajo);
-      }
-      else {
-        cout << endl
-             << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----"
-             << endl
-             << endl;
-        cout << endl << endl;
-        system("pause");
-        system("cls");
-      }
+        inscribirseMateriaAlumno(legajo);
 
       system("cls");
       subMenuAlumnoPlanificacionCursada();
@@ -2169,7 +2154,7 @@ bool inscriptoMaterias() {
   while (fread(&inscripcionObj, sizeof(InscripcionMateria), 1, pInscMat)) {
     if (inscripcionObj.getAlumno().getLegajo() == legajo) {
       for (int x = 0; x < 7; x++) {
-        if (inscripcionObj.getEstadoMaterias()[x]) {
+        if (inscripcionObj.getEstadoMaterias(x)) {
           return true;
         }
       }
@@ -2203,7 +2188,7 @@ bool finalesDisponibles() {
     while (fread(&inscMatObj, sizeof(InscripcionMateria), 1, pInscMat)) {
       if (inscMatObj.getAlumno().getLegajo() == legajo) {
         for (int x = 0; x < 7; x++) {
-          if (evaluacionObj.getIdMateria() == inscMatObj.getMaterias()[x].getId() && inscMatObj.getEstadoMaterias()[x]) {
+          if (evaluacionObj.getIdMateria() == inscMatObj.getMaterias2(x) && inscMatObj.getEstadoMaterias(x)== true) {
             fclose(pInscMat);
             fclose(pEval);
             return true;
@@ -2245,7 +2230,7 @@ bool finalDisponible(int idEvaluacion) {
         for (int x = 0; x < 7; x++) {
           if (evaluacionObj.getIdMateria() ==
                   inscMatObj.getMaterias()[x].getId() &&
-              inscMatObj.getEstadoMaterias()[x]) {
+              inscMatObj.getEstadoMaterias(x)) {
             if (evaluacionObj.getId() == idEvaluacion) {
               fclose(pInscMat);
               fclose(pEval);
@@ -2412,8 +2397,8 @@ void verExamenesFinalesAlumno() {
         if (inscMatObj.getAlumno().getLegajo() == legajo) {
           for (int x = 0; x < 7; x++) {
             if (evaluacionObj.getIdMateria() ==
-                    inscMatObj.getMaterias()[x].getId() &&
-                inscMatObj.getEstadoMaterias()[x]) {
+                    inscMatObj.getMaterias2(x) &&
+                inscMatObj.getEstadoMaterias(x)) {
               cout << left << setw(anchoFecha)
                    << evaluacionObj.getFecha().toString("DD/MM/YYYY") << "|"
                    << left << setw(anchoID) << evaluacionObj.getId() << "|"
