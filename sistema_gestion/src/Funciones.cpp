@@ -634,6 +634,12 @@ aux.inscribirseMateria(legajo);
 
 }
 
+void inscribirseEvaluacionAlumno(int legajo)
+{InscripcionEvaluacion aux;
+
+aux.inscribirseEvaluacion(legajo);
+
+}
 
 ///--- MENÚS ROLES ---\\
 
@@ -2057,38 +2063,7 @@ void subMenuAlumnoPlanificacionCursada() {
       break;
     case 52:  /// INSCRIBIRSE A FINALES
       system("cls");
-
-      if (contarEvaluaciones() > 0) {
-        if (inscriptoMaterias()) {
-          if (finalesDisponibles()) {
-            inscripcionEvaluacionObj.inscribirseEvaluacion(legajo);
-            system("cls");
-            subMenuAlumnoPlanificacionCursada();
-            break;
-
-          }
-          else {
-            cout << endl
-                 << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CORRESPONDIENTES A LAS MATERIAS INSCRIPTAS ----"
-                 << endl
-                 << endl;
-          }
-        }
-        else {
-          cout << endl
-               << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo
-               << " NO SE ENCUENTRA INSCRIPTO A MATERIAS ----" << endl
-               << endl;
-          cout << endl << endl;
-        }
-      }
-      else {
-        cout << endl
-             << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CARGADOS EN EL SISTEMA ----"
-             << endl
-             << endl;
-        cout << endl << endl;
-      }
+        inscribirseEvaluacionAlumno(legajo);
 
       system("pause");
       system("cls");

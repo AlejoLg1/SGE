@@ -23,11 +23,6 @@ class InscripcionMateria
 
         InscripcionMateria();
 
-        ///---- DESTRUCTOR ----
-
-        //~InscripcionMateria();
-
-
         ///---- SETTERS ----\\\
 
         void setAlumno(Alumno);
@@ -76,8 +71,6 @@ class InscripcionMateria
         bool leerEntrada(int& entrada);
 
         bool preguntarContinuar(const std::string& mensaje);
-
-
 
         void MostrarTodosLosRegistrosIncripcionMateria (); ///LO ARME PARA VER QUE NO SE ESTEN DUPLICANDO LOS REGISTROS
 

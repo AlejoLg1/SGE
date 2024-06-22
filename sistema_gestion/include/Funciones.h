@@ -102,6 +102,7 @@ bool finalDisponible(int);
 int idMateriaPorIdEvaluacion(int);
 
 void inscribirseMateriaAlumno(int);
+void inscribirseEvaluacionAlumno(int);
 
 ///---LISTADOS ---\\
 

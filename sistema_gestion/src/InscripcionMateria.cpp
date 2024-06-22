@@ -1,9 +1,7 @@
 #include "InscripcionMateria.h"
-
 #include <cstdlib>  // Para std::system
 #include <iomanip>
 #include <limits>  // Para std::numeric_limits
-
 #include "Alumno.h"
 #include "Funciones.h"
 #include "Materia.h"
@@ -21,10 +19,6 @@ InscripcionMateria::InscripcionMateria(){
     }
 }
 
-///---- DESTRUCTOR ----///
-/*InscripcionMateria::~InscripcionMateria() {
-
-}*/
 
 ///---- SETTERS ----\\\
 
@@ -41,10 +35,7 @@ void InscripcionMateria::setMaterias(const Materia& aux, int pos) {
 }
 
 void InscripcionMateria::setEstadoMaterias(bool aux, int pos) {
-  // Verificación de Rango: Se asegura de que pos esté dentro del rango válido
-  // de _estadoMaterias
-
-    _estadoMaterias[pos] = aux;
+  _estadoMaterias[pos] = aux;
 
 
 }
@@ -86,8 +77,6 @@ InscripcionMateria aux;
 int posicion=0;
 bool bandera=false;
 
-
-//posicion = buscarInscripcionMateria(Legajo);
 while (aux.leerEnDiscoInscripcionMateriaPorPosicion(posicion))
 {
     if (aux.getAlumno().getLegajo()== Legajo)
@@ -105,54 +94,10 @@ while (aux.leerEnDiscoInscripcionMateriaPorPosicion(posicion))
 }
 if (bandera==false)
 {
-    //_alumno=alumno;
-    //_materias[0]=materia;
-    //_estadoMaterias[0]=true;
-    //_numMaterias=1;
-    //grabarEnDiscoInscripcionMateria();
+
     return -1;
 }
 
-
-/*
-aux.leerEnDiscoInscripcionMateriaPorPosicion(posicion);
-
-  if (aux.getNumMaterias() >= 7) {
-    cout << endl
-         << "---- LÍMITE INSCRIPCIONES REALIZADAS ALCANZADO ----" << endl;
-    return -2;
-  }
-  else {
-    if (posicion  == -1) {
-        cout<<"cantidad de materias :"<<aux.getNumMaterias()<<endl;
-        //aux.setAlumno(alumno);
-        //aux.setMaterias(materia,aux.getNumMaterias());
-        //aux.setEstadoMaterias(true,aux.getNumMaterias());
-        //aux.setNumMaterias(true);
-        _alumno = alumno;
-        _materias[0] = materia;  // Agrega la materia al final del arreglo
-        _estadoMaterias[0] = true;  // Agrega el estado de la materia al final del arreglo
-        _numMaterias=1; //setNumMaterias(true);  // Incrementa el contador de materia
-
-      grabarEnDiscoInscripcionMateria();
-      return -1;
-    }
-    else {
-
-        cout<<"cantidad de materias :"<<aux.getNumMaterias()<<endl;
-        aux.setAlumno(alumno);
-        aux.setMaterias(materia,aux.getNumMaterias());
-        aux.setEstadoMaterias(true,aux.getNumMaterias());
-        aux.setNumMaterias(true);
-        //_alumno = alumno;
-       // _materias[aux.getNumMaterias()] = materia;  // Agrega la materia al final del arreglo
-     //_estadoMaterias[aux.getNumMaterias()] = true;  // Agrega el estado de la materia al final del arreglo
-       // _numMaterias=aux.getNumMaterias()+1; //setNumMaterias(true);  // Incrementa el contador de materia
-        aux.ModificarEnDiscoInscripcionMateria(posicion);
-      return posicion;
-    }
-  }
-*/
 
 }
 
@@ -213,7 +158,6 @@ void InscripcionMateria::inscribirseMateria(int legajo) {
                 _estadoMaterias[0]=true;
                 _numMaterias=1;
                 grabarEnDiscoInscripcionMateria();
-      //inscMat.grabarEnDiscoInscripcionMateria(legAux, matAux);
           std::cout << std::endl
               << std::endl
               << "---- INSCRIPCIÓN REALIZADA CON ÉXITO ----" << std::endl;
@@ -225,7 +169,6 @@ void InscripcionMateria::inscribirseMateria(int legajo) {
       return;
     }
     else {
-      //inscMat.ModificarEnDiscoInscripcionMateria(posicionDeInscripcion)
           std::cout << std::endl
               << std::endl
               << "---- MATERIA AGREGADA CON ÉXITO ----" << std::endl;
@@ -297,9 +240,6 @@ void InscripcionMateria::mostrarRegistroDeIncriccionesMateria(int legajo) {
   legAux = buscarAlumno(legajo);
 
   while (leerEnDiscoInscripcionMateriaPorPosicion(pos)) {
-        //MostrarTodosLosRegistrosIncripcionMateria();
-  //system("pause");
-
     if (_alumno.getLegajo() == legAux.getLegajo()) {
       mostrarInscripcionMateria();
     }

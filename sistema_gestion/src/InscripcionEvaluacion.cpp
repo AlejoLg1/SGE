@@ -20,7 +20,7 @@ void InscripcionEvaluacion::setAlumno(Alumno aux) { _alumno = aux; }
 void InscripcionEvaluacion::setMaterias(const Materia& aux, int pos) {
   if (pos >= 0 && pos < 7) {
     _materias[pos] = aux;
-  } 
+  }
   else {
     cout << endl << "---- ERROR : POSICIÓN FUERA DE RANGO ----" << endl << endl;
     system("pause");
@@ -30,14 +30,22 @@ void InscripcionEvaluacion::setMaterias(const Materia& aux, int pos) {
 void InscripcionEvaluacion::setMateriasNotas(float nota, int pos) {
   if (pos >= 0 && pos < 7) {
     _materiasNotas[pos] = nota;
-  } 
+  }
   else {
     cout << endl << "---- ERROR : POSICIÓN FUERA DE RANGO ----" << endl << endl;
     system("pause");
   }
 }
 
-void InscripcionEvaluacion::setNumMaterias(int num) { _numMaterias = num; }
+void InscripcionEvaluacion::setNumMaterias(bool sumar) {
+  if (sumar) {
+    _numMaterias++;
+  }
+  else {
+    _numMaterias--;
+  }
+
+}
 
 ///---- GETTERS ----\\\
 
@@ -55,38 +63,44 @@ int InscripcionEvaluacion::getNumMaterias() { return _numMaterias; }
 
 ///---- MÉTODOS ----\\\
 
-int InscripcionEvaluacion::cargarInscripcionEvaluacion(const Alumno& alumno,
-                                                       const Materia& materia,
-                                                       int legajo) {
-  if (_numMaterias >= 7) {
-    throw std::runtime_error("No se pueden cargar más de 7 materias");
-  } 
-  else {
-    if (int posicion = buscarInscripcionEvaluacion(legajo) == -1) {
-      _alumno = alumno;
-      _materias[_numMaterias] = materia;
-      _materiasNotas[_numMaterias] = 0;  // Initializing the note
-      _numMaterias++;
-      return -1;
-    }
+int InscripcionEvaluacion::cargarInscripcionEvaluacion(const Alumno& alumno,const Materia& materia,int legajo) {
+  reset();
+  InscripcionEvaluacion aux;
+  int posicion=0;
+  bool bandera=false;
 
-    else {
-      _alumno = alumno;
-      _materias[_numMaterias] = materia;
-      _materiasNotas[_numMaterias] = 0;  // Initializing the note
-      _numMaterias++;
-      return posicion;
+while (aux.leerEnDiscoInscripcionEvaluacionPorPosicion(posicion))
+{
+    if (aux.getAlumno().getLegajo()== legajo)
+    {
+        aux.setAlumno(alumno);
+        aux.setMaterias(materia,aux.getNumMaterias());
+        aux.setNumMaterias(1);
+        aux.ModificarEnDiscoInscripcionEvaluacion(posicion);
+        bandera=true;
+        return -3;
     }
-  }
-  return -1;
+    posicion++;
 }
+
+if (bandera==false)
+{
+    return -1;
+}
+
+}
+
+
 
 void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
   Alumno legAux;
   Evaluacion evalAux;
   Materia matAux;
-  int idEvaluacion = 0;
+  int idEvaluacion, opcion = 0;
   bool continuar = true;
+  InscripcionEvaluacion inscEva;
+
+  inscEva.reset();
 
   while (continuar) {
     std::system("cls");
@@ -136,20 +150,32 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
     legAux = buscarAlumno(legajo);
     evalAux = buscarEvaluacion(idEvaluacion);
     matAux = buscarMateria(evalAux.getIdMateria());
-    int posicionDeInscripcion =
-        cargarInscripcionEvaluacion(legAux, matAux, legajo);
+    int posicionDeInscripcion = inscEva.cargarInscripcionEvaluacion(legAux, matAux, legajo);
 
     if (posicionDeInscripcion == -1) {
-      grabarEnDiscoInscripcionEvaluacion(legAux, evalAux);
-    } else {
-      ModificarEnDiscoInscripcionEvaluacion(posicionDeInscripcion);
-    }
-
-    std::cout << std::endl
+            _alumno=legAux;
+            _materias[0]=matAux;
+            _inscriptoMaterias[0]=true;
+            _numMaterias=1;
+            grabarEnDiscoInscripcionEvaluacion();
+                std::cout << std::endl
               << std::endl
               << "---- INSCRIPCIÓN REALIZADA CON ÉXITO ----" << std::endl;
     system("Pause");
     continuar = false;
+
+    }
+    else if (posicionDeInscripcion == -2) {
+      system("pause");
+      return;
+    }
+    else {
+          std::cout << std::endl
+              << std::endl
+              << "---- EVALUACION AGREGADA CON ÉXITO ----" << std::endl;
+    system("Pause");
+    continuar = false;
+    }
   }
 }
 
@@ -275,7 +301,7 @@ int InscripcionEvaluacion::cargarBajaDeUnRegistroDeIncriccionesEvaluacion(
   return posicion;
 }
 
-void InscripcionEvaluacion::grabarEnDiscoInscripcionEvaluacion(const Alumno& alumno, const Evaluacion& evaluacion) {
+void InscripcionEvaluacion::grabarEnDiscoInscripcionEvaluacion() {
   FILE* p;
 
   if (!(p = fopen("InscripcionEvaluacion.dat", "ab"))) {
@@ -354,3 +380,14 @@ bool InscripcionEvaluacion::preguntarContinuar(const std::string& mensaje) {
   }
   return opcion == 1;
 }
+
+// Método para resetear la clase
+    void InscripcionEvaluacion::reset() {
+       _alumno = Alumno();  // Asigna un nuevo objeto Alumno (debería tener un constructor por defecto)
+        for (int i = 0; i < 7; ++i) {
+            _materias[i] = Materia();  // Asigna nuevos objetos Materia (deberían tener un constructor por defecto)
+            _materiasNotas[i]=0;
+            _inscriptoMaterias[i] = false;  // Establece todos los estados de materias a false
+        }
+        _numMaterias = 0;  // Reinicia el contador de materias
+    }

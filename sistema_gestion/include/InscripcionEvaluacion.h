@@ -26,7 +26,7 @@ class InscripcionEvaluacion
 
         void setMateriasNotas(float, int);
 
-        void setNumMaterias(int);
+        void setNumMaterias(bool);
 
         ///---- GETTERS ----\\\
 
@@ -56,7 +56,7 @@ class InscripcionEvaluacion
 
         int cargarBajaDeUnRegistroDeIncriccionesEvaluacion(const Alumno& alumno, const Materia& materia, int , int);
 
-        void grabarEnDiscoInscripcionEvaluacion(const Alumno& alumno, const Evaluacion& evaluacion);
+        void grabarEnDiscoInscripcionEvaluacion();
 
         void ModificarEnDiscoInscripcionEvaluacion(int pos);
 
@@ -67,6 +67,8 @@ class InscripcionEvaluacion
         bool leerEntrada(int& entrada);
 
         bool preguntarContinuar(const std::string& mensaje);
+
+        void reset();
 
 
 
