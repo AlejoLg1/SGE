@@ -90,6 +90,11 @@ int contarAvisos();
 
 void menuProfesor();
 void subMenuProfesorGestionMaterias();
+int contarInscipcionEvaluaciones();
+void cargarNotas();
+bool validarExistenciaEvaluacion(int);
+int obtenerIdMateriaEvaluacion(int);
+bool validarProfesorAsignado(int, int);
 
 void menuAlumno();
 void subMenuAlumnoPlanificacionCursada();
@@ -100,6 +105,7 @@ void verExamenesFinalesAlumno();
 bool finalesDisponibles();
 bool finalDisponible(int);
 int idMateriaPorIdEvaluacion(int);
+int contarMateriasInscripto();
 
 void inscribirseMateriaAlumno(int);
 void inscribirseEvaluacionAlumno(int);

@@ -627,18 +627,22 @@ int idMateriaPorIdEvaluacion(int idEvaluacion) {
   }
 }
 
-void inscribirseMateriaAlumno (int legajo)
-{ InscripcionMateria aux;
+void inscribirseMateriaAlumno (int legajo) {
+    InscripcionMateria aux;
 
-aux.inscribirseMateria(legajo);
-
+    if(contarMateriasInscripto() < 7){
+        aux.inscribirseMateria(legajo);
+    }
+    else{
+        cout << endl << "---- ERROR : LÍMITE DE INSCRIPCIONES ALCANZADO ----" << endl << endl << endl;
+        system("pause");
+    }
 }
 
-void inscribirseEvaluacionAlumno(int legajo)
-{InscripcionEvaluacion aux;
+void inscribirseEvaluacionAlumno(int legajo) {
+    InscripcionEvaluacion aux;
 
-aux.inscribirseEvaluacion(legajo);
-
+    aux.inscribirseEvaluacion(legajo);
 }
 
 ///--- MENÚS ROLES ---\\
@@ -1612,7 +1616,18 @@ void subMenuProfesorGestionMaterias() {
     case 52:
       system("cls");
       ///-- >> CARGAR NOTAS
+      if (contarInscipcionEvaluaciones() > 0) {
+            cargarNotas();
+      }
+      else {
+        cout << endl
+             << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A EXÁMENES FINALES CARGADAS EN EL SISTEMA ----"
+             << endl
+             << endl;
+        cout << endl << endl;
+      }
 
+      system("pause");
       system("cls");
       subMenuProfesorGestionMaterias();
       break;
@@ -1756,9 +1771,8 @@ InscripcionEvaluacion BuscarArchivoInscripcionEvaluacion(int legajo) {
 
   while (archivoInscripcionEvaluacion.leerEnDiscoInscripcionEvaluacionPorPosicion(pos)) {
     if (archivoInscripcionEvaluacion.getAlumno().getLegajo() == legajo) {
-      return archivoInscripcionEvaluacion;
+        return archivoInscripcionEvaluacion;
     }
-
     pos++;
   }
 }
@@ -1769,7 +1783,9 @@ void ListarEvaluaciones(int legajo) {
 }
 
 void ListarEvaluacionesInscripto(int legajo) {
-  BuscarEvaluacionesInscritoAlumno(BuscarArchivoInscripcionEvaluacion(legajo));
+    InscripcionEvaluacion archivoInscripcionEvaluacion;
+
+    BuscarEvaluacionesInscritoAlumno(BuscarArchivoInscripcionEvaluacion(legajo));
 }
 
 void verExamenesFinalesProfesor() {
@@ -1836,6 +1852,182 @@ void verExamenesFinalesProfesor() {
   fclose(pEval);
 }
 
+void cargarNotas() {
+    FILE *pInscEvaluacion;
+    InscripcionEvaluacion inscEvaluacionObj;
+
+    int idFinal;
+    int idMateria;
+    float nota;
+    bool flag = true, cargarNotas = false;
+
+    if (!(pInscEvaluacion = fopen("InscripcionEvaluacion.dat", "rb+"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
+
+    cout << endl << "Ingrese el ID del examen final (ID examen final 0 para salir): ";
+    cin >> idFinal;
+    cout << endl;
+
+    if (idFinal == 0) {
+        fclose(pInscEvaluacion);
+        cout << endl;
+        return;
+    }
+
+    if (!validarExistenciaEvaluacion(idFinal)) {
+        cout << endl << "---- ERROR : ID DE FINAL INEXISTENTE ----" << endl << endl;
+        fclose(pInscEvaluacion);
+        return;
+    }
+
+    idMateria = obtenerIdMateriaEvaluacion(idFinal);
+
+    if(!validarProfesorAsignado(idMateria, legajo)) {
+        cout << endl << "\t ---- ERROR : LA CARGA DE NOTAS DEL EXAMEN FINAL NO CORRESPONDE AL PROFESOR CON LEGAJO " << legajo << " ----" << endl << endl << endl;
+        return;
+    }
+
+    while (fread(&inscEvaluacionObj, sizeof(InscripcionEvaluacion), 1, pInscEvaluacion)) {
+        for (int x = 0; x < 7; x++) {
+            if (inscEvaluacionObj.getMaterias()[x].getId() == idMateria) {
+                if(inscEvaluacionObj.getMateriasNotas()[x] != 0){
+                    ;
+                }
+                else{
+                    if(flag){
+                        cargarNotas = true;
+                        flag = false;
+                    }
+                    system("cls");
+                    cout << endl << "Ingrese el ID del examen final (ID examen final 0 para salir): " << idFinal << endl;
+                    cout << endl << "\t - Legajo Alumno: " << inscEvaluacionObj.getAlumno().getLegajo() << endl;
+                    cout << endl << "\t - Nota (1 a 10): ";
+                    cin >> nota;
+
+                    while (nota <= 0 || nota > 10) {
+                        cout << endl << "---- ERROR : NOTA INVÁLIDA ---- " << endl << endl;
+                        system("pause");
+                        system("cls");
+                        cout << endl << "Ingrese el ID del examen final (ID examen final 0 para salir): " << idFinal << endl;
+                        cout << endl << "\t - Legajo Alumno: " << inscEvaluacionObj.getAlumno().getLegajo() << endl;
+                        cout << endl << "\t - Nota (1 a 10): ";
+                        cin >> nota;
+                    }
+
+                    inscEvaluacionObj.setMateriasNotas(nota, x);
+                    long offset = ftell(pInscEvaluacion) - sizeof(InscripcionEvaluacion);
+                    fseek(pInscEvaluacion, offset, SEEK_SET);
+                    fwrite(&inscEvaluacionObj, sizeof(InscripcionEvaluacion), 1, pInscEvaluacion);
+                    fseek(pInscEvaluacion, 0, SEEK_CUR);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    if(!cargarNotas){
+        cout << "\t ---- ERROR : NO SE ENCONTRARON NOTAS DISPONIBLES PARA CARGAR ----" << endl;
+    }
+
+    cout << endl << endl;
+    fclose(pInscEvaluacion);
+}
+
+
+int contarInscipcionEvaluaciones() {
+  FILE *pInscEvaluacion;
+  int cantInscEvals = 0;
+
+  if (!(pInscEvaluacion = fopen("InscripcionEvaluacion.dat", "ab"))) {
+    cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    return -1;
+  }
+
+  fseek(pInscEvaluacion, 0, SEEK_END);
+  cantInscEvals += ftell(pInscEvaluacion) / sizeof(InscripcionEvaluacion);
+  fseek(pInscEvaluacion, 0, SEEK_SET);
+  fclose(pInscEvaluacion);
+
+  return cantInscEvals;
+}
+
+bool validarExistenciaEvaluacion(int idFinal) {
+    FILE *pEvaluacion;
+    Evaluacion evaluacionObj;
+    bool existe = false;
+
+    if(!(pEvaluacion = fopen("evaluaciones.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        system("pause");
+        return false;
+    }
+
+    while(fread(&evaluacionObj, sizeof(Evaluacion), 1, pEvaluacion)) {
+        if(evaluacionObj.getId() == idFinal) {
+            existe = true;
+            break;
+        }
+    };
+
+    fclose(pEvaluacion);
+
+    return existe;
+}
+
+int obtenerIdMateriaEvaluacion(int idFinal) {
+    FILE *pEvaluacion;
+    Evaluacion evaluacionObj;
+    bool existe = false;
+    int idMateria = 0;
+
+    if(!(pEvaluacion = fopen("evaluaciones.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return false;
+    }
+
+    while(fread(&evaluacionObj, sizeof(Evaluacion), 1, pEvaluacion)) {
+        if(evaluacionObj.getId() == idFinal) {
+            idMateria = evaluacionObj.getIdMateria();
+            break;
+
+        }
+    };
+
+    fclose(pEvaluacion);
+
+    return idMateria;
+}
+
+bool validarProfesorAsignado(int idMateria, int legajo) {
+    FILE *pMat;
+    Materia materiaObj;
+    bool exito = false;
+
+    if(!(pMat = fopen("materias.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return false;
+    }
+
+    while(fread(&materiaObj, sizeof(Materia), 1, pMat)) {
+        if(materiaObj.getId() == idMateria) {
+            if(materiaObj.getProfesor().getLegajo() == legajo) {
+                exito = true;
+                break;
+            }
+        }
+    }
+
+    fclose(pMat);
+
+    if(!exito) {
+        return false;
+    }
+
+    return true;
+}
 ///--- MENÚ ALUMNO ---\\
 
 void menuAlumno() {
@@ -2030,14 +2222,14 @@ void subMenuAlumnoPlanificacionCursada() {
   switch (opcion) {
     case 49:  /// VER PLANIF
       system("cls");
-        inscripcionMateriaObj.mostrarRegistroDeIncriccionesMateria(legajo);
+      inscripcionMateriaObj.mostrarRegistroDeIncriccionesMateria(legajo);
 
       system("cls");
       subMenuAlumnoPlanificacionCursada();
       break;
     case 50:  /// ANOTARSE A MATERIAS
       system("cls");
-        inscribirseMateriaAlumno(legajo);
+      inscribirseMateriaAlumno(legajo);
 
       system("cls");
       subMenuAlumnoPlanificacionCursada();
@@ -2046,7 +2238,7 @@ void subMenuAlumnoPlanificacionCursada() {
       system("cls");
 
       if (inscriptoMaterias()) {
-        inscripcionMateriaObj.DarseDeBajaMateria(legajo);
+            inscripcionMateriaObj.DarseDeBajaMateria(legajo);
       }
       else {
         cout << endl
@@ -2063,9 +2255,8 @@ void subMenuAlumnoPlanificacionCursada() {
       break;
     case 52:  /// INSCRIBIRSE A FINALES
       system("cls");
-        inscribirseEvaluacionAlumno(legajo);
+      inscribirseEvaluacionAlumno(legajo);
 
-      system("pause");
       system("cls");
       subMenuAlumnoPlanificacionCursada();
       break;
@@ -2138,6 +2329,31 @@ bool inscriptoMaterias() {
 
   fclose(pInscMat);
   return false;
+}
+
+int contarMateriasInscripto() {
+  FILE *pInscMat;
+  InscripcionMateria inscripcionObj;
+  int contMaterias = 0;
+
+  if (!(pInscMat = fopen("InscripcionMateria.dat", "rb"))) {
+    cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    system("cls");
+    return false;
+  }
+
+  while (fread(&inscripcionObj, sizeof(InscripcionMateria), 1, pInscMat)) {
+    if (inscripcionObj.getAlumno().getLegajo() == legajo) {
+      for (int x = 0; x < 7; x++) {
+        if (inscripcionObj.getEstadoMaterias(x)) {
+          contMaterias++;
+        }
+      }
+    }
+  }
+
+  fclose(pInscMat);
+  return contMaterias;
 }
 
 bool finalesDisponibles() {
