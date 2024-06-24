@@ -702,7 +702,7 @@ void menuAdministrador() {
       system("cls");
       cout << "ACTIVANDO PERFIL DIRECTOR" << endl;
 
-      cout << endl << "\t- Legajo: ";
+      cout << endl << "\t- Legajo (Nro. de Legajo 0 para salir): ";
       cin >> legajoDirector;
       validarLegajo(legajoDirector);
 
@@ -715,7 +715,7 @@ void menuAdministrador() {
       system("cls");
       cout << "DESACTIVANDO PERFIL DIRECTOR" << endl;
 
-      cout << endl << "\t- Legajo: ";
+      cout << endl << "\t- Legajo (Nro. de Legajo 0 para salir): ";
       cin >> legajoDirector;
       validarLegajo(legajoDirector);
 
@@ -975,7 +975,7 @@ void subMenuDirectivoProfesor() {
       system("cls");
       cout << "ACTIVANDO PERFIL PROFESOR" << endl;
 
-      cout << endl << "\t- Legajo: ";
+      cout << endl << "\t- Legajo (Nro. de Legajo 0 para salir): ";
       cin >> legajoProfesor;
       validarLegajo(legajoProfesor);
 
@@ -988,7 +988,7 @@ void subMenuDirectivoProfesor() {
       system("cls");
       cout << "DESACTIVANDO PERFIL PROFESOR" << endl;
 
-      cout << endl << "\t- Legajo: ";
+      cout << endl << "\t- Legajo (Nro. de Legajo 0 para salir): ";
       cin >> legajoProfesor;
       validarLegajo(legajoProfesor);
 
@@ -1055,7 +1055,7 @@ void subMenuDirectivoAlumno() {
       system("cls");
       cout << "ACTIVANDO PERFIL ALUMNO" << endl;
 
-      cout << endl << "\t- Legajo: ";
+      cout << endl << "\t- Legajo (Nro. de Legajo 0 para salir): ";
       cin >> legajoAlumno;
       validarLegajo(legajoAlumno);
 
@@ -1068,7 +1068,7 @@ void subMenuDirectivoAlumno() {
       system("cls");
       cout << "DESACTIVANDO PERFIL ALUMNO" << endl;
 
-      cout << endl << "\t- Legajo: ";
+      cout << endl << "\t- Legajo (Nro. de Legajo 0 para salir):: ";
       cin >> legajoAlumno;
       validarLegajo(legajoAlumno);
 

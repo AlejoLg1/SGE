@@ -90,73 +90,77 @@ void Alumno::activarAlumno(int legajo) {
     bool usuarioEncontrado = false;
     FILE *pAlumno;
 
-    if(!(pAlumno = fopen("alumnos.dat", "rb+"))) {
-        system("cls");
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
-        return;
-    }
+    if(legajo != 0){
+        if(!(pAlumno = fopen("alumnos.dat", "rb+"))) {
+            system("cls");
+            cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+            return;
+        }
 
-    while (fread(this, sizeof(Alumno), 1, pAlumno)) {
-        if(this->getLegajo() == legajo) {
-            usuarioEncontrado = true;
-            if(this->getEstado() == false) {
-                this->setEstado(true);
-                long offset = ftell(pAlumno) - sizeof(Alumno);
-                fseek(pAlumno, offset, SEEK_SET);
-                fwrite(this, sizeof(Alumno), 1, pAlumno);
-                cout << endl << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl << endl;
-                system("pause");
-                break;
-            }
-            else {
-                cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO PREVIAMENTE ----" << endl << endl;
-                system("pause");
+        while (fread(this, sizeof(Alumno), 1, pAlumno)) {
+            if(this->getLegajo() == legajo) {
+                usuarioEncontrado = true;
+                if(this->getEstado() == false) {
+                    this->setEstado(true);
+                    long offset = ftell(pAlumno) - sizeof(Alumno);
+                    fseek(pAlumno, offset, SEEK_SET);
+                    fwrite(this, sizeof(Alumno), 1, pAlumno);
+                    cout << endl << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl << endl;
+                    system("pause");
+                    break;
+                }
+                else {
+                    cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO PREVIAMENTE ----" << endl << endl;
+                    system("pause");
+                }
             }
         }
-    }
 
-    if(!usuarioEncontrado) {
-        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
-        system("pause");
-    }
+        if(!usuarioEncontrado) {
+            cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+            system("pause");
+        }
 
-    fclose(pAlumno);
+        fclose(pAlumno);
+    }
 }
 
 void Alumno::desactivarAlumno(int legajo) {
     bool usuarioEncontrado = false;
     FILE *pAlumno;
 
-    if(!(pAlumno = fopen("alumnos.dat", "rb+"))) {
-        system("cls");
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
-        return;
-    };
-    while (fread(this, sizeof(Alumno), 1, pAlumno)) {
-        if(this->getLegajo() == legajo) {
-            usuarioEncontrado = true;
-            if(this->getEstado() == true) {
-                this->setEstado(false);
-                long offset = ftell(pAlumno) - sizeof(Alumno);
-                fseek(pAlumno, offset, SEEK_SET);
-                fwrite(this, sizeof(Alumno), 1, pAlumno);
-                cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl << endl;
-                system("pause");
-                break;
-            }
-            else {
-                cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO PREVIAMENTE ----" << endl;
-                system("pause");
+    if(legajo != 0){
+        if(!(pAlumno = fopen("alumnos.dat", "rb+"))) {
+            system("cls");
+            cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+            return;
+        };
+        while (fread(this, sizeof(Alumno), 1, pAlumno)) {
+            if(this->getLegajo() == legajo) {
+                usuarioEncontrado = true;
+                if(this->getEstado() == true) {
+                    this->setEstado(false);
+                    long offset = ftell(pAlumno) - sizeof(Alumno);
+                    fseek(pAlumno, offset, SEEK_SET);
+                    fwrite(this, sizeof(Alumno), 1, pAlumno);
+                    cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl << endl;
+                    system("pause");
+                    break;
+                }
+                else {
+                    cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO PREVIAMENTE ----" << endl;
+                    system("pause");
+                }
             }
         }
-    }
 
-    if(!usuarioEncontrado) {
-        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
-        system("pause");
-    }
+        if(!usuarioEncontrado) {
+            cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+            system("pause");
+        }
 
-    fclose(pAlumno);
+        fclose(pAlumno);
+    }
 }
 
 void Alumno::cambiarClave(int legajo, int clave) {

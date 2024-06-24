@@ -79,84 +79,88 @@ void Director::activarDirector(int legajo) {
   bool usuarioEncontrado = false;
   FILE *pDirectivo;
 
-  if (!(pDirectivo = fopen("directores.dat", "rb+"))) {
-    system("cls");
-    cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
-    return;
-  }
-
-  while (fread(this, sizeof(Director), 1, pDirectivo)) {
-    if (this->getLegajo() == legajo) {
-      usuarioEncontrado = true;
-      if (this->getEstado() == false) {
-        this->setEstado(true);
-        long offset = ftell(pDirectivo) - sizeof(Director);
-        fseek(pDirectivo, offset, SEEK_SET);
-        fwrite(this, sizeof(Director), 1, pDirectivo);
-        cout << endl
-             << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl
-             << endl;
-        system("pause");
-        break;
+  if(legajo != 0){
+      if (!(pDirectivo = fopen("directores.dat", "rb+"))) {
+        system("cls");
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
       }
-      else {
-        cout << endl
-             << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO "
-                "PREVIAMENTE ----"
-             << endl
-             << endl;
+
+      while (fread(this, sizeof(Director), 1, pDirectivo)) {
+        if (this->getLegajo() == legajo) {
+          usuarioEncontrado = true;
+          if (this->getEstado() == false) {
+            this->setEstado(true);
+            long offset = ftell(pDirectivo) - sizeof(Director);
+            fseek(pDirectivo, offset, SEEK_SET);
+            fwrite(this, sizeof(Director), 1, pDirectivo);
+            cout << endl
+                 << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl
+                 << endl;
+            system("pause");
+            break;
+          }
+          else {
+            cout << endl
+                 << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO "
+                    "PREVIAMENTE ----"
+                 << endl
+                 << endl;
+            system("pause");
+          }
+        }
+      }
+
+      if (!usuarioEncontrado) {
+        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
         system("pause");
       }
-    }
-  }
 
-  if (!usuarioEncontrado) {
-    cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
-    system("pause");
+      fclose(pDirectivo);
   }
-
-  fclose(pDirectivo);
 }
 
 void Director::desactivarDirector(int legajo) {
   bool usuarioEncontrado = false;
   FILE *pDirectivo;
 
-  if (!(pDirectivo = fopen("directores.dat", "rb+"))) {
-    system("cls");
-    cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
-    return;
-  };
-  while (fread(this, sizeof(Director), 1, pDirectivo)) {
-    if (this->getLegajo() == legajo) {
-      usuarioEncontrado = true;
-      if (this->getEstado() == true) {
-        this->setEstado(false);
-        long offset = ftell(pDirectivo) - sizeof(Director);
-        fseek(pDirectivo, offset, SEEK_SET);
-        fwrite(this, sizeof(Director), 1, pDirectivo);
-        cout << endl
-             << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl
-             << endl;
-        system("pause");
-        break;
+  if(legajo != 0){
+      if (!(pDirectivo = fopen("directores.dat", "rb+"))) {
+        system("cls");
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+      };
+      while (fread(this, sizeof(Director), 1, pDirectivo)) {
+        if (this->getLegajo() == legajo) {
+          usuarioEncontrado = true;
+          if (this->getEstado() == true) {
+            this->setEstado(false);
+            long offset = ftell(pDirectivo) - sizeof(Director);
+            fseek(pDirectivo, offset, SEEK_SET);
+            fwrite(this, sizeof(Director), 1, pDirectivo);
+            cout << endl
+                 << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl
+                 << endl;
+            system("pause");
+            break;
+          }
+          else {
+            cout << endl
+                 << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO "
+                    "PREVIAMENTE ----"
+                 << endl;
+            system("pause");
+          }
+        }
       }
-      else {
-        cout << endl
-             << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO "
-                "PREVIAMENTE ----"
-             << endl;
+
+      if (!usuarioEncontrado) {
+        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
         system("pause");
       }
-    }
-  }
 
-  if (!usuarioEncontrado) {
-    cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
-    system("pause");
+      fclose(pDirectivo);
   }
-
-  fclose(pDirectivo);
 }
 
 void Director::cambiarClave(int legajo, int clave) {

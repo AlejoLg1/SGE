@@ -60,74 +60,77 @@ void Profesor::activarProfesor(int legajo) {
     bool usuarioEncontrado = false;
     FILE *pProf;
 
-    if(!(pProf = fopen("profesores.dat", "rb+"))) {
-        system("cls");
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
-        return;
-    }
+    if(legajo != 0){
+        if(!(pProf = fopen("profesores.dat", "rb+"))) {
+            system("cls");
+            cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+            return;
+        }
 
-    while (fread(this, sizeof(Profesor), 1, pProf)) {
-        if(this->getLegajo() == legajo) {
-            usuarioEncontrado = true;
-            if(this->getEstado() == false) {
-                this->setEstado(true);
-                long offset = ftell(pProf) - sizeof(Profesor);
-                fseek(pProf, offset, SEEK_SET);
-                fwrite(this, sizeof(Profesor), 1, pProf);
-                cout << endl << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl << endl;
-                system("pause");
-                break;
-            }
-            else {
-                cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO PREVIAMENTE ----" << endl << endl;
-                system("pause");
+        while (fread(this, sizeof(Profesor), 1, pProf)) {
+            if(this->getLegajo() == legajo) {
+                usuarioEncontrado = true;
+                if(this->getEstado() == false) {
+                    this->setEstado(true);
+                    long offset = ftell(pProf) - sizeof(Profesor);
+                    fseek(pProf, offset, SEEK_SET);
+                    fwrite(this, sizeof(Profesor), 1, pProf);
+                    cout << endl << "USUARIO MARCADO COMO ACTIVO CON ÉXITO " << endl << endl;
+                    system("pause");
+                    break;
+                }
+                else {
+                    cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO PREVIAMENTE ----" << endl << endl;
+                    system("pause");
+                }
             }
         }
-    }
 
-    if(!usuarioEncontrado) {
-        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
-        system("pause");
-    }
+        if(!usuarioEncontrado) {
+            cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+            system("pause");
+        }
 
-    fclose(pProf);
+        fclose(pProf);
+    }
 }
 
 void Profesor::desactivarProfesor(int legajo) {
     bool usuarioEncontrado = false;
     FILE *pProf;
 
-    if(!(pProf = fopen("profesores.dat", "rb+"))) {
-        system("cls");
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
-        return;
-    };
-    while (fread(this, sizeof(Profesor), 1, pProf)) {
-        if(this->getLegajo() == legajo) {
-            usuarioEncontrado = true;
-            if(this->getEstado() == true) {
-                this->setEstado(false);
-                long offset = ftell(pProf) - sizeof(Profesor);
-                fseek(pProf, offset, SEEK_SET);
-                fwrite(this, sizeof(Profesor), 1, pProf);
-                cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl << endl;
-                system("pause");
-                break;
-            }
-            else {
-                cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO PREVIAMENTE ----" << endl;
-                system("pause");
+    if(legajo != 0){
+        if(!(pProf = fopen("profesores.dat", "rb+"))) {
+            system("cls");
+            cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+            return;
+        };
+        while (fread(this, sizeof(Profesor), 1, pProf)) {
+            if(this->getLegajo() == legajo) {
+                usuarioEncontrado = true;
+                if(this->getEstado() == true) {
+                    this->setEstado(false);
+                    long offset = ftell(pProf) - sizeof(Profesor);
+                    fseek(pProf, offset, SEEK_SET);
+                    fwrite(this, sizeof(Profesor), 1, pProf);
+                    cout << endl << "USUARIO MARCADO COMO INACTIVO CON ÉXITO " << endl << endl;
+                    system("pause");
+                    break;
+                }
+                else {
+                    cout << endl << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO PREVIAMENTE ----" << endl;
+                    system("pause");
+                }
             }
         }
+
+        if(!usuarioEncontrado) {
+            cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+            system("pause");
+        }
+
+        fclose(pProf);
     }
-
-    if(!usuarioEncontrado) {
-        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
-        system("pause");
-    }
-
-    fclose(pProf);
-
 }
 
 void Profesor::cambiarClave(int legajo, int clave) {
