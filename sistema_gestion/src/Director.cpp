@@ -49,9 +49,10 @@ bool Director::getEstado() { return _estado; }
 
 ///---- MÉTODOS ----\\\
 
-void Director::cargarDirector() {
+bool Director::cargarDirector() {
   int clave;
   bool estado;
+  bool salir = false;
 
   cout << "CREANDO PERFIL DIRECTOR" << endl;
 
@@ -60,7 +61,10 @@ void Director::cargarDirector() {
   cout << getLegajo();
   cout << endl;
 
-  Persona::cargar();
+  salir = Persona::cargar();
+  if(salir) {
+    return true;
+  }
 
   cout << endl << "\t - Contraseña (numérica): ";
   cin >> clave;
@@ -94,7 +98,7 @@ void Director::activarDirector(int legajo) {
              << endl;
         system("pause");
         break;
-      } 
+      }
       else {
         cout << endl
              << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO ACTIVO "
@@ -136,7 +140,7 @@ void Director::desactivarDirector(int legajo) {
              << endl;
         system("pause");
         break;
-      } 
+      }
       else {
         cout << endl
              << "---- ATENCIÓN: EL USUARIO YA HABÍA SIDO MARCADO COMO INACTIVO "
@@ -176,7 +180,7 @@ void Director::cambiarClave(int legajo, int clave) {
         cout << endl << "CONTRASEÑA CAMBIADA CON ÉXITO " << endl << endl;
         system("pause");
         break;
-      } 
+      }
       else {
         cout << endl << "---- ERROR: CONTRASEÑAS IGUALES ----" << endl << endl;
         system("pause");
@@ -208,7 +212,11 @@ void Director::grabarEnDiscoDirector() {
     cout << "El ARCHIVO NO SE PUDO CREAR O ABRIR" << endl;
   }
 
-  this->cargarDirector();
+  if(this->cargarDirector()) {
+    fclose(p);
+    return;
+  }
+
   fwrite(this, sizeof(Director), 1, p);
 
   fclose(p);

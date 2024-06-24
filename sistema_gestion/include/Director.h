@@ -39,7 +39,7 @@ class Director : public Persona
 
         ///---- MÉTODOS ----\\\
 
-        void cargarDirector();
+        bool cargarDirector();
 
         void activarDirector(int);
 
