@@ -43,7 +43,6 @@
 		<Unit filename="include/Fecha.h" />
 		<Unit filename="include/Funciones.h" />
 		<Unit filename="include/InscripcionEvaluacion.h" />
-		<Unit filename="include/InscripcionEvalucion.h" />
 		<Unit filename="include/InscripcionMateria.h" />
 		<Unit filename="include/Materia.h" />
 		<Unit filename="include/Persona.h" />
