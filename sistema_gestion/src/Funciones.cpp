@@ -733,12 +733,14 @@ void menuAdministrador() {
       cout << "CAMBIANDO CONTRASEÑA" << endl;
 
       cout << endl << "\t - Contraseña anterior: " << clave << endl;
-      cout << endl << "\t - Contraseña nueva (numérica): ";
+      cout << endl << "\t - Contraseña nueva (numérica / Contraseña 0 para salir): ";
       cin >> nuevaClave;
 
       administradorObj.cambiarClave(legajo, nuevaClave);
 
-      clave = nuevaClave;
+      if(nuevaClave != 0){
+        clave = nuevaClave;
+      }
 
       system("cls");
       menuAdministrador();
@@ -907,12 +909,14 @@ void menuDirectivo() {
       cout << "CAMBIANDO CONTRASEÑA" << endl;
 
       cout << endl << "\t - Contraseña anterior: " << clave << endl;
-      cout << endl << "\t - Contraseña nueva (numérica): ";
+      cout << endl << "\t - Contraseña nueva (numérica / Contraseña 0 para salir): ";
       cin >> nuevaClave;
 
       directorObj.cambiarClave(legajo, nuevaClave);
 
-      clave = nuevaClave;
+      if(nuevaClave != 0){
+        clave = nuevaClave;
+      }
 
       system("cls");
       menuDirectivo();
@@ -1519,12 +1523,14 @@ void menuProfesor() {
       cout << "CAMBIANDO CONTRASEÑA" << endl;
 
       cout << endl << "\t - Contraseña anterior: " << clave << endl;
-      cout << endl << "\t - Contraseña nueva (numérica): ";
+      cout << endl << "\t - Contraseña nueva (numérica / Contraseña 0 para salir): ";
       cin >> nuevaClave;
 
       profesorObj.cambiarClave(legajo, nuevaClave);
 
-      clave = nuevaClave;
+      if(nuevaClave != 0){
+        clave = nuevaClave;
+      }
 
       system("cls");
       menuProfesor();
@@ -2119,12 +2125,14 @@ void menuAlumno() {
       cout << "CAMBIANDO CONTRASEÑA" << endl;
 
       cout << endl << "\t - Contraseña anterior: " << clave << endl;
-      cout << endl << "\t - Contraseña nueva (numérica): ";
+      cout << endl << "\t - Contraseña nueva (numérica / Contraseña 0 para salir): ";
       cin >> nuevaClave;
 
       alumnoObj.cambiarClave(legajo, nuevaClave);
 
-      clave = nuevaClave;
+      if(nuevaClave != 0){
+        clave = nuevaClave;
+      }
 
       menuAlumno();
       break;

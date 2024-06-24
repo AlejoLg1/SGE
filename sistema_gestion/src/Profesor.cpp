@@ -138,37 +138,39 @@ void Profesor::cambiarClave(int legajo, int clave) {
     bool usuarioEncontrado = false;
     FILE *pProf;
 
-    if(!(pProf = fopen("profesores.dat", "rb+"))) {
-        system("cls");
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
-        return;
-    }
+    if(clave != 0) {
+        if(!(pProf = fopen("profesores.dat", "rb+"))) {
+            system("cls");
+            cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+            return;
+        }
 
-    while (fread(this, sizeof(Profesor), 1, pProf)) {
-        if(this->getLegajo() == legajo) {
-            usuarioEncontrado = true;
-            if(this->getClave() != clave) {
-                this->setClave(clave);
-                long offset = ftell(pProf) - sizeof(Profesor);
-                fseek(pProf, offset, SEEK_SET);
-                fwrite(this, sizeof(Profesor), 1, pProf);
-                cout << endl << "CONTRASEÑA CAMBIADA CON ÉXITO " << endl << endl;
-                system("pause");
-                break;
-            }
-            else {
-                cout << endl << "---- ERROR: CONTRASEÑAS IGUALES ----" << endl << endl;
-                system("pause");
+        while (fread(this, sizeof(Profesor), 1, pProf)) {
+            if(this->getLegajo() == legajo) {
+                usuarioEncontrado = true;
+                if(this->getClave() != clave) {
+                    this->setClave(clave);
+                    long offset = ftell(pProf) - sizeof(Profesor);
+                    fseek(pProf, offset, SEEK_SET);
+                    fwrite(this, sizeof(Profesor), 1, pProf);
+                    cout << endl << endl << "CONTRASEÑA CAMBIADA CON ÉXITO " << endl << endl;
+                    system("pause");
+                    break;
+                }
+                else {
+                    cout << endl << endl << "---- ERROR: CONTRASEÑAS IGUALES ----" << endl << endl;
+                    system("pause");
+                }
             }
         }
-    }
 
-    if(!usuarioEncontrado) {
-        cout << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
-        system("pause");
-    }
+        if(!usuarioEncontrado) {
+            cout << endl << endl << "---- ERROR: USUARIO NO ENCONTRADO ----" << endl << endl;
+            system("pause");
+        }
 
-    fclose(pProf);
+        fclose(pProf);
+    }
 }
 
 bool Profesor::cargarProfesor() {
