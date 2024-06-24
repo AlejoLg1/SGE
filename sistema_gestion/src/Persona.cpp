@@ -29,11 +29,9 @@ bool Persona::esValido(const char* str) {
 void Persona::setNombre(char* nombre) {
     while (!esValido(nombre)) {
         cout << "\n\t---- ERROR : NOMBRE INVÁLIDO ----" << endl;
-        cout << "\n\t - Nombre: ";
+        cout << "\n\t - Nombre ('NULL' para salir): ";
         cin >> nombre;
     }
-    strncpy(_nombre, nombre, 15);
-    _nombre[15] = '\0';
 }
 
 void Persona::setApellido(char* apellido) {
@@ -66,10 +64,12 @@ bool Persona::cargar() {
     cout << endl << "\t - Nombre ('NULL' para salir): ";
     cin >> nombre;
 
+    setNombre(nombre);
     if(strcmp(nombre, "NULL") == 0) {
         return true;
     }
-    setNombre(nombre);
+    strncpy(_nombre, nombre, 15);
+    _nombre[15] = '\0';
 
     cout << endl << "\t - Apellido: ";
     cin >> apellido;
