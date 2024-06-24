@@ -642,6 +642,8 @@ void inscribirseMateriaAlumno (int legajo) {
 void inscribirseEvaluacionAlumno(int legajo) {
     InscripcionEvaluacion aux;
 
+
+
     aux.inscribirseEvaluacion(legajo);
 }
 
@@ -1718,6 +1720,24 @@ void BuscarEvaluacionesDeMateriasAsignadasAlumno(const InscripcionMateria &mater
   }
 }
 
+void BuscarEvaluacionesDeMateriasAsignadasAlumnoListandoTodoRecto(const InscripcionMateria& materiasInscripto)
+{
+     int pos = 0;
+  Evaluacion evaluaciones;
+
+  cout << "----------------------------------------------------------------------------------------" << endl;
+  cout << "-     EVALUACIONES DISPONIBLES        " << endl;
+  while (evaluaciones.leerEnDiscoEvaluacionPorPosicion(pos)) {
+    for (int i = 0; i < 7; i++) {
+      if (evaluaciones.getIdMateria() == materiasInscripto.getMaterias2(i)) {
+        evaluaciones.mostrarEvaluacionTodoRecto();
+      }
+    }
+
+    pos++;
+  }
+}
+
 void BuscarEvaluacionesInscritoAlumno(const InscripcionEvaluacion &evaluacionInscripto) {
   bool hayInscripciones = false;
   int pos = 0;
@@ -1774,14 +1794,19 @@ InscripcionEvaluacion BuscarArchivoInscripcionEvaluacion(int legajo) {
 }
 
 void ListarEvaluaciones(int legajo) {
-  BuscarEvaluacionesDeMateriasAsignadasAlumno(
-      BuscarArchvoInscripcionMateria(legajo));
+  BuscarEvaluacionesDeMateriasAsignadasAlumno(BuscarArchvoInscripcionMateria(legajo));
+}
+
+void ListarEvaluacionesTodoRecto (int legajo)
+{
+    BuscarEvaluacionesDeMateriasAsignadasAlumnoListandoTodoRecto(BuscarArchvoInscripcionMateria(legajo));
 }
 
 void ListarEvaluacionesInscripto(int legajo) {
     InscripcionEvaluacion archivoInscripcionEvaluacion;
     int pos=0;
     bool bandera=false;
+
 
     while (archivoInscripcionEvaluacion.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
     {

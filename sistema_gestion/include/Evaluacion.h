@@ -35,6 +35,7 @@ class Evaluacion
         ///METODOS
         bool cargarEvaluacion(int);
         void mostrarEvaluacion();
+        void mostrarEvaluacionTodoRecto();
         void grabarEnDisco(int);
         void leerEnDisco();
         bool leerEnDiscoEvaluacionPorPosicion(int);

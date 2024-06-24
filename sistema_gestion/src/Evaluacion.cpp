@@ -185,6 +185,17 @@ Materia materia = buscarMateria(getIdMateria());
 
 }
 
+void Evaluacion::mostrarEvaluacionTodoRecto()
+{
+    Materia materia = buscarMateria(getIdMateria());
+
+    cout << "----------------------------------------------------------------------------------------"<<endl;
+    cout << "\t - ID Final: " << getId()<< " | Profesor: " << materia.getProfesor().getNombre()<<" "<<materia.getProfesor().getApellido()<< "| Materia: " << materia.getNombreMateria()<< "| Fecha: " << getFecha().toString("DD/MM/YYYY")<<endl;
+    cout << "----------------------------------------------------------------------------------------"<<endl;
+
+
+}
+
 void Evaluacion::grabarEnDisco(int legajoProfesor) {
     FILE *pEvaluacion;
 

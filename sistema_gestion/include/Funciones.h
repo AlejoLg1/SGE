@@ -67,6 +67,8 @@ bool estaAlumnoInscritoEnEvaluacion (int, int);
 
 void BuscarEvaluacionesDeMateriasAsignadasAlumno(const InscripcionMateria& materiasInscripto);
 
+void BuscarEvaluacionesDeMateriasAsignadasAlumnoListandoTodoRecto(const InscripcionMateria& materiasInscripto);
+
 void BuscarEvaluacionesInscritoAlumno(const InscripcionEvaluacion& evaluacionInscripto);
 
 InscripcionMateria BuscarArchvoInscripcionMateria(int legajo);
@@ -113,6 +115,7 @@ void inscribirseEvaluacionAlumno(int);
 ///---LISTADOS ---\\
 
 void ListarEvaluaciones (int legajo);
+void ListarEvaluacionesTodoRecto (int legajo);
 void ListarEvaluacionesInscripto (int legajo);
 bool MateriasAsignadas();
 void verExamenesFinalesProfesor();
