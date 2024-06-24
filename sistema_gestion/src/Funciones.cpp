@@ -1780,8 +1780,27 @@ void ListarEvaluaciones(int legajo) {
 
 void ListarEvaluacionesInscripto(int legajo) {
     InscripcionEvaluacion archivoInscripcionEvaluacion;
+    int pos=0;
+    bool bandera=false;
 
-    BuscarEvaluacionesInscritoAlumno(BuscarArchivoInscripcionEvaluacion(legajo));
+    while (archivoInscripcionEvaluacion.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
+    {
+        if (archivoInscripcionEvaluacion.getAlumno().getLegajo()==legajo)
+        {
+            archivoInscripcionEvaluacion.mostrarInscripcionEvaluacion();
+            bandera=true;
+
+
+        }
+        pos++;
+
+    }
+
+    if (bandera == false)
+    {
+        cout<<"NO SE ANOTO A NINGUNA EVALUACION"<<endl;
+    }
+
 }
 
 void verExamenesFinalesProfesor() {
