@@ -168,18 +168,22 @@ void Profesor::cambiarClave(int legajo, int clave) {
     fclose(pProf);
 }
 
-void Profesor::cargarProfesor() {
+bool Profesor::cargarProfesor() {
     int clave;
     bool estado;
+    bool salir = false;
 
-    cout << "CREANDO PERFIL DIRECTOR" << endl;
+    cout << "CREANDO PERFIL PROFESOR" << endl;
 
     cout<< endl <<"\t - Legajo: ";
     setLegajo();
     cout << getLegajo();
     cout << endl;
 
-    Persona::cargar();
+    salir = Persona::cargar();
+    if(salir) {
+        return true;
+    }
 
     cout<< endl << "\t - Contraseña (numérica): ";
     cin >> clave;
@@ -189,6 +193,7 @@ void Profesor::cargarProfesor() {
     cin >> estado;
     setEstado(estado);
 
+    return false;
 }
 void Profesor::mostrarProfesor() {
     Persona::mostrar();
@@ -207,7 +212,11 @@ void Profesor::grabarEnDiscoProfesor() {
         cout << "ERROR DE ARCHIVO.";
     }
 
-    this->cargarProfesor();
+    if(this->cargarProfesor()) {
+        fclose(p);
+        return;
+    }
+
     fwrite(this, sizeof(Profesor), 1, p);
 
     fclose(p);

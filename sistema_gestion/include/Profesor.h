@@ -31,7 +31,7 @@ class Profesor : public Persona
         void activarProfesor(int);
         void desactivarProfesor(int);
         void cambiarClave(int, int);
-        void cargarProfesor();
+        bool cargarProfesor();
         void mostrarProfesor();
         void grabarEnDiscoProfesor();
         void leerEnDiscoProfesor();

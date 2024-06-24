@@ -71,7 +71,6 @@ bool Alumno::cargar() {
     cout << endl;
 
     salir = Persona::cargar();
-
     if(salir) {
         return true;
     }
