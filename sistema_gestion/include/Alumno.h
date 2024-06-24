@@ -30,7 +30,7 @@ class Alumno : public Persona{
 
         ///---- MÉTODOS ----\\\
 
-        void cargar();
+        bool cargar();
 
         void activarAlumno(int);
 

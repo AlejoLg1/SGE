@@ -33,7 +33,7 @@ class Persona
 
         ///---- MÉTODOS ----\\\
 
-        void cargar();
+        bool cargar();
 
         void mostrar();
 

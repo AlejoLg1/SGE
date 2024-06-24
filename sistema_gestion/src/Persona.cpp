@@ -59,17 +59,23 @@ char* Persona::getApellido() {
 
 ///---- MÉTODOS ----\\\
 
-void Persona::cargar() {
+bool Persona::cargar() {
     char nombre[16];
     char apellido[16];
 
-    cout << endl << "\t - Nombre: ";
+    cout << endl << "\t - Nombre ('NULL' para salir): ";
     cin >> nombre;
+
+    if(strcmp(nombre, "NULL") == 0) {
+        return true;
+    }
     setNombre(nombre);
+
     cout << endl << "\t - Apellido: ";
     cin >> apellido;
     setApellido(apellido);
 
+    return false;
 }
 void Persona::mostrar() {
 

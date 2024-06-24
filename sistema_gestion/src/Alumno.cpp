@@ -54,12 +54,14 @@ bool Alumno::getEstado() {
 
 ///---- MÉTODOS ----\\\
 
-void Alumno::cargar() {
+bool Alumno::cargar() {
     int legajo;
     int clave;
     bool estado;
     int materias[7] = {-1};
     int materia, cont = 0;
+    bool salir = false;
+
 
     cout << "CREANDO PERFIL ALUMNO" << endl;
 
@@ -68,7 +70,11 @@ void Alumno::cargar() {
     cout << getLegajo();
     cout << endl;
 
-    Persona::cargar();
+    salir = Persona::cargar();
+
+    if(salir) {
+        return true;
+    }
 
     cout << endl << "\t - Contraseña (numérica): ";
     cin >> clave;
@@ -78,6 +84,7 @@ void Alumno::cargar() {
     cin >> estado;
     setEstado(estado);
 
+    return false;
 }
 
 void Alumno::activarAlumno(int legajo) {
@@ -210,7 +217,10 @@ void Alumno::grabarEnDiscoAlumno() {
         return;
     }
 
-    this->cargar();
+    if(this->cargar()) {
+        fclose(pAlumno);
+        return;
+    }
 
     fwrite(this, sizeof(Alumno), 1, pAlumno);
 
