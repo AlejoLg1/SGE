@@ -59,6 +59,9 @@ int InscripcionEvaluacion::getMaterias2(int pos) const {
 
 float* InscripcionEvaluacion::getMateriasNotas() { return _materiasNotas; }
 
+
+bool* InscripcionEvaluacion::getInscriptoMaterias() { return _inscriptoMaterias; }
+
 int InscripcionEvaluacion::getNumMaterias() { return _numMaterias; }
 
 ///---- MÉTODOS ----\\\
@@ -156,6 +159,7 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
             _alumno=legAux;
             _materias[0]=matAux;
             _inscriptoMaterias[0]=true;
+            _materiasNotas[0] = 0;
             _numMaterias=1;
             grabarEnDiscoInscripcionEvaluacion();
                 std::cout << std::endl
@@ -172,7 +176,7 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
     else {
           std::cout << std::endl
               << std::endl
-              << "---- EVALUACION AGREGADA CON ÉXITO ----" << std::endl;
+              << "---- INSCRIPCIÓN REALIZADA CON ÉXITO ----" << std::endl;
     system("Pause");
     continuar = false;
     }
@@ -342,8 +346,7 @@ void InscripcionEvaluacion::leerEnDiscoInscripcionEvaluacion() {
   fclose(p);
 }
 
-bool InscripcionEvaluacion::leerEnDiscoInscripcionEvaluacionPorPosicion(
-    int pos) {
+bool InscripcionEvaluacion::leerEnDiscoInscripcionEvaluacionPorPosicion(int pos) {
   FILE* p;
   bool leyo;
 
