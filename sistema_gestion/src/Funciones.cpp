@@ -2137,12 +2137,12 @@ void menuAlumno() {
   }
 }
 
-void validarLegajo(int legajo) {
+void validarLegajo(int &legajo) {
   while (legajo < 0 || cin.fail()) {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << endl << "\t---- ERROR : LEGAJO INVÁLIDO ----" << endl;
-    cout << endl << "\t - Legajo: ";
+    cout << endl << "\t - Legajo (Nro. de Legajo 0 para salir): ";
     cin >> legajo;
   }
 }

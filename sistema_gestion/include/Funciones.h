@@ -41,11 +41,11 @@ bool claveValida(std::string, int, int, const char* [], int [], std::string []);
 
 bool estadoValido(std::string, int, const char* [], int [], std::string []);
 
-void validarLegajo(int legajo);
+void validarLegajo(int &);
 
-bool validarMateria(int ID);
+bool validarMateria(int);
 
-bool validarEvaluacion (int ID);
+bool validarEvaluacion (int);
 
 ///--- BUSCAR --\\\
 
