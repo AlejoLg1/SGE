@@ -10,7 +10,13 @@
 #include "Materia.h"
 
 InscripcionEvaluacion::InscripcionEvaluacion() {
-  // ctor
+  _numMaterias=0;
+
+  for (int i=0; i<7;i++)
+  {
+      _materiasNotas[i]=0;
+      _inscriptoMaterias [i]= false;
+  }
 }
 
 ///---- SETTERS ----\\\
