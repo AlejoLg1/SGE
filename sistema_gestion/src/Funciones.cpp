@@ -661,7 +661,7 @@ void menuAdministrador() {
   cout << "1. CREAR PERFIL DIRECTOR                            " << endl;
   cout << "2. ACTIVAR PERFIL DIRECTOR                          " << endl;
   cout << "3. DESACTIVAR PERFIL DIRECTOR                       " << endl;
-  cout << "4. GESTION CONTRASEÑAS                              " << endl;
+  cout << "4. GESTIÓN CONTRASEÑAS                              " << endl;
   cout << "5. CAMBIAR CONTRASEÑA                               " << endl;
   cout << "0. VOLVER AL MENÚ PRINCIPAL                         " << endl;
   cout << "----------------------------------------------------" << endl;
@@ -681,7 +681,7 @@ void menuAdministrador() {
     cout << "1. CREAR PERFIL DIRECTOR                            " << endl;
     cout << "2. ACTIVAR PERFIL DIRECTOR                          " << endl;
     cout << "3. DESACTIVAR PERFIL DIRECTOR                       " << endl;
-    cout << "4. GESTION CONTRASEÑAS                              " << endl;
+    cout << "4. GESTIÓN CONTRASEÑAS                              " << endl;
     cout << "5. CAMBIAR CONTRASEÑA                               " << endl;
     cout << "0. VOLVER AL MENÚ PRINCIPAL                         " << endl;
     cout << "----------------------------------------------------" << endl;
@@ -1556,7 +1556,6 @@ void subMenuProfesorGestionMaterias() {
   cout << "2. CREAR EXAMEN FINAL                               " << endl;
   cout << "3. VER EXAMENES FINALES                             " << endl;
   cout << "4. CARGAR NOTAS                                     " << endl;
-  cout << "5. MODIFICAR NOTAS                                  " << endl;
   cout << "0. VOLVER AL MENÚ PROFESOR                          " << endl;
   cout << "----------------------------------------------------" << endl;
   cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -1564,8 +1563,7 @@ void subMenuProfesorGestionMaterias() {
 
   opcion = _getch();
 
-  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 &&
-         opcion != 53 && opcion != 48) {
+  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48) {
     cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
     Sleep(500);
     system("cls");
@@ -1577,7 +1575,6 @@ void subMenuProfesorGestionMaterias() {
     cout << "2. CREAR EXAMEN FINAL                               " << endl;
     cout << "3. VER EXAMENES FINALES                             " << endl;
     cout << "4. CARGAR NOTAS                                     " << endl;
-    cout << "5. MODIFICAR NOTAS                                  " << endl;
     cout << "0. VOLVER AL MENÚ PROFESOR                          " << endl;
     cout << "----------------------------------------------------" << endl;
     cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -1634,13 +1631,6 @@ void subMenuProfesorGestionMaterias() {
       }
 
       system("pause");
-      system("cls");
-      subMenuProfesorGestionMaterias();
-      break;
-    case 53:
-      system("cls");
-      ///-- >> MODIFICAR NOTAS
-
       system("cls");
       subMenuProfesorGestionMaterias();
       break;
