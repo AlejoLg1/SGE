@@ -26,6 +26,8 @@ class InscripcionEvaluacion
 
         void setMateriasNotas(float, int);
 
+        void setInscriptoMaterias(bool, int);
+
         void setNumMaterias(bool);
 
         ///---- GETTERS ----\\\
@@ -38,9 +40,11 @@ class InscripcionEvaluacion
 
         float* getMateriasNotas();
 
+        bool* getInscriptoMaterias();
+
         int getNumMaterias();
 
-        ///---- MÉTODOS ----\\\
+        ///---- MÃ‰TODOS ----\\\
 
         int cargarInscripcionEvaluacion(const Alumno& alumno, const Materia& materia, int legajo);
 
