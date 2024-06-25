@@ -1,8 +1,8 @@
 #include "InscripcionEvaluacion.h"
 
 #include <iostream>
-#include <limits>     // Necesario para std::numeric_limits
-#include <stdexcept>  // Necesario para std::out_of_range
+#include <limits>     // Necesario para numeric_limits
+#include <stdexcept>  // Necesario para out_of_range
 
 #include "Alumno.h"
 #include "Evaluacion.h"
@@ -112,17 +112,17 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
   inscEva.reset();
 
   while (continuar) {
-    std::system("cls");
+    system("cls");
 
     verExamenesFinalesAlumno(legajo);
-    std::cout << "------------------------------" << std::endl;
-    std::cout << "  INSCRIPCIÓN A EXAMEN FINAL  " << std::endl;
-    std::cout << "------------------------------" << std::endl;
-    std::cout << "Ingrese el ID del examen final (ID examen final 0 para salir): ";
+    cout << "------------------------------" << endl;
+    cout << "  INSCRIPCIÓN A EXAMEN FINAL  " << endl;
+    cout << "------------------------------" << endl;
+    cout << "Ingrese el ID del examen final (ID examen final 0 para salir): ";
 
     if (!leerEntrada(idEvaluacion)) {
-      std::cout << "Entrada inválida. Por favor, ingrese un número válido."
-                << std::endl;
+      cout << "Entrada inválida. Por favor, ingrese un número válido."
+                << endl;
       continue;
     }
 
@@ -132,7 +132,7 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
 
     if (!validarEvaluacion(idEvaluacion)) {
       system("cls");
-      std::cout << "El ID ingresado no existe" << std::endl;
+      cout << "El ID ingresado no existe" << endl;
       if (!preguntarContinuar("¿Quiere volver a ingresar el ID?")) {
         return;
       }
@@ -150,7 +150,7 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
 
     if (estaAlumnoInscritoEnEvaluacion(legajo, idEvaluacion)) {
       system("cls");
-      std::cout << "Ya esta inscripto en ese exámen final " << std::endl;
+      cout << "Ya esta inscripto en ese exámen final " << endl;
       if (!preguntarContinuar("¿Quiere realizar otra inscripción?")) {
         return;
       }
@@ -169,9 +169,9 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
             _materiasNotas[0] = 0;
             _numMaterias=1;
             grabarEnDiscoInscripcionEvaluacion();
-                std::cout << std::endl
-              << std::endl
-              << "---- INSCRIPCIÓN REALIZADA CON ÉXITO ----" << std::endl;
+                cout << endl
+              << endl
+              << "---- INSCRIPCIÓN REALIZADA CON ÉXITO ----" << endl;
     system("Pause");
     continuar = false;
 
@@ -181,9 +181,9 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
       return;
     }
     else {
-          std::cout << std::endl
-              << std::endl
-              << "---- INSCRIPCIÓN REALIZADA CON ÉXITO ----" << std::endl;
+          cout << endl
+              << endl
+              << "---- INSCRIPCIÓN REALIZADA CON ÉXITO ----" << endl;
     system("Pause");
     continuar = false;
     }
@@ -191,18 +191,16 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
 }
 
 void InscripcionEvaluacion::mostrarInscripcionEvaluacion() {
-  // Mostrar detalles del alumno
-  std::cout << "----------------------------- " << std::endl;
-  std::cout << "Nombre: " << _alumno.getNombre() << std::endl;
-  std::cout << "Apellido: " << _alumno.getApellido() << std::endl;
-  std::cout << "Legajo: " << _alumno.getLegajo() << std::endl;
+    cout << "----------------------------- " << endl;
+    cout << "Nombre: " << _alumno.getNombre() << endl;
+    cout << "Apellido: " << _alumno.getApellido() << endl;
+    cout << "Legajo: " << _alumno.getLegajo() << endl;
 
-  // Mostrar materias inscritas y sus notas
-  std::cout << "Materias inscritas y notas:" << std::endl;
+    cout << "Materias inscritas y notas:" << endl;
   for (int i = 0; i < _numMaterias; ++i) {
-    std::cout << "| " << _materias[i].getNombreMateria() << " | Nota: " << _materiasNotas[i] << std::endl;
+    cout << "| " << _materias[i].getNombreMateria() << " | Nota: " << _materiasNotas[i] << endl;
   }
-  std::cout << "----------------------------- " << std::endl;
+  cout << "----------------------------- " << endl;
   system("pause");
 }
 
@@ -215,13 +213,13 @@ void InscripcionEvaluacion::mostrarInscripcionEvaluacionSinElNombreDeUsuario(
 
   while (leerEnDiscoInscripcionEvaluacionPorPosicion(pos)) {
     if (_alumno.getLegajo() == legAux.getLegajo()) {
-      std::cout << "Materias inscritas y notas:" << std::endl;
+      cout << "Materias inscritas y notas:" << endl;
       for (int i = 0; i < _numMaterias; ++i) {
-        std::cout << "| ID: " << _materias[i].getId()
+        cout << "| ID: " << _materias[i].getId()
                   << " | Materia: " << _materias[i].getNombreMateria()
-                  << " | Nota: " << _materiasNotas[i] << std::endl;
+                  << " | Nota: " << _materiasNotas[i] << endl;
       }
-      std::cout << "----------------------------- " << std::endl;
+      cout << "----------------------------- " << endl;
     }
     pos++;
   }
@@ -250,23 +248,23 @@ void InscripcionEvaluacion::DarseDeBajaEvaluacion(
   bool continuar = true;
 
   while (continuar) {
-    std::system("cls");
+    system("cls");
     mostrarInscripcionEvaluacionSinElNombreDeUsuario(legajo);
 
-    std::cout << "   DARSE DE BAJA EN EVALUACION  " << std::endl;
-    std::cout << "-----------------------------" << std::endl;
-    std::cout << "Ingrese el ID de la Evaluacion: ";
+    cout << "   DARSE DE BAJA EN EVALUACION  " << endl;
+    cout << "-----------------------------" << endl;
+    cout << "Ingrese el ID de la Evaluacion: ";
 
     if (!leerEntrada(idEvaluacion))  // chequea que sea un número y no otra cosa
     {
-      std::cout << "Entrada inválida. Por favor, ingrese un número válido."
-                << std::endl;
+      cout << "Entrada inválida. Por favor, ingrese un número válido."
+                << endl;
       continue;
     }
 
     if (!validarEvaluacion(idEvaluacion)) {
       system("cls");
-      std::cout << "El ID ingresado no existe" << std::endl;
+      cout << "El ID ingresado no existe" << endl;
       if (!preguntarContinuar("¿Quiere volver a ingresar el ID?")) {
         return;
       }
@@ -275,7 +273,7 @@ void InscripcionEvaluacion::DarseDeBajaEvaluacion(
 
     if (!estaAlumnoInscritoEnEvaluacion(legajo, idEvaluacion)) {
       system("cls");
-      std::cout << "No Esta Inscripto en Esa Evaluacion" << std::endl;
+      cout << "No Esta Inscripto en Esa Evaluacion" << endl;
       if (!preguntarContinuar("¿Quiere volver a ingresar el ID?")) {
         return;
       }
@@ -289,7 +287,7 @@ void InscripcionEvaluacion::DarseDeBajaEvaluacion(
         legAux, matAux, legajo, idEvaluacion);
 
     ModificarEnDiscoInscripcionEvaluacion(posicionDeInscripcion);
-    std::cout << "Evaluacion Dada de baja" << std::endl;
+    cout << "Evaluacion Dada de baja" << endl;
 
     system("Pause");
     continuar = false;
@@ -316,7 +314,7 @@ void InscripcionEvaluacion::grabarEnDiscoInscripcionEvaluacion() {
   FILE* p;
 
   if (!(p = fopen("InscripcionEvaluacion.dat", "ab"))) {
-    std::cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << std::endl;
+    cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
     return;
   }
 
@@ -329,7 +327,7 @@ void InscripcionEvaluacion::ModificarEnDiscoInscripcionEvaluacion(int pos) {
 
   p = fopen("InscripcionEvaluacion.dat", "rb+");
   if (p == nullptr) {
-    std::cout << "NO SE PUDO ABRIR/CREAR EL ARCHIVO" << std::endl;
+    cout << "NO SE PUDO ABRIR/CREAR EL ARCHIVO" << endl;
     return;
   }
 
@@ -342,11 +340,11 @@ void InscripcionEvaluacion::leerEnDiscoInscripcionEvaluacion() {
   FILE* p;
 
   if (!(p = fopen("InscripcionEvaluacion.dat", "rb"))) {
-    std::cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << std::endl;
+    cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
     return;
   }
 
-  std::cout << "MOSTRANDO INSCRIPCIONES:" << std::endl;
+  cout << "MOSTRANDO INSCRIPCIONES:" << endl;
   while (fread(this, sizeof(InscripcionEvaluacion), 1, p)) {
     this->mostrarInscripcionEvaluacion();
   }
@@ -369,23 +367,23 @@ bool InscripcionEvaluacion::leerEnDiscoInscripcionEvaluacionPorPosicion(int pos)
 }
 
 bool InscripcionEvaluacion::leerEntrada(int& entrada) {
-  std::cin >> entrada;
-  if (std::cin.fail()) {
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  cin >> entrada;
+  if (cin.fail()) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     return false;
   }
   return true;
 }
 
-bool InscripcionEvaluacion::preguntarContinuar(const std::string& mensaje) {
+bool InscripcionEvaluacion::preguntarContinuar(const string& mensaje) {
   int opcion = 0;
-  std::cout << mensaje << std::endl;
-  std::cout << "SI = 1      NO = 0" << std::endl << std::endl;
+  cout << mensaje << endl;
+  cout << "SI = 1      NO = 0" << endl << endl;
 
-  std::cout << "> ";
+  cout << "> ";
   if (!leerEntrada(opcion)) {
-    std::cout << "Opción inválida. Intente de nuevo." << std::endl;
+    cout << "Opción inválida. Intente de nuevo." << endl;
     return false;
   }
   return opcion == 1;

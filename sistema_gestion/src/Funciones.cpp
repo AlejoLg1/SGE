@@ -2335,8 +2335,6 @@ void subMenuAlumnoPlanificacionCursada() {
       ListarEvaluacionesInscripto(legajo);
       system("pause");
 
-      // LÓGICA SIMILAR A ARRIBA PERO VALIANDO CONTRA LAS MATERIAS INSCRIPTO
-
       system("cls");
       subMenuAlumnoPlanificacionCursada();
       break;
@@ -2513,12 +2511,12 @@ void SALIENDO() {
 string cargaDescripcion() {
   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-  std::cout << "             --- ** Escribe tu mensaje. Presiona Ctrl+G para terminar. ** ---\n"
+  cout << "             --- ** Escribe tu mensaje. Presiona Ctrl+G para terminar. ** ---\n"
             << endl
             << endl;
 
   char ch;
-  std::string input;
+  string input;
 
   while ((ch = _getch()) != 7) {
     if (ch == 8) {

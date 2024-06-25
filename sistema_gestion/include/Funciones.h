@@ -24,22 +24,22 @@ int settearNuevoLegajo();
 
 bool usuariosCargados();
 
-bool usuariosEspecificosCargados(std::string, const char* [], int [], std::string []);
+bool usuariosEspecificosCargados(string, const char* [], int [], string []);
 
-void mensajeUsuariosNoEncontrados(std::string);
+void mensajeUsuariosNoEncontrados(string);
 
 
 ///--- LOGIN ROLES ---\\
 
-void login(int, std::string);
+void login(int, string);
 
 ///--- VALIDAR CREDENCIALES LOGIN ---\\
 
-bool usuarioValido(std::string, int, const char* [], int [], std::string []);
+bool usuarioValido(string, int, const char* [], int [], string []);
 
-bool claveValida(std::string, int, int, const char* [], int [], std::string []);
+bool claveValida(string, int, int, const char* [], int [], string []);
 
-bool estadoValido(std::string, int, const char* [], int [], std::string []);
+bool estadoValido(string, int, const char* [], int [], string []);
 
 void validarLegajo(int &);
 
@@ -103,7 +103,7 @@ void subMenuAlumnoPlanificacionCursada();
 void opcionCambiarContrasenaAlumno(int);
 bool inscriptoMaterias();
 int contarEvaluaciones();
-void verExamenesFinalesAlumno();
+void verExamenesFinalesAlumno(int);
 bool finalesDisponibles();
 bool finalDisponible(int);
 int idMateriaPorIdEvaluacion(int);
@@ -128,6 +128,6 @@ void verMateriasAsignadas();
 void CARGANDO();
 void SALIENDO();
 
-std::string cargaDescripcion();
+string cargaDescripcion();
 
 #endif // FUNCIONES_H_INCLUDED
