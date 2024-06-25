@@ -12,7 +12,7 @@ using namespace std;
 Materia::Materia() {
     _id = 0;
     _profesor = Profesor();
-    _nivel = 0;
+//    _nivel = 0;
     strncpy(_nombreMateria, "-", 20);
 }
 
@@ -26,13 +26,13 @@ void Materia::setProfesor(int legajo) {
     _profesor = BuscarProfesor(legajo);
 }
 
-void Materia::setNivel(int nivel) {
+/*void Materia::setNivel(int nivel) {
     while(nivel < 0 || nivel > 4) {
         cout << endl << "---- ERROR : NIVEL INVÁLIDO ----" << endl;
         cin >> nivel;
     }
     _nivel = nivel;
-}
+}*/
 
 void Materia::setNombreMateria(string nombre) {
     strncpy(_nombreMateria, nombre.c_str(), sizeof(_nombreMateria) - 1);
@@ -49,9 +49,9 @@ Profesor Materia::getProfesor() {
     return _profesor;
 }
 
-int Materia::getNivel() {
+/*int Materia::getNivel() {
     return _nivel;
-}
+}*/
 
 char* Materia::getNombreMateria() {
     return _nombreMateria;
@@ -61,7 +61,7 @@ char* Materia::getNombreMateria() {
 
 void Materia::cargarMateria() {
     int legajoProfesor;
-    int nivel;
+    //int nivel;
     string nombreMateria;
 
     setId();
@@ -79,9 +79,9 @@ void Materia::cargarMateria() {
 
     setNombreMateria(nombreMateria);
 
-    cout << endl << "\t - Nivel (1 a 4): ";
+    /*cout << endl << "\t - Nivel (1 a 4): ";
     cin >> nivel;
-    setNivel(nivel);
+    setNivel(nivel);*/
 
 }
 
@@ -89,7 +89,7 @@ void Materia::cargarMateria() {
 void Materia::mostrarMateria() {
     cout << endl << "\t - ID: " <<  this->getId();
     cout << endl << "\t - Nombre de la Materia: " << this->getNombreMateria();
-    cout << endl << "\t - Nivel: " << this->getNivel();
+    //cout << endl << "\t - Nivel: " << this->getNivel();
     cout << endl << "\t - Legajo Profesor: ";
     if(this->getProfesor().getLegajo() == 0) {
         cout << "No asignado" << endl;
