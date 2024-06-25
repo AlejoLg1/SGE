@@ -1,6 +1,7 @@
 #include "InscripcionEvaluacion.h"
 
 #include <iostream>
+#include <iomanip>
 #include <limits>     // Necesario para numeric_limits
 #include <stdexcept>  // Necesario para out_of_range
 
@@ -191,6 +192,8 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
 }
 
 void InscripcionEvaluacion::mostrarInscripcionEvaluacion() {
+    bool haySinAsignar = false;
+
     cout << "----------------------------- " << endl;
     cout << "Nombre: " << _alumno.getNombre() << endl;
     cout << "Apellido: " << _alumno.getApellido() << endl;
@@ -198,9 +201,28 @@ void InscripcionEvaluacion::mostrarInscripcionEvaluacion() {
 
     cout << "Materias inscritas y notas:" << endl;
   for (int i = 0; i < _numMaterias; ++i) {
-    cout << "| " << _materias[i].getNombreMateria() << " | Nota: " << _materiasNotas[i] << endl;
+    cout << "| " << left << setw(15) << _materias[i].getNombreMateria() << " | Nota: ";
+
+
+    if(_materiasNotas[i] == 0) {
+        cout << left << setw(7) << "Sin asignar";
+        haySinAsignar = true;
+    }
+    else{
+        cout << left << setw(7) << _materiasNotas[i];
+    }
+    cout << endl;
+
   }
-  cout << "----------------------------- " << endl;
+
+  if(haySinAsignar) {
+    cout << "-------------------------------------" << endl;
+  }
+  else{
+    cout << "-----------------------------" << endl;
+  }
+
+  cout << endl << endl;
   system("pause");
 }
 

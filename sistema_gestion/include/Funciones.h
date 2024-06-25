@@ -114,9 +114,9 @@ void inscribirseEvaluacionAlumno(int);
 
 ///---LISTADOS ---\\
 
-void ListarEvaluaciones (int legajo);
-void ListarEvaluacionesTodoRecto (int legajo);
-void ListarEvaluacionesInscripto (int legajo);
+void ListarEvaluaciones (int );
+void ListarEvaluacionesTodoRecto (int);
+void ListarEvaluacionesInscripto (int);
 bool MateriasAsignadas();
 void verExamenesFinalesProfesor();
 void verMateriasAsignadas();

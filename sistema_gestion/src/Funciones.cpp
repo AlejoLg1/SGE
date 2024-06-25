@@ -1797,8 +1797,7 @@ void ListarEvaluaciones(int legajo) {
   BuscarEvaluacionesDeMateriasAsignadasAlumno(BuscarArchvoInscripcionMateria(legajo));
 }
 
-void ListarEvaluacionesTodoRecto (int legajo)
-{
+void ListarEvaluacionesTodoRecto (int legajo) {
     BuscarEvaluacionesDeMateriasAsignadasAlumnoListandoTodoRecto(BuscarArchvoInscripcionMateria(legajo));
 }
 
@@ -1808,22 +1807,17 @@ void ListarEvaluacionesInscripto(int legajo) {
     bool bandera=false;
 
 
-    while (archivoInscripcionEvaluacion.leerEnDiscoInscripcionEvaluacionPorPosicion(pos))
-    {
-        if (archivoInscripcionEvaluacion.getAlumno().getLegajo()==legajo)
-        {
+    while (archivoInscripcionEvaluacion.leerEnDiscoInscripcionEvaluacionPorPosicion(pos)) {
+        if (archivoInscripcionEvaluacion.getAlumno().getLegajo()==legajo) {
             archivoInscripcionEvaluacion.mostrarInscripcionEvaluacion();
             bandera=true;
-
-
         }
         pos++;
-
     }
 
-    if (bandera == false)
-    {
-        cout<<"NO SE ANOTO A NINGUNA EVALUACION"<<endl;
+    if (bandera == false) {
+        cout << "---- ERROR : EL ALUMNO CON LEGAJO "<< legajo << " NO SE ENCUENTRA INSCRIPTO A EXÁMENES FINALES ----" << endl << endl;
+        system("pause");
     }
 
 }
@@ -2297,7 +2291,30 @@ void subMenuAlumnoPlanificacionCursada() {
       break;
     case 52:  /// INSCRIBIRSE A FINALES
       system("cls");
-      inscribirseEvaluacionAlumno(legajo);
+
+      if (contarEvaluaciones() > 0) {
+        if (inscriptoMaterias()) {
+          inscribirseEvaluacionAlumno(legajo);
+        }
+        else {
+          cout << endl
+               << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo
+               << " NO SE ENCUENTRA INSCRIPTO A MATERIAS ----" << endl
+               << endl;
+          cout << endl << endl;
+          system("pause");
+        }
+      }
+      else {
+        cout << endl
+             << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CARGADOS EN EL SISTEMA ----"
+             << endl
+             << endl;
+        cout << endl << endl;
+        system("pause");
+      }
+
+
 
       system("cls");
       subMenuAlumnoPlanificacionCursada();
@@ -2332,8 +2349,28 @@ void subMenuAlumnoPlanificacionCursada() {
     case 54:  /// VER FINALES INSCRIPTO
       system("cls");
 
-      ListarEvaluacionesInscripto(legajo);
-      system("pause");
+
+      if (contarEvaluaciones() > 0) {
+        if (inscriptoMaterias()) {
+          ListarEvaluacionesInscripto(legajo);
+        }
+        else {
+          cout << endl
+               << "---- ERROR : EL ALUMNO CON LEGAJO " << legajo
+               << " NO SE ENCUENTRA INSCRIPTO A MATERIAS ----" << endl
+               << endl;
+          cout << endl << endl;
+          system("pause");
+        }
+      }
+      else {
+        cout << endl
+             << "---- ERROR : NO SE ENCONTRARON EXÁMENES FINALES CARGADOS EN EL SISTEMA ----"
+             << endl
+             << endl;
+        cout << endl << endl;
+        system("pause");
+      }
 
       system("cls");
       subMenuAlumnoPlanificacionCursada();
