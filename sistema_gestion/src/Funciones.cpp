@@ -1620,7 +1620,6 @@ void subMenuProfesorGestionMaterias() {
       break;
     case 52:
       system("cls");
-      ///-- >> CARGAR NOTAS
       if (contarInscipcionEvaluaciones() > 0) {
             cargarNotas();
       }
@@ -1630,9 +1629,10 @@ void subMenuProfesorGestionMaterias() {
              << endl
              << endl;
         cout << endl << endl;
+        system("pause");
       }
 
-      system("pause");
+
       system("cls");
       subMenuProfesorGestionMaterias();
       break;
@@ -1900,7 +1900,8 @@ void cargarNotas() {
         return;
     }
 
-    cout << endl << "Ingrese el ID del examen final (ID examen final 0 para salir): ";
+    cout << "CARGANDO NOTAS (ID examen final 0 para salir)" << endl;
+    cout << endl << "\t - ID examen final: ";
     cin >> idFinal;
     cout << endl;
 
@@ -1911,8 +1912,9 @@ void cargarNotas() {
     }
 
     if (!validarExistenciaEvaluacion(idFinal)) {
-        cout << endl << "---- ERROR : ID DE FINAL INEXISTENTE ----" << endl << endl;
+        cout << endl << "\t ---- ERROR : ID DE FINAL INEXISTENTE ----" << endl << endl << endl;
         fclose(pInscEvaluacion);
+        system("pause");
         return;
     }
 
@@ -1920,6 +1922,7 @@ void cargarNotas() {
 
     if(!validarProfesorAsignado(idMateria, legajo)) {
         cout << endl << "\t ---- ERROR : LA CARGA DE NOTAS DEL EXAMEN FINAL NO CORRESPONDE AL PROFESOR CON LEGAJO " << legajo << " ----" << endl << endl << endl;
+        system("pause");
         return;
     }
 
@@ -1935,16 +1938,18 @@ void cargarNotas() {
                         flag = false;
                     }
                     system("cls");
-                    cout << endl << "Ingrese el ID del examen final (ID examen final 0 para salir): " << idFinal << endl;
+                    cout << "CARGANDO NOTAS (ID examen final 0 para salir)" << endl;
+                    cout << endl << "\t - ID examen final: " << idFinal << endl;
                     cout << endl << "\t - Legajo Alumno: " << inscEvaluacionObj.getAlumno().getLegajo() << endl;
                     cout << endl << "\t - Nota (1 a 10): ";
                     cin >> nota;
 
                     while (nota <= 0 || nota > 10) {
-                        cout << endl << "---- ERROR : NOTA INVÁLIDA ---- " << endl << endl;
+                        cout << endl << "\t ---- ERROR : NOTA INVÁLIDA ---- " << endl << endl;
                         system("pause");
                         system("cls");
-                        cout << endl << "Ingrese el ID del examen final (ID examen final 0 para salir): " << idFinal << endl;
+                        cout << "CARGANDO NOTAS (ID examen final 0 para salir)" << endl;
+                        cout << endl << "\t - ID examen final: " << idFinal << endl;
                         cout << endl << "\t - Legajo Alumno: " << inscEvaluacionObj.getAlumno().getLegajo() << endl;
                         cout << endl << "\t - Nota (1 a 10): ";
                         cin >> nota;
@@ -1963,10 +1968,10 @@ void cargarNotas() {
     }
 
     if(!cargarNotas){
-        cout << "\t ---- ERROR : NO SE ENCONTRARON NOTAS DISPONIBLES PARA CARGAR ----" << endl;
+        cout << "\t ---- ERROR : NO SE ENCONTRARON NOTAS DISPONIBLES PARA CARGAR ----" << endl << endl << endl;
+        system("pause");
     }
 
-    cout << endl << endl;
     fclose(pInscEvaluacion);
 }
 
