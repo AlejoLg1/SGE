@@ -1422,7 +1422,7 @@ void mostrarPlanEstudio() {
   int anchoProfesor = 16;
 
   if (!(pMat = fopen("materias.dat", "rb"))) {
-    cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    cout << endl << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----" << endl << endl << endl;
     return;
   }
 
@@ -1650,7 +1650,12 @@ bool MateriasAsignadas() {
   Materia materiaObj;
 
   if (!(pMat = fopen("materias.dat", "rb"))) {
-    cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    cout << endl
+       << "---- ERROR : EL PROFESOR CON LEGAJO " << legajo
+       << " NO POSEE MATERIAS ASIGNADAS PARA CREAR EXAMENES FINALES ----"
+       << endl
+       << endl;
+    system("pause");
     return false;
   }
 
@@ -1744,7 +1749,7 @@ void BuscarEvaluacionesInscritoAlumno(const InscripcionEvaluacion &evaluacionIns
   Evaluacion evaluaciones;
 
   cout << "-------------------------------------" << endl;
-  cout << "    INCRIPCIONES EXAMENES FINALES    " << endl;
+  cout << "    INSCRIPCIONES EXAMENES FINALES    " << endl;
   while (evaluaciones.leerEnDiscoEvaluacionPorPosicion(pos)) {
     for (int i = 0; i < 7; i++) {
       if (evaluaciones.getIdMateria() == evaluacionInscripto.getMaterias2(i)) {
@@ -1855,7 +1860,8 @@ void verExamenesFinalesProfesor() {
 
   while (fread(&evaluacionObj, sizeof(Evaluacion), 1, pEval)) {
     if (!(pMat = fopen("materias.dat", "rb"))) {
-      cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+      cout << endl << "---- ERROR : EL PROFESOR CON LEGAJO " << legajo
+       << " NO POSEE MATERIAS ASIGNADAS PARA HABER CREADO EXAMENES FINALES ----" << endl << endl;
       return;
     }
     while (fread(&materiaObj, sizeof(Materia), 1, pMat)) {

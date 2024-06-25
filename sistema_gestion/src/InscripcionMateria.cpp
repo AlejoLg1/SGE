@@ -108,7 +108,7 @@ void InscripcionMateria::inscribirseMateria(int legajo) {
 
     mostrarPlanEstudio();
     std::cout << "-----------------------------" << std::endl;
-    std::cout << "    INCRIPCIÓN DE MATERIA    " << std::endl;
+    std::cout << "    INSCRIPCIÓN DE MATERIA    " << std::endl;
     std::cout << "-----------------------------" << std::endl;
     std::cout << "Ingrese el ID de la materia (ID Materia 0 para salir): ";
 
