@@ -214,7 +214,7 @@ void Fecha::CargarFechaEvaluacion(int idEvaluacion, int legajoProfesor, int idMa
     while(_anio < 1900 || !esBisiesto()){
         int dias[12] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
         cin.clear();
-        cout << "\t\t ---- ERROR : FECHA INCORRECTA, EL AÑO NO ES BISIESTO  ----" << endl << endl;
+        cout << "\t\t ---- ERROR : FECHA INVÁLIDA ----" << endl << endl;
         Sleep(1000);
         system("cls");
         precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
