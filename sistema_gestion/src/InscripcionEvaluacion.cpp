@@ -114,7 +114,7 @@ void InscripcionEvaluacion::inscribirseEvaluacion(int legajo) {
   while (continuar) {
     std::system("cls");
 
-        ListarEvaluacionesTodoRecto(legajo);
+    verExamenesFinalesAlumno(legajo);
     std::cout << "------------------------------" << std::endl;
     std::cout << "  INSCRIPCIÓN A EXAMEN FINAL  " << std::endl;
     std::cout << "------------------------------" << std::endl;

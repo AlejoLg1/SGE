@@ -2307,7 +2307,7 @@ void subMenuAlumnoPlanificacionCursada() {
 
       if (contarEvaluaciones() > 0) {
         if (inscriptoMaterias()) {
-          verExamenesFinalesAlumno();
+          verExamenesFinalesAlumno(legajo);
         }
         else {
           cout << endl
@@ -2581,7 +2581,7 @@ int contarEvaluaciones() {
   return cantEvals;
 }
 
-void verExamenesFinalesAlumno() {
+void verExamenesFinalesAlumno(int legajo) {
   FILE *pEval;
   Evaluacion evaluacionObj;
 
