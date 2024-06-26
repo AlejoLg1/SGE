@@ -32,13 +32,13 @@ class Alumno : public Persona{
 
         bool cargar();
 
+        void mostrar();
+
         void activarAlumno(int);
 
         void desactivarAlumno(int);
 
-        void cambiarClave(int , int);
-
-        void mostrar();
+        void cambiarClave(int, int);
 
         void grabarEnDiscoAlumno();
 

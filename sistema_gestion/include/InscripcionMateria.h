@@ -72,7 +72,7 @@ class InscripcionMateria
 
         bool preguntarContinuar(const std::string& mensaje);
 
-        void MostrarTodosLosRegistrosIncripcionMateria (); ///LO ARME PARA VER QUE NO SE ESTEN DUPLICANDO LOS REGISTROS
+        void MostrarTodosLosRegistrosIncripcionMateria();
 
         void reset();  // Inicializa los miembros con valores predeterminados
 

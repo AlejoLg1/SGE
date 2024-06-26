@@ -12,7 +12,7 @@ class Materia
     private:
         int _id;
         Profesor _profesor;
-        int _nivel;
+        //int _nivel;
         char _nombreMateria[30];
 
         int generarId();
@@ -29,7 +29,7 @@ class Materia
 
         void setProfesor(int);
 
-        void setNivel(int);
+        //void setNivel(int);
 
         void setNombreMateria(string);
 
@@ -39,7 +39,7 @@ class Materia
 
         Profesor getProfesor();
 
-        int getNivel();
+        //int getNivel();
 
         char* getNombreMateria();
 
