@@ -11,6 +11,8 @@ private:
 
     void establecerFechaPorDefecto();
     bool esBisiesto();
+    bool fechaValida();
+    bool esDiaDeSemana();
     void agregarDias();
     void restarDias();
 public:

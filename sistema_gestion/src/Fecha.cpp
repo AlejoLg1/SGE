@@ -3,6 +3,7 @@ using namespace std;
 #include <cstdlib>
 #include <string>
 #include <ctime>
+#include <limits>
 #include <cstring>
 #include "Fecha.h"
 #include "rlutil.h"
@@ -19,6 +20,17 @@ bool Fecha::esBisiesto(){
     if ((_anio % 4 == 0 && _anio % 100 != 0) || _anio % 400 == 0){
           return true;
     }
+    return false;
+}
+
+bool Fecha::esDiaDeSemana(){
+    struct tm time_in = {0,0,0, _dia, _mes - 1, _anio - 1900};
+
+    time_t time_temp = mktime(&time_in);
+
+    const struct tm* time_out = localtime(&time_temp);
+    if(time_out->tm_wday >=1 && time_out->tm_wday <=6) return true;
+
     return false;
 }
 
@@ -115,146 +127,58 @@ Fecha::Fecha(int dia, int mes, int anio){
     }
 }
 
+bool Fecha::fechaValida(){
+
+    if (_anio < 1900 || _mes < 1 || _mes > 12 || _dia < 1) return false;
+
+    int diasMes[] = { 31, esBisiesto() ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    if (_dia > diasMes[_mes - 1]) return false;
+
+    if(!esDiaDeSemana()) return false;
+
+    return true;
+}
+
 void Fecha::CargarFecha(){
-    int dias[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-    cout << "DIA: ";
-    cin >> _dia;
-
-    while(_dia < 1 || _dia > dias[_mes-1]){
-        system("cls");
+   do{
         cin.clear();
-        cout << "EL DIA INGRESADO ES INVALIDO. VUELVA A INGRESAR EL DIA: >";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "\t\t - Día: ";
         cin >> _dia;
-    }
-
-    cout << "MES: ";
-    cin >> _mes;
-
-    while(_mes < 1 || _mes > 12){
-        system("cls");
-        cin.clear();
-        cout << "EL MES INGRESADO ES INVALIDO. VUELVA A INGRESAR EL MES: >";
+        cout << "\t\t - Mes: ";
         cin >> _mes;
-    }
-
-    cout << "ANIO: ";
-    cin >> _anio;
-
-
-    while(_anio < 1900 || !esBisiesto()){
-        int dias[12] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-        system("cls");
-        cin.clear();
-        cout << "LA FECHA INGRESADA ES INCORRECTA (* NO ES ANIO BISIESTO *) - VUELVA A INGRESAR LA FECHA: >";
-        cout << "DIA: ";
-        cin >> _dia;
-
-        while(_dia < 1 || _dia > dias[_mes-1]){
-            system("cls");
-            cin.clear();
-            cout << "EL DIA INGRESADO ES INVALIDO. VUELVA A INGRESAR EL DIA: >";
-            cin >> _dia;
-        }
-
-        cout << "MES: ";
-        cin >> _mes;
-
-        while(_mes < 1 || _mes > 12){
-            system("cls");
-            cin.clear();
-            cout << "EL MES INGRESADO ES INVALIDO. VUELVA A INGRESAR EL MES: >";
-            cin >> _mes;
-        }
-
-        cout << "ANIO: ";
+        cout << "\t\t - Año: ";
         cin >> _anio;
-    }
+
+        if (!fechaValida()) {
+            cout << "\t\t ---- FECHA INVALIDA POR FAVOR INGRESE NUEVAMENTE LA FECHA ----" << endl;
+            Sleep(1000);
+            system("cls");
+        }
+    }while (!fechaValida());
 }
 
 void Fecha::CargarFechaEvaluacion(int idEvaluacion, int legajoProfesor, int idMateria){
-    int dias[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    cout << "\t\t - Día: ";
-    cin >> _dia;
-    cout << endl;
-
-    while(_dia < 1 || _dia > dias[_mes-1]){
+    do{
         cin.clear();
-        cout << "\t\t ---- ERROR : DÍA INVÁLIDO ----" << endl << endl;
-        Sleep(1000);
-        system("cls");
-        precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "\t\t - Día: ";
         cin >> _dia;
-        cout << endl;
-    }
-
-    cout << "\t\t - Mes: ";
-    cin >> _mes;
-    cout << endl;
-
-    while(_mes < 1 || _mes > 12){
-        cin.clear();
-        cout << "\t\t ---- ERROR : MES INVÁLIDO ----" << endl << endl;
-        Sleep(1000);
-        system("cls");
-        precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
-        cout << "\t\t - Día: " << _dia << endl;
-        cout << endl;
         cout << "\t\t - Mes: ";
         cin >> _mes;
-        cout << endl;
-    }
-
-    cout << "\t\t - Año: ";
-    cin >> _anio;
-    cout << endl;
-
-    while(_anio < 1900 || !esBisiesto()){
-        int dias[12] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-        cin.clear();
-        cout << "\t\t ---- ERROR : FECHA INVÁLIDA ----" << endl << endl;
-        Sleep(1000);
-        system("cls");
-        precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
-
-        cout << "\t\t - Día: ";
-        cin >> _dia;
-        cout << endl;
-
-        while(_dia < 1 || _dia > dias[_mes-1]){
-            cin.clear();
-            cout << "\t\t ---- ERROR : DÍA INVÁLIDO ----" << endl << endl;
-            Sleep(1000);
-            system("cls");
-            precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
-            cout << "\t\t - Día: ";
-            cin >> _dia;
-            cout << endl;
-        }
-
-        cout << "\t\t - Mes: ";
-        cin >> _mes;
-        cout << endl;
-
-        while(_mes < 1 || _mes > 12){
-            cin.clear();
-            cout << "\t\t ---- ERROR : MES INVÁLIDO ----" << endl << endl;
-            Sleep(1000);
-            system("cls");
-            precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
-            cout << "\t\t - Día: " << _dia << endl;
-            cout << endl;
-            cout << "\t\t - Mes: ";
-            cin >> _mes;
-            cout << endl;
-        }
-
         cout << "\t\t - Año: ";
         cin >> _anio;
-        cout << endl;
-    }
+
+        if (!fechaValida()) {
+            cout << "\t\t ---- FECHA INVALIDA POR FAVOR INGRESE NUEVAMENTE LA FECHA ----" << endl;
+            cout << "LA FECHA INGRESADA NO CORRESPONDE A UN DÍA HÁBIL (LUNES A VIERNES). VUELVA A INGRESAR LA FECHA: >";
+            Sleep(4000);
+            system("cls");
+            precargarCargaEvaluacion(idEvaluacion, legajoProfesor, idMateria);
+        }
+    }while (!fechaValida());
 }
 
 string Fecha::toString(string formatoFecha){
