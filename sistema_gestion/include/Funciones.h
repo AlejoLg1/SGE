@@ -79,6 +79,13 @@ InscripcionEvaluacion BuscarArchivoInscripcionEvaluacion(int legajo);
 
 void menuAdministrador();
 void subMenuAdministradorClaves();
+void subMenuAdministradorCopiasSeguridad();
+void subMenuAdministradorRealizarCopiasSeguridad();
+void realizarBackup(const string&, const string&);
+void realizarBackupGeneral();
+void subMenuAdministradorRestaurarCopiasSeguridad();
+void realizarRestauracion(const string&, const string&);
+void realizarRestauracionGeneral();
 
 void menuDirectivo();
 void subMenuDirectivoProfesor();

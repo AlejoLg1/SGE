@@ -7,6 +7,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <fstream>
 #include <limits>
 #include <cstdlib>
 #include <string>
@@ -665,6 +666,7 @@ void menuAdministrador() {
   cout << "3. DESACTIVAR PERFIL DIRECTOR                       " << endl;
   cout << "4. GESTIÓN CONTRASEÑAS                              " << endl;
   cout << "5. CAMBIAR CONTRASEÑA                               " << endl;
+  cout << "6. GESTIÓN COPIAS DE SEGURIDAD                                  " << endl;
   cout << "0. VOLVER AL MENÚ PRINCIPAL                         " << endl;
   cout << "----------------------------------------------------" << endl;
   cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -672,23 +674,24 @@ void menuAdministrador() {
 
   opcion = _getch();
 
-  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 48) {
+  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 48) {
     cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
     Sleep(500);
     system("cls");
 
-    cout << "----------------------------------------------------" << endl;
-    cout << "                 MENÚ ADMINISTRADOR                 " << endl;
-    cout << "----------------------------------------------------" << endl;
-    cout << "1. CREAR PERFIL DIRECTOR                            " << endl;
-    cout << "2. ACTIVAR PERFIL DIRECTOR                          " << endl;
-    cout << "3. DESACTIVAR PERFIL DIRECTOR                       " << endl;
-    cout << "4. GESTIÓN CONTRASEÑAS                              " << endl;
-    cout << "5. CAMBIAR CONTRASEÑA                               " << endl;
-    cout << "0. VOLVER AL MENÚ PRINCIPAL                         " << endl;
-    cout << "----------------------------------------------------" << endl;
-    cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
-    cout << "----------------------------------------------------" << endl;
+      cout << "----------------------------------------------------" << endl;
+      cout << "                 MENÚ ADMINISTRADOR                 " << endl;
+      cout << "----------------------------------------------------" << endl;
+      cout << "1. CREAR PERFIL DIRECTOR                            " << endl;
+      cout << "2. ACTIVAR PERFIL DIRECTOR                          " << endl;
+      cout << "3. DESACTIVAR PERFIL DIRECTOR                       " << endl;
+      cout << "4. GESTIÓN CONTRASEÑAS                              " << endl;
+      cout << "5. CAMBIAR CONTRASEÑA                               " << endl;
+      cout << "6. GESTIÓN COPIAS DE SEGURIDAD                      " << endl;
+      cout << "0. VOLVER AL MENÚ PRINCIPAL                         " << endl;
+      cout << "----------------------------------------------------" << endl;
+      cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+      cout << "----------------------------------------------------" << endl;
 
     opcion = _getch();
   }
@@ -743,6 +746,14 @@ void menuAdministrador() {
       if(nuevaClave != 0){
         clave = nuevaClave;
       }
+
+      system("cls");
+      menuAdministrador();
+      break;
+    case 54:
+      system("cls");
+
+      subMenuAdministradorCopiasSeguridad();
 
       system("cls");
       menuAdministrador();
@@ -843,6 +854,413 @@ void subMenuAdministradorClaves() {
     default:
       cout << "OPCIÓN no válida." << endl;
   }
+}
+
+void subMenuAdministradorCopiasSeguridad() {
+  int opcion;
+
+  // CARGANDO();
+  cout << "----------------------------------------------------" << endl;
+  cout << "              MENÚ COPIAS DE SEGURIDAD              " << endl;
+  cout << "----------------------------------------------------" << endl;
+  cout << "1. REALIZAR COPIAS DE SEGURIDAD                     " << endl;
+  cout << "2. RESTAURAR COPIAS DE SEGURIDAD                    " << endl;
+  cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
+  cout << "----------------------------------------------------" << endl;
+  cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+  cout << "----------------------------------------------------" << endl;
+
+  opcion = _getch();
+
+  while (opcion != 49 && opcion != 50 && opcion != 48) {
+    cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
+    Sleep(500);
+    system("cls");
+
+    cout << "----------------------------------------------------" << endl;
+    cout << "              MENÚ COPIAS DE SEGURIDAD              " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "1. REALIZAR COPIAS DE SEGURIDAD                     " << endl;
+    cout << "2. RESTAURAR COPIAS DE SEGURIDAD                    " << endl;
+    cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+    cout << "----------------------------------------------------" << endl;
+
+    opcion = _getch();
+  }
+
+  switch (opcion) {
+    case 49:
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      system("cls");
+      subMenuAdministradorCopiasSeguridad();
+      break;
+    case 50:
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      system("cls");
+      subMenuAdministradorCopiasSeguridad();
+      break;
+    case 48:
+      system("cls");
+      menuAdministrador();
+      break;
+    default:
+      cout << "OPCIÓN no válida." << endl;
+  }
+}
+
+void subMenuAdministradorRealizarCopiasSeguridad() {
+  int opcion;
+
+  // CARGANDO();
+  cout << "----------------------------------------------------" << endl;
+  cout << "         MENÚ REALIZAR COPIAS DE SEGURIDAD          " << endl;
+  cout << "----------------------------------------------------" << endl;
+  cout << "1. REALIZAR COPIA DE SEGURIDAD GENERAL              " << endl;
+  cout << "2. REALIZAR COPIA DE SEGURIDAD ADMINISTRADOR        " << endl;
+  cout << "3. REALIZAR COPIA DE SEGURIDAD DIRECTORES           " << endl;
+  cout << "4. REALIZAR COPIA DE SEGURIDAD PROFESORES           " << endl;
+  cout << "5. REALIZAR COPIA DE SEGURIDAD ALUMNOS              " << endl;
+  cout << "6. REALIZAR COPIA DE SEGURIDAD EXÁMENES             " << endl;
+  cout << "7. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
+  cout << "8. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
+  cout << "9. REALIZAR COPIA DE SEGURIDAD AVISOS               " << endl;
+  cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
+  cout << "----------------------------------------------------" << endl;
+  cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+  cout << "----------------------------------------------------" << endl;
+
+  opcion = _getch();
+
+  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 56 && opcion != 57 && opcion != 48) {
+    cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
+    Sleep(500);
+    system("cls");
+
+    cout << "----------------------------------------------------" << endl;
+    cout << "         MENÚ REALIZAR COPIAS DE SEGURIDAD          " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "1. REALIZAR COPIA DE SEGURIDAD GENERAL              " << endl;
+    cout << "2. REALIZAR COPIA DE SEGURIDAD ADMINISTRADOR        " << endl;
+    cout << "3. REALIZAR COPIA DE SEGURIDAD DIRECTORES           " << endl;
+    cout << "4. REALIZAR COPIA DE SEGURIDAD PROFESORES           " << endl;
+    cout << "5. REALIZAR COPIA DE SEGURIDAD ALUMNOS              " << endl;
+    cout << "6. REALIZAR COPIA DE SEGURIDAD EXÁMENES             " << endl;
+    cout << "7. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
+    cout << "8. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
+    cout << "9. REALIZAR COPIA DE SEGURIDAD AVISOS               " << endl;
+    cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+    cout << "----------------------------------------------------" << endl;
+
+    opcion = _getch();
+  }
+
+  switch (opcion) {
+    case 49:
+      system("cls");
+      realizarBackupGeneral();
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 50:
+      system("cls");
+      realizarBackup("administradores.dat", "administradores.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 51:
+      system("cls");
+      realizarBackup("directores.dat", "directores.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 52:
+      system("cls");
+      realizarBackup("profesores.dat", "profesores.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 53:
+      system("cls");
+      realizarBackup("alumnos.dat", "alumnos.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 54:
+      system("cls");
+      realizarBackup("evaluaciones.dat", "evaluaciones.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 55:
+      system("cls");
+      realizarBackup("InscripcionEvaluacion.dat", "InscripcionEvaluacion.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 56:
+      system("cls");
+      realizarBackup("InscripcionMateria.dat", "InscripcionMateria.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 57:
+      system("cls");
+      realizarBackup("avisos.dat", "avisos.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 48:
+      system("cls");
+      subMenuAdministradorCopiasSeguridad();
+      break;
+    default:
+      cout << "OPCIÓN no válida." << endl;
+  }
+}
+
+void realizarBackup(const string& fileName, const string& backUpFileName) {
+    ifstream source(fileName, ios::binary);
+    ofstream backup(backUpFileName, ios::binary);
+
+    if (!source) {
+        cout << "--- ERROR : NO SE ENCONTRÓ EL ARCHIVO ORIGINAL '" << fileName << "' ----" << endl << endl;
+        system("pause");
+        return;
+    }
+
+    if (!backup) {
+        cout << "--- ERROR : NO SE PUDO CREAR EL ARCHIVO BACKUP '" << backUpFileName << "' ----" << endl << endl;
+        system("pause");
+        return;
+    }
+
+    backup << source.rdbuf();
+
+    cout << "¡COPIA DE SEGURIDAD DEL ARCHIVO '" << fileName << "' CREADA CON ÉXITO!" << endl << endl;
+    system("pause");
+}
+
+void realizarBackupGeneral() {
+    string FilesNames[] = {
+        "administradores.dat",
+        "directores.dat",
+        "profesores.dat",
+        "alumnos.dat",
+        "evaluaciones.dat",
+        "InscripcionEvaluacion.dat",
+        "InscripcionMateria.dat",
+        "avisos.dat"
+    };
+
+    string backUpFilesNames[] = {
+        "administradores.bkp",
+        "directores.bkp",
+        "profesores.bkp",
+        "alumnos.bkp",
+        "evaluaciones.bkp",
+        "InscripcionEvaluacion.bkp",
+        "InscripcionMateria.bkp",
+        "avisos.bkp"
+    };
+
+    int arrayLength = sizeof(FilesNames) / sizeof(string);
+    int x;
+
+    for(x = 0; x < arrayLength; x++){
+        cout << "CREANDO COPIA DE SEGURIDAD" << endl << endl;
+        realizarBackup(FilesNames[x], backUpFilesNames[x]);
+        system("cls");
+    }
+
+    cout << "¡COPIA DE SEGURIDAD GENERAL CREADA CON ÉXITO!" << endl << endl << endl;
+    system("pause");
+
+}
+
+void subMenuAdministradorRestaurarCopiasSeguridad() {
+  int opcion;
+
+  // CARGANDO();
+  cout << "----------------------------------------------------" << endl;
+  cout << "         MENÚ RESTAURAR COPIAS DE SEGURIDAD         " << endl;
+  cout << "----------------------------------------------------" << endl;
+  cout << "1. RESTAURAR COPIA DE SEGURIDAD GENERAL             " << endl;
+  cout << "2. RESTAURAR COPIA DE SEGURIDAD ADMINISTRADOR       " << endl;
+  cout << "3. RESTAURAR COPIA DE SEGURIDAD DIRECTORES          " << endl;
+  cout << "4. RESTAURAR COPIA DE SEGURIDAD PROFESORES          " << endl;
+  cout << "5. RESTAURAR COPIA DE SEGURIDAD ALUMNOS             " << endl;
+  cout << "6. RESTAURAR COPIA DE SEGURIDAD EXÁMENES            " << endl;
+  cout << "7. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
+  cout << "8. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
+  cout << "9. RESTAURAR COPIA DE SEGURIDAD AVISOS              " << endl;
+  cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
+  cout << "----------------------------------------------------" << endl;
+  cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+  cout << "----------------------------------------------------" << endl;
+
+  opcion = _getch();
+
+  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 56 && opcion != 57 && opcion != 48) {
+    cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
+    Sleep(500);
+    system("cls");
+
+    cout << "----------------------------------------------------" << endl;
+    cout << "         MENÚ RESTAURAR COPIAS DE SEGURIDAD         " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "1. RESTAURAR COPIA DE SEGURIDAD GENERAL             " << endl;
+    cout << "2. RESTAURAR COPIA DE SEGURIDAD ADMINISTRADOR       " << endl;
+    cout << "3. RESTAURAR COPIA DE SEGURIDAD DIRECTORES          " << endl;
+    cout << "4. RESTAURAR COPIA DE SEGURIDAD PROFESORES          " << endl;
+    cout << "5. RESTAURAR COPIA DE SEGURIDAD ALUMNOS             " << endl;
+    cout << "6. RESTAURAR COPIA DE SEGURIDAD EXÁMENES            " << endl;
+    cout << "7. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
+    cout << "8. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
+    cout << "9. RESTAURAR COPIA DE SEGURIDAD AVISOS              " << endl;
+    cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+    cout << "----------------------------------------------------" << endl;
+
+    opcion = _getch();
+  }
+
+  switch (opcion) {
+    case 49:
+      system("cls");
+      realizarRestauracionGeneral();
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 50:
+      system("cls");
+      realizarRestauracion("administradores.bkp", "administradores.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 51:
+      system("cls");
+      realizarRestauracion("directores.bkp", "directores.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 52:
+      system("cls");
+      realizarRestauracion("profesores.bkp", "profesores.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 53:
+      system("cls");
+      realizarRestauracion("alumnos.bkp", "alumnos.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 54:
+      system("cls");
+      realizarRestauracion("evaluaciones.bkp", "evaluaciones.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 55:
+      system("cls");
+      realizarRestauracion("InscripcionEvaluacion.bkp", "InscripcionEvaluacion.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 56:
+      system("cls");
+      realizarRestauracion("InscripcionMateria.bkp", "InscripcionMateria.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 57:
+      system("cls");
+      realizarRestauracion("avisos.bkp", "avisos.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 48:
+      system("cls");
+      subMenuAdministradorCopiasSeguridad();
+      break;
+    default:
+      cout << "OPCIÓN no válida." << endl;
+  }
+}
+
+void realizarRestauracion(const string& backUpFileName, const string& fileName) {
+    ifstream backup(backUpFileName, ios::binary);
+    ofstream source(fileName, ios::binary);
+
+    if (!backup) {
+        cout << "--- ERROR : NO SE PUDO CREAR EL ARCHIVO BACKUP '" << backUpFileName << "' ----" << endl << endl;
+        system("pause");
+        return;
+    }
+
+    if (!source) {
+        cout << "--- ERROR : NO SE ENCONTRÓ EL ARCHIVO ORIGINAL '" << fileName << "' ----" << endl << endl;
+        system("pause");
+        return;
+    }
+
+    backup.seekg(0, ios::end);
+    if (backup.tellg() == 0) {
+        cout << "--- ERROR : EL ARCHIVO '" << backUpFileName << "' NO POSEE REGISTROS ----" << endl << endl;
+        cout << "--- NO SE RESTAURARÁ LA COPIA DE SEGURIDAD ----" << endl << endl;
+        system("pause");
+        return;
+    }
+    backup.seekg(0, ios::beg);
+
+    source << backup.rdbuf();
+
+    cout << "¡COPIA DE SEGURIDAD DEL ARCHIVO '" << fileName << "' RESTAURADA CON ÉXITO!" << endl << endl;
+    system("pause");
+}
+
+void realizarRestauracionGeneral() {
+    string FilesNames[] = {
+        "administradores.dat",
+        "directores.dat",
+        "profesores.dat",
+        "alumnos.dat",
+        "evaluaciones.dat",
+        "InscripcionEvaluacion.dat",
+        "InscripcionMateria.dat",
+        "avisos.dat"
+    };
+
+    string backUpFilesNames[] = {
+        "administradores.bkp",
+        "directores.bkp",
+        "profesores.bkp",
+        "alumnos.bkp",
+        "evaluaciones.bkp",
+        "InscripcionEvaluacion.bkp",
+        "InscripcionMateria.bkp",
+        "avisos.bkp"
+    };
+
+    int arrayLength = sizeof(FilesNames) / sizeof(string);
+    int x;
+
+    for(x = 0; x < arrayLength; x++){
+        cout << "RESTAURANDO COPIA DE SEGURIDAD" << endl << endl;
+        realizarRestauracion(backUpFilesNames[x], FilesNames[x]);
+        system("cls");
+    }
+
+    cout << "¡COPIA DE SEGURIDAD GENERAL RESTAURADA CON ÉXITO!" << endl << endl << endl;
+    system("pause");
+
 }
 
 ///--- MENÚ DIRECTIVO ---\\
