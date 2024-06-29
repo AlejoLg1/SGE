@@ -7,8 +7,8 @@
 class InscripcionEvaluacion
 {
     private:
-        Alumno _alumno;
-        Materia _materias [7];
+        int _alumno;
+        int _materias [7];
         float _materiasNotas [7]; //-> Nota
         bool _inscriptoMaterias [7]; //--> PARA SABER SI YA ESTA INSCRIPTO EN ESTA MATERIA
         int _numMaterias;
@@ -20,9 +20,9 @@ class InscripcionEvaluacion
 
         ///---- SETTERS ----\\\
 
-        void setAlumno(Alumno);
+        void setAlumno(int);
 
-        void setMaterias(const Materia& aux, int pos);
+        void setMaterias(const int& aux, int pos);
 
         void setMateriasNotas(float, int);
 
@@ -32,9 +32,9 @@ class InscripcionEvaluacion
 
         ///---- GETTERS ----\\\
 
-        Alumno getAlumno();
+        int getAlumno();
 
-        Materia* getMaterias();
+        int* getMaterias();
 
         int getMaterias2(int pos) const;
 
@@ -42,11 +42,13 @@ class InscripcionEvaluacion
 
         bool* getInscriptoMaterias();
 
+        bool getInscriptoMaterias2(int);
+
         int getNumMaterias();
 
         ///---- MÉTODOS ----\\\
 
-        int cargarInscripcionEvaluacion(const Alumno& alumno, const Materia& materia, int legajo);
+        int cargarInscripcionEvaluacion(Alumno& alumno, const Materia& materia, int legajo);
 
         void inscribirseEvaluacion(int);
 
@@ -55,10 +57,6 @@ class InscripcionEvaluacion
         void mostrarInscripcionEvaluacionSinElNombreDeUsuario(int );
 
         void mostrarRegistroDeIncriccionesEvaluacion(int);
-
-        void DarseDeBajaEvaluacion(int);
-
-        int cargarBajaDeUnRegistroDeIncriccionesEvaluacion(const Alumno& alumno, const Materia& materia, int , int);
 
         void grabarEnDiscoInscripcionEvaluacion();
 

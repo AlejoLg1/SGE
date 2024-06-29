@@ -624,7 +624,7 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1719682852 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\funciones.cpp
+1719689076 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\funciones.cpp
 	"Funciones.h"
 	<conio.h>
 	<locale.h>
@@ -887,12 +887,12 @@
 	"Alumno.h"
 	"Evaluacion.h"
 
-1719261717 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\include\inscripcionevaluacion.h
+1719688792 c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\include\inscripcionevaluacion.h
 	"Materia.h"
 	"Alumno.h"
 	"Evaluacion.h"
 
-1719521342 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\inscripcionevaluacion.cpp
+1719688792 source:c:\users\gabriel\documents\github\lab2-proyect\sistema_gestion\src\inscripcionevaluacion.cpp
 	"InscripcionEvaluacion.h"
 	<iostream>
 	<iomanip>
