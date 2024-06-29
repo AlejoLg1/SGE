@@ -11,8 +11,8 @@
 class InscripcionMateria
 {
     private:
-        Alumno _alumno;
-        Materia _materias[7];  // Arreglo de tamaño fijo para las materias
+        int _alumno;
+        int _materias[7];  // Arreglo de tamaño fijo para las materias
         bool _estadoMaterias[7];  // Arreglo de tamaño fijo para los estados de las materias
         int _numMaterias; // Variable para rastrear el número actual de materias
 
@@ -25,18 +25,18 @@ class InscripcionMateria
 
         ///---- SETTERS ----\\\
 
-        void setAlumno(Alumno);
+        void setAlumno(int);
 
-        void setMaterias(const Materia& aux, int pos);
+        void setMaterias(int, int pos);
 
         void setEstadoMaterias(bool, int);
 
         void setNumMaterias(bool);
         ///---- GETTERS ----\\\
 
-        Alumno getAlumno();
+        int getAlumno();
 
-        Materia* getMaterias();
+        int* getMaterias();
 
         int getMaterias2(int pos) const;
 
@@ -46,7 +46,7 @@ class InscripcionMateria
 
         ///---- MÉTODOS ----\\\
 
-        int cargarInscripcionMateria(const Alumno& alumno, const Materia& materia, int);
+        int cargarInscripcionMateria(Alumno& alumno, const Materia& materia, int);
 
         void inscribirseMateria(int);
 
@@ -58,7 +58,7 @@ class InscripcionMateria
 
         void DarseDeBajaMateria(int);
 
-        int cargarBajaDeUnRegistroDeIncriccionesMateria(const Alumno& alumno,const Materia& materia,int ,int );
+        int cargarBajaDeUnRegistroDeIncriccionesMateria(Alumno& alumno,const Materia& materia,int ,int );
 
         void grabarEnDiscoInscripcionMateria();
 

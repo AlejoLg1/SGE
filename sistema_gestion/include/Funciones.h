@@ -117,6 +117,7 @@ int idMateriaPorIdEvaluacion(int);
 int contarMateriasInscripto();
 
 void inscribirseMateriaAlumno(int);
+void darseDeBajaMateriaAlumno(int);
 void inscribirseEvaluacionAlumno(int);
 
 ///---LISTADOS ---\\

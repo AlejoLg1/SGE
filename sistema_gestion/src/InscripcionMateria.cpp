@@ -22,9 +22,15 @@ InscripcionMateria::InscripcionMateria(){
 
 ///---- SETTERS ----\\\
 
-void InscripcionMateria::setAlumno(Alumno aux) { _alumno = aux; }
+void InscripcionMateria::setAlumno(int aux)
 
-void InscripcionMateria::setMaterias(const Materia& aux, int pos) {
+ {
+     _alumno = aux;
+
+
+}
+
+void InscripcionMateria::setMaterias(int aux, int pos) {
   if (pos >= 0 && pos < 7) {
     _materias[pos] = aux;
   }
@@ -46,14 +52,14 @@ void InscripcionMateria::setNumMaterias(bool sumar) {
 }
 ///---- GETTERS ----\\\
 
-Alumno InscripcionMateria::getAlumno() { return _alumno; }
+int InscripcionMateria::getAlumno() { return _alumno; }
 
-Materia* InscripcionMateria::getMaterias() {
+int* InscripcionMateria::getMaterias() {
   return _materias;  // Devuelve un puntero al arreglo de materias
 }
 
 int InscripcionMateria::getMaterias2(int pos) const {
-  return _materias[pos].getId();
+  return _materias[pos];
 }
 
 bool InscripcionMateria::getEstadoMaterias(int pos) {
@@ -66,16 +72,16 @@ int InscripcionMateria::getNumMaterias() { return _numMaterias; }
 
 ///---- MÉTODOS ----\\\
 
-int InscripcionMateria::cargarInscripcionMateria(const Alumno& alumno,const Materia& materia,int Legajo) {
+int InscripcionMateria::cargarInscripcionMateria(Alumno& alumno,const Materia& materia,int Legajo) {
     reset();
     InscripcionMateria aux;
     int posicion=0;
     bool bandera=false;
 
     while (aux.leerEnDiscoInscripcionMateriaPorPosicion(posicion)) {
-        if (aux.getAlumno().getLegajo() == Legajo) {
-            aux.setAlumno(alumno);
-            aux.setMaterias(materia,aux.getNumMaterias());
+        if (aux.getAlumno() == Legajo) {
+            aux.setAlumno(alumno.getLegajo());
+            aux.setMaterias(materia.getId(),aux.getNumMaterias());
             aux.setEstadoMaterias(true,aux.getNumMaterias());
             aux.setNumMaterias(true);
             aux.ModificarEnDiscoInscripcionMateria(posicion);
@@ -145,8 +151,8 @@ void InscripcionMateria::inscribirseMateria(int legajo) {
     int posicionDeInscripcion = inscMat.cargarInscripcionMateria(legAux, matAux, legajo);
 
     if (posicionDeInscripcion == -1) {
-        _alumno=legAux;
-        _materias[0]=matAux;
+        _alumno=legAux.getLegajo();
+        _materias[0]=matAux.getId();
         _estadoMaterias[0]=true;
         _numMaterias=1;
         grabarEnDiscoInscripcionMateria();
@@ -156,7 +162,7 @@ void InscripcionMateria::inscribirseMateria(int legajo) {
 
     }
     else if (posicionDeInscripcion == -2) {
-      system("pause");
+
       return;
     }
     else {
@@ -170,16 +176,22 @@ void InscripcionMateria::inscribirseMateria(int legajo) {
 
 void InscripcionMateria::mostrarInscripcionMateria() {
   // Mostrar detalles del alumno
+  Alumno alu;
+  Materia mat;
+
+
+  alu = buscarAlumno(_alumno);
   std::cout << "----------------------------- " << std::endl;
-  std::cout << "Nombre: " << _alumno.getNombre() << std::endl;
-  std::cout << "Apellido: " << _alumno.getApellido() << std::endl;
-  std::cout << "Legajo: " << _alumno.getLegajo() << std::endl;
+  std::cout << "Nombre: " << alu.getNombre()<< std::endl;
+  std::cout << "Apellido: " << alu.getApellido() << std::endl;
+  std::cout << "Legajo: " << alu.getLegajo() << std::endl;
 
   // Mostrar materias inscritas y sus estados
   std::cout << "Materias inscritas:" << std::endl;
   for (int i = 0; i < 7; ++i) {
     if (_estadoMaterias[i] == true) {
-      std::cout << "| " << _materias[i].getNombreMateria() << std::endl;
+            mat = buscarMateria(_materias[i]);
+      std::cout << "| " << mat.getNombreMateria() << std::endl;
     }
   }
   std::cout << "----------------------------- " << std::endl << std::endl;
@@ -192,9 +204,11 @@ void InscripcionMateria::mostrarInscripcionMateriaSinElNombreDeUsuario(
   int anchoMateria = 21;
 
   Alumno legAux;
+  Materia mat;
   int pos = 0;
 
   legAux = buscarAlumno(legajo);
+
 
   cout << "Materias inscritas:" << std::endl << std::endl;
   cout << left << setw(anchoID) << "ID";
@@ -205,11 +219,12 @@ void InscripcionMateria::mostrarInscripcionMateriaSinElNombreDeUsuario(
        << endl;
 
   while (leerEnDiscoInscripcionMateriaPorPosicion(pos)) {
-    if (_alumno.getLegajo() == legAux.getLegajo()) {
+    if (_alumno == legAux.getLegajo()) {
       for (int i = 0; i < 7; ++i) {
         if (_estadoMaterias[i] == true) {
-          cout << left << setw(anchoID) << _materias[i].getId() << "|" << left
-               << setw(anchoMateria) << _materias[i].getNombreMateria() << "|"
+                mat = buscarMateria(_materias[i]);
+          cout << left << setw(anchoID) << mat.getId() << "|" << left
+               << setw(anchoMateria) << mat.getNombreMateria() << "|"
                << endl;
         }
       }
@@ -230,7 +245,7 @@ void InscripcionMateria::mostrarRegistroDeIncriccionesMateria(int legajo) {
   legAux = buscarAlumno(legajo);
 
   while (leerEnDiscoInscripcionMateriaPorPosicion(pos)) {
-    if (_alumno.getLegajo() == legAux.getLegajo()) {
+    if (_alumno == legAux.getLegajo()) {
         estaInscripto = true;
         mostrarInscripcionMateria();
     }
@@ -295,33 +310,81 @@ void InscripcionMateria::DarseDeBajaMateria(int legajo) {
     legAux = buscarAlumno(legajo);
     matAux = buscarMateria(idMateria);
 
-    int posicionDeInscripcion = cargarBajaDeUnRegistroDeIncriccionesMateria(
-        legAux, matAux, legajo, idMateria);
+    int posicionDeInscripcion = cargarBajaDeUnRegistroDeIncriccionesMateria(legAux, matAux, legajo, idMateria);
 
-    ModificarEnDiscoInscripcionMateria(posicionDeInscripcion);
+    if (posicionDeInscripcion>-1)
+    {
     std::cout << endl
               << endl
               << "---- MATERIA DADA DE BAJA CON ÉXITO ----" << std::endl;
     system("Pause");
     continuar = false;
+    }
+
+        if (posicionDeInscripcion==-2)
+    {
+    std::cout << endl
+              << endl
+              << "---- MATERIA DADA DE BAJA ANTERIORMENTE ----" << std::endl;
+    system("Pause");
+    continuar = false;
+    }
+
+            if (posicionDeInscripcion==-1)
+    {
+    std::cout << endl
+              << endl
+              << "---- NO ESTA INSCRIPTO A LA MATERIA INGRESADA ----" << std::endl;
+    system("Pause");
+    continuar = false;
+    }
+
+
   }
 }
 
-int InscripcionMateria::cargarBajaDeUnRegistroDeIncriccionesMateria(
-    const Alumno& alumno, const Materia& materia, int Legajo,
-    int idMateriaBaja) {
-  int posicion = buscarInscripcionMateria(Legajo);
+int InscripcionMateria::cargarBajaDeUnRegistroDeIncriccionesMateria(Alumno& alumno, const Materia& materia, int Legajo,int idMateriaBaja)
+{
+      reset();
+    InscripcionMateria aux;
+    int posicion=0;
+    bool bandera=false;
 
-  _alumno = alumno;
-  for (int i = 0; i < 7; i++) {
-    if (_materias[i].getId() == idMateriaBaja) {
-      _estadoMaterias[i] = false;
-      return posicion;
+    while (aux.leerEnDiscoInscripcionMateriaPorPosicion(posicion))
+    {
+        if (aux.getAlumno()== Legajo)
+        {
+            for (int i=0;i<7;i++)
+            {
+                if(aux.getMaterias2(i)==idMateriaBaja)
+                {
+                    if (aux.getEstadoMaterias(i)==true)
+                    {
+                        aux.setEstadoMaterias(false,i);
+                        aux.ModificarEnDiscoInscripcionMateria(posicion);
+                        bandera=true;
+                        return posicion;
+                    }
+                    else
+                        {
+                        bandera=true;
+                        return-2;
+
+                        }
+                        bandera=true;
+                }
+            }
+        }
+
+        posicion++;
     }
-  }
 
-  _numMaterias;  // No lo descuenta ya que se supone que el alumno esta cursando
-  return posicion;
+       if (bandera==false)
+    {
+
+        return -1;
+    }
+
 }
 
 void InscripcionMateria::grabarEnDiscoInscripcionMateria() {
@@ -406,6 +469,8 @@ bool InscripcionMateria::preguntarContinuar(const std::string& mensaje) {
 }
 
 void InscripcionMateria::MostrarTodosLosRegistrosIncripcionMateria() {
+    Materia mat;
+
     FILE* p = fopen("InscripcionMateria.dat", "rb");
     if (!p) {
         cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
@@ -415,13 +480,14 @@ void InscripcionMateria::MostrarTodosLosRegistrosIncripcionMateria() {
     InscripcionMateria inscripcion;
     while (fread(&inscripcion, sizeof(InscripcionMateria), 1, p)) {
         cout << "--------------------------------------" << endl;
-        cout << "Legajo del Alumno: " << inscripcion.getAlumno().getNombre()<< endl;
+        cout << "Legajo del Alumno: " << inscripcion.getAlumno()<< endl;
         cout << "Número de Materias Inscritas: " << inscripcion.getNumMaterias() << endl;
         cout << "Materias Inscritas:" << endl;
 
         for (int i = 0; i < 7; i++) {
             if (inscripcion.getEstadoMaterias(i)==true) {
-                cout << "  Legajo de la Materia: " << inscripcion.getMaterias2(i) << endl;
+                    mat = buscarMateria(inscripcion.getMaterias2(i));
+                cout << "  Legajo de la Materia: " << mat.getId() << endl;
                 system("pause");
             }
         }
@@ -434,9 +500,9 @@ void InscripcionMateria::MostrarTodosLosRegistrosIncripcionMateria() {
 
 // Método para resetear la clase
     void InscripcionMateria::reset() {
-       _alumno = Alumno();  // Asigna un nuevo objeto Alumno (debería tener un constructor por defecto)
+       _alumno = 0;
         for (int i = 0; i < 7; ++i) {
-            _materias[i] = Materia();  // Asigna nuevos objetos Materia (deberían tener un constructor por defecto)
+            _materias[i] = 0;
             _estadoMaterias[i] = false;  // Establece todos los estados de materias a false
         }
         _numMaterias = 0;  // Reinicia el contador de materias
