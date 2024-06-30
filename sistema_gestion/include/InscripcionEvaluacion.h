@@ -22,7 +22,7 @@ class InscripcionEvaluacion
 
         void setAlumno(int);
 
-        void setMaterias(const int& aux, int pos);
+        void setMaterias(const int&, int);
 
         void setMateriasNotas(float, int);
 
@@ -48,7 +48,7 @@ class InscripcionEvaluacion
 
         ///---- MÉTODOS ----\\\
 
-        int cargarInscripcionEvaluacion(Alumno& alumno, const Materia& materia, int legajo);
+        int cargarInscripcionEvaluacion(Alumno&, const Materia&, int);
 
         void inscribirseEvaluacion(int);
 
@@ -60,7 +60,7 @@ class InscripcionEvaluacion
 
         void grabarEnDiscoInscripcionEvaluacion();
 
-        void ModificarEnDiscoInscripcionEvaluacion(int pos);
+        void ModificarEnDiscoInscripcionEvaluacion(int);
 
         void leerEnDiscoInscripcionEvaluacion();
 
@@ -68,12 +68,9 @@ class InscripcionEvaluacion
 
         bool leerEntrada(int& entrada);
 
-        bool preguntarContinuar(const std::string& mensaje);
+        bool preguntarContinuar(const std::string&);
 
         void reset();
-
-
-
 
 };
 

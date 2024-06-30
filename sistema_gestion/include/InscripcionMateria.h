@@ -27,7 +27,7 @@ class InscripcionMateria
 
         void setAlumno(int);
 
-        void setMaterias(int, int pos);
+        void setMaterias(int, int);
 
         void setEstadoMaterias(bool, int);
 
@@ -38,7 +38,7 @@ class InscripcionMateria
 
         int* getMaterias();
 
-        int getMaterias2(int pos) const;
+        int getMaterias2(int) const;
 
         bool getEstadoMaterias(int);
 
@@ -46,7 +46,7 @@ class InscripcionMateria
 
         ///---- MÉTODOS ----\\\
 
-        int cargarInscripcionMateria(Alumno& alumno, const Materia& materia, int);
+        int cargarInscripcionMateria(Alumno&, const Materia&, int);
 
         void inscribirseMateria(int);
 
@@ -58,19 +58,19 @@ class InscripcionMateria
 
         void DarseDeBajaMateria(int);
 
-        int cargarBajaDeUnRegistroDeIncriccionesMateria(Alumno& alumno,const Materia& materia,int ,int );
+        int cargarBajaDeUnRegistroDeIncriccionesMateria(Alumno&, const Materia&, int, int);
 
         void grabarEnDiscoInscripcionMateria();
 
-        void ModificarEnDiscoInscripcionMateria(int pos);
+        void ModificarEnDiscoInscripcionMateria(int );
 
         void leerEnDiscoInscripcionMateria();
 
         bool leerEnDiscoInscripcionMateriaPorPosicion(int);
 
-        bool leerEntrada(int& entrada);
+        bool leerEntrada(int&);
 
-        bool preguntarContinuar(const std::string& mensaje);
+        bool preguntarContinuar(const std::string&);
 
         void MostrarTodosLosRegistrosIncripcionMateria();
 

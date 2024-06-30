@@ -65,15 +65,15 @@ bool estaAlumnoInscritoEnMateria (int, int);
 
 bool estaAlumnoInscritoEnEvaluacion (int, int);
 
-void BuscarEvaluacionesDeMateriasAsignadasAlumno(const InscripcionMateria& materiasInscripto);
+void BuscarEvaluacionesDeMateriasAsignadasAlumno(const InscripcionMateria&);
 
-void BuscarEvaluacionesDeMateriasAsignadasAlumnoListandoTodoRecto(const InscripcionMateria& materiasInscripto);
+void BuscarEvaluacionesDeMateriasAsignadasAlumnoListandoTodoRecto(const InscripcionMateria&);
 
-void BuscarEvaluacionesInscritoAlumno(const InscripcionEvaluacion& evaluacionInscripto);
+void BuscarEvaluacionesInscritoAlumno(const InscripcionEvaluacion&);
 
-InscripcionMateria BuscarArchvoInscripcionMateria(int legajo);
+InscripcionMateria BuscarArchvoInscripcionMateria(int);
 
-InscripcionEvaluacion BuscarArchivoInscripcionEvaluacion(int legajo);
+InscripcionEvaluacion BuscarArchivoInscripcionEvaluacion(int);
 
 ///--- MENÚS ROLES ---\\
 
