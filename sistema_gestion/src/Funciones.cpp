@@ -1026,7 +1026,6 @@ void subMenuAdministradorRealizarCopiasSeguridad() {
 
 void realizarBackup(const string& fileName, const string& backUpFileName) {
     ifstream source(fileName, ios::binary);
-    ofstream backup(backUpFileName, ios::binary);
 
     if (!source) {
         cout << "--- ERROR : NO SE ENCONTRÓ EL ARCHIVO ORIGINAL '" << fileName << "' ----" << endl << endl;
@@ -1034,12 +1033,12 @@ void realizarBackup(const string& fileName, const string& backUpFileName) {
         return;
     }
 
+    ofstream backup(backUpFileName, ios::binary);
     if (!backup) {
         cout << "--- ERROR : NO SE PUDO CREAR EL ARCHIVO BACKUP '" << backUpFileName << "' ----" << endl << endl;
         system("pause");
         return;
     }
-
     backup << source.rdbuf();
 
     cout << "¡COPIA DE SEGURIDAD DEL ARCHIVO '" << fileName << "' CREADA CON ÉXITO!" << endl << endl;
@@ -1078,7 +1077,7 @@ void realizarBackupGeneral() {
         system("cls");
     }
 
-    cout << "¡COPIA DE SEGURIDAD GENERAL CREADA CON ÉXITO!" << endl << endl << endl;
+    cout << "¡PROCESO DE CREACION DE COPIAS DE SEGURIDAD FINALIZADO!" << endl << endl << endl;
     system("pause");
 
 }
@@ -1197,16 +1196,10 @@ void subMenuAdministradorRestaurarCopiasSeguridad() {
 
 void realizarRestauracion(const string& backUpFileName, const string& fileName) {
     ifstream backup(backUpFileName, ios::binary);
-    ofstream source(fileName, ios::binary);
+
 
     if (!backup) {
-        cout << "--- ERROR : NO SE PUDO CREAR EL ARCHIVO BACKUP '" << backUpFileName << "' ----" << endl << endl;
-        system("pause");
-        return;
-    }
-
-    if (!source) {
-        cout << "--- ERROR : NO SE ENCONTRÓ EL ARCHIVO ORIGINAL '" << fileName << "' ----" << endl << endl;
+        cout << "--- ERROR : NO ENCONTRÓ EL ARCHIVO BACKUP '" << backUpFileName << "' ----" << endl << endl;
         system("pause");
         return;
     }
@@ -1219,6 +1212,13 @@ void realizarRestauracion(const string& backUpFileName, const string& fileName) 
         return;
     }
     backup.seekg(0, ios::beg);
+
+    ofstream source(fileName, ios::binary);
+    if (!source) {
+        cout << "--- ERROR : NO SE ENCONTRÓ EL ARCHIVO ORIGINAL '" << fileName << "' ----" << endl << endl;
+        system("pause");
+        return;
+    }
 
     source << backup.rdbuf();
 
@@ -1258,7 +1258,7 @@ void realizarRestauracionGeneral() {
         system("cls");
     }
 
-    cout << "¡COPIA DE SEGURIDAD GENERAL RESTAURADA CON ÉXITO!" << endl << endl << endl;
+    cout << "¡PROCESO DE RESTAURACION DE COPIAS DE SEGURIDAD GENERAL FINALIZADO!" << endl << endl << endl;
     system("pause");
 
 }

@@ -38,7 +38,7 @@ bool Administrador::esValido(const char* str) {
 void Administrador::setNombre(char* nombre) {
     while (!esValido(nombre)) {
         cout << "\n\t---- ERROR : NOMBRE INVÁLIDO ----" << endl;
-        cout << "\n\t - Nombre: ";
+        cout << "\n\t - Usuario: ";
         cin >> nombre;
     }
     strncpy(_nombre, nombre, 15);
