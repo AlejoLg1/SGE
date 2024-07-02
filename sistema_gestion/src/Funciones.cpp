@@ -941,10 +941,11 @@ void subMenuAdministradorRealizarCopiasSeguridad() {
   cout << "3. REALIZAR COPIA DE SEGURIDAD DIRECTORES           " << endl;
   cout << "4. REALIZAR COPIA DE SEGURIDAD PROFESORES           " << endl;
   cout << "5. REALIZAR COPIA DE SEGURIDAD ALUMNOS              " << endl;
-  cout << "6. REALIZAR COPIA DE SEGURIDAD EXÁMENES             " << endl;
-  cout << "7. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
-  cout << "8. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
-  cout << "9. REALIZAR COPIA DE SEGURIDAD AVISOS               " << endl;
+  cout << "6. REALIZAR COPIA DE SEGURIDAD MATERIAS             " << endl;
+  cout << "7. REALIZAR COPIA DE SEGURIDAD EXÁMENES             " << endl;
+  cout << "8. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
+  cout << "9. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
+  cout << "10. REALIZAR COPIA DE SEGURIDAD AVISOS              " << endl;
   cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
   cout << "----------------------------------------------------" << endl;
   cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -952,7 +953,7 @@ void subMenuAdministradorRealizarCopiasSeguridad() {
 
   opcion = _getch();
 
-  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 56 && opcion != 57 && opcion != 48) {
+  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 56 && opcion != 57 && opcion != 58 && opcion != 48) {
     cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
     Sleep(500);
     system("cls");
@@ -965,10 +966,11 @@ void subMenuAdministradorRealizarCopiasSeguridad() {
     cout << "3. REALIZAR COPIA DE SEGURIDAD DIRECTORES           " << endl;
     cout << "4. REALIZAR COPIA DE SEGURIDAD PROFESORES           " << endl;
     cout << "5. REALIZAR COPIA DE SEGURIDAD ALUMNOS              " << endl;
-    cout << "6. REALIZAR COPIA DE SEGURIDAD EXÁMENES             " << endl;
-    cout << "7. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
-    cout << "8. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
-    cout << "9. REALIZAR COPIA DE SEGURIDAD AVISOS               " << endl;
+    cout << "6. REALIZAR COPIA DE SEGURIDAD MATERIAS             " << endl;
+    cout << "7. REALIZAR COPIA DE SEGURIDAD EXÁMENES             " << endl;
+    cout << "8. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
+    cout << "9. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
+    cout << "10. REALIZAR COPIA DE SEGURIDAD AVISOS              " << endl;
     cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
     cout << "----------------------------------------------------" << endl;
     cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -1010,23 +1012,29 @@ void subMenuAdministradorRealizarCopiasSeguridad() {
       break;
     case 54:
       system("cls");
-      realizarBackup("evaluaciones.dat", "evaluaciones.bkp");
+      realizarBackup("materias.dat", "materias.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
     case 55:
       system("cls");
-      realizarBackup("InscripcionEvaluacion.dat", "InscripcionEvaluacion.bkp");
+      realizarBackup("evaluaciones.dat", "evaluaciones.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
     case 56:
       system("cls");
-      realizarBackup("InscripcionMateria.dat", "InscripcionMateria.bkp");
+      realizarBackup("InscripcionEvaluacion.dat", "InscripcionEvaluacion.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
     case 57:
+      system("cls");
+      realizarBackup("InscripcionMateria.dat", "InscripcionMateria.bkp");
+      system("cls");
+      subMenuAdministradorRealizarCopiasSeguridad();
+      break;
+    case 58:
       system("cls");
       realizarBackup("avisos.dat", "avisos.bkp");
       system("cls");
@@ -1068,6 +1076,7 @@ void realizarBackupGeneral() {
         "directores.dat",
         "profesores.dat",
         "alumnos.dat",
+        "materias.dat",
         "evaluaciones.dat",
         "InscripcionEvaluacion.dat",
         "InscripcionMateria.dat",
@@ -1079,6 +1088,7 @@ void realizarBackupGeneral() {
         "directores.bkp",
         "profesores.bkp",
         "alumnos.bkp",
+        "materias.bkp",
         "evaluaciones.bkp",
         "InscripcionEvaluacion.bkp",
         "InscripcionMateria.bkp",
@@ -1111,10 +1121,11 @@ void subMenuAdministradorRestaurarCopiasSeguridad() {
   cout << "3. RESTAURAR COPIA DE SEGURIDAD DIRECTORES          " << endl;
   cout << "4. RESTAURAR COPIA DE SEGURIDAD PROFESORES          " << endl;
   cout << "5. RESTAURAR COPIA DE SEGURIDAD ALUMNOS             " << endl;
-  cout << "6. RESTAURAR COPIA DE SEGURIDAD EXÁMENES            " << endl;
-  cout << "7. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
-  cout << "8. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
-  cout << "9. RESTAURAR COPIA DE SEGURIDAD AVISOS              " << endl;
+  cout << "6. RESTAURAR COPIA DE SEGURIDAD MATERIAS            " << endl;
+  cout << "7. RESTAURAR COPIA DE SEGURIDAD EXÁMENES            " << endl;
+  cout << "8. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
+  cout << "9. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
+  cout << "10. RESTAURAR COPIA DE SEGURIDAD AVISOS             " << endl;
   cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
   cout << "----------------------------------------------------" << endl;
   cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -1122,7 +1133,7 @@ void subMenuAdministradorRestaurarCopiasSeguridad() {
 
   opcion = _getch();
 
-  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 56 && opcion != 57 && opcion != 48) {
+  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 56 && opcion != 57 && opcion != 58 && opcion != 48) {
     cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
     Sleep(500);
     system("cls");
@@ -1135,10 +1146,11 @@ void subMenuAdministradorRestaurarCopiasSeguridad() {
     cout << "3. RESTAURAR COPIA DE SEGURIDAD DIRECTORES          " << endl;
     cout << "4. RESTAURAR COPIA DE SEGURIDAD PROFESORES          " << endl;
     cout << "5. RESTAURAR COPIA DE SEGURIDAD ALUMNOS             " << endl;
-    cout << "6. RESTAURAR COPIA DE SEGURIDAD EXÁMENES            " << endl;
-    cout << "7. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
-    cout << "8. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
-    cout << "9. RESTAURAR COPIA DE SEGURIDAD AVISOS              " << endl;
+    cout << "6. RESTAURAR COPIA DE SEGURIDAD MATERIAS            " << endl;
+    cout << "7. RESTAURAR COPIA DE SEGURIDAD EXÁMENES            " << endl;
+    cout << "8. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES EXÁMENES" << endl;
+    cout << "9. RESTAURAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
+    cout << "10. RESTAURAR COPIA DE SEGURIDAD AVISOS             " << endl;
     cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
     cout << "----------------------------------------------------" << endl;
     cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -1180,23 +1192,29 @@ void subMenuAdministradorRestaurarCopiasSeguridad() {
       break;
     case 54:
       system("cls");
-      realizarRestauracion("evaluaciones.bkp", "evaluaciones.dat");
+      realizarRestauracion("materias.bkp", "materias.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
     case 55:
       system("cls");
-      realizarRestauracion("InscripcionEvaluacion.bkp", "InscripcionEvaluacion.dat");
+      realizarRestauracion("evaluaciones.bkp", "evaluaciones.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
     case 56:
       system("cls");
-      realizarRestauracion("InscripcionMateria.bkp", "InscripcionMateria.dat");
+      realizarRestauracion("InscripcionEvaluacion.bkp", "InscripcionEvaluacion.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
     case 57:
+      system("cls");
+      realizarRestauracion("InscripcionMateria.bkp", "InscripcionMateria.dat");
+      system("cls");
+      subMenuAdministradorRestaurarCopiasSeguridad();
+      break;
+    case 58:
       system("cls");
       realizarRestauracion("avisos.bkp", "avisos.dat");
       system("cls");
@@ -1216,7 +1234,7 @@ void realizarRestauracion(const string& backUpFileName, const string& fileName) 
 
 
     if (!backup) {
-        cout << "--- ERROR : NO ENCONTRÓ EL ARCHIVO BACKUP '" << backUpFileName << "' ----" << endl << endl;
+        cout << "--- ERROR : NO SE ENCONTRÓ EL ARCHIVO BACKUP '" << backUpFileName << "' ----" << endl << endl;
         system("pause");
         return;
     }
@@ -1249,6 +1267,7 @@ void realizarRestauracionGeneral() {
         "directores.dat",
         "profesores.dat",
         "alumnos.dat",
+        "materias.dat",
         "evaluaciones.dat",
         "InscripcionEvaluacion.dat",
         "InscripcionMateria.dat",
@@ -1260,6 +1279,7 @@ void realizarRestauracionGeneral() {
         "directores.bkp",
         "profesores.bkp",
         "alumnos.bkp",
+        "materias.bkp",
         "evaluaciones.bkp",
         "InscripcionEvaluacion.bkp",
         "InscripcionMateria.bkp",
@@ -1509,7 +1529,7 @@ void subMenuDirectivoAlumno() {
       system("cls");
       cout << "DESACTIVANDO PERFIL ALUMNO" << endl;
 
-      cout << endl << "\t- Legajo (Nro. de Legajo 0 para salir):: ";
+      cout << endl << "\t- Legajo (Nro. de Legajo 0 para salir): ";
       cin >> legajoAlumno;
       validarLegajo(legajoAlumno);
 
@@ -2129,12 +2149,22 @@ int opcion;
     case 49:
       system("cls");
 
-      if (contarInscripcionMateria() > 0) {
-            verListadosAlumnosInscriptosPorMateria();
+      if (contarMaterias() > 0) {
+            if (contarInscripcionMateria() > 0) {
+                verListadosAlumnosInscriptosPorMateria();
+          }
+          else {
+            cout << endl
+                 << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A MATERIAS CARGADAS EN EL SISTEMA ----"
+                 << endl
+                 << endl;
+            cout << endl << endl;
+            system("pause");
+          }
       }
       else {
         cout << endl
-             << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A MATERIAS CARGADAS EN EL SISTEMA ----"
+             << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----"
              << endl
              << endl;
         cout << endl << endl;
@@ -2147,12 +2177,22 @@ int opcion;
     case 50:
       system("cls");
 
-      if (contarInscripcionEvaluaciones() > 0) {
-            verListadosAlumnosAprobadosPorMateria();
+      if (contarMaterias() > 0) {
+          if (contarInscripcionEvaluaciones() > 0) {
+              verListadosAlumnosAprobadosPorMateria();
+          }
+          else {
+            cout << endl
+                 << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A EXÁMENES FINALES CARGADAS EN EL SISTEMA ----"
+                 << endl
+                 << endl;
+            cout << endl << endl;
+            system("pause");
+          }
       }
       else {
         cout << endl
-             << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A EXÁMENES FINALES CARGADAS EN EL SISTEMA ----"
+             << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----"
              << endl
              << endl;
         cout << endl << endl;
@@ -2165,14 +2205,22 @@ int opcion;
     case 51:
       system("cls");
 
-
-
-      if (contarInscripcionEvaluaciones() > 0) {
-            verListadosAlumnosDesaprobadosPorMateria();
+      if (contarMaterias() > 0) {
+          if (contarInscripcionEvaluaciones() > 0) {
+              verListadosAlumnosDesaprobadosPorMateria();
+          }
+          else {
+            cout << endl
+                 << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A EXÁMENES FINALES CARGADAS EN EL SISTEMA ----"
+                 << endl
+                 << endl;
+            cout << endl << endl;
+            system("pause");
+          }
       }
       else {
         cout << endl
-             << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A EXÁMENES FINALES CARGADAS EN EL SISTEMA ----"
+             << "---- ERROR : NO SE ENCONTRARON MATERIAS CARGADAS EN EL SISTEMA ----"
              << endl
              << endl;
         cout << endl << endl;
@@ -2223,6 +2271,10 @@ void verListadosAlumnosInscriptosPorMateria(){
         cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS INSCRIPTOS (ID Materia 0 para salir): ";
         cin >> idMateria;
         cout << endl << endl;
+
+        if(idMateria == 0){
+            return;
+        }
     }
 
     if(!validarProfesorAsignado(idMateria, legajo)) {
@@ -2306,6 +2358,10 @@ void verListadosAlumnosAprobadosPorMateria(){
         cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS APROBADOS (ID Materia 0 para salir): ";
         cin >> idMateria;
         cout << endl << endl;
+
+        if(idMateria == 0){
+            return;
+        }
     }
 
     if(!validarProfesorAsignado(idMateria, legajo)) {
@@ -2387,6 +2443,10 @@ void verListadosAlumnosDesaprobadosPorMateria(){
         cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS DESAPROBADOS (ID Materia 0 para salir): ";
         cin >> idMateria;
         cout << endl << endl;
+
+        if(idMateria == 0){
+            return;
+        }
     }
 
     if(!validarProfesorAsignado(idMateria, legajo)) {
