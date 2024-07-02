@@ -422,7 +422,7 @@
 	<locale.h>
 	"Persona.h"
 
-1719461799 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\funciones.h
+1719932413 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\funciones.h
 	<string>
 	<locale.h>
 	"Alumno.h"
@@ -440,14 +440,14 @@
 	<locale.h>
 	"Persona.h"
 
-1719461799 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\inscripcionmateria.h
+1719779580 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\inscripcionmateria.h
 	<iostream>
 	<vector>
 	<locale.h>
 	"Alumno.h"
 	"Materia.h"
 
-1719267072 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\administrador.cpp
+1719779580 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\administrador.cpp
 	<iostream>
 	<cstring>
 	<limits>
@@ -471,7 +471,7 @@
 	<limits>
 	"Funciones.h"
 
-1719461799 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\inscripcionmateria.cpp
+1719763431 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\inscripcionmateria.cpp
 	"InscripcionMateria.h"
 	<cstdlib>
 	<iomanip>
@@ -903,7 +903,7 @@
 	"Funciones.h"
 	"Materia.h"
 
-1719267072 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\inscripcionevaluacion.h
+1719779580 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\inscripcionevaluacion.h
 	"Materia.h"
 	"Alumno.h"
 	"Evaluacion.h"
@@ -919,7 +919,7 @@
 1718149552 c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\include\aviso.h
 	"Fecha.h"
 
-1719461799 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\funciones.cpp
+1719932731 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\funciones.cpp
 	"Funciones.h"
 	<conio.h>
 	<locale.h>
@@ -927,6 +927,7 @@
 	<windows.h>
 	<iomanip>
 	<iostream>
+	<fstream>
 	<limits>
 	<cstdlib>
 	<string>
@@ -941,7 +942,7 @@
 	"Materia.h"
 	"Profesor.h"
 
-1719461799 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\inscripcionevaluacion.cpp
+1719763431 source:c:\users\lucas\onedrive\documentos\github\lab2-proyect\sistema_gestion\src\inscripcionevaluacion.cpp
 	"InscripcionEvaluacion.h"
 	<iostream>
 	<iomanip>

@@ -1984,6 +1984,7 @@ void subMenuProfesorGestionMaterias() {
   cout << "2. CREAR EXAMEN FINAL                               " << endl;
   cout << "3. VER EXAMENES FINALES                             " << endl;
   cout << "4. CARGAR NOTAS                                     " << endl;
+  cout << "5. LISTADOS                                         " << endl;
   cout << "0. VOLVER AL MENÚ PROFESOR                          " << endl;
   cout << "----------------------------------------------------" << endl;
   cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -1991,7 +1992,7 @@ void subMenuProfesorGestionMaterias() {
 
   opcion = _getch();
 
-  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 48) {
+  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 48) {
     cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
     Sleep(500);
     system("cls");
@@ -2003,6 +2004,7 @@ void subMenuProfesorGestionMaterias() {
     cout << "2. CREAR EXAMEN FINAL                               " << endl;
     cout << "3. VER EXAMENES FINALES                             " << endl;
     cout << "4. CARGAR NOTAS                                     " << endl;
+    cout << "5. LISTADOS                                         " << endl;
     cout << "0. VOLVER AL MENÚ PROFESOR                          " << endl;
     cout << "----------------------------------------------------" << endl;
     cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -2057,6 +2059,9 @@ void subMenuProfesorGestionMaterias() {
         cout << endl << endl;
         system("pause");
       }
+      case 53:
+      system("cls");
+      subMenuListadosEstadisticaProfesor();
 
 
       system("cls");
@@ -2069,6 +2074,301 @@ void subMenuProfesorGestionMaterias() {
     default:
       cout << "OPCIÓN no válida." << endl;
   }
+}
+
+void subMenuListadosEstadisticaProfesor(){
+
+int opcion;
+  Evaluacion evaluacionObj;
+
+  // CARGANDO();
+  cout << "----------------------------------------------------" << endl;
+  cout << "                  GESTIÓN LISTADOS                  " << endl;
+  cout << "----------------------------------------------------" << endl;
+  cout << "1. VER LISTADO DE ALUMNOS INSCRIPTOS A -X- MATERIA  " << endl;
+  cout << "2. VER LISTADO DE ALUMNOS APROBADOS A -X- MATERIA   " << endl;
+  cout << "3. VER LISTADO DE ALUMNOS DESAPROBADOS A -X- MATERIA" << endl;
+  cout << "0. VOLVER AL MENÚ GESTION DE MATERIAS               " << endl;
+  cout << "----------------------------------------------------" << endl;
+  cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+  cout << "----------------------------------------------------" << endl;
+
+  opcion = _getch();
+
+  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 48) {
+    cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
+    Sleep(500);
+    system("cls");
+
+    cout << "----------------------------------------------------" << endl;
+    cout << "                  GESTIÓN LISTADOS                  " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "1. VER LISTADO DE ALUMNOS INSCRIPTOS A -X- MATERIA  " << endl;
+    cout << "2. VER LISTADO DE ALUMNOS APROBADOS A -X- MATERIA   " << endl;
+    cout << "3. VER LISTADO DE ALUMNOS DESAPROBADOS A -X- MATERIA" << endl;
+    cout << "0. VOLVER AL MENÚ GESTION DE MATERIAS               " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
+    cout << "----------------------------------------------------" << endl;
+
+    opcion = _getch();
+  }
+
+  switch (opcion) {
+    case 49:
+      system("cls");
+
+      verListadosAlumnosInscriptosPorMateria();
+      system("pause");
+
+      system("cls");
+      subMenuListadosEstadisticaProfesor();
+      break;
+    case 50:
+      system("cls");
+
+      verListadosAlumnosAprobadosPorMateria();
+      system("pause");
+
+      system("cls");
+      subMenuListadosEstadisticaProfesor();
+      break;
+    case 51:
+      system("cls");
+
+      verListadosAlumnosDesaprobadosPorMateria();
+      system("pause");
+
+      system("cls");
+      subMenuListadosEstadisticaProfesor();
+      break;
+
+    case 48:
+      system("cls");
+      subMenuProfesorGestionMaterias();
+      break;
+    default:
+      cout << "OPCIÓN no válida." << endl;
+  }
+
+}
+
+void verListadosAlumnosInscriptosPorMateria(){
+
+        cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl
+        << endl;
+
+        verMateriasAsignadas();
+
+        int idMateria;
+
+        cout << endl << "INGRESE EL ID DE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+        cin >> idMateria;
+        cout << endl << endl;
+
+    while(!validarMateria(idMateria)){
+
+        cout << "El ID INGRESADO NO EXISTE. VUELVA A INGRESAR EL ID." << endl;
+        system("pause");
+
+        system("cls");
+        cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl
+        << endl;
+
+        verMateriasAsignadas();
+
+        cout << endl << "INGRESE EL ID DE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+        cin >> idMateria;
+        cout << endl << endl;
+    }
+
+    FILE *pInscMateria;
+    InscripcionMateria inscMateriaObj;
+
+    if (!(pInscMateria = fopen("InscripcionMateria.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    }
+
+    int anchoID = 6;
+    int anchoNombreAlumno = 20;
+    int anchoApellidoAlumno = 20;
+
+    cout << left << setw(anchoID) << "ID";
+    cout << "|";
+    cout << left << setw(anchoNombreAlumno) << "NOMBRE";
+    cout << "|";
+    cout << left << setw(anchoApellidoAlumno) << "APELLIDO" << endl;
+
+    cout << string(anchoID, '-') << "+" << string(anchoNombreAlumno, '-') << "+" << string(anchoApellidoAlumno, '-') << endl;
+
+    while (fread(&inscMateriaObj, sizeof(InscripcionMateria), 1, pInscMateria)) {
+        bool encontro = false;
+        int vec[7]={};
+        for (int i = 0; i < 7; i++) {
+            if (vec[i]=inscMateriaObj.getMaterias()[i] == idMateria) {
+                int idAlumno = inscMateriaObj.getAlumno();
+                Alumno alumno = buscarAlumno(idAlumno);
+
+                cout << left << setw(anchoID) << alumno.getLegajo() << "|"
+                     << left << setw(anchoNombreAlumno) << alumno.getNombre() << "|"
+                     << left << setw(anchoApellidoAlumno) << alumno.getApellido() << endl;
+
+                encontro = true;
+                break;
+            }
+        }
+        if (!encontro) {
+
+            continue;
+        }
+    }
+    cout << endl << endl;
+
+    fclose(pInscMateria);
+}
+
+void verListadosAlumnosAprobadosPorMateria(){
+
+    cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl
+    << endl;
+    verMateriasAsignadas();
+
+    int idMateria;
+
+    cout << endl << "INGRESE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+    cin >> idMateria;
+    cout << endl << endl;
+
+    while(!validarMateria(idMateria)){
+
+        cout << "El ID INGRESADO NO EXISTE. VUELVA A INGRESAR EL ID." << endl;
+        system("pause");
+
+        system("cls");
+        cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl
+        << endl;
+
+        verMateriasAsignadas();
+
+        cout << endl << "INGRESE EL ID DE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+        cin >> idMateria;
+        cout << endl << endl;
+    }
+
+    int anchoID = 6;
+    int anchoNombreAlumno = 21;
+    int anchoApellidoAlumno = 20;
+    int anchoNotaAlumno = 5;
+
+    FILE *pInscEvaluacion;
+   InscripcionEvaluacion inscEvaluacionObj;
+
+   if (!(pInscEvaluacion = fopen("InscripcionEvaluacion.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    }
+
+    cout << left << setw(anchoID) << "ID";
+    cout << "|";
+    cout << left << setw(anchoNombreAlumno) << "NOMBRE";
+    cout << "|";
+    cout << left << setw(anchoApellidoAlumno) << "APELLIDO";
+    cout << "|";
+    cout << left << setw(anchoNotaAlumno) << "NOTA" << endl;
+
+    cout << string(anchoID, '-') << "+" << string(anchoNombreAlumno, '-') << "+"
+         << string(anchoApellidoAlumno, '-') << "+" << string(anchoNotaAlumno, '-') << endl;
+
+
+    while (fread(&inscEvaluacionObj, sizeof(InscripcionEvaluacion), 1, pInscEvaluacion)) {
+        for (int i = 0; i < 7; i++) {
+            if (inscEvaluacionObj.getMaterias()[i]== idMateria) {
+                if(inscEvaluacionObj.getMateriasNotas()[i] > 5){
+                    int idAlumno = inscEvaluacionObj.getAlumno();
+                    Alumno alumno = buscarAlumno(idAlumno);
+                    cout << left << setw(anchoID) << alumno.getLegajo() << "|"
+                         << left << setw(anchoNombreAlumno) << alumno.getNombre() << "|"
+                         << left << setw(anchoApellidoAlumno) << alumno.getApellido() << "|"
+                         << left << setw(anchoNotaAlumno) << inscEvaluacionObj.getMateriasNotas()[i] << endl;
+                }
+            }
+        }
+    }
+    cout << endl << endl;
+
+    fclose(pInscEvaluacion);
+}
+
+void verListadosAlumnosDesaprobadosPorMateria(){
+
+    cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl
+    << endl;
+    verMateriasAsignadas();
+
+   int idMateria;
+
+   cout << endl << "INGRESE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+   cin >> idMateria;
+   cout << endl << endl;
+
+    while(!validarMateria(idMateria)){
+
+        cout << "El ID INGRESADO NO EXISTE. VUELVA A INGRESAR EL ID." << endl;
+        system("pause");
+
+        system("cls");
+        cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl
+        << endl;
+
+        verMateriasAsignadas();
+
+        cout << endl << "INGRESE EL ID DE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+        cin >> idMateria;
+        cout << endl << endl;
+    }
+
+   int anchoID = 6;
+   int anchoNombreAlumno = 21;
+   int anchoApellidoAlumno = 20;
+   int anchoNotaAlumno = 5;
+
+   FILE *pInscEvaluacion;
+   InscripcionEvaluacion inscEvaluacionObj;
+
+   if (!(pInscEvaluacion = fopen("InscripcionEvaluacion.dat", "rb"))) {
+        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    }
+
+    cout << left << setw(anchoID) << "ID";
+    cout << "|";
+    cout << left << setw(anchoNombreAlumno) << "NOMBRE";
+    cout << "|";
+    cout << left << setw(anchoApellidoAlumno) << "APELLIDO";
+    cout << "|";
+    cout << left << setw(anchoNotaAlumno) << "NOTA" << endl;
+
+    cout << string(anchoID, '-') << "+" << string(anchoNombreAlumno, '-') << "+"
+         << string(anchoApellidoAlumno, '-') << "+" << string(anchoNotaAlumno, '-') << endl;
+
+
+
+    while (fread(&inscEvaluacionObj, sizeof(InscripcionEvaluacion), 1, pInscEvaluacion)) {
+        for (int i = 0; i < 7; i++) {
+            if (inscEvaluacionObj.getMaterias()[i]== idMateria) {
+                if(inscEvaluacionObj.getMateriasNotas()[i] < 6){
+                    int idAlumno = inscEvaluacionObj.getAlumno();
+                    Alumno alumno = buscarAlumno(idAlumno);
+                    cout << left << setw(anchoID) << alumno.getLegajo() << "|"
+                         << left << setw(anchoNombreAlumno) << alumno.getNombre() << "|"
+                         << left << setw(anchoApellidoAlumno) << alumno.getApellido() << "|"
+                         << left << setw(anchoNotaAlumno) << inscEvaluacionObj.getMateriasNotas()[i] << endl;
+                }
+            }
+        }
+    }
+    cout << endl << endl;
+
+
+    fclose(pInscEvaluacion);
 }
 
 bool MateriasAsignadas() {

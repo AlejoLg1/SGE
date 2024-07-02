@@ -104,6 +104,10 @@ void cargarNotas();
 bool validarExistenciaEvaluacion(int);
 int obtenerIdMateriaEvaluacion(int);
 bool validarProfesorAsignado(int, int);
+void subMenuListadosEstadisticaProfesor();
+void verListadosAlumnosInscriptosPorMateria();
+void verListadosAlumnosAprobadosPorMateria();
+void verListadosAlumnosDesaprobadosPorMateria();
 
 void menuAlumno();
 void subMenuAlumnoPlanificacionCursada();
