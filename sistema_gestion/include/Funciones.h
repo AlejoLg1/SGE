@@ -99,7 +99,8 @@ int contarAvisos();
 
 void menuProfesor();
 void subMenuProfesorGestionMaterias();
-int contarInscipcionEvaluaciones();
+int contarInscripcionEvaluaciones();
+int contarInscripcionMateria();
 void cargarNotas();
 bool validarExistenciaEvaluacion(int);
 int obtenerIdMateriaEvaluacion(int);

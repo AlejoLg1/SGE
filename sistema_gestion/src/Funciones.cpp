@@ -743,10 +743,10 @@ void menuAdministrador() {
       break;
     case 53:
       system("cls");
-      cout << "CAMBIANDO CONTRASEÑA" << endl;
+      cout << "CAMBIANDO CONTRASEÑA (Contraseña 0 para salir)" << endl;
 
       cout << endl << "\t - Contraseña anterior: " << clave << endl;
-      cout << endl << "\t - Contraseña nueva (numérica / Contraseña 0 para salir): ";
+      cout << endl << "\t - Contraseña nueva (numérica): ";
       cin >> nuevaClave;
 
       administradorObj.cambiarClave(legajo, nuevaClave);
@@ -815,42 +815,51 @@ void subMenuAdministradorClaves() {
   switch (opcion) {
     case 49:
       system("cls");
-      cout << "BLANQUEANDO CONTRASEÑA PERFIL DIRECTOR" << endl << endl;
+      cout << "BLANQUEANDO CONTRASEÑA PERFIL DIRECTOR (Legajo 0 para salir)" << endl << endl;
 
       cout << "AVISO: Al blanquear la contraseña, la misma se establecerá" << endl;
       cout << "       como el número de legajo del usuario." << endl << endl;
 
       cout << endl << "\t - Legajo Director : ";
       cin >> legajoAux;
-      directorObj.cambiarClave(legajoAux, legajoAux);
+
+      if(legajoAux != 0){
+        directorObj.cambiarClave(legajoAux, legajoAux);
+      }
 
       system("cls");
       subMenuAdministradorClaves();
       break;
     case 50:
       system("cls");
-      cout << "BLANQUEANDO CONTRASEÑA PERFIL PROFESOR" << endl << endl;
+      cout << "BLANQUEANDO CONTRASEÑA PERFIL PROFESOR (Legajo 0 para salir)" << endl << endl;
 
       cout << "AVISO: Al blanquear la contraseña, la misma se establecerá" << endl;
       cout << "       como el número de legajo del usuario." << endl << endl;
 
       cout << endl << "\t - Legajo Profesor : ";
       cin >> legajoAux;
-      profesorObj.cambiarClave(legajoAux, legajoAux);
+
+      if(legajoAux != 0){
+        profesorObj.cambiarClave(legajoAux, legajoAux);
+      }
 
       system("cls");
       subMenuAdministradorClaves();
       break;
     case 51:
       system("cls");
-      cout << "BLANQUEANDO CONTRASEÑA PERFIL ALUMNO" << endl << endl;
+      cout << "BLANQUEANDO CONTRASEÑA PERFIL ALUMNO (Legajo 0 para salir)" << endl << endl;
 
       cout << "AVISO: Al blanquear la contraseña, la misma se establecerá" << endl;
       cout << "       como el número de legajo del usuario." << endl << endl;
 
       cout << endl << "\t - Legajo Alumno : ";
       cin >> legajoAux;
-      alumnoObj.cambiarClave(legajoAux, legajoAux);
+
+      if(legajoAux != 0){
+        alumnoObj.cambiarClave(legajoAux, legajoAux);
+      }
 
       system("cls");
       subMenuAdministradorClaves();
@@ -1334,10 +1343,10 @@ void menuDirectivo() {
       break;
     case 53:
       system("cls");
-      cout << "CAMBIANDO CONTRASEÑA" << endl;
+      cout << "CAMBIANDO CONTRASEÑA (Contraseña 0 para salir)" << endl;
 
       cout << endl << "\t - Contraseña anterior: " << clave << endl;
-      cout << endl << "\t - Contraseña nueva (numérica / Contraseña 0 para salir): ";
+      cout << endl << "\t - Contraseña nueva (numérica): ";
       cin >> nuevaClave;
 
       directorObj.cambiarClave(legajo, nuevaClave);
@@ -1948,10 +1957,10 @@ void menuProfesor() {
       break;
     case 51:
       system("cls");
-      cout << "CAMBIANDO CONTRASEÑA" << endl;
+      cout << "CAMBIANDO CONTRASEÑA (Contraseña 0 para salir)" << endl;
 
       cout << endl << "\t - Contraseña anterior: " << clave << endl;
-      cout << endl << "\t - Contraseña nueva (numérica / Contraseña 0 para salir): ";
+      cout << endl << "\t - Contraseña nueva (numérica): ";
       cin >> nuevaClave;
 
       profesorObj.cambiarClave(legajo, nuevaClave);
@@ -2048,7 +2057,7 @@ void subMenuProfesorGestionMaterias() {
       break;
     case 52:
       system("cls");
-      if (contarInscipcionEvaluaciones() > 0) {
+      if (contarInscripcionEvaluaciones() > 0) {
             cargarNotas();
       }
       else {
@@ -2059,6 +2068,8 @@ void subMenuProfesorGestionMaterias() {
         cout << endl << endl;
         system("pause");
       }
+      system("cls");
+      subMenuProfesorGestionMaterias();
       case 53:
       system("cls");
       subMenuListadosEstadisticaProfesor();
@@ -2085,9 +2096,9 @@ int opcion;
   cout << "----------------------------------------------------" << endl;
   cout << "                  GESTIÓN LISTADOS                  " << endl;
   cout << "----------------------------------------------------" << endl;
-  cout << "1. VER LISTADO DE ALUMNOS INSCRIPTOS A -X- MATERIA  " << endl;
-  cout << "2. VER LISTADO DE ALUMNOS APROBADOS A -X- MATERIA   " << endl;
-  cout << "3. VER LISTADO DE ALUMNOS DESAPROBADOS A -X- MATERIA" << endl;
+  cout << "1. VER LISTADO DE ALUMNOS INSCRIPTOS A MATERIA      " << endl;
+  cout << "2. VER LISTADO DE ALUMNOS INSCRIPTOS A MATERIA APROBADOS" << endl;
+  cout << "3. VER LISTADO DE ALUMNOS INSCRIPTOS A MATERIA DESAPROBADOS" << endl;
   cout << "0. VOLVER AL MENÚ GESTION DE MATERIAS               " << endl;
   cout << "----------------------------------------------------" << endl;
   cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -2103,9 +2114,9 @@ int opcion;
     cout << "----------------------------------------------------" << endl;
     cout << "                  GESTIÓN LISTADOS                  " << endl;
     cout << "----------------------------------------------------" << endl;
-    cout << "1. VER LISTADO DE ALUMNOS INSCRIPTOS A -X- MATERIA  " << endl;
-    cout << "2. VER LISTADO DE ALUMNOS APROBADOS A -X- MATERIA   " << endl;
-    cout << "3. VER LISTADO DE ALUMNOS DESAPROBADOS A -X- MATERIA" << endl;
+    cout << "1. VER LISTADO DE ALUMNOS INSCRIPTOS A MATERIA      " << endl;
+    cout << "2. VER LISTADO DE ALUMNOS INSCRIPTOS A MATERIA APROBADOS" << endl;
+    cout << "3. VER LISTADO DE ALUMNOS INSCRIPTOS A MATERIA DESAPROBADOS" << endl;
     cout << "0. VOLVER AL MENÚ GESTION DE MATERIAS               " << endl;
     cout << "----------------------------------------------------" << endl;
     cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
@@ -2118,8 +2129,17 @@ int opcion;
     case 49:
       system("cls");
 
-      verListadosAlumnosInscriptosPorMateria();
-      system("pause");
+      if (contarInscripcionMateria() > 0) {
+            verListadosAlumnosInscriptosPorMateria();
+      }
+      else {
+        cout << endl
+             << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A MATERIAS CARGADAS EN EL SISTEMA ----"
+             << endl
+             << endl;
+        cout << endl << endl;
+        system("pause");
+      }
 
       system("cls");
       subMenuListadosEstadisticaProfesor();
@@ -2127,8 +2147,17 @@ int opcion;
     case 50:
       system("cls");
 
-      verListadosAlumnosAprobadosPorMateria();
-      system("pause");
+      if (contarInscripcionEvaluaciones() > 0) {
+            verListadosAlumnosAprobadosPorMateria();
+      }
+      else {
+        cout << endl
+             << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A EXÁMENES FINALES CARGADAS EN EL SISTEMA ----"
+             << endl
+             << endl;
+        cout << endl << endl;
+        system("pause");
+      }
 
       system("cls");
       subMenuListadosEstadisticaProfesor();
@@ -2136,13 +2165,23 @@ int opcion;
     case 51:
       system("cls");
 
-      verListadosAlumnosDesaprobadosPorMateria();
-      system("pause");
+
+
+      if (contarInscripcionEvaluaciones() > 0) {
+            verListadosAlumnosDesaprobadosPorMateria();
+      }
+      else {
+        cout << endl
+             << "---- ERROR : NO SE ENCONTRARON INSCRIPCIONES A EXÁMENES FINALES CARGADAS EN EL SISTEMA ----"
+             << endl
+             << endl;
+        cout << endl << endl;
+        system("pause");
+      }
 
       system("cls");
       subMenuListadosEstadisticaProfesor();
       break;
-
     case 48:
       system("cls");
       subMenuProfesorGestionMaterias();
@@ -2155,20 +2194,24 @@ int opcion;
 
 void verListadosAlumnosInscriptosPorMateria(){
 
-        cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl
-        << endl;
+    cout << "MOSTRANDO MATERIAS ASIGNADAS - PLAN DE ESTUDIO 2003" << endl
+    << endl;
 
-        verMateriasAsignadas();
+    verMateriasAsignadas();
 
-        int idMateria;
+    int idMateria;
 
-        cout << endl << "INGRESE EL ID DE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
-        cin >> idMateria;
-        cout << endl << endl;
+    cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS INSCRIPTOS (ID Materia 0 para salir): ";
+    cin >> idMateria;
+    cout << endl << endl;
+
+    if(idMateria == 0){
+        return;
+    }
 
     while(!validarMateria(idMateria)){
 
-        cout << "El ID INGRESADO NO EXISTE. VUELVA A INGRESAR EL ID." << endl;
+        cout << "\t ---- ERROR : EL ID INGRESADO NO EXISTE ----" << endl << endl << endl;
         system("pause");
 
         system("cls");
@@ -2177,23 +2220,28 @@ void verListadosAlumnosInscriptosPorMateria(){
 
         verMateriasAsignadas();
 
-        cout << endl << "INGRESE EL ID DE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+        cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS INSCRIPTOS (ID Materia 0 para salir): ";
         cin >> idMateria;
         cout << endl << endl;
+    }
+
+    if(!validarProfesorAsignado(idMateria, legajo)) {
+        cout << endl << "\t ---- ERROR : LA MATERIA CON ID " << idMateria << " NO CORRESPONDE AL PROFESOR CON LEGAJO " << legajo << " ----" << endl << endl << endl;
+        system("pause");
+        return;
     }
 
     FILE *pInscMateria;
     InscripcionMateria inscMateriaObj;
 
-    if (!(pInscMateria = fopen("InscripcionMateria.dat", "rb"))) {
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    if (!(pInscMateria = fopen("InscripcionMateria.dat", "rb+"))) {
     }
 
-    int anchoID = 6;
+    int anchoID = 10;
     int anchoNombreAlumno = 20;
     int anchoApellidoAlumno = 20;
 
-    cout << left << setw(anchoID) << "ID";
+    cout << left << setw(anchoID) << "LEGAJO";
     cout << "|";
     cout << left << setw(anchoNombreAlumno) << "NOMBRE";
     cout << "|";
@@ -2222,9 +2270,10 @@ void verListadosAlumnosInscriptosPorMateria(){
             continue;
         }
     }
-    cout << endl << endl;
-
     fclose(pInscMateria);
+
+    cout << endl << endl;
+    system("pause");
 }
 
 void verListadosAlumnosAprobadosPorMateria(){
@@ -2235,13 +2284,17 @@ void verListadosAlumnosAprobadosPorMateria(){
 
     int idMateria;
 
-    cout << endl << "INGRESE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+    cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS APROBADOS (ID Materia 0 para salir): ";
     cin >> idMateria;
     cout << endl << endl;
 
+    if(idMateria == 0){
+        return;
+    }
+
     while(!validarMateria(idMateria)){
 
-        cout << "El ID INGRESADO NO EXISTE. VUELVA A INGRESAR EL ID." << endl;
+        cout << "\t ---- ERROR : EL ID INGRESADO NO EXISTE ----" << endl << endl << endl;
         system("pause");
 
         system("cls");
@@ -2250,12 +2303,18 @@ void verListadosAlumnosAprobadosPorMateria(){
 
         verMateriasAsignadas();
 
-        cout << endl << "INGRESE EL ID DE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+        cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS APROBADOS (ID Materia 0 para salir): ";
         cin >> idMateria;
         cout << endl << endl;
     }
 
-    int anchoID = 6;
+    if(!validarProfesorAsignado(idMateria, legajo)) {
+        cout << endl << "\t ---- ERROR : LA MATERIA CON ID " << idMateria << " NO CORRESPONDE AL PROFESOR CON LEGAJO " << legajo << " ----" << endl << endl << endl;
+        system("pause");
+        return;
+    }
+
+    int anchoID = 10;
     int anchoNombreAlumno = 21;
     int anchoApellidoAlumno = 20;
     int anchoNotaAlumno = 5;
@@ -2263,11 +2322,10 @@ void verListadosAlumnosAprobadosPorMateria(){
     FILE *pInscEvaluacion;
    InscripcionEvaluacion inscEvaluacionObj;
 
-   if (!(pInscEvaluacion = fopen("InscripcionEvaluacion.dat", "rb"))) {
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+   if (!(pInscEvaluacion = fopen("InscripcionEvaluacion.dat", "rb+"))) {
     }
 
-    cout << left << setw(anchoID) << "ID";
+    cout << left << setw(anchoID) << "LEGAJO";
     cout << "|";
     cout << left << setw(anchoNombreAlumno) << "NOMBRE";
     cout << "|";
@@ -2293,9 +2351,10 @@ void verListadosAlumnosAprobadosPorMateria(){
             }
         }
     }
-    cout << endl << endl;
-
     fclose(pInscEvaluacion);
+
+    cout << endl << endl;
+    system("pause");
 }
 
 void verListadosAlumnosDesaprobadosPorMateria(){
@@ -2304,15 +2363,19 @@ void verListadosAlumnosDesaprobadosPorMateria(){
     << endl;
     verMateriasAsignadas();
 
-   int idMateria;
+    int idMateria;
 
-   cout << endl << "INGRESE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
-   cin >> idMateria;
-   cout << endl << endl;
+    cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS DESAPROBADOS (ID Materia 0 para salir): ";
+    cin >> idMateria;
+    cout << endl << endl;
+
+    if(idMateria == 0){
+        return;
+    }
 
     while(!validarMateria(idMateria)){
 
-        cout << "El ID INGRESADO NO EXISTE. VUELVA A INGRESAR EL ID." << endl;
+        cout << "\t ---- ERROR : EL ID INGRESADO NO EXISTE ----" << endl << endl << endl;
         system("pause");
 
         system("cls");
@@ -2321,24 +2384,31 @@ void verListadosAlumnosDesaprobadosPorMateria(){
 
         verMateriasAsignadas();
 
-        cout << endl << "INGRESE EL ID DE LA MATERIA QUE BUSCA PARA SU LISTADO: ";
+        cout << endl << "INGRESE EL ID DE LA MATERIA PARA SU LISTADO DE ALUMNOS DESAPROBADOS (ID Materia 0 para salir): ";
         cin >> idMateria;
         cout << endl << endl;
     }
 
-   int anchoID = 6;
-   int anchoNombreAlumno = 21;
-   int anchoApellidoAlumno = 20;
-   int anchoNotaAlumno = 5;
+    if(!validarProfesorAsignado(idMateria, legajo)) {
+        cout << endl << "\t ---- ERROR : LA MATERIA CON ID " << idMateria << " NO CORRESPONDE AL PROFESOR CON LEGAJO " << legajo << " ----" << endl << endl << endl;
+        system("pause");
+        return;
+    }
+    int anchoID = 10;
+    int anchoNombreAlumno = 21;
+    int anchoApellidoAlumno = 20;
+    int anchoNotaAlumno = 5;
 
    FILE *pInscEvaluacion;
    InscripcionEvaluacion inscEvaluacionObj;
 
-   if (!(pInscEvaluacion = fopen("InscripcionEvaluacion.dat", "rb"))) {
-        cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+   if (!(pInscEvaluacion = fopen("InscripcionEvaluacion.dat", "rb+"))) {
     }
 
-    cout << left << setw(anchoID) << "ID";
+
+
+
+    cout << left << setw(anchoID) << "LEGAJO";
     cout << "|";
     cout << left << setw(anchoNombreAlumno) << "NOMBRE";
     cout << "|";
@@ -2365,10 +2435,10 @@ void verListadosAlumnosDesaprobadosPorMateria(){
             }
         }
     }
-    cout << endl << endl;
-
-
     fclose(pInscEvaluacion);
+
+    cout << endl << endl;
+    system("pause");
 }
 
 bool MateriasAsignadas() {
@@ -2708,7 +2778,7 @@ void cargarNotas() {
 }
 
 
-int contarInscipcionEvaluaciones() {
+int contarInscripcionEvaluaciones() {
   FILE *pInscEvaluacion;
   int cantInscEvals = 0;
 
@@ -2723,6 +2793,23 @@ int contarInscipcionEvaluaciones() {
   fclose(pInscEvaluacion);
 
   return cantInscEvals;
+}
+
+int contarInscripcionMateria() {
+  FILE *pInscMats;
+  int cantInscMats = 0;
+
+  if (!(pInscMats = fopen("InscripcionMateria.dat", "ab"))) {
+    cout << endl << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+    return -1;
+  }
+
+  fseek(pInscMats, 0, SEEK_END);
+  cantInscMats += ftell(pInscMats) / sizeof(InscripcionMateria);
+  fseek(pInscMats, 0, SEEK_SET);
+  fclose(pInscMats);
+
+  return cantInscMats;
 }
 
 bool validarExistenciaEvaluacion(int idFinal) {
@@ -2887,10 +2974,10 @@ void menuAlumno() {
       break;
     case 52:
       system("cls");
-      cout << "CAMBIANDO CONTRASEÑA" << endl;
+      cout << "CAMBIANDO CONTRASEÑA (Contraseña 0 para salir)" << endl;
 
       cout << endl << "\t - Contraseña anterior: " << clave << endl;
-      cout << endl << "\t - Contraseña nueva (numérica / Contraseña 0 para salir): ";
+      cout << endl << "\t - Contraseña nueva (numérica): ";
       cin >> nuevaClave;
 
       alumnoObj.cambiarClave(legajo, nuevaClave);
