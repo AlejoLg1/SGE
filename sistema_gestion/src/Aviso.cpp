@@ -51,7 +51,7 @@ bool Aviso::cargarAviso() {
   cout << "INGRESE EL ASUNTO (Asunto X para salir): > ";
   getline(cin, asunto);
 
-  if (asunto == "X") {
+  if (asunto == "X" || asunto == "x") {
     return false;
   }
 
