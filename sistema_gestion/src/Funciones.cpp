@@ -947,14 +947,15 @@ void subMenuAdministradorRealizarCopiasSeguridad() {
   cout << "9. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
   cout << "10. REALIZAR COPIA DE SEGURIDAD AVISOS              " << endl;
   cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
-  cout << "----------------------------------------------------" << endl;
-  cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
-  cout << "----------------------------------------------------" << endl;
+  cout << "----------------------------------------------------" << endl << endl;
+  cout << "SELECCIONE UNA OPCIÓN: ";
 
-  opcion = _getch();
+  cin >> opcion;
 
-  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 56 && opcion != 57 && opcion != 58 && opcion != 48) {
-    cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
+
+  while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5 && opcion != 6 && opcion != 7 && opcion != 8 && opcion != 9 && opcion != 10 && opcion != 0 || cin.fail()) {
+    cin.clear();
+    cout << endl << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
     Sleep(500);
     system("cls");
 
@@ -972,75 +973,74 @@ void subMenuAdministradorRealizarCopiasSeguridad() {
     cout << "9. REALIZAR COPIA DE SEGURIDAD INSCRIPCIONES MATERIAS" << endl;
     cout << "10. REALIZAR COPIA DE SEGURIDAD AVISOS              " << endl;
     cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
-    cout << "----------------------------------------------------" << endl;
-    cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
-    cout << "----------------------------------------------------" << endl;
+    cout << "----------------------------------------------------" << endl << endl;
+    cout << "SELECCIONE UNA OPCIÓN: ";
 
-    opcion = _getch();
+    cin >> opcion;
   }
 
   switch (opcion) {
-    case 49:
+    case 1:
       system("cls");
       realizarBackupGeneral();
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 50:
+    case 2:
       system("cls");
       realizarBackup("administradores.dat", "administradores.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 51:
+    case 3:
       system("cls");
       realizarBackup("directores.dat", "directores.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 52:
+    case 4:
       system("cls");
       realizarBackup("profesores.dat", "profesores.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 53:
+    case 5:
       system("cls");
       realizarBackup("alumnos.dat", "alumnos.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 54:
+    case 6:
       system("cls");
       realizarBackup("materias.dat", "materias.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 55:
+    case 7:
       system("cls");
       realizarBackup("evaluaciones.dat", "evaluaciones.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 56:
+    case 8:
       system("cls");
       realizarBackup("InscripcionEvaluacion.dat", "InscripcionEvaluacion.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 57:
+    case 9:
       system("cls");
       realizarBackup("InscripcionMateria.dat", "InscripcionMateria.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 58:
+    case 10:
       system("cls");
       realizarBackup("avisos.dat", "avisos.bkp");
       system("cls");
       subMenuAdministradorRealizarCopiasSeguridad();
       break;
-    case 48:
+    case 0:
       system("cls");
       subMenuAdministradorCopiasSeguridad();
       break;
@@ -1128,13 +1128,13 @@ void subMenuAdministradorRestaurarCopiasSeguridad() {
   cout << "10. RESTAURAR COPIA DE SEGURIDAD AVISOS             " << endl;
   cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
   cout << "----------------------------------------------------" << endl;
-  cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
-  cout << "----------------------------------------------------" << endl;
+  cout << "SELECCIONE UNA OPCIÓN: ";
 
-  opcion = _getch();
+  cin >> opcion;
 
-  while (opcion != 49 && opcion != 50 && opcion != 51 && opcion != 52 && opcion != 53 && opcion != 54 && opcion != 55 && opcion != 56 && opcion != 57 && opcion != 58 && opcion != 48) {
-    cout << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
+  while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5 && opcion != 6 && opcion != 7 && opcion != 8 && opcion != 9 && opcion != 10 && opcion != 0 || cin.fail()) {
+    cin.clear();
+    cout << endl << "---- ERROR : OPCIÓN INVÁLIDA ----" << endl;
     Sleep(500);
     system("cls");
 
@@ -1153,74 +1153,73 @@ void subMenuAdministradorRestaurarCopiasSeguridad() {
     cout << "10. RESTAURAR COPIA DE SEGURIDAD AVISOS             " << endl;
     cout << "0. VOLVER AL MENÚ ADMINISTRADOR                     " << endl;
     cout << "----------------------------------------------------" << endl;
-    cout << "             - SELECCIONE UNA OPCIÓN: -             " << endl;
-    cout << "----------------------------------------------------" << endl;
+    cout << "SELECCIONE UNA OPCIÓN: ";
 
-    opcion = _getch();
+    cin >> opcion;
   }
 
   switch (opcion) {
-    case 49:
+    case 1:
       system("cls");
       realizarRestauracionGeneral();
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 50:
+    case 2:
       system("cls");
       realizarRestauracion("administradores.bkp", "administradores.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 51:
+    case 3:
       system("cls");
       realizarRestauracion("directores.bkp", "directores.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 52:
+    case 4:
       system("cls");
       realizarRestauracion("profesores.bkp", "profesores.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 53:
+    case 5:
       system("cls");
       realizarRestauracion("alumnos.bkp", "alumnos.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 54:
+    case 6:
       system("cls");
       realizarRestauracion("materias.bkp", "materias.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 55:
+    case 7:
       system("cls");
       realizarRestauracion("evaluaciones.bkp", "evaluaciones.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 56:
+    case 8:
       system("cls");
       realizarRestauracion("InscripcionEvaluacion.bkp", "InscripcionEvaluacion.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 57:
+    case 9:
       system("cls");
       realizarRestauracion("InscripcionMateria.bkp", "InscripcionMateria.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 58:
+    case 10:
       system("cls");
       realizarRestauracion("avisos.bkp", "avisos.dat");
       system("cls");
       subMenuAdministradorRestaurarCopiasSeguridad();
       break;
-    case 48:
+    case 0:
       system("cls");
       subMenuAdministradorCopiasSeguridad();
       break;
