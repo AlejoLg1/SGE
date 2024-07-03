@@ -187,7 +187,7 @@ void InscripcionMateria::mostrarInscripcionMateria() {
   std::cout << "Legajo: " << alu.getLegajo() << std::endl;
 
   // Mostrar materias inscritas y sus estados
-  std::cout << "Materias inscritas:" << std::endl;
+  std::cout << "Materias inscriptas:" << std::endl;
   for (int i = 0; i < 7; ++i) {
     if (_estadoMaterias[i] == true) {
             mat = buscarMateria(_materias[i]);
@@ -210,7 +210,7 @@ void InscripcionMateria::mostrarInscripcionMateriaSinElNombreDeUsuario(
   legAux = buscarAlumno(legajo);
 
 
-  cout << "Materias inscritas:" << std::endl << std::endl;
+  cout << "Materias inscriptas:" << std::endl << std::endl;
   cout << left << setw(anchoID) << "ID";
   cout << "|";
   cout << left << setw(anchoMateria) << "Materia";

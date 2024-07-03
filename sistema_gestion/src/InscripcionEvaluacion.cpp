@@ -224,10 +224,10 @@ void InscripcionEvaluacion::mostrarInscripcionEvaluacion() {
     cout << "Apellido: " << alu.getApellido() << endl;
     cout << "Legajo: " << alu.getLegajo() << endl;
 
-    cout << "Materias inscritas y notas:" << endl;
+    cout << "Finales de materias inscriptas y notas:" << endl;
   for (int i = 0; i < _numMaterias; ++i) {
         mat = buscarMateria(_materias[i]);
-    cout << "| " << left << setw(15) << mat.getNombreMateria()<< " | Nota: ";
+    cout << "| " << left << setw(20) << mat.getNombreMateria()<< " | Nota: ";
 
 
     if(_materiasNotas[i] == 0) {
@@ -242,10 +242,10 @@ void InscripcionEvaluacion::mostrarInscripcionEvaluacion() {
   }
 
   if(haySinAsignar) {
-    cout << "-------------------------------------" << endl;
+    cout << "------------------------------------------" << endl;
   }
   else{
-    cout << "-----------------------------" << endl;
+    cout << "----------------------------------" << endl;
   }
 
   cout << endl << endl;
@@ -264,7 +264,7 @@ void InscripcionEvaluacion::mostrarInscripcionEvaluacionSinElNombreDeUsuario(
 
   while (leerEnDiscoInscripcionEvaluacionPorPosicion(pos)) {
     if (_alumno == legAux.getLegajo()) {
-      cout << "Materias inscritas y notas:" << endl;
+      cout << "Materias inscriptas y notas:" << endl;
       for (int i = 0; i < _numMaterias; ++i) {
             mat = buscarMateria(_materias[i]);
         cout << "| ID: " << mat.getId()
