@@ -62,15 +62,15 @@ La primera vez que se ingrese a la aplicación, se utilizará un usuario ‘Admi
     ```bash
     cd Lab2-Proyect
     ```
-3. Instalar las dependencias (si aplica):
+3. Compilar el proyecto:
     ```bash
-    pip install -r requirements.txt
+    g++ -o gestion_cursada main.cpp
     ```
 
 ## Uso
-1. Ejecutar el archivo principal del proyecto:
+1. Ejecutar el archivo compilado:
     ```bash
-    python main.py
+    ./gestion_cursada
     ```
 2. Seguir las instrucciones en pantalla para interactuar con el sistema según el rol del usuario.
 
