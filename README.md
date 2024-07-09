@@ -1,10 +1,5 @@
 # Sistema de Gestión Educativa
 
-## Integrantes:
-- Legname Alejo
-- Bettiga Gabriel
-- Sosa Lucas
-
 ## Introducción
 El sistema permite gestionar la cursada mediante distintos perfiles (Alumno, Profesor, Directivo). Contará con un login y submenús específicos para cada rol, donde se podrán realizar distintas acciones acordes a sus funciones.
 
@@ -12,7 +7,7 @@ El sistema permite gestionar la cursada mediante distintos perfiles (Alumno, Pro
 El objetivo principal del programa es controlar la cursada independientemente del rol del usuario en la institución. La jerarquía de usuarios es la siguiente:
 
 1. Administrador
-2. Directivo
+2. Director
 3. Profesor
 4. Alumno
 
