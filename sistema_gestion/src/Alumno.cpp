@@ -226,11 +226,10 @@ void Alumno::grabarEnDiscoAlumno() {
     }
 
     if(this->cargar()) {
+        fwrite(this, sizeof(Alumno), 1, pAlumno);
         fclose(pAlumno);
         return;
     }
-
-    fwrite(this, sizeof(Alumno), 1, pAlumno);
 
     fclose(pAlumno);
 }

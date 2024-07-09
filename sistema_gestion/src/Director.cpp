@@ -212,20 +212,21 @@ void Director::mostrarDirector() {
 }
 
 void Director::grabarEnDiscoDirector() {
-  FILE *p;
-  p = fopen("directores.dat", "ab");
-  if (p == NULL) {
-    cout << "El ARCHIVO NO SE PUDO CREAR O ABRIR" << endl;
-  }
+  FILE *pDirector;
+
+  if(!(pDirector = fopen("directores.dat", "ab"))) {
+        cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
+        return;
+    }
 
   if(this->cargarDirector()) {
-    fclose(p);
+    fwrite(this, sizeof(Director), 1, pDirector);
+    fclose(pDirector);
     return;
   }
 
-  fwrite(this, sizeof(Director), 1, p);
+  fclose(pDirector);
 
-  fclose(p);
 }
 
 void Director::leerEnDiscoDirector() {

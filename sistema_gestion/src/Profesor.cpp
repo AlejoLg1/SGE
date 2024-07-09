@@ -209,23 +209,20 @@ void Profesor::mostrarProfesor() {
     cout << endl << endl;
 }
 void Profesor::grabarEnDiscoProfesor() {
-    FILE *p;
+    FILE *pProfesor;
 
-    p = fopen("profesores.dat", "ab");
-
-    if(p == nullptr) {
-        cout << "ERROR DE ARCHIVO.";
-    }
-
-    if(this->cargarProfesor()) {
-        fclose(p);
+    if(!(pProfesor = fopen("profesores.dat", "ab"))) {
+        cout << "---- ERROR AL ABRIR EL ARCHIVO ----" << endl;
         return;
     }
 
-    fwrite(this, sizeof(Profesor), 1, p);
+    if(this->cargarProfesor()) {
+        fwrite(this, sizeof(Profesor), 1, pProfesor);
+        fclose(pProfesor);
+        return;
+    }
 
-    fclose(p);
-
+    fclose(pProfesor);
 }
 
 void Profesor::leerEnDiscoProfesor() {
