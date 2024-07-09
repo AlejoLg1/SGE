@@ -1,18 +1,13 @@
 # Sistema de Gestión Educativa
 
-## Integrantes:
-- Legname Alejo
-- Bettiga Gabriel
-- Sosa Lucas
-
 ## Introducción
-El sistema permite gestionar la cursada mediante distintos perfiles (Alumno, Profesor, Directivo). Contará con un login y submenús específicos para cada rol, donde se podrán realizar distintas acciones acordes a sus funciones.
+El sistema permite gestionar la cursada mediante distintos perfiles (Alumno, Profesor, Directivo). Cuenta con un login y submenús específicos para cada rol, donde se podrán realizar distintas acciones acordes a sus funciones.
 
 ## Descripción Detallada del Sistema
 El objetivo principal del programa es controlar la cursada independientemente del rol del usuario en la institución. La jerarquía de usuarios es la siguiente:
 
 1. Administrador
-2. Directivo
+2. Director
 3. Profesor
 4. Alumno
 
@@ -51,28 +46,22 @@ La primera vez que se ingrese a la aplicación, se utilizará un usuario ‘Admi
   - Cambiar contraseña del usuario actual.
 
 ## Diagrama de Clases
-![Diagrama de Clases](images/diagrama.png)
+![Diagrama de Clases](sistema_gestion/images/diagrama.png)
 
-## Instalación
+## Instalación y Uso
 1. Clonar el repositorio:
     ```bash
-    git clone https://github.com/AlejoLg1/Lab2-Proyect.git
+    git clone https://github.com/AlejoLg1/SGE.git
     ```
-2. Navegar al directorio del proyecto:
-    ```bash
-    cd Lab2-Proyect
-    ```
-3. Compilar el proyecto:
-    ```bash
-    g++ -o gestion_cursada main.cpp
-    ```
-
-## Uso
-1. Ejecutar el archivo compilado:
-    ```bash
-    ./gestion_cursada
-    ```
-2. Seguir las instrucciones en pantalla para interactuar con el sistema según el rol del usuario.
+2. Compilar y Ejecutar el Proyecto a través de una IDE:
+    
+    - Abre tu entorno de desarrollo integrado (IDE) preferido, como Visual Studio Code, Code::Blocks, Eclipse, u otro.
+    - Carga el proyecto clonado (SGE) dentro del IDE.
+    - Configura el proyecto según las instrucciones específicas de configuración de cada IDE.
+    - Compila y ejecuta el proyecto según las funciones proporcionadas por tu IDE.
+      
+3. Seguir las Instrucciones en Pantalla:
+    - Una vez que el proyecto esté compilado y ejecutado correctamente, sigue las instrucciones que aparecen en pantalla para interactuar con el sistema de acuerdo al rol de usuario especificado.
 
 ## Licencia
 Este proyecto está licenciado bajo los términos de la licencia MIT.
