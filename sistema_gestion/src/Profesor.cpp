@@ -222,6 +222,7 @@ void Profesor::grabarEnDiscoProfesor() {
         return;
     }
 
+    fwrite(this, sizeof(Profesor), 1, pProfesor);
     fclose(pProfesor);
 }
 
