@@ -53,26 +53,20 @@ La primera vez que se ingrese a la aplicación, se utilizará un usuario ‘Admi
 ## Diagrama de Clases
 ![Diagrama de Clases](sistema_gestion/images/diagrama.png)
 
-## Instalación
+## Instalación y uso
 1. Clonar el repositorio:
     ```bash
-    git clone https://github.com/AlejoLg1/Lab2-Proyect.git
+    git clone https://github.com/AlejoLg1/SGE.git
     ```
-2. Navegar al directorio del proyecto:
-    ```bash
-    cd Lab2-Proyect
-    ```
-3. Compilar el proyecto:
-    ```bash
-    g++ -o gestion_cursada main.cpp
-    ```
-
-## Uso
-1. Ejecutar el archivo compilado:
-    ```bash
-    ./gestion_cursada
-    ```
-2. Seguir las instrucciones en pantalla para interactuar con el sistema según el rol del usuario.
+2. Compilar y Ejecutar el Proyecto a través de una IDE:
+    
+    - Abre tu entorno de desarrollo integrado (IDE) preferido, como Visual Studio Code, Code::Blocks, Eclipse, u otro.
+    - Carga el proyecto clonado (SGE) dentro del IDE.
+    - Configura el proyecto según las instrucciones específicas de configuración de cada IDE.
+    - Compila y ejecuta el proyecto según las funciones proporcionadas por tu IDE.
+      
+3. Seguir las Instrucciones en Pantalla:
+    - Una vez que el proyecto esté compilado y ejecutado correctamente, sigue las instrucciones que aparecen en pantalla para interactuar con el sistema de acuerdo al rol de usuario especificado.
 
 ## Licencia
 Este proyecto está licenciado bajo los términos de la licencia MIT.
