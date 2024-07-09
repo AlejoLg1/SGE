@@ -1,7 +1,7 @@
 # Sistema de Gestión Educativa
 
 ## Introducción
-El sistema permite gestionar la cursada mediante distintos perfiles (Alumno, Profesor, Directivo). Contará con un login y submenús específicos para cada rol, donde se podrán realizar distintas acciones acordes a sus funciones.
+El sistema permite gestionar la cursada mediante distintos perfiles (Alumno, Profesor, Directivo). Cuenta con un login y submenús específicos para cada rol, donde se podrán realizar distintas acciones acordes a sus funciones.
 
 ## Descripción Detallada del Sistema
 El objetivo principal del programa es controlar la cursada independientemente del rol del usuario en la institución. La jerarquía de usuarios es la siguiente:
