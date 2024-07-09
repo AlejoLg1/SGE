@@ -51,7 +51,7 @@ La primera vez que se ingrese a la aplicación, se utilizará un usuario ‘Admi
   - Cambiar contraseña del usuario actual.
 
 ## Diagrama de Clases
-![Diagrama de Clases](images/diagrama.png)
+![Diagrama de Clases](sistema_gestion/images/diagrama.png)
 
 ## Instalación
 1. Clonar el repositorio:
