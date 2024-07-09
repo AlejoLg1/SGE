@@ -48,7 +48,7 @@ La primera vez que se ingrese a la aplicación, se utilizará un usuario ‘Admi
 ## Diagrama de Clases
 ![Diagrama de Clases](sistema_gestion/images/diagrama.png)
 
-## Instalación y uso
+## Instalación y Uso
 1. Clonar el repositorio:
     ```bash
     git clone https://github.com/AlejoLg1/SGE.git
