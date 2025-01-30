@@ -1,68 +1,67 @@
-# Sistema de Gestión Educativa
+# Educational Management System
 
-## Introducción
-El sistema permite gestionar la cursada mediante distintos perfiles (Alumno, Profesor, Directivo). Cuenta con un login y submenús específicos para cada rol, donde se podrán realizar distintas acciones acordes a sus funciones.
+## Introduction
+The system allows course management through different user profiles (Student, Teacher, Director). It includes a login and specific submenus for each role, where users can perform actions according to their functions.
 
-## Descripción Detallada del Sistema
-El objetivo principal del programa es controlar la cursada independientemente del rol del usuario en la institución. La jerarquía de usuarios es la siguiente:
+## Detailed System Description
+The main objective of the program is to manage the course regardless of the user's role in the institution. The user hierarchy is as follows:
 
-1. Administrador
+1. Administrator
 2. Director
-3. Profesor
-4. Alumno
+3. Teacher
+4. Student
 
-La primera vez que se ingrese a la aplicación, se utilizará un usuario ‘Administrador’. Esta opción es esencial para avanzar correctamente en el flujo del programa. Se generará automáticamente un “N° de legajo” y se solicitará una “contraseña” numérica. Los datos de autenticación se almacenan de forma segura en archivos `.dat`.
+The first time the application is accessed, an "Administrator" user is used. This option is essential to proceed correctly in the program's workflow. A "File Number" is automatically generated, and a numeric "password" is required. Authentication data is securely stored in `.dat` files.
 
-### Funcionalidades por Rol
+### Features by Role
 
-#### Administrador
-- **Gestión de Perfiles:**
-  - Crear, activar y desactivar perfiles de Directores.
-  - Blanquear contraseñas de Directores, Profesores y Alumnos.
-  - Cambiar contraseña del usuario actual.
-- **Gestión de Copias de Seguridad:**
-  - Realizar y restaurar copias de seguridad de todos los archivos.
+#### Administrator
+- **Profile Management:**
+  - Create, activate, and deactivate Director profiles.
+  - Reset passwords for Directors, Teachers, and Students.
+  - Change the current user's password.
+- **Backup Management:**
+  - Create and restore backups of all files.
 
 #### Director
-- **Gestión de Perfiles:**
-  - Crear, activar y desactivar perfiles de Profesores y Alumnos.
-- **Gestión del Plan de Estudio:**
-  - Cargar materias, asignar profesores y ver el plan de estudio.
-- **Gestión de Avisos:**
-  - Crear y ver avisos.
-- **Cambiar contraseña del usuario actual.**
+- **Profile Management:**
+  - Create, activate, and deactivate Teacher and Student profiles.
+- **Curriculum Management:**
+  - Add subjects, assign teachers, and view the curriculum.
+- **Notice Management:**
+  - Create and view notices.
+- **Change the current user's password.**
 
-#### Profesor
-- **Gestión de Materias:**
-  - Ver materias asignadas, crear y ver exámenes finales, cargar notas.
-- **Listados:**
-  - Ver listados de alumnos inscriptos, aprobados y desaprobados.
-- **Ver avisos y cambiar contraseña del usuario actual.**
+#### Teacher
+- **Subject Management:**
+  - View assigned subjects, create and view final exams, enter grades.
+- **Lists:**
+  - View lists of enrolled, approved, and failed students.
+- **View notices and change the current user's password.**
 
-#### Alumno
-- **Gestión de Cursada:**
-  - Ver planificación, anotarse y darse de baja en materias, anotarse y ver exámenes finales.
-  - Ver el plan de estudio y los avisos.
-  - Cambiar contraseña del usuario actual.
+#### Student
+- **Course Management:**
+  - View schedules, enroll and drop subjects, register for and view final exams.
+  - View the curriculum and notices.
+  - Change the current user's password.
 
-## Diagrama de Clases
-![Diagrama de Clases](sistema_gestion/images/diagrama.png)
+## Class Diagram
+![Class Diagram](sistema_gestion/images/diagrama.png)
 
-## Instalación y Uso
-1. Clonar el repositorio:
+## Installation and Usage
+1. Clone the repository:
     ```bash
     git clone https://github.com/AlejoLg1/SGE.git
     ```
-2. Compilar y Ejecutar el Proyecto a través de una IDE:
+2. Compile and Run the Project via an IDE:
     
-    - Abre tu entorno de desarrollo integrado (IDE) preferido, como Visual Studio Code, Code::Blocks, Eclipse, u otro.
-    - Carga el proyecto clonado (SGE) dentro del IDE.
-    - Configura el proyecto según las instrucciones específicas de configuración de cada IDE.
-    - Compila y ejecuta el proyecto según las funciones proporcionadas por tu IDE.
+    - Open your preferred Integrated Development Environment (IDE), such as Visual Studio Code, Code::Blocks, Eclipse, or others.
+    - Load the cloned project (SGE) into the IDE.
+    - Configure the project according to the specific setup instructions for each IDE.
+    - Compile and run the project using the functions provided by your IDE.
       
-3. Seguir las Instrucciones en Pantalla:
-    - Una vez que el proyecto esté compilado y ejecutado correctamente, sigue las instrucciones que aparecen en pantalla para interactuar con el sistema de acuerdo al rol de usuario especificado.
+3. Follow On-Screen Instructions:
+    - Once the project is successfully compiled and executed, follow the on-screen instructions to interact with the system according to the specified user role.
 
-## Licencia
-Este proyecto está licenciado bajo los términos de la licencia MIT.
-
+## License
+This project is licensed under the terms of the MIT license.
